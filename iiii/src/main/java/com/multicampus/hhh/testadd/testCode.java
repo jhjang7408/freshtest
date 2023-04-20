@@ -6,4 +6,6 @@ public class testCode {
 
     private String setsetset;
 
+    private Long stst;
+
 }
