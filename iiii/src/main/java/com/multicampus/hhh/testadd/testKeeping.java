@@ -15,5 +15,10 @@ public class testKeeping {
 
     private String jjjjjjjjjjjjj;
     private String eeeeeeeeeeeee;
+
+    private String ddddddddddddd;
+    private String ccccccccccccc;
+    private String ooooooooooooo;
+
 }
 
