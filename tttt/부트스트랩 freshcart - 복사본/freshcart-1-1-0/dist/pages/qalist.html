@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/basic.html}">
 
 <head>
 
-  <title>FreshCart - eCommerce HTML Template</title>
   <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,6 +35,9 @@
 <link rel="stylesheet" href="../assets/css/theme.min.css">
 
 
+  <link href="../assets/libs/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -268,164 +272,229 @@
 
 
 
-<!-- section 여기부터는 가이드 페이지 나오는듯 -->
-<main>
-  <div class="mt-4">
-    <div class="container">
-      <div class="row ">
-        <div class="col-12">
-          <!-- breadcrumb -->
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="../index.html">메인</a></li>
-          <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-          <li class="breadcrumb-item active" aria-current="page">가이드</li>
-        </ol>
-      </nav>
-      </div>
-      </div>
-    </div>
-  </div>
-  <!-- section -->
-  <section class="mt-8">
-    <div class="container">
-      <div class="row">
-        <!-- logo -->
-        <div class="col-12">
-          <h1 class="fw-bold">가이드</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- section -->
-  <section class="mt-6 mb-lg-14 mb-8">
-    <!-- container -->
-  <div class="container">
-    <div class="row d-flex align-items-center mb-8">
-      <div class="col-12 col-md-12 col-lg-8"><a href="#!">
-        <!-- img -->
-        <div class="img-zoom">
-          <img src="../assets/images/라이딩사진.jpg" alt="" class="img-fluid w-100">
-        </div>
-      </a></div>
-      <!-- text -->
-      <div class="col-12 col-md-12 col-lg-4">
-        <div class="ps-lg-8 mt-8 mt-lg-0">
-          <h1 class="mb-3"><a href="#!" class="text-inherit">추천 라이딩 코스</a></h1></br>
-          <h3><p><a href="../pages/riding1.html">1번 라이딩 코스</a></p></h3>
-          <h3><p><a href="../pages/riding2.html">2번 라이딩 코스</a></p></h3>
-          <h3><p><a href="../pages/riding3.html">3번 라이딩 코스</a></p></h3>
-          <h3><p><a href="../pages/riding4.html">4번 라이딩 코스</a></p></h3>
-          <h3><p><a href="../pages/riding5.html">5번 라이딩 코스</a></p></h3>
-          <h3><p><a href="">지역별 라이딩 코스 검색(map api?)</a></p></h3>
-          
-        </div>
-      </div>
+  <!-- main wrapper -->
 
-    </div>
-    <!-- row -->
-    <div class="row" style="text-align: center;">
-      <div class="col-9 col-md-4 col-lg-3 mb-8">
-        <div class="mb-4">
-          <a href="#!">
-            <!-- img -->
-            <div class="img-zoom">
-              <img src="../assets/images/수신호좌.jpg" alt="" style="display: inline-block;">
-            </div>
-          </a>
-        </div>
-        <!-- text -->
-        <div class="mb-3"><h4>좌회전 수신호</h4>
-        </div>
-        <!-- text -->
-      </div>
+  <div>
+    <!-- navbar vertical -->
 
-      <div class="col-9 col-md-4 col-lg-3 mb-8">
-        <div class="mb-4">
-          <a href="#!">
-            <!-- img -->
-            <div class="img-zoom">
-              <img src="../assets/images/수신호우.jpg" alt="" style="display: inline-block;">
-            </div>
-          </a></div>
-          <!-- text -->
-        <div class="mb-3"><h4>우회전 수신호</h4>
-        </div>
-        <!-- text -->
-      </div>
 
-      <div class="col-9 col-md-4 col-lg-3 mb-8">
-        <div class="mb-4">
-          <a href="#!">
-            <!-- img -->
-            <div class="img-zoom">
-              <img src="../assets/images/수신호멈.jpg" alt="" style="display: inline-block;">
-            </div>
-          </a></div>
-          <!-- text -->
-        <div class="mb-3"><h4>멈춤 수신호</h4>
-        </div>
-      </div>
+
+    
+
+    <!-- main -->
+    <main>
       
-
-      <div class="col-9 col-md-4 col-lg-3 mb-8">
-        <div class="mb-4">
-          <a href="#!">
-            <!-- img -->
-            <div class="img-zoom">
-              <img src="../assets/images/수신호천.jpg" alt="" style="display: inline-block;">
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="mt-4">
+            <div class="container">
+              <div class="row ">
+                <div class="col-12">
+                  <!-- breadcrumb -->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item"><a href="../index.html">메인</a></li>
+                  <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">질문정보게시판</li>
+                </ol>
+              </nav>
+              </div>
+              </div>
             </div>
-          </a>
-        </div>
-        <!-- text -->
-        <div class="mb-3"><h4>천천히 수신호</h4>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6 mb-3 mb-lg-0">
-          <div>
-            <a href="../pages/bikemanagement.html"><img src="../assets/images/자전거관리사진.jpg" weight="400" height="400"></a>
-            <a href="../pages/bikemanagement.html" class="btn btn-dark">관리 방법 확인하기</a>
           </div>
 
-        </div>
-        <div class="col-12 col-md-3">
-
-          
-            <div>
-              <a href="../pages/safe.html"><img src="../assets/images/자전거안전사진.png" weight="400" height="400"></a>
-              <a href="../pages/safe.html" class="btn btn-dark">안전 수칙 확인하기</a>
+          <section class="mt-8">
+            <div class="container">
+              <div class="row">
+                <!-- logo -->
+                <div class="col-12">
+                  <h1 class="fw-bold">질문정보게시판</h1>
+                </div>
+              </div>
             </div>
+          </section>
+        <!-- row -->
+        <div layout:fragment="content">
 
-          
+            <div class="row mt-3">
+                <form action="/board/list" method="get">
+                    <div class="col">
+                        <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <select class="form-select" name="type">
+                                    <option value="">---</option>
+                                    <option value="t" th:selected="${pageRequestDTO.type =='t'}">제목</option>
+                                    <option value="c" th:selected="${pageRequestDTO.type =='c'}">내용</option>
+                                    <option value="w" th:selected="${pageRequestDTO.type =='w'}">작성자</option>
+                                    <option value="tc" th:selected="${pageRequestDTO.type =='tc'}">제목 내용</option>
+                                    <option value="tcw" th:selected="${pageRequestDTO.type =='tcw'}">제목 내용 작성자</option>
+                                </select>
+                            </div>
+                            <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
+                                <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+        
+            <div class="row mt-3">
+                <div class="col">
+        
+                    <div class="card">
+                        <div class="card-header">
+                            질문정보게시판
+                        </div>
+                        <div class="card-body" >
+                            <h5 class="card-title">게시글 </h5>
+        
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">쓴사람</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                                </thead>
+        
+                                <tbody th:with="link = ${pageRequestDTO.getLink()}">
+                                <tr th:each="dto:${responseDTO.dtoList}"  >
+                                    <td>[[${dto.bno}]]</td>
+                                    <td>
+                                        <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|" class="text-decoration-none"> [[${dto.title}]] </a>
+                                        <span class="badge progress-bar-success" style="background-color: #0a53be">[[${dto.replyCount}]]</span>
+                                        <div th:if="${dto.boardImages != null && dto.boardImages.size() > 0}">
+                                            <img style="width:100px" th:each="boarImage: ${dto.boardImages}" th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
+                                        </div>
+                                    </td>
+                                    <td>[[${dto.writer}]]</td>
+                                    <td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td>
+                                </tr>
+                                </tbody>
+        
+        
+                            </table>
+        
+                            <div class="float-end">
+                                <ul class="pagination flex-wrap">
+        
+                                    <li class="page-item" th:if="${responseDTO.prev}">
+                                        <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
+                                    </li>
+        
+                                    <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
+                                        <li th:class="${responseDTO.page == i}?'page-item active':'page-item'" >
+                                            <a class="page-link"  th:data-num="${i}">[[${i}]]</a>
+                                        </li>
+                                    </th:block>
+        
+                                    <li class="page-item" th:if="${responseDTO.next}">
+                                        <a class="page-link"  th:data-num="${responseDTO.end + 1}">Next</a>
+                                    </li>
+                                </ul>
+                                <div class="my-4">
+                                    <div class="float-end">
+                                        <a href="../dashboard/qaregister.html"><button type="button" class="btn btn-secondary modBtn">글쓰기</button></a>
+                                    </div>
+                                  </div>
+                            </div>
+        
+        
+                        </div><!--end card body-->
+                    </div><!--end card-->
+                </div><!-- end col-->
+            </div><!-- end row-->
+        
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        
+        </div>
+        
+        
+        <script layout:fragment="script" th:inline="javascript">
+        
+            document.querySelector(".pagination").addEventListener("click", function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+        
+                const target = e.target
+        
+                if(target.tagName !== 'A') {
+                    return
+                }
+        
+                const num = target.getAttribute("data-num")
+        
+                const formObj = document.querySelector("form")
+        
+                formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+        
+                formObj.submit();
+        
+            },false)
+        
+            document.querySelector(".clearBtn").addEventListener("click", function (e){
+                e.preventDefault()
+                e.stopPropagation()
+        
+                self.location =''
+        
+            },false)
+        
+            //show modal
+            const result = [[${result}]]
+        
+            const modal = new bootstrap.Modal(document.querySelector(".modal"))
+        
+            if(result){
+                modal.show()
+            }
+        
+        
+        
+        </script>
+        
+        
+
         </div>
       </div>
-    </div>
-
-
-
-
+    </main>
 
   </div>
-  </section>
 
-</main>
+    <!-- Libs JS -->
+<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
+<!-- Theme JS -->
+<script src="../assets/js/theme.min.js"></script>
+  <script src="../assets/libs/quill/dist/quill.min.js"></script>
+  <script src="../assets/js/vendors/editor.js"></script>
+  <script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
 
    <!-- Footer -->
   <!-- footer -->

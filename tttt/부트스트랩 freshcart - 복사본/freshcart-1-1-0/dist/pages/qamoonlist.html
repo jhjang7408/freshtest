@@ -233,7 +233,7 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="../pages/guide.html">가이드</a></li>
-                    <li><a class="dropdown-item" href="../pages/store-grid.html">질문/정보 게시판</a></li>
+                    <li><a class="dropdown-item" href="../pages/qalist.html">질문/정보 게시판</a></li>
                   </ul>
                 </li>
         
@@ -254,8 +254,8 @@
                     고객센터
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="../pages/signin.html">1:1문의</a></li>
-                    <li><a class="dropdown-item" href="../pages/signup.html">자주 묻는 질문</a></li>
+                    <li><a class="dropdown-item" href="../pages/moonlist.html">1:1문의</a></li>
+                    <li><a class="dropdown-item" href="../pages/qamoonlist.html">자주 묻는 질문</a></li>
                   </ul>
                 </li>
               </ul>
@@ -295,8 +295,8 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                   <li class="breadcrumb-item"><a href="../index.html">메인</a></li>
-                  <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">질문정보게시판</li>
+                  <li class="breadcrumb-item"><a href="#!">고객센터</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">1:1문의글</li>
                 </ol>
               </nav>
               </div>
@@ -309,7 +309,7 @@
               <div class="row">
                 <!-- logo -->
                 <div class="col-12">
-                  <h1 class="fw-bold">질문정보게시판</h1>
+                  <h1 class="fw-bold">자주묻는질문</h1>
                 </div>
               </div>
             </div>
@@ -317,30 +317,7 @@
         <!-- row -->
         <div layout:fragment="content">
 
-            <div class="row mt-3">
-                <form action="/board/list" method="get">
-                    <div class="col">
-                        <input type="hidden" name="size" th:value="${pageRequestDTO.size}">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <select class="form-select" name="type">
-                                    <option value="">---</option>
-                                    <option value="t" th:selected="${pageRequestDTO.type =='t'}">제목</option>
-                                    <option value="c" th:selected="${pageRequestDTO.type =='c'}">내용</option>
-                                    <option value="w" th:selected="${pageRequestDTO.type =='w'}">작성자</option>
-                                    <option value="tc" th:selected="${pageRequestDTO.type =='tc'}">제목 내용</option>
-                                    <option value="tcw" th:selected="${pageRequestDTO.type =='tcw'}">제목 내용 작성자</option>
-                                </select>
-                            </div>
-                            <input type="text" class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary searchBtn" type="submit">Search</button>
-                                <button class="btn btn-outline-secondary clearBtn" type="button">Clear</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            
         
         
             <div class="row mt-3">
@@ -348,10 +325,10 @@
         
                     <div class="card">
                         <div class="card-header">
-                            질문정보게시판
+                            자주묻는질문
                         </div>
                         <div class="card-body" >
-                            <h5 class="card-title">게시글 </h5>
+                            <h5 class="card-title"></h5>
         
                             <table class="table">
                                 <thead>
@@ -363,49 +340,16 @@
                                 </tr>
                                 </thead>
         
-                                <tbody th:with="link = ${pageRequestDTO.getLink()}">
-                                <tr th:each="dto:${responseDTO.dtoList}"  >
-                                    <td>[[${dto.bno}]]</td>
-                                    <td>
-                                        <a th:href="|@{/board/read(bno =${dto.bno})}&${link}|" class="text-decoration-none"> [[${dto.title}]] </a>
-                                        <span class="badge progress-bar-success" style="background-color: #0a53be">[[${dto.replyCount}]]</span>
-                                        <div th:if="${dto.boardImages != null && dto.boardImages.size() > 0}">
-                                            <img style="width:100px" th:each="boarImage: ${dto.boardImages}" th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
-                                        </div>
-                                    </td>
-                                    <td>[[${dto.writer}]]</td>
-                                    <td>[[${#temporals.format(dto.regDate, 'yyyy-MM-dd')}]]</td>
-                                </tr>
-                                </tbody>
+                                
         
         
                             </table>
         
-                            <div class="float-end">
-                                <ul class="pagination flex-wrap">
-        
-                                    <li class="page-item" th:if="${responseDTO.prev}">
-                                        <a class="page-link" th:data-num="${responseDTO.start -1}">Previous</a>
-                                    </li>
-        
-                                    <th:block th:each="i: ${#numbers.sequence(responseDTO.start, responseDTO.end)}">
-                                        <li th:class="${responseDTO.page == i}?'page-item active':'page-item'" >
-                                            <a class="page-link"  th:data-num="${i}">[[${i}]]</a>
-                                        </li>
-                                    </th:block>
-        
-                                    <li class="page-item" th:if="${responseDTO.next}">
-                                        <a class="page-link"  th:data-num="${responseDTO.end + 1}">Next</a>
-                                    </li>
-                                </ul>
-                                <div class="my-4">
-                                    <div class="float-end">
-                                        <button type="button" class="btn btn-primary listBtn">게시판으로</button>
-                                        <button type="button" class="btn btn-secondary modBtn">수정</button>
-                                        <button type="button" class="btn btn-danger removeBtn">삭제</button>
-                                    </div>
+                            <div class="my-4">
+                                  <div class="float-end">
+                                      <a href="./moonlist.html"><button type="button" class="btn btn-secondary modBtn">1:1문의하기</button></a>
                                   </div>
-                            </div>
+                                </div>
         
         
                         </div><!--end card body-->
@@ -531,8 +475,8 @@
               <h6 class="mb-4">커뮤니티</h6>
               <ul class="nav flex-column">
                     <!-- list -->
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">가이드</a></li>
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">질문/정보 게시판</a></li>
+                <li class="nav-item mb-2"><a href="./guide.html" class="nav-link">가이드</a></li>
+                <li class="nav-item mb-2"><a href="./qalist.html" class="nav-link">질문/정보 게시판</a></li>
               </ul>
             </div>
 
@@ -549,8 +493,8 @@
               <h6 class="mb-4">고객센터</h6>
               <ul class="nav flex-column">
                   <!-- list -->
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">1:1문의</a></li>
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">자주 묻는 질문</a></li>
+                <li class="nav-item mb-2"><a href="./moonlist.html" class="nav-link">1:1문의</a></li>
+                <li class="nav-item mb-2"><a href="./qamoonlist.html" class="nav-link">자주 묻는 질문</a></li>
               </ul>
             </div>
           </div>
