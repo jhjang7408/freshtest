@@ -5,15 +5,7 @@ public class jjjj {
     asdfasdffas
 
     public asdfasdf getAsdfasdffas() {
-        df
-                asd
-                asdfasdffassdf
-                        asd
-                        asdfasdffassdf
-                                as
-                                asdfasdffasasd
-                                        f
-                                        asdfasdffas
+
 
     }
 }
