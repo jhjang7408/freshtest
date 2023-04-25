@@ -6,10 +6,6 @@ public class testCode {
 
     private String setsetset;
 
-
-    private String branch;
-
     private Long stst;
-
 
 }
