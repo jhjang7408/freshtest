@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" a>
+  <head>
+    <title>FreshCart - eCommerce HTML Template</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta content="Codescandy" name="author" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-M8S4MT3EYG");
+    </script>
+
+    <!-- Favicon icon-->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="../assets/images/favicon/favicon.ico"
+    />
+
+    <!-- Libs CSS -->
+    <link
+      href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/libs/feather-webfont/dist/feather-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/libs/simplebar/dist/simplebar.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../assets/css/theme.min.css" />
+  </head>
+
+  <body>
+    <!-- navigation -->
+    <div class="border-bottom shadow-sm">
+      <nav class="navbar navbar-light py-2">
+        <div
+          class="container justify-content-center justify-content-lg-between"
+        >
+          <a class="navbar-brand" href="../index.html">
+            <img
+              src="../assets/images/logo/freshcart-logo.svg"
+              alt=""
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <span class="navbar-text">
+            계정이 이미 있습니까?
+            <a href="../pages/signin.html" style="color: #007bff"
+              >로그인 하러가기</a
+            >
+          </span>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <!-- section -->
+
+      <section class="my-lg-14 my-8">
+        <!-- container -->
+        <div class="container">
+          <!-- row -->
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
+              <!-- 회원가입 이미지 -->
+              <img
+                src="../assets/images/svg-graphics/signup-g.svg"
+                alt=""
+                class="img-fluid"
+              />
+            </div>
+            <!-- col -->
+            <div
+              class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1"
+            >
+              <div class="mb-lg-9 mb-5">
+                <h1 class="mb-1 h2 fw-bold">회원가입</h1>
+                <p>반갑습니다. 사용할 아이디와 비밀번호 등을 입력하세요.</p>
+              </div>
+              <!-- form -->
+              <form>
+                <div class="row g-3">
+                  <!-- col -->
+                  <div class="col-12">
+                    <!-- input --><input
+                      type="text"
+                      class="form-control"
+                      placeholder="아이디"
+                      aria-label="First name"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <div class="password-field position-relative">
+                      <input
+                        type="password"
+                        id="fakePassword"
+                        placeholder="비밀번호"
+                        class="form-control"
+                        required
+                      />
+                      <span
+                        ><i id="passwordToggler" class="bi bi-eye-slash"></i
+                      ></span>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <!-- input --><input
+                      type="email"
+                      class="form-control"
+                      id="inputEmail4"
+                      placeholder="닉네임"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <!-- input --><input
+                      type="text"
+                      class="form-control"
+                      placeholder="이름"
+                      aria-label="Last name"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <!-- input --><input
+                      type="email"
+                      class="form-control"
+                      id="inputEmail4"
+                      placeholder="전화번호"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <!-- input --><input
+                      type="email"
+                      class="form-control"
+                      id="inputEmail4"
+                      placeholder="이메일"
+                      required
+                    />
+                  </div>
+                  <div class="col-12">
+                    <!-- input --><input
+                      type="email"
+                      class="form-control"
+                      id="inputEmail4"
+                      placeholder="주소"
+                      required
+                    />
+                  </div>
+
+                  <!-- btn -->
+                  <div class="col-12 d-grid">
+                    <button type="submit" class="btn btn-primary">
+                      회원가입하기
+                    </button>
+                  </div>
+
+                  <!-- text -->
+                  <p>
+                    <small
+                      >회원가입을 위해선 <a href="#!">회원가입 정책</a></small
+                    >에 동의하셔야 합니다.
+                  </p>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row g-4 py-4">
+          <div class="col-12 col-md-12 col-lg-8">
+            <div class="row g-4">
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">판매 등록</h6>
+                <!-- list -->
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">판매 등록</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">구매</h6>
+                <!-- list -->
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">악세서리 구매</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">자전거 구매</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#1" class="nav-link">장바구니</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">커뮤니티</h6>
+                <ul class="nav flex-column">
+                  <!-- list -->
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">가이드</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">질문/정보 게시판</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">공지</h6>
+                <ul class="nav flex-column">
+                  <!-- list -->
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">공지</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">이벤트</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-3">
+                <h6 class="mb-4">고객센터</h6>
+                <ul class="nav flex-column">
+                  <!-- list -->
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">1:1문의</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">자주 묻는 질문</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Javascript-->
+    <!-- Libs JS -->
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+    <!-- Theme JS -->
+    <script src="../assets/js/theme.min.js"></script>
+    <script src="../assets/js/vendors/password.js"></script>
+  </body>
+</html>
