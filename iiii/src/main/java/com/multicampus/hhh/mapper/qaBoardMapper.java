@@ -2,6 +2,7 @@ package com.multicampus.hhh.mapper;
 
 import com.multicampus.hhh.domain.qaBoardVO;
 import com.multicampus.hhh.dto.qaBoardDTO;
+import com.multicampus.hhh.dto.qaPageRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,10 @@ public interface qaBoardMapper {
     void delete(int qa_id);
 
     void update(qaBoardVO qaboardVO);
+
+    List<qaBoardVO> selectList(qaPageRequestDTO pageRequestDTO);
+
+    int getCount(qaPageRequestDTO pageRequestDTO);
 
 }
 

@@ -1,6 +1,9 @@
 package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.dto.qaBoardDTO;
+import com.multicampus.hhh.dto.qaBoardListAllDTO;
+import com.multicampus.hhh.dto.qaPageRequestDTO;
+import com.multicampus.hhh.dto.qaPageResponseDTO;
 import com.multicampus.hhh.mapper.qaBoardMapper;
 import com.multicampus.hhh.service.qaBoardService;
 import groovy.util.logging.Log4j2;
@@ -22,9 +25,21 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class qaBoardController {
 
-    @Autowired
-    qaBoardService qaboardService;
 
+    private final qaBoardService qaboardService;
+
+
+    @GetMapping("/qalist")
+    public void list(@Valid qaPageRequestDTO qapageRequestDTO, BindingResult bindingResult, Model model){
+
+
+
+        if(bindingResult.hasErrors()){
+            qapageRequestDTO = qaPageRequestDTO.builder().build();
+        }
+
+        model.addAttribute("responseDTO", qaboardService.getList(qapageRequestDTO));
+    }
 
     @GetMapping("/qaregister")
     public void registerGET(){};
