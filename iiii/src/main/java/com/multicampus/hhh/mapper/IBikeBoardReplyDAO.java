@@ -1,4 +1,4 @@
-package com.multicampus.hhh.dao;
+package com.multicampus.hhh.mapper;
 
 public interface IBikeBoardReplyDAO {
 }
