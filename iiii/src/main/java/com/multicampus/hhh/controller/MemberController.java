@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/member")
 public class MemberController {
 
-    @GetMapping("/member/signup")
+    @GetMapping("/signup")
     public String signup(){
 
         log.info("===========GET signup===========");
