@@ -1,6 +1,4 @@
 package com.multicampus.hhh.controller;
 
-
-public class qaBoardTest {
-
+public class asdfasdfasdfasdf {
 }
