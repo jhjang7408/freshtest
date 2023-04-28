@@ -10,9 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/qaboards")
+@RequestMapping("/qa")
 @RequiredArgsConstructor
 @Log4j2
 public class QaBoardController {
@@ -23,17 +24,18 @@ public class QaBoardController {
     public String main(Model model){
         model.addAttribute("qalist", qaBoardService.qaBoardList());
 
-        return "/qa/qalist";
+        return "qa/qalist";
     }
 
 
     @GetMapping("/qaview")
-    public String qaview(int qaid, Model model){
+    public String qaview(@RequestParam(name = "qa_id") Integer qaid, Model model){
 
         log.info(qaBoardService.findById(qaid));
 
         model.addAttribute("qaview", qaBoardService.findById(qaid));
-        return "/qa/qaview";
+
+        return "qa/qaview";
     }
 
 

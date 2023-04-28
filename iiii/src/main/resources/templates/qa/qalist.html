@@ -42,8 +42,6 @@
 <body>
 
   <div class="border-bottom ">
-  
-
     <div class="py-4 pt-lg-3 pb-lg-0">
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
@@ -265,20 +263,10 @@
 
   </nav>
 </div>
-
-
-
-
-
-
   <!-- main wrapper -->
 
   <div>
     <!-- navbar vertical -->
-
-
-
-    
 
     <!-- main -->
     <main>
@@ -342,8 +330,8 @@
                                 <tbody>
                                 <tr th:each="board : ${qalist}">
 
-                                  <td><a href="|qaview?qa_id=${board.qaid}|"  th:text="${board.qaid}">번호</a></td>
-                                  <td><a th:href="|@{/qa/qaview(qa_id =${board.qaid})}|" class="text-decoration-none" th:text="${board.title}">제목</a></td>
+                                  <td><a th:href="@{/qa/qaview(qa_id=${board.qaid})}"  th:text="${board.qaid}">번호</a></td>
+                                  <td><a th:href="@{/qa/qaview(qa_id=${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
                                     <td th:text="${board.userid}">작성자</td>
                                     <td th:text="${board.regdate}">시간</td>
                                 </tr>
@@ -356,7 +344,7 @@
 
                                 <div class="my-4">
                                     <div class="float-end">
-                                        <a href="/qa/qaregister.html"><button type="button" class="btn btn-secondary modBtn">글쓰기</button></a>
+                                        <a href="/qa/qaregister"><button type="button" class="btn btn-secondary modBtn">글쓰기</button></a>
                                     </div>
                                   </div>
                             </div>

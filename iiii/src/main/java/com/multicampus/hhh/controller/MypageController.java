@@ -29,5 +29,10 @@ public class MypageController {
     public void listsell(){
         log.info("판매내역");
     }
+    
+    @GetMapping("/shop-cart")
+    public  void cartPage(){
+        log.info("장바구니");
+    }
 
 }

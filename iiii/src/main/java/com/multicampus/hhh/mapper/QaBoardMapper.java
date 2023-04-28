@@ -1,5 +1,6 @@
 package com.multicampus.hhh.mapper;
 
+import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.domain.QaBoard;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,4 @@ public interface QaBoardMapper {
     List<QaBoard> findAll();
 
     QaBoard findById(int qaid);
-
 }
