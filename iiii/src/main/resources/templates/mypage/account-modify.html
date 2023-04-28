@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <title>FreshCart - eCommerce HTML Template</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
-  <meta name="description" content="" />
-  <meta content="Codescandy" name="author" />
+  <head>
+    <title>FreshCart - eCommerce HTML Template</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta content="Codescandy" name="author" />
 
-  <!-- Google tag (gtag.js) -->
-  <script
-          async
-          th:src="@{https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG}"
-  ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      th:src="@{https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG}"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag("config", "G-M8S4MT3EYG");
-  </script>
+      gtag("config", "G-M8S4MT3EYG");
+    </script>
 
-  <!-- Favicon icon-->
-  <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          th:href="@{/images/favicon/favicon.ico}"
-  />
+    <!-- Favicon icon-->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      th:href="@{/images/favicon/favicon.ico}"
+    />
 
-  <!-- Libs CSS -->
-  <link
-          th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}"
-          rel="stylesheet"
-  />
-  <link
-          th:href="@{/libs/feather-webfont/dist/feather-icons.css}"
-          rel="stylesheet"
-  />
-  <link
-          th:href="@{/libs/simplebar/dist/simplebar.min.css}"
-          rel="stylesheet"
-  />
+    <!-- Libs CSS -->
+    <link
+      th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{assets/libs/feather-webfont/dist/feather-icons.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/libs/simplebar/dist/simplebar.min.css}"
+      rel="stylesheet"
+    />
 
-  <!-- Theme CSS -->
-  <link rel="stylesheet" th:href="@{/css/theme.min.css}" />
-</head>
+    <!-- Theme CSS -->
+    <link rel="stylesheet" th:href="@{/css/theme.min.css}" />
+  </head>
 
   <body>
   <div class="border-bottom">
@@ -57,14 +57,14 @@
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
           <div class="col-xxl-2 col-lg-3">
-            <a class="navbar-brand d-none d-lg-block" href="../index.html">
-              <img th:src="@{수신호멈.jpg}"
+            <a class="navbar-brand d-none d-lg-block" href="../index">
+              <img th:src="@{/images/수신호멈.jpg}"
                    alt="eCommerce HTML Template"/>
             </a>
             <div class="d-flex justify-content-between w-100 d-lg-none">
-              <a class="navbar-brand" href="../index.html">
+              <a class="navbar-brand" href="../index">
                 <img
-                        th:src="@{logo/freshcart-logo.svg}"
+                        th:src="@{/images/logo/freshcart-logo.svg}"
                         alt="eCommerce HTML Template"
                 />
               </a>
@@ -268,9 +268,9 @@
           <div
                   class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
           >
-            <a href="../index.html"
+            <a href="../index"
             ><img
-                    th:src="@{s/logo/freshcart-logo.svg}"
+                    th:src="@{../images/logo/freshcart-logo.svg}"
                     alt="eCommerce HTML Template"
             /></a>
             <button
@@ -338,7 +338,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="../index.html"
+                    <a class="dropdown-item" href="../index"
                     >악세서리 판매 등록</a
                     >
                   </li>
@@ -458,9 +458,121 @@
       </div>
     </nav>
   </div>
+
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="locationModal"
+      tabindex="-1"
+      aria-labelledby="locationModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-6">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h5 class="mb-1" id="locationModalLabel">
+                  Choose your Delivery Location
+                </h5>
+                <p class="mb-0 small">
+                  Enter your address and we will specify the offer you area.
+                </p>
+              </div>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="my-5">
+              <input
+                type="search"
+                class="form-control"
+                placeholder="Search your area"
+              />
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h6 class="mb-0">Select Location</h6>
+              <a href="#" class="btn btn-outline-gray-400 text-muted btn-sm"
+                >Clear All</a
+              >
+            </div>
+            <div>
+              <div data-simplebar style="height: 300px">
+                <div class="list-group list-group-flush">
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active"
+                  >
+                    <span>Alabama</span><span>Min:$20</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Alaska</span><span>Min:$30</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Arizona</span><span>Min:$50</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>California</span><span>Min:$29</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Colorado</span><span>Min:$80</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Florida</span><span>Min:$90</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Arizona</span><span>Min:$50</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>California</span><span>Min:$29</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Colorado</span><span>Min:$80</span></a
+                  >
+                  <a
+                    href="#"
+                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
+                  >
+                    <span>Florida</span><span>Min:$90</span></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <main>
       <!-- section -->
       <section>
+        <!-- container -->
         <div class="container">
           <!-- row -->
           <div class="row">
@@ -490,30 +602,30 @@
                 <ul class="nav flex-column nav-pills nav-pills-dark">
                   <li class="nav-item">
                     <a
-                            class="nav-link"
-                            aria-current="page"
-                            href="/mypage/orderlist-bike"
-                    ><i class="feather-icon icon-shopping-bag me-2"></i>자전거
+                      class="nav-link"
+                      aria-current="page"
+                      href="/mypage/orderlist-bike"
+                      ><i class="feather-icon icon-shopping-bag me-2"></i>자전거
                       구매내역</a
                     >
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
-                    <a class="nav-link active" href="/mypage/orderlist-acc"
-                    ><i class="feather-icon icon-credit-card me-2"></i
-                    >악세사리 구매내역</a
+                    <a class="nav-link" href="/mypage/orderlist-acc"
+                      ><i class="feather-icon icon-credit-card me-2"></i
+                      >악세사리 구매내역</a
                     >
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
                     <a class="nav-link" href="/mypage/listsell"
-                    ><i class="feather-icon icon-map-pin me-2"></i>판매내역</a
+                      ><i class="feather-icon icon-map-pin me-2"></i>판매내역</a
                     >
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
-                    <a class="nav-link" href="/mypage/account-modify"
-                    ><i class="feather-icon icon-settings me-2"></i>개인 정보
+                    <a class="nav-link active" href="/mypage/account-modify"
+                      ><i class="feather-icon icon-settings me-2"></i>개인 정보
                       수정</a
                     >
                   </li>
@@ -521,7 +633,7 @@
                   <!-- nav item -->
                   <li class="nav-item">
                     <a class="nav-link" href="account-notification.html"
-                    ><i class="feather-icon icon-bell me-2"></i>알림</a
+                      ><i class="feather-icon icon-bell me-2"></i>알림</a
                     >
                   </li>
                   <!-- nav item -->
@@ -531,7 +643,7 @@
                   <!-- nav item -->
                   <li class="nav-item">
                     <a class="nav-link" href="../index"
-                    ><i class="feather-icon icon-log-out me-2"></i>로그
+                      ><i class="feather-icon icon-log-out me-2"></i>로그
                       아웃</a
                     >
                   </li>
@@ -540,312 +652,108 @@
             </div>
             <div class="col-lg-9 col-md-8 col-12">
               <div class="py-6 p-md-6 p-lg-10">
-                <!-- heading -->
-                <h2 class="mb-6">구매내역</h2>
-
-                <div class="table-responsive-xxl border-0">
-                  <!-- Table -->
-                  <table class="table mb-0 text-nowrap table-centered">
-                    <!-- Table Head -->
-                    <thead class="bg-light">
-                      <tr>
-                        <th>&nbsp;</th>
-                        <th>상품명</th>
-                        <th>주문번호</th>
-                        <th>날짜</th>
-                        <th>갯수</th>
-                        <th>거래상태</th>
-                        <th>가격</th>
-
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <!-- Table body -->
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{products/product-img-1.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Haldiram's Nagpur Aloo Bhujia</h6>
-                          </a>
-                          <span><small class="text-muted">400g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#14899</a>
-                        </td>
-                        <td class="align-middle border-top-0">March 5, 2023</td>
-                        <td class="align-middle border-top-0">1</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-warning">Processing</span>
-                        </td>
-                        <td class="align-middle border-top-0">$15.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{products/product-img-2.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Nutri Choise Biscuit</h6>
-                          </a>
-                          <span><small class="text-muted">2 Pkt</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#14658 </a>
-                        </td>
-                        <td class="align-middle border-top-0">July 9, 2023</td>
-                        <td class="align-middle border-top-0">2</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$45.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{/images/products/product-img-3.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">
-                            <h6 class="mb-0">
-                              Cadbury Dairy Milk 5 Star Bites
-                            </h6>
-                            <span><small class="text-muted">202 g</small></span>
-                          </a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#13778 </a>
-                        </td>
-                        <td class="align-middle border-top-0">Oct 03, 2023</td>
-                        <td class="align-middle border-top-0">4</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$99.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{/images/products/product-img-4.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Onion Flavour Potato</h6>
-                          </a>
-                          <span><small class="text-muted">100 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#13746 </a>
-                        </td>
-                        <td class="align-middle border-top-0">March 5, 2023</td>
-                        <td class="align-middle border-top-0">1</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$12.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{/images/products/product-img-5.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Salted Instant Popcorn</h6>
-                          </a>
-                          <span><small class="text-muted">500 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#13566 </a>
-                        </td>
-                        <td class="align-middle border-top-0">July 9, 2023</td>
-                        <td class="align-middle border-top-0">2</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-danger">Cancel</span>
-                        </td>
-                        <td class="align-middle border-top-0">$6.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{/images/products/product-img-6.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Blueberry Greek Yogurt</h6>
-                          </a>
-                          <span><small class="text-muted">500 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#12094 </a>
-                        </td>
-                        <td class="align-middle border-top-0">Oct 03, 2023</td>
-                        <td class="align-middle border-top-0">4</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$18.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{products/product-img-6.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Blueberry Greek Yogurt</h6>
-                          </a>
-                          <span><small class="text-muted">500 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#12094 </a>
-                        </td>
-                        <td class="align-middle border-top-0">Oct 03, 2023</td>
-                        <td class="align-middle border-top-0">4</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$18.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{/images/products/product-img-6.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Blueberry Greek Yogurt</h6>
-                          </a>
-                          <span><small class="text-muted">500 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#12094 </a>
-                        </td>
-                        <td class="align-middle border-top-0">Oct 03, 2023</td>
-                        <td class="align-middle border-top-0">4</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$18.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="mb-6">
+                  <!-- heading -->
+                  <h2 class="mb-0">개인 정보 수정</h2>
+                </div>
+                <div>
+                  <!-- heading -->
+                  <h5 class="mb-4">개인 정보</h5>
+                  <div class="row">
+                    <div class="col-lg-5">
+                      <!-- form -->
+                      <form>
+                        <!-- input -->
+                        <div class="mb-3">
+                          <label class="form-label">이름</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="로그인한 정보에서 보내준 이름 수정불가"
+                            readonly
+                          />
+                        </div>
+                        <!-- input -->
+                        <div class="mb-3">
+                          <label class="form-label">이메일</label>
+                          <input
+                            type="email"
+                            class="form-control"
+                            placeholder="로그인한 정보에서 보낸 이메일 수정가능"
+                          />
+                        </div>
+                        <!-- input -->
+                        <div class="mb-5">
+                          <label class="form-label">핸드폰</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="010-0000-0000"
+                          />
+                        </div>
+                        <!-- input -->
+                        <div class="mb-5">
+                          <label class="form-label">주소</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="주소 api"
+                          />
+                        </div>
+                        <!-- button -->
+                        <div class="mb-3">
+                          <button class="btn btn-primary">
+                            개인정보 저장하기
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-10" />
+                <div class="pe-lg-14">
+                  <!-- heading -->
+                  <h5 class="mb-4">비밀번호</h5>
+                  <form class="row row-cols-1 row-cols-lg-2">
+                    <!-- input -->
+                    <div class="mb-3 col">
+                      <label class="form-label">새로운 비밀번호</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        placeholder="**********"
+                      />
+                    </div>
+                    <!-- input -->
+                    <div class="mb-3 col">
+                      <label class="form-label">현재 비밀번호</label>
+                      <input
+                        type="password"
+                        class="form-control"
+                        placeholder="**********"
+                      />
+                    </div>
+                    <!-- input -->
+                    <div class="col-12">
+                      <p class="mb-4">
+                        현재 비밀번호를 잊으셨습니까?<a href="#">
+                          비밀번호 초기화</a
+                        >
+                      </p>
+                      <a href="#" class="btn btn-primary">비밀번호 저장하기</a>
+                    </div>
+                  </form>
+                </div>
+                <hr class="my-10" />
+                <div>
+                  <!-- heading -->
+                  <h5 class="mb-4">회원 탈퇴하기</h5>
+                  <p class="mb-2">회원 탈퇴하시겠습니까?</p>
+                  <p class="mb-5">
+                    계정을 삭제하면 관련된 모든 주문 세부 정보를 제거합니다.
+                  </p>
+                  <!-- btn -->
+                  <a href="#" class="btn btn-outline-danger">회원 탈퇴하기</a>
                 </div>
               </div>
             </div>
@@ -855,7 +763,6 @@
     </main>
 
     <!-- modal -->
-
     <div
       class="offcanvas offcanvas-start"
       tabindex="-1"
@@ -877,26 +784,26 @@
         <ul class="nav flex-column nav-pills nav-pills-dark">
           <!-- nav item -->
           <li class="nav-item">
-            <a
-              class="nav-link active"
-              aria-current="page"
-              href="account-orders.html"
+            <a class="nav-link" aria-current="page" href="account-orders.html"
               ><i class="feather-icon icon-shopping-bag me-2"></i>Your Orders</a
             >
           </li>
           <!-- nav item -->
+
           <li class="nav-item">
-            <a class="nav-link" href="account-settings.html"
+            <a class="nav-link active" href="account-settings.html"
               ><i class="feather-icon icon-settings me-2"></i>Settings</a
             >
           </li>
           <!-- nav item -->
+
           <li class="nav-item">
             <a class="nav-link" href="account-address.html"
               ><i class="feather-icon icon-map-pin me-2"></i>Address</a
             >
           </li>
           <!-- nav item -->
+
           <li class="nav-item">
             <a class="nav-link" href="account-payment-method.html"
               ><i class="feather-icon icon-credit-card me-2"></i>Payment
@@ -904,6 +811,7 @@
             >
           </li>
           <!-- nav item -->
+
           <li class="nav-item">
             <a class="nav-link" href="account-notification.html"
               ><i class="feather-icon icon-bell me-2"></i>Notification</a
@@ -912,7 +820,7 @@
         </ul>
         <hr class="my-6" />
         <div>
-          <!-- nav  -->
+          <!-- navs -->
           <ul class="nav flex-column nav-pills nav-pills-dark">
             <!-- nav item -->
             <li class="nav-item">
@@ -925,6 +833,7 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <!-- footer -->
     <footer class="footer">
       <div class="container">
@@ -1001,12 +910,12 @@
       </div>
     </footer>
     <!-- Javascript-->
-    <!-- Libs JS -->
-    <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
-    <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
+  <!-- Libs JS -->
+  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
-    <!-- Theme JS -->
-    <script th:src="@{/js/theme.min.js}"></script>
+  <!-- Theme JS -->
+  <script th:src="@{/js/theme.min.js}"></script>
   </body>
 </html>

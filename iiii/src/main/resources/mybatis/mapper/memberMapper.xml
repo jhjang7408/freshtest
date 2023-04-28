@@ -11,4 +11,8 @@
         insert into user_role (user_role_id, role_name)
         values(#{user_id}, #{memberRole.ordinal})
     </insert>
+
+    <select id="findUser" resultType="com.multicampus.hhh.domain.MemberVO">
+        select * from user where user_id = #{user_id}
+    </select>
 </mapper>

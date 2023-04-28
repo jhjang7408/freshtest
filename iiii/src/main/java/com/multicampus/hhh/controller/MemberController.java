@@ -42,10 +42,9 @@ public class MemberController {
         log.info("로그인 페이지");
         return "member/signin";
     }
-
-    @PostMapping("/signin")
-    public String login(){
-        log.info("로그인 성공");
-        return "redirect:/index";
+    
+    @GetMapping("/findpassword")
+    public void findpass(){
+        log.info("비밀번호 찾기 페이지");
     }
 }

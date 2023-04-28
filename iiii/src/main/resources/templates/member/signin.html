@@ -204,7 +204,7 @@
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
             <div class="list-inline-item">
-              <a th:href="@{../member/signin.html}">로그인</a>
+              <a href="/member/signin">로그인</a>
             </div>
 
             <div class="list-inline-item">
@@ -220,35 +220,35 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" th:href="@{../mypage/shop-cart.html}"
+                    <a class="dropdown-item" href="/mypage/shop-cart"
                     >장바구니</a
                     >
                   </li>
                   <li>
                     <a
                             class="dropdown-item"
-                            href="../pages/account-orders-buy-bike.html"
+                            href="/mypage/orderlist-bike"
                     >자전거 구매내역</a
                     >
                   </li>
                   <li>
                     <a
                             class="dropdown-item"
-                            href="../pages/account-orders-buy-acc.html"
+                            href="/mypage/orderlist-acc"
                     >악세사리 구매내역</a
                     >
                   </li>
                   <li>
                     <a
                             class="dropdown-item"
-                            href="../pages/account-orders-sell.html"
+                            href="/mypage/listsell"
                     >판매 목록</a
                     >
                   </li>
                   <li>
                     <a
                             class="dropdown-item"
-                            href="../pages/account-settings.html"
+                            href="/mypage/account-modify"
                     >개인정보 수정</a
                     >
                   </li>
@@ -489,24 +489,12 @@
 
               <div class="col-12">
                 <!-- input -->
-                <input
-                        type="text"
-                        class="form-control"
-                        id="inputEmail4"
-                        placeholder="아이디"
-                        required
-                />
+                <input type="text" class="form-control" placeholder="아이디" required/>
               </div>
               <div class="col-12">
                 <!-- input -->
                 <div class="password-field position-relative">
-                  <input
-                          type="password"
-                          id="fakePassword"
-                          placeholder="비밀번호"
-                          class="form-control"
-                          required
-                  />
+                  <input type="password" placeholder="비밀번호" class="form-control" required/>
                   <span
                   ><i id="passwordToggler" class="bi bi-eye-slash"></i
                   ></span>
@@ -527,7 +515,7 @@
                   </label>
                 </div>
                 <div>
-                  <a href="../pages/forgot-password.html">비밀번호 찾기</a>
+                  <a href="/member/findpassword">비밀번호 찾기</a>
                 </div>
               </div>
               <!-- btn -->
@@ -539,7 +527,7 @@
               <!-- link -->
               <div>
                 계정이 없습니까?
-                <a href="../pages/signup.html"> 회원가입하기</a>
+                <a href="/member/signup"> 회원가입하기</a>
               </div>
             </div>
           </form>
@@ -626,12 +614,12 @@
 </footer>
 <!-- Javascript-->
 <!-- Libs JS -->
-<script th:src="@{/libs/jquery/dist/jquery.min.js"}></script>
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
 <!-- Theme JS -->
-<script th:src="@{/js/theme.min.js"}></script>
+<script th:src="@{/js/theme.min.js}"></script>
 <script th:src="@{/js/vendors/password.js}"></script>
 </body>
 </html>

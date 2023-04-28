@@ -15,4 +15,19 @@ public class MypageController {
         log.info("orderlistpage");
     }
 
+    @GetMapping("/orderlist-acc")
+    public void orderacclist(){
+        log.info("orderaccListpage");
+    }
+    
+    @GetMapping("/account-modify")
+    public void accountmod(){
+        log.info("개인정보수정 페이지");
+    }
+    
+    @GetMapping("/listsell")
+    public void listsell(){
+        log.info("판매내역");
+    }
+
 }

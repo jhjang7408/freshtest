@@ -58,13 +58,13 @@
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
           <div class="col-xxl-2 col-lg-3">
             <a class="navbar-brand d-none d-lg-block" href="../index.html">
-              <img th:src="@{수신호멈.jpg}"
+              <img th:src="@{/images/수신호멈.jpg}"
                    alt="eCommerce HTML Template"/>
             </a>
             <div class="d-flex justify-content-between w-100 d-lg-none">
               <a class="navbar-brand" href="../index.html">
                 <img
-                        th:src="@{logo/freshcart-logo.svg}"
+                        th:src="@{/images/logo/freshcart-logo.svg}"
                         alt="eCommerce HTML Template"
                 />
               </a>
@@ -270,7 +270,7 @@
           >
             <a href="../index.html"
             ><img
-                    th:src="@{s/logo/freshcart-logo.svg}"
+                    th:src="@{../images/logo/freshcart-logo.svg}"
                     alt="eCommerce HTML Template"
             /></a>
             <button
@@ -499,14 +499,14 @@
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
-                    <a class="nav-link active" href="/mypage/orderlist-acc"
+                    <a class="nav-link" href="/mypage/orderlist-acc"
                     ><i class="feather-icon icon-credit-card me-2"></i
                     >악세사리 구매내역</a
                     >
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
-                    <a class="nav-link" href="/mypage/listsell"
+                    <a class="nav-link active" href="/mypage/listsell"
                     ><i class="feather-icon icon-map-pin me-2"></i>판매내역</a
                     >
                   </li>
@@ -541,7 +541,7 @@
             <div class="col-lg-9 col-md-8 col-12">
               <div class="py-6 p-md-6 p-lg-10">
                 <!-- heading -->
-                <h2 class="mb-6">구매내역</h2>
+                <h2 class="mb-6">판매내역</h2>
 
                 <div class="table-responsive-xxl border-0">
                   <!-- Table -->
@@ -566,7 +566,7 @@
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
-                              th:src="@{products/product-img-1.jpg}"
+                              src="../assets/images/products/product-img-1.jpg"
                               alt="Ecommerce"
                               class="icon-shape icon-xl"
                           /></a>
@@ -601,7 +601,7 @@
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
-                              th:src="@{products/product-img-2.jpg}"
+                              src="../assets/images/products/product-img-2.jpg"
                               alt="Ecommerce"
                               class="icon-shape icon-xl"
                           /></a>
@@ -636,7 +636,7 @@
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
-                              th:src="@{/images/products/product-img-3.jpg}"
+                              src="../assets/images/products/product-img-3.jpg"
                               alt="Ecommerce"
                               class="icon-shape icon-xl"
                           /></a>
@@ -673,7 +673,7 @@
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
-                              th:src="@{/images/products/product-img-4.jpg}"
+                              src="../assets/images/products/product-img-4.jpg"
                               alt="Ecommerce"
                               class="icon-shape icon-xl"
                           /></a>
@@ -708,7 +708,7 @@
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
-                              th:src="@{/images/products/product-img-5.jpg}"
+                              src="../assets/images/products/product-img-5.jpg"
                               alt="Ecommerce"
                               class="icon-shape icon-xl"
                           /></a>
@@ -743,77 +743,7 @@
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
-                              th:src="@{/images/products/product-img-6.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Blueberry Greek Yogurt</h6>
-                          </a>
-                          <span><small class="text-muted">500 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#12094 </a>
-                        </td>
-                        <td class="align-middle border-top-0">Oct 03, 2023</td>
-                        <td class="align-middle border-top-0">4</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$18.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{products/product-img-6.jpg}"
-                              alt="Ecommerce"
-                              class="icon-shape icon-xl"
-                          /></a>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="fw-semi-bold text-inherit">
-                            <h6 class="mb-0">Blueberry Greek Yogurt</h6>
-                          </a>
-                          <span><small class="text-muted">500 g</small></span>
-                        </td>
-                        <td class="align-middle border-top-0">
-                          <a href="#" class="text-inherit">#12094 </a>
-                        </td>
-                        <td class="align-middle border-top-0">Oct 03, 2023</td>
-                        <td class="align-middle border-top-0">4</td>
-                        <td class="align-middle border-top-0">
-                          <span class="badge bg-success">Completed</span>
-                        </td>
-                        <td class="align-middle border-top-0">$18.00</td>
-                        <td class="text-muted align-middle border-top-0">
-                          <a
-                            href="#"
-                            class="text-inherit"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            data-bs-title="View"
-                            ><i class="feather-icon icon-eye"></i
-                          ></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="align-middle border-top-0 w-0">
-                          <a href="#">
-                            <img
-                              th:src="@{/images/products/product-img-6.jpg}"
+                              src="../assets/images/products/product-img-6.jpg"
                               alt="Ecommerce"
                               class="icon-shape icon-xl"
                           /></a>
@@ -916,7 +846,7 @@
           <ul class="nav flex-column nav-pills nav-pills-dark">
             <!-- nav item -->
             <li class="nav-item">
-              <a class="nav-link" href="../index"
+              <a class="nav-link" href="../index.html"
                 ><i class="feather-icon icon-log-out me-2"></i>Log out</a
               >
             </li>
@@ -1001,12 +931,12 @@
       </div>
     </footer>
     <!-- Javascript-->
-    <!-- Libs JS -->
-    <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
-    <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
-    <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
+  <!-- Libs JS -->
+  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
-    <!-- Theme JS -->
-    <script th:src="@{/js/theme.min.js}"></script>
+  <!-- Theme JS -->
+  <script th:src="@{/js/theme.min.js}"></script>
   </body>
 </html>
