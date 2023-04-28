@@ -11,4 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 public class BasketDTO {
+    private String bag_id;
+    private String user_id;
+    private Integer ac_id;
+    private Integer count;
 }

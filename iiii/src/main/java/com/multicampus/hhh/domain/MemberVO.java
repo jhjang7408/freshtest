@@ -10,7 +10,6 @@ import lombok.*;
 public class MemberVO {
     //컬럼 어노테이션 설정
     private String user_id;
-    private int user_role_id;
     private String password;
     private String name;
     private String nickname;
@@ -18,4 +17,13 @@ public class MemberVO {
     private String address;
     private String phnum;
     private boolean social;
+
+
+
+
+    private MemberRole memberRole;
+
+    public void addRole(MemberRole memberRole) {
+        this.memberRole=memberRole;
+    }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" a>
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>FreshCart - eCommerce HTML Template</title>
     <!-- Required meta tags -->
@@ -30,25 +30,25 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="../assets/images/favicon/favicon.ico"
+      th:href="@{/images/favicon/favicon.ico}"
     />
 
     <!-- Libs CSS -->
     <link
-      href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css"
+      th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}"
       rel="stylesheet"
     />
     <link
-      href="../assets/libs/feather-webfont/dist/feather-icons.css"
+      th:href="@{/libs/feather-webfont/dist/feather-icons.css}"
       rel="stylesheet"
     />
     <link
-      href="../assets/libs/simplebar/dist/simplebar.min.css"
+      th:href="@{/libs/simplebar/dist/simplebar.min.css}"
       rel="stylesheet"
     />
 
     <!-- Theme CSS -->
-    <link rel="stylesheet" href="../assets/css/theme.min.css" />
+    <link rel="stylesheet" th:href="@{/css/theme.min.css}" />
   </head>
 
   <body>
@@ -58,16 +58,16 @@
         <div
           class="container justify-content-center justify-content-lg-between"
         >
-          <a class="navbar-brand" href="../index.html">
+          <a class="navbar-brand" href="/index.html">
             <img
-              src="../assets/images/logo/freshcart-logo.svg"
+              th:src="@{/images/logo/freshcart-logo.svg}"
               alt=""
               class="d-inline-block align-text-top"
             />
           </a>
           <span class="navbar-text">
             계정이 이미 있습니까?
-            <a href="../pages/signin.html" style="color: #007bff"
+            <a href="/member/signin" style="color: #007bff"
               >로그인 하러가기</a
             >
           </span>
@@ -86,7 +86,7 @@
             <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
               <!-- 회원가입 이미지 -->
               <img
-                src="../assets/images/svg-graphics/signup-g.svg"
+                th:src="@{/images/svg-graphics/signup-g.svg}"
                 alt=""
                 class="img-fluid"
               />
@@ -100,78 +100,34 @@
                 <p>반갑습니다. 사용할 아이디와 비밀번호 등을 입력하세요.</p>
               </div>
               <!-- form -->
-              <form>
+              <form action="/member/signup" role="form" method="post" th:object="${memberDTO}">
                 <div class="row g-3">
                   <!-- col -->
                   <div class="col-12">
-                    <!-- input --><input
-                      type="text"
-                      class="form-control"
-                      placeholder="아이디"
-                      aria-label="First name"
-                      required
-                    />
+                    <!-- input -->
+                    <input type="text" th:field="*{user_id}" class="form-control" placeholder="아이디" required/>
                   </div>
                   <div class="col-12">
                     <div class="password-field position-relative">
-                      <input
-                        type="password"
-                        id="fakePassword"
-                        placeholder="비밀번호"
-                        class="form-control"
-                        required
-                      />
-                      <span
-                        ><i id="passwordToggler" class="bi bi-eye-slash"></i
-                      ></span>
+                      <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" required/>
+                      <span><i id="passwordToggler" class="bi bi-eye-slash"></i></span>
                     </div>
                   </div>
                   <div class="col-12">
-                    <!-- input --><input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail4"
-                      placeholder="닉네임"
-                      required
-                    />
+                    <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임" required/>
                   </div>
                   <div class="col-12">
-                    <!-- input --><input
-                      type="text"
-                      class="form-control"
-                      placeholder="이름"
-                      aria-label="Last name"
-                      required
-                    />
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="이름" required/>
                   </div>
                   <div class="col-12">
-                    <!-- input --><input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail4"
-                      placeholder="전화번호"
-                      required
-                    />
+                    <input type="text" th:field="*{phnum}" class="form-control" placeholder="전화번호" required/>
                   </div>
                   <div class="col-12">
-                    <!-- input --><input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail4"
-                      placeholder="이메일"
-                      required
-                    />
+                    <input type="email" th:field="*{email}" class="form-control"  placeholder="이메일"  required/>
                   </div>
                   <div class="col-12">
-                    <!-- input --><input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail4"
-                      placeholder="주소"
-                      required
-                    />
+                    <input type="text" th:field="*{address}" class="form-control"  placeholder="주소"  required/>
                   </div>
-
                   <!-- btn -->
                   <div class="col-12 d-grid">
                     <button type="submit" class="btn btn-primary">
@@ -271,12 +227,12 @@
     </footer>
     <!-- Javascript-->
     <!-- Libs JS -->
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+    <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
     <!-- Theme JS -->
-    <script src="../assets/js/theme.min.js"></script>
-    <script src="../assets/js/vendors/password.js"></script>
+    <script th:src="@{/js/theme.min.js}"></script>
+    <script th:src="@{js/vendors/password.js}"></script>
   </body>
 </html>
