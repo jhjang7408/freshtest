@@ -26,4 +26,8 @@ public class QaBoard {
     private String image;
 
 
+    public QaBoard(LocalDateTime regdate){
+        this.regdate=LocalDateTime.now();
+    }
+
 }

@@ -15,4 +15,6 @@ public interface QaBoardMapper {
 
     QaBoard findById(int qaid);
 
+    void qaregister(QaBoard qaBoard);
+
 }

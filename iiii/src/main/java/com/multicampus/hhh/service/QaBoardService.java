@@ -20,7 +20,13 @@ public class QaBoardService {
     }
 
     public QaBoard findById(int qaid){
-        return qaBoardMapper.findById(qaid);
+        QaBoard findqaid = qaBoardMapper.findById(qaid);
+        return findqaid;
+    }
+
+
+    public void qaregister(QaBoard qaBoard){
+        qaBoardMapper.qaregister(qaBoard);
     }
 
 }

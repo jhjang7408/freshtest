@@ -342,8 +342,8 @@
                                 <tbody>
                                 <tr th:each="board : ${qalist}">
 
-                                  <td><a href="|qaview?qa_id=${board.qaid}|"  th:text="${board.qaid}">번호</a></td>
-                                  <td><a th:href="|@{/qa/qaview(qa_id =${board.qaid})}|" class="text-decoration-none" th:text="${board.title}">제목</a></td>
+                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
+                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
                                     <td th:text="${board.userid}">작성자</td>
                                     <td th:text="${board.regdate}">시간</td>
                                 </tr>
@@ -356,7 +356,7 @@
 
                                 <div class="my-4">
                                     <div class="float-end">
-                                        <a href="/qa/qaregister.html"><button type="button" class="btn btn-secondary modBtn">글쓰기</button></a>
+                                        <a href="qaregister"><button type="button" class="btn btn-secondary modBtn">글쓰기</button></a>
                                     </div>
                                   </div>
                             </div>

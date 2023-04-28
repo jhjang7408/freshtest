@@ -14,6 +14,8 @@
     </select>
 
 
-
+    <insert id="qaregister" parameterType="com.multicampus.hhh.domain.QaBoard">
+        insert into qa_board (title, content, user_id) values (#{title}, #{content}, #{userid});
+    </insert>
 
 </mapper>
