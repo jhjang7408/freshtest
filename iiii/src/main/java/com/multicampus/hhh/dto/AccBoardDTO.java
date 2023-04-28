@@ -15,10 +15,12 @@ public class AccBoardDTO {
     @NotBlank
     private String image;
 
+
+    @NotBlank
     private int price;
     private int amount;
     private String info;
-    private String board_name;
+    private String brand_name;
 
 
 }
