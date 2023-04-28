@@ -1,4 +1,4 @@
-import { int, pad } from "./index";
+import { int, pad } from "../utils";
 var doNothing = function () { return undefined; };
 export var monthToStr = function (monthNumber, shorthand, locale) { return locale.months[shorthand ? "shorthand" : "longhand"][monthNumber]; };
 export var revFormat = {
