@@ -342,8 +342,8 @@
                                 <tbody>
                                 <tr th:each="board : ${qalist}">
 
-                                    <td><a th:href="|@{/qa/qaboard(bno =${board.qaid})}|" th:text="${board.qaid}">게시글 아이디</a></td>
-                                    <td><a th:href="|@{/qa/qaboard(bno =${board.qaid})}|" th:text="${board.title}">제목</a></td>
+                                  <td><a href="|qaview?qa_id=${board.qaid}|"  th:text="${board.qaid}">번호</a></td>
+                                  <td><a th:href="|@{/qa/qaview(qa_id =${board.qaid})}|" class="text-decoration-none" th:text="${board.title}">제목</a></td>
                                     <td th:text="${board.userid}">작성자</td>
                                     <td th:text="${board.regdate}">시간</td>
                                 </tr>

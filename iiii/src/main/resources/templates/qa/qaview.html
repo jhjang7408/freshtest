@@ -329,27 +329,12 @@
 
 
 
-                  <div>
-                    <label for="qaid">번호</label>
-                    <input type="text" id="qaid" name="qaid" class="form-control"
-                           value="1" th:value="${qaboard.qaid}" readonly>
-                  </div>
+                  <div class="container">
+                    <p>번호 : ${qaview.qaid}</p>
+                    <p>제목 : ${qaview.title}</p>
+                    <p>작성자 : ${qaview.userid}</p>
+                    내용 : <textarea class="form-control" th:text="${qalist.content}"></textarea>
 
-                  <div>
-                    <label for="userid">작성자</label>
-                    <input type="text" id="userid" name="userid" class="form-control"
-                           value="1" th:value="${qaboard.userid}" readonly>
-                  </div>
-
-                  <div>
-                    <label for="title">제목</label>
-                    <input type="text" id="title" name="title" class="form-control"
-                           value="제목1" th:value="${qaboard.title}" readonly>
-                  </div>
-                  <div>
-                    <label for="content">내용</label>
-                    <input type="text" id="content" name="content" class="form-control"
-                           value="컨텐츠" th:value="${qaboard.content}" readonly>
                   </div>
 
 
