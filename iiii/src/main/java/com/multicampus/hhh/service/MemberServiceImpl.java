@@ -34,6 +34,26 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Override
+    public int findMember(String id) {
+        MemberVO memberVO=memberMapper.findUser(id);
+        if(memberVO == null){
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public MemberVO checkMember(String id, String password) {
+
+        MemberVO memberVO = memberMapper.findUser(id);
+        if (memberVO.getPassword() != password){
+            return null;
+        }
+
+        return memberVO;
+    }
+
 
 //    @Override
 //    public void modify(MemberVO memberVO) {

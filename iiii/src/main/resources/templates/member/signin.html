@@ -483,18 +483,21 @@
             <p>어서오십시오. 아이디와 비밀번호를 입력하세요.</p>
           </div>
 
-          <form>
+          <form action="/member/signin" method="post" th:object="${loginMember}">
             <div class="row g-3">
               <!-- row -->
 
               <div class="col-12">
                 <!-- input -->
-                <input type="text" class="form-control" placeholder="아이디" required/>
+                <input type="text" th:field="*{user_id}" class="form-control" placeholder="아이디" required/>
+              </div>
+              <div th:if="${loginError}" id="errorMsg">
+                <p th:text="${loginError}" style="color: red;"></p>
               </div>
               <div class="col-12">
                 <!-- input -->
                 <div class="password-field position-relative">
-                  <input type="password" placeholder="비밀번호" class="form-control" required/>
+                  <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" required/>
                   <span
                   ><i id="passwordToggler" class="bi bi-eye-slash"></i
                   ></span>
