@@ -5,15 +5,15 @@
 <mapper namespace="com.multicampus.hhh.mapper.MemberMapper">
     <insert id="save">
         insert into user (user_id, password, name, nickname, email, address, phnum)
-        values (#{user_id}, #{password}, #{name}, #{nickname}, #{email}, #{address}, #{phnum})
+        values (#{userid}, #{password}, #{name}, #{nickname}, #{email}, #{address}, #{phnum})
     </insert>
     <insert id="saveRole">
         insert into user_role (user_role_id, role_name)
-        values (#{user_id}, #{memberRole.ordinal})
+        values (#{userid}, #{memberRole.ordinal})
     </insert>
 
     <select id="findUser" resultType="com.multicampus.hhh.domain.MemberVO">
-        select * from user where user_id = #{user_id}
+        select * from user where user_id = #{userid}
     </select>
 
     <update id="updateUser">
@@ -21,27 +21,27 @@
     </update>
 
     <delete id="deleteuser">
-         delete from user where user_id = #{user_id};
+         delete from user where user_id = #{userid};
     </delete>
     <delete id="deleterole">
-        delete from user_role where user_role_id = #{user_id};
+        delete from user_role where user_role_id = #{userid};
     </delete>
 
     <select id="findjoinUser" resultType="com.multicampus.hhh.domain.MemberVO">
         SELECT u.user_id, u.password, u.name, u.nickname, u.email, u.address, u.phnum, u.social, ur.role_name
         FROM user u
                  JOIN user_role ur ON u.user_id = ur.user_role_id
-        WHERE u.user_id= #{user_id};
+        WHERE u.user_id= #{userid};
     </select>
 
     <select id="findtest" resultType="com.multicampus.hhh.dto.MemberDTO">
         SELECT *
         FROM user
-        WHERE user_id = #{user_id};
+        WHERE user_id = #{userid};
     </select>
 
     <select id="roleFind" resultType="com.multicampus.hhh.domain.MemberRole">
-        select * from user_role where user_role_id = #{user_id}
+        select * from user_role where user_role_id = #{userid}
     </select>
 
 </mapper>

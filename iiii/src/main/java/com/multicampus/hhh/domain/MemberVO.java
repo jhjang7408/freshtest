@@ -2,7 +2,6 @@ package com.multicampus.hhh.domain;
 
 import lombok.*;
 
-@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder

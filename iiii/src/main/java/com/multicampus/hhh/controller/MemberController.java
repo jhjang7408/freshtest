@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -35,7 +32,7 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String register(MemberDTO memberDTO, Model model){
+    public String register(MemberDTO memberDTO, @RequestParam("address_detail") String addressDetail, Model model){
         log.info("======POST signup =======");
 
 //        try{
@@ -50,6 +47,9 @@ public class MemberController {
             model.addAttribute("errorMsg","이미 등록된 아이디 입니다.");
             return "member/signup";
         }
+        String address = memberDTO.getAddress() + " " + addressDetail;
+        memberDTO.setAddress(address);
+        log.info("주소 저장");
         memberService.saveMember(memberDTO);
         log.info("컨트롤러 회원가입 체크");
 

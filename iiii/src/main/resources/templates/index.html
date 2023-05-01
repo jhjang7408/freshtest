@@ -237,7 +237,7 @@
                   <ul class="dropdown-menu">
                     <li>
                       <a class="dropdown-item" href="/mypage/shop-cart"
-                      >장바구니</a
+                         >장바구니</a
                       >
                     </li>
                     <li>
@@ -392,7 +392,7 @@
                   </li>
                   <li>
                     <a class="dropdown-item" href="/mypage/shop-cart"
-                    >장바구니</a
+                       th:if="${session.loginId != null}">장바구니</a
                     >
                   </li>
                 </ul>
@@ -2369,7 +2369,7 @@
                     <a href="#!" class="nav-link">자전거 구매</a>
                   </li>
                   <li class="nav-item mb-2">
-                    <a href="#1" class="nav-link">장바구니</a>
+                    <a href="/mypage/shop-cart" class="nav-link">장바구니</a>
                   </li>
                 </ul>
               </div>
