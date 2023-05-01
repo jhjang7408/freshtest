@@ -29,4 +29,14 @@ public class QaBoardService {
         qaBoardMapper.qaregister(qaBoard);
     }
 
+
+    public void qamodify(QaBoard qaBoard){
+        qaBoardMapper.qamodify(qaBoard);
+    }
+
+
+    public void qadelete(int qaid){
+        qaBoardMapper.qadelete(qaid);
+    }
+
 }

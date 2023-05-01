@@ -350,8 +350,8 @@
                   <div class="my-4">
                     <div class="float-end">
                       <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
-                      <button type="button" class="btn btn-secondary modBtn">수정</button>
-                      <button type="button" class="btn btn-danger removeBtn">삭제</button>
+                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+                      <a href="qadelete"><button type="button" class="btn btn-danger removeBtn">삭제</button></a>
                     </div>
                   </div>
                 </div>

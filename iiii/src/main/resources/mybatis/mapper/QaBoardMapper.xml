@@ -18,4 +18,17 @@
         insert into qa_board (title, content, user_id) values (#{title}, #{content}, #{userid});
     </insert>
 
+
+    <update id="qamodify" parameterType="com.multicampus.hhh.domain.QaBoard">
+        update qa_board set title=#{title}, content=#{content} where qa_id=#{qaid};
+    </update>
+
+
+
+    <delete id="qadelete" parameterType="int">
+        delete from qa_board where qa_id = #{qaid};
+    </delete>
+
+
+
 </mapper>

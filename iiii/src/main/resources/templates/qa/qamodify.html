@@ -325,35 +325,50 @@
                 <h4 class="mb-4 h5">읽기</h4>
                 <div class="row">
                   <!-- input -->
+
+                  <form th:action="@{qamodify}" method="post">
+
+
                   <div class="mb-3 col-lg-8">
                     <label class="form-label">번호</label>
-                    <input type="text" class="form-control" th:value="${qaview.qaid}" readonly>
+                    <input type="text" class="form-control" name="qaid" th:value="${qamodify.qaid}" readonly>
                   </div>
                   <!-- input -->
                   <div class="mb-3 col-lg-8">
                     <label class="form-label">제목</label>
-                    <input type="text" class="form-control" th:value="${qaview.title}" readonly>
+                    <input type="text" class="form-control" name="title" th:value="${qamodify.title}">
                   </div>
                   <!-- input -->
                   <div class="mb-3 col-lg-8">
                     <label class="form-label">작성자</label>
-                    <input type="text" class="form-control" th:value="${qaview.userid}" readonly>
+                    <input type="text" class="form-control" name="userid" th:value="${qamodify.userid}" readonly>
                   </div>
                   <!-- input -->
                   <div class="mb-8 col-lg-8">
                     <label class="form-label">내용</label>
-                    <input type="text" class="form-control" th:value="${qaview.content}" readonly>
+                    <input type="text" class="form-control" name="content" th:value="${qamodify.content}">
                   </div>
 
                   <!-- input -->
 
                   <div class="my-4">
                     <div class="float-end">
-                      <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
-                      <button type="button" class="btn btn-secondary modBtn">수정</button>
-                      <button type="button" class="btn btn-danger removeBtn">삭제</button>
+                      <button class="w-100 btn btn-primary btn-lg" type="submit">저장</button>
+                      <button class="w-100 btn btn-primary btn-lg">취소/게시판으로</button>
+
                     </div>
                   </div>
+
+
+
+
+
+                  </form>
+
+
+
+
+
                 </div>
               </div>
             </div>

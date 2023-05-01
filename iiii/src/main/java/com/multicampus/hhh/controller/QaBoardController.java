@@ -57,4 +57,31 @@ public class QaBoardController {
 
 
 
+    @GetMapping("/qamodify")
+    public String qamodifyForm(@RequestParam(name = "qa_id") int qaid, Model model){
+        QaBoard findqaid = qaBoardService.findById(qaid);
+        model.addAttribute("qamodify", findqaid);
+
+        return "/qa/qamodify";
+    }
+
+
+    @PostMapping(value = "/qamodify")
+    public String qamodify(QaBoard qaBoard){
+        qaBoardService.qamodify(qaBoard);
+
+        return "redirect:/qa/qaview";
+    }
+
+
+    @PostMapping("/qadelete")
+    public String qadelete(@RequestParam("qa_id") int qaid){
+
+        qaBoardService.qadelete(qaid);
+
+        return "redirect:/qa/qalist";
+    }
+
+
+
 }
