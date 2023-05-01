@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -44,37 +45,55 @@ public class MemberController {
 //            model.addAttribute("errorMsg","이미 등록된 아이디 입니다.");
 //                    return "member/signin";
 //        }
-        int check = memberService.findMember(memberDTO.getUser_id());
-        if(check == 1){
+        MemberVO check = memberService.findMember(memberDTO.getUserid());
+        if(check != null){
             model.addAttribute("errorMsg","이미 등록된 아이디 입니다.");
             return "member/signup";
         }
         memberService.saveMember(memberDTO);
+        log.info("컨트롤러 회원가입 체크");
 
-        return "redirect:/member/login";
+        return "redirect:/member/signin";
     }
 
     @GetMapping("/signin")
     public String loginpage(@ModelAttribute("loginMember") MemberDTO memberDTO){
         log.info("로그인 페이지");
+//        String id = (String) session.getAttribute("userid");
+//        if(id != null){ //로그인 상태
+//            MemberVO memberVO = memberService.findMember(id);
+//            model.addAttribute("Member",memberVO);
+//            return "redirect:/";
+//        }
+
         return "member/signin";
     }
 
     @PostMapping("/signin")
-    public String login(@Valid @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult){
+    public String login(@Valid @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult,HttpSession session) throws Exception{
+
         if(bindingResult.hasErrors()){
-            return "member/signin";
+            log.info("binding오류");
+            return "redirect:/member/signin";
         }
-        log.info("POST 로그인 첫번째");
-        MemberVO memberVO= memberService.checkMember(memberDTO.getUser_id(), memberDTO.getPassword());
-        
-        log.info("memberService 동작");
+        MemberVO memberVO= memberService.checkMember(memberDTO.getUserid(), memberDTO.getPassword());
+        log.info(memberVO);
+
         if(memberVO == null){
             bindingResult.reject("loginError", "아이디 또는 비밀번호가 맞지 않습니다.");
-            return "member/signin";
+            log.info("로그인 오류");
+            return "redirect:/member/signin";
         }
-        log.info("POST 로그인 두번째");
+        session.setAttribute("loginId",memberVO);
+        log.info("로그인 세션 부여");
 
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        log.info("로그아웃");
 
         return "redirect:/";
     }

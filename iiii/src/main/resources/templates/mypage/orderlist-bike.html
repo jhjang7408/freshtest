@@ -14,7 +14,7 @@
   <!-- Google tag (gtag.js) -->
   <script
           async
-          th:src="@{https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG}"
+          src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"
   ></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -57,12 +57,12 @@
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
           <div class="col-xxl-2 col-lg-3">
-            <a class="navbar-brand d-none d-lg-block" href="../index.html">
+            <a class="navbar-brand d-none d-lg-block" href="/">
               <img th:src="@{/images/수신호멈.jpg}"
                    alt="eCommerce HTML Template"/>
             </a>
             <div class="d-flex justify-content-between w-100 d-lg-none">
-              <a class="navbar-brand" href="../index.html">
+              <a class="navbar-brand" href="/">
                 <img
                         th:src="@{/images/logo/freshcart-logo.svg}"
                         alt="eCommerce HTML Template"
@@ -202,12 +202,17 @@
 
           <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
             <div class="list-inline">
-              <div class="list-inline-item">
+              <div class="list-inline-item" th:if="${session.loginId == null}">
                 <a href="/member/signin">로그인</a>
               </div>
+              <div class="list-inline-item" th:if="${session.loginId != null}">
+                <a href="/member/logout">로그아웃</a>
+              </div>
 
-              <div class="list-inline-item">
-                <li class="nav-item dropdown">
+
+
+              <div class="list-inline-item" th:if="${session.loginId != null}">
+                <li class="nav-item dropdown" >
                   <a
                           class="nav-link dropdown-toggle"
                           href="#"
@@ -268,7 +273,7 @@
           <div
                   class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
           >
-            <a href="../index.html"
+            <a href="/"
             ><img
                     th:src="@{../images/logo/freshcart-logo.svg}"
                     alt="eCommerce HTML Template"
@@ -338,7 +343,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="../index.html"
+                    <a class="dropdown-item" href="../index"
                     >악세서리 판매 등록</a
                     >
                   </li>
@@ -374,7 +379,7 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../pages/shop-cart.html"
+                    <a class="dropdown-item" href="/mypage/shop-cart"
                     >장바구니</a
                     >
                   </li>
@@ -530,7 +535,7 @@
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
-                    <a class="nav-link" href="../index"
+                    <a class="nav-link" href="/member/logout"
                     ><i class="feather-icon icon-log-out me-2"></i>로그
                       아웃</a
                     >

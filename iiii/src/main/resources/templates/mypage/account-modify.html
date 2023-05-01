@@ -57,12 +57,12 @@
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
           <div class="col-xxl-2 col-lg-3">
-            <a class="navbar-brand d-none d-lg-block" href="../index">
+            <a class="navbar-brand d-none d-lg-block" href="/">
               <img th:src="@{/images/수신호멈.jpg}"
                    alt="eCommerce HTML Template"/>
             </a>
             <div class="d-flex justify-content-between w-100 d-lg-none">
-              <a class="navbar-brand" href="../index">
+              <a class="navbar-brand" href="/">
                 <img
                         th:src="@{/images/logo/freshcart-logo.svg}"
                         alt="eCommerce HTML Template"
@@ -202,12 +202,17 @@
 
           <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
             <div class="list-inline">
-              <div class="list-inline-item">
+              <div class="list-inline-item" th:if="${session.loginId == null}">
                 <a href="/member/signin">로그인</a>
               </div>
+              <div class="list-inline-item" th:if="${session.loginId != null}">
+                <a href="/member/logout">로그아웃</a>
+              </div>
 
-              <div class="list-inline-item">
-                <li class="nav-item dropdown">
+
+
+              <div class="list-inline-item" th:if="${session.loginId != null}">
+                <li class="nav-item dropdown" >
                   <a
                           class="nav-link dropdown-toggle"
                           href="#"
@@ -268,7 +273,7 @@
           <div
                   class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
           >
-            <a href="../index"
+            <a href="/"
             ><img
                     th:src="@{../images/logo/freshcart-logo.svg}"
                     alt="eCommerce HTML Template"
@@ -374,7 +379,7 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../pages/shop-cart.html"
+                    <a class="dropdown-item" href="/mypage/shop-cart"
                     >장바구니</a
                     >
                   </li>
@@ -662,15 +667,17 @@
                   <div class="row">
                     <div class="col-lg-5">
                       <!-- form -->
-                      <form>
+                      <form action="/mypage/account-modify" method="post">
                         <!-- input -->
                         <div class="mb-3">
                           <label class="form-label">이름</label>
                           <input
                             type="text"
                             class="form-control"
-                            placeholder="로그인한 정보에서 보내준 이름 수정불가"
+                            placeholder="로그인한 아이디 표시"
                             readonly
+                            name="userid"
+                            th:value="${session.loginId.userid}"
                           />
                         </div>
                         <!-- input -->
@@ -679,7 +686,8 @@
                           <input
                             type="email"
                             class="form-control"
-                            placeholder="로그인한 정보에서 보낸 이메일 수정가능"
+                            placeholder="이메일"
+                            name="email"
                           />
                         </div>
                         <!-- input -->
@@ -689,6 +697,7 @@
                             type="text"
                             class="form-control"
                             placeholder="010-0000-0000"
+                            name="phnum"
                           />
                         </div>
                         <!-- input -->
@@ -698,6 +707,7 @@
                             type="text"
                             class="form-control"
                             placeholder="주소 api"
+                            name="address"
                           />
                         </div>
                         <!-- button -->
@@ -714,33 +724,34 @@
                 <div class="pe-lg-14">
                   <!-- heading -->
                   <h5 class="mb-4">비밀번호</h5>
-                  <form class="row row-cols-1 row-cols-lg-2">
+                  <form class="row row-cols-1 row-cols-lg-2" id="passwordForm">
                     <!-- input -->
                     <div class="mb-3 col">
                       <label class="form-label">새로운 비밀번호</label>
                       <input
-                        type="password"
-                        class="form-control"
-                        placeholder="**********"
+                              type="password"
+                              class="form-control"
+                              placeholder="************"
+                              id="newPassword"
+                              name="password1"
                       />
                     </div>
                     <!-- input -->
                     <div class="mb-3 col">
-                      <label class="form-label">현재 비밀번호</label>
+                      <label class="form-label">비밀번호 확인</label>
                       <input
-                        type="password"
-                        class="form-control"
-                        placeholder="**********"
+                              type="password"
+                              class="form-control"
+                              placeholder="************"
+                              id="newPasswordCheck"
+                              name="password2"
                       />
                     </div>
-                    <!-- input -->
-                    <div class="col-12">
-                      <p class="mb-4">
-                        현재 비밀번호를 잊으셨습니까?<a href="#">
-                          비밀번호 초기화</a
-                        >
-                      </p>
-                      <a href="#" class="btn btn-primary">비밀번호 저장하기</a>
+                    <!-- button -->
+                    <div class="mb-3">
+                      <button class="btn btn-primary" id="save-password-btn">
+                        비밀번호 저장하기
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -753,7 +764,7 @@
                     계정을 삭제하면 관련된 모든 주문 세부 정보를 제거합니다.
                   </p>
                   <!-- btn -->
-                  <a href="#" class="btn btn-outline-danger">회원 탈퇴하기</a>
+                  <button id="delete-btn" class="btn btn-outline-danger">회원 탈퇴하기</button>
                 </div>
               </div>
             </div>
@@ -917,5 +928,55 @@
 
   <!-- Theme JS -->
   <script th:src="@{/js/theme.min.js}"></script>
+
+  <script>
+    $(document).ready(function() {
+      $('#save-password-btn').click(function(e) {
+        e.preventDefault();
+        const newPassword = $('#newPassword').val();
+        const newPasswordCheck = $('#newPasswordCheck').val();
+
+        if(newPassword !== newPasswordCheck) {
+          alert('비밀번호가 일치하지 않습니다.');
+          return;
+        }
+
+        const data = {
+          'password' : newPassword
+        };
+
+        $.ajax({
+          type : 'POST',
+          url : '/mypage/changepass',
+          data: data,
+          success: function () {
+            alert('비밀번호 변경이 완료되었습니다.');
+          },
+          error: function(){
+            alert('비밀번호 변경 중 오류가 발생했습니다..')
+          }
+        });
+      });
+    });
+
+    $(document).ready(function () {
+      $('#delete-btn').click(function() {
+        if(confirm("정말 계정을 삭제 하시겠습니까?")) {
+          $.ajax({
+            type : 'POST',
+            url : '/mypage/deleteMember',
+            success : function (){
+              alert('회원 탈퇴 되었습니다.')
+            },
+            error : function () {
+              alert('오류가 발생했습니다.')
+            }
+          });
+        } else {
+
+        }
+      });
+    });
+  </script>
   </body>
 </html>

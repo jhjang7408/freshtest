@@ -17,7 +17,7 @@ public class MemberDTO {
 
     @NotBlank
     @Length(min=4, max=20)
-    private String user_id;
+    private String userid;
 
     @NotBlank
     @Length(min=4, max=20)

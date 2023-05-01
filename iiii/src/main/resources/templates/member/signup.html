@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" a>
+<html xmlns:th="http://www.thymeleaf.org">
+
   <head>
     <title>FreshCart - eCommerce HTML Template</title>
     <!-- Required meta tags -->
@@ -100,46 +101,47 @@
                 <p>반갑습니다. 사용할 아이디와 비밀번호 등을 입력하세요.</p>
               </div>
               <!-- form -->
-              <form action="/member/signup" role="form" method="post" th:object="${memberDTO}">
-                <div class="row g-3">
-                  <!-- col -->
-                  <div class="col-12">
-                    <!-- input -->
-                    <input type="text" th:field="*{user_id}" class="form-control" placeholder="아이디" required/>
-                  </div>
-                  <div th:if="${errorMsg}" id="errorMsg">
-                    <p th:text="${errorMsg}" style="color: red;"></p>
-                  </div>
+                <form action="/member/signup" role="form" method="post" th:object="${memberDTO}">
+                  <div class="row g-3">
+                    <!-- col -->
+                    <div class="col-12">
+                      <!-- input -->
+                      <label for="user_id">아이디</label>
+                      <input type="text" id="user_id" th:field="*{user_id}" class="form-control" placeholder="아이디" required/>
+                    </div>
+                    <div th:if="${errorMsg}" id="errorMsg">
+                      <p th:text="${errorMsg}" style="color: red;"></p>
+                    </div>
 
-                  <div class="col-12">
-                    <div class="password-field position-relative">
-                      <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" required/>
-                      <span><i id="passwordToggler" class="bi bi-eye-slash"></i></span>
+                    <div class="col-12">
+                      <div class="password-field position-relative">
+                        <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" required/>
+                        <span><i id="passwordToggler" class="bi bi-eye-slash"></i></span>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임" required/>
+                    </div>
+                    <div class="col-12">
+                      <input type="text" th:field="*{name}" class="form-control" placeholder="이름" required/>
+                    </div>
+                    <div class="col-12">
+                      <input type="text" th:field="*{phnum}" class="form-control" placeholder="전화번호" required/>
+                    </div>
+                    <div class="col-12">
+                      <input type="email" th:field="*{email}" class="form-control"  placeholder="이메일"  required/>
+                    </div>
+                    <div class="col-12">
+                      <input type="text" th:field="*{address}" class="form-control"  placeholder="주소"  required/>
+                    </div>
+                    <!-- btn -->
+                    <div class="col-12 d-grid">
+                      <button type="submit" class="btn btn-primary">
+                        회원가입하기
+                      </button>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임" required/>
-                  </div>
-                  <div class="col-12">
-                    <input type="text" th:field="*{name}" class="form-control" placeholder="이름" required/>
-                  </div>
-                  <div class="col-12">
-                    <input type="text" th:field="*{phnum}" class="form-control" placeholder="전화번호" required/>
-                  </div>
-                  <div class="col-12">
-                    <input type="email" th:field="*{email}" class="form-control"  placeholder="이메일"  required/>
-                  </div>
-                  <div class="col-12">
-                    <input type="text" th:field="*{address}" class="form-control"  placeholder="주소"  required/>
-                  </div>
-                  <!-- btn -->
-                  <div class="col-12 d-grid">
-                    <button type="submit" class="btn btn-primary">
-                      회원가입하기
-                    </button>
-                  </div>
-                </div>
-              </form>
+                </form>
             </div>
           </div>
         </div>
@@ -230,6 +232,6 @@
 
     <!-- Theme JS -->
     <script th:src="@{/js/theme.min.js}"></script>
-    <script th:src="@{js/vendors/password.js}"></script>
+    <script th:src="@{/js/vendors/password.js}"></script>
   </body>
 </html>

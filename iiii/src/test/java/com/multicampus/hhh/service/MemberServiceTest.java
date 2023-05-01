@@ -19,7 +19,7 @@ class MemberServiceTest {
     @Test
     public void servicetest(){
         MemberDTO memberDTO = new MemberDTO().builder()
-                        .user_id("test1323")
+                        .userid("test1323")
                         .name("test")
                         .password("1234")
                         .name("testnm").nickname("testni").email("test@email.com")
