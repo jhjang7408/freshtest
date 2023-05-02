@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Log4j2
 public class MainController {
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String main(){
-        log.info("main");
-        return "/index";
+        log.info("메인페이지");
+        return "index";
     }
 }

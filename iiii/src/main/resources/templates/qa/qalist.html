@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
 
@@ -21,20 +21,20 @@
 </script>
 
 <!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
 
 
 <!-- Libs CSS -->
-<link href="../assets/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link href="../assets/libs/feather-webfont/dist/feather-icons.css" rel="stylesheet">
-<link href="../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet">
+<link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
+<link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
+<link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
 
 
 <!-- Theme CSS -->
-<link rel="stylesheet" href="../assets/css/theme.min.css">
+<link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
 
-  <link href="../assets/libs/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+  <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet">
 
   <title>Dashboard</title>
 </head>
@@ -42,19 +42,17 @@
 <body>
 
   <div class="border-bottom ">
-  
-
     <div class="py-4 pt-lg-3 pb-lg-0">
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
           <div class="col-xxl-2 col-lg-3">
             <a class="navbar-brand d-none d-lg-block" href="../index.html">
-              <img src="../assets/images/수신호멈.jpg" alt="eCommerce HTML Template">
+              <img th:src="@{/images/수신호멈.jpg}" alt="eCommerce HTML Template">
 
             </a>
             <div class="d-flex justify-content-between w-100 d-lg-none">
               <a class="navbar-brand" href="../dist/index.html">
-                <img src="../assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template">
+                <img th:src="@{/images/logo/freshcart-logo.svg}" alt="eCommerce HTML Template">
 
               </a>
 
@@ -170,7 +168,7 @@
       
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
         <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-          <a href="../dist/index.html"><img src="../assets/images/logo/freshcart-logo.svg"
+          <a href="../dist/index.html"><img src="../../static/images/logo/freshcart-logo.svg"
               alt="eCommerce HTML Template"></a>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
@@ -265,20 +263,10 @@
 
   </nav>
 </div>
-
-
-
-
-
-
   <!-- main wrapper -->
 
   <div>
     <!-- navbar vertical -->
-
-
-
-    
 
     <!-- main -->
     <main>
@@ -295,8 +283,7 @@
                 <ol class="breadcrumb mb-0">
                   <li class="breadcrumb-item"><a href="../index.html">메인</a></li>
                   <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-                  <li class="breadcrumb-item"><a href="../pages/qalist.html">질문정보게시판</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">글쓰기</li>
+                  <li class="breadcrumb-item active" aria-current="page">질문정보게시판</li>
                 </ol>
               </nav>
               </div>
@@ -309,66 +296,132 @@
               <div class="row">
                 <!-- logo -->
                 <div class="col-12">
-                  <h1 class="fw-bold">질문/정보 글쓰기</h1>
+                  <h1 class="fw-bold">질문정보게시판</h1>
                 </div>
               </div>
             </div>
           </section>
         <!-- row -->
-        <div class="row">
+        <div layout:fragment="content">
 
-          <div class="col-lg-8 col-12">
-            <!-- card -->
-            <div class="card mb-6 card-lg">
-              <!-- card body -->
-              <div class="card-body p-6 ">
-                <h4 class="mb-4 h5">글쓰기</h4>
-                <div class="row">
-                  <!-- input -->
-                  <div class="mb-3 col-lg-6">
-                    <label class="form-label">제목</label>
-                    <input type="text" class="form-control" placeholder="제목" required>
-                  </div>
-                  <!-- input -->
-                  
-                  <!-- input -->
-                  <!-- input -->
-                  <div class="mb-3 col-lg-12 mt-5">
-                    <h4 class="mb-3 h5">내용</h4>
-                    <div class="py-8" id="editor"></div>
-                  </div>
-                  <!-- input -->
-                  
-                  <div>
-                    <div class="mb-3 col-lg-12 mt-5">
-                      <!-- heading -->
-                      <h4 class="mb-3 h5">이미지</h4>
 
-                      <!-- input -->
-                      <form action="#" class="d-block dropzone border-dashed rounded-2 ">
-                        <div class="fallback">
-                          <input name="file" type="file" multiple>
+        
+        
+            <div class="row mt-3">
+                <div class="col">
+        
+                    <div class="card">
+                        <div class="card-header">
+                            질문정보게시판
                         </div>
-                      </form>
-                    </div>
-                  </div>
+                        <div class="card-body" >
+                            <h5 class="card-title">게시글 </h5>
+        
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">작성자</th>
+                                    <th scope="col">날짜</th>
+                                </tr>
+                                </thead>
+        
+                                <tbody>
+                                <tr th:each="board : ${qalist}">
 
-                  <div class="my-4">
-                    <div class="float-end">
-                        <a href="../pages/qalist.html"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
-                        <button type="submit" class="btn btn-primary submitBtn">등록하기</button>
-                        <button type="reset" class="btn btn-secondary">리셋</button>
+                                  <td><a th:href="@{/qa/qaview(qa_id=${board.qaid})}"  th:text="${board.qaid}">번호</a></td>
+                                  <td><a th:href="@{/qa/qaview(qa_id=${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
+                                    <td th:text="${board.userid}">작성자</td>
+                                    <td th:text="${board.regdate}">시간</td>
+                                </tr>
+                                </tbody>
+        
+        
+                            </table>
+        
+                            <div class="float-end">
+
+                                <div class="my-4">
+                                    <div class="float-end">
+                                        <a href="/qa/qaregister"><button type="button" class="btn btn-secondary modBtn">글쓰기</button></a>
+                                    </div>
+                                  </div>
+                            </div>
+        
+        
+                        </div><!--end card body-->
+                    </div><!--end card-->
+                </div><!-- end col-->
+            </div><!-- end row-->
+        
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
                     </div>
-                  </div>
-                  
                 </div>
-
-              </div>
             </div>
-
-           
-          </div>
-          
+            
+            
+        
+        </div>
+        
+        
+        <script layout:fragment="script" th:inline="javascript">
+        
+            document.querySelector(".pagination").addEventListener("click", function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+        
+                const target = e.target
+        
+                if(target.tagName !== 'A') {
+                    return
+                }
+        
+                const num = target.getAttribute("data-num")
+        
+                const formObj = document.querySelector("form")
+        
+                formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+        
+                formObj.submit();
+        
+            },false)
+        
+            document.querySelector(".clearBtn").addEventListener("click", function (e){
+                e.preventDefault()
+                e.stopPropagation()
+        
+                self.location =''
+        
+            },false)
+        
+            //show modal
+            const result = [[${result}]]
+        
+            const modal = new bootstrap.Modal(document.querySelector(".modal"))
+        
+            if(result){
+                modal.show()
+            }
+        
+        
+        
+        </script>
+        
+        
 
         </div>
       </div>
@@ -377,15 +430,15 @@
   </div>
 
     <!-- Libs JS -->
-<script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-<script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
 <!-- Theme JS -->
-<script src="../assets/js/theme.min.js"></script>
-  <script src="../assets/libs/quill/dist/quill.min.js"></script>
-  <script src="../assets/js/vendors/editor.js"></script>
-  <script src="../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script th:src="@{/js/theme.min.js}"></script>
+  <script th:src="@{/libs/quill/dist/quill.min.js}"></script>
+  <script th:src="@{/js/vendors/editor.js}"></script>
+  <script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
 
    <!-- Footer -->
   <!-- footer -->
@@ -420,8 +473,8 @@
               <h6 class="mb-4">커뮤니티</h6>
               <ul class="nav flex-column">
                     <!-- list -->
-                <li class="nav-item mb-2"><a href="../pages/guide.html" class="nav-link">가이드</a></li>
-                <li class="nav-item mb-2"><a href="../pages/qalist.html" class="nav-link">질문/정보 게시판</a></li>
+                <li class="nav-item mb-2"><a href="./guide.html" class="nav-link">가이드</a></li>
+                <li class="nav-item mb-2"><a href="./qalist.html" class="nav-link">질문/정보 게시판</a></li>
               </ul>
             </div>
 
@@ -438,8 +491,8 @@
               <h6 class="mb-4">고객센터</h6>
               <ul class="nav flex-column">
                   <!-- list -->
-                <li class="nav-item mb-2"><a href="../pages/moonlist.html" class="nav-link">1:1문의</a></li>
-                <li class="nav-item mb-2"><a href="../pages/qamoonlist.html" class="nav-link">자주 묻는 질문</a></li>
+                <li class="nav-item mb-2"><a href="./moonlist.html" class="nav-link">1:1문의</a></li>
+                <li class="nav-item mb-2"><a href="./qamoonlist.html" class="nav-link">자주 묻는 질문</a></li>
               </ul>
             </div>
           </div>
@@ -453,12 +506,12 @@
   </footer>
     <!-- Javascript-->
     <!-- Libs JS -->
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
   
   <!-- Theme JS -->
-  <script src="../assets/js/theme.min.js"></script>
+  <script th:src="@{/js/theme.min.js}"></script>
   
   
   
