@@ -4,7 +4,6 @@ import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -14,8 +13,13 @@ public interface MemberMapper {
     void save(MemberVO memberVO);   //회원등록
     void saveRole(MemberVO memberVO);
     MemberVO findUser(String user_id);    //회원조회
+    void updateUser(MemberVO memberVO);
 
-    public void delete(String id);
-    public void update(MemberDTO memberDTO);
+    MemberVO findjoinUser(String user_id);
+    MemberDTO findtest(String user_id);
+    MemberRole roleFind(String user_id);
+
+    void deleteuser(String user_id);
+    void deleterole(String user_id);
 
 }

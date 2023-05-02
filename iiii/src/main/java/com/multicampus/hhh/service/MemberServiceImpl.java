@@ -25,13 +25,46 @@ public class MemberServiceImpl implements MemberService {
 
         member.addRole(MemberRole.USER);
 
-        log.info(member);
-        log.info(member.getMemberRole());
-
         memberMapper.save(member);
         memberMapper.saveRole(member);
+        log.info("회원가입 테스트");
+        log.info(member);
 
+    }
 
+    @Override
+    public MemberVO findMember(String id) {
+        MemberVO memberVO=memberMapper.findUser(id);
+        if(memberVO == null){
+            return null;
+        }
+        return memberVO;
+    }
+
+    @Override
+    public MemberVO checkMember(String id, String password) {
+
+        MemberVO memberVO = memberMapper.findUser(id);
+
+        if (!memberVO.getPassword().equals(password)){
+            return null;
+        }
+
+        return memberVO;
+    }
+
+    @Override
+    public void modifyMember(MemberVO memberVO) {
+
+        memberMapper.updateUser(memberVO);
+    }
+
+    @Override
+    public void removeMember(MemberVO memberVO) {
+        log.info("회원탈퇴 유저아이디 확인");
+        log.info(memberVO.getUserid());
+        memberMapper.deleterole(memberVO.getUserid());
+        memberMapper.deleteuser(memberVO.getUserid());
     }
 
 

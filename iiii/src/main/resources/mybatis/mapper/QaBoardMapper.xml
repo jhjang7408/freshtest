@@ -9,7 +9,7 @@
     </select>
 
 
-    <select id="findById" parameterType="int" resultType="com.multicampus.hhh.domain.QaBoard">
+    <select id="findById" resultType="com.multicampus.hhh.domain.QaBoard">
         select * from qa_board where qa_id = #{param1};
     </select>
 

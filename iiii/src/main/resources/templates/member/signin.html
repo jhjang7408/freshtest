@@ -58,12 +58,12 @@
     <div class="container">
       <div class="row w-100 align-items-center gx-lg-2 gx-0">
         <div class="col-xxl-2 col-lg-3">
-          <a class="navbar-brand d-none d-lg-block" href="../index.html">
+          <a class="navbar-brand d-none d-lg-block" href="/">
             <img th:src="@{/images/수신호멈.jpg}"
-                    alt="eCommerce HTML Template"/>
+                 alt="eCommerce HTML Template"/>
           </a>
           <div class="d-flex justify-content-between w-100 d-lg-none">
-            <a class="navbar-brand" href="../index.html">
+            <a class="navbar-brand" href="/">
               <img
                       th:src="@{/images/logo/freshcart-logo.svg}"
                       alt="eCommerce HTML Template"
@@ -203,12 +203,17 @@
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
-            <div class="list-inline-item">
+            <div class="list-inline-item" th:if="${session.loginId == null}">
               <a href="/member/signin">로그인</a>
             </div>
+            <div class="list-inline-item" th:if="${session.loginId != null}">
+              <a href="/member/logout">로그아웃</a>
+            </div>
 
-            <div class="list-inline-item">
-              <li class="nav-item dropdown">
+
+
+            <div class="list-inline-item" th:if="${session.loginId != null}">
+              <li class="nav-item dropdown" >
                 <a
                         class="nav-link dropdown-toggle"
                         href="#"
@@ -269,7 +274,7 @@
         <div
                 class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
         >
-          <a href="../index.html"
+          <a href="/"
           ><img
                   th:src="@{../images/logo/freshcart-logo.svg}"
                   alt="eCommerce HTML Template"
@@ -339,7 +344,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../index.html"
+                  <a class="dropdown-item" href="../index"
                   >악세서리 판매 등록</a
                   >
                 </li>
@@ -375,7 +380,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/shop-cart.html"
+                  <a class="dropdown-item" href="/mypage/shop-cart"
                   >장바구니</a
                   >
                 </li>
@@ -483,18 +488,21 @@
             <p>어서오십시오. 아이디와 비밀번호를 입력하세요.</p>
           </div>
 
-          <form>
+          <form action="/member/signin" method="post" th:object="${loginMember}">
             <div class="row g-3">
               <!-- row -->
 
               <div class="col-12">
                 <!-- input -->
-                <input type="text" class="form-control" placeholder="아이디" required/>
+                <input type="text" th:field="*{userid}" class="form-control" placeholder="아이디" required/>
+              </div>
+              <div th:if="${loginError}" id="errorMsg">
+                <p th:text="${loginError}" style="color: red;"></p>
               </div>
               <div class="col-12">
                 <!-- input -->
                 <div class="password-field position-relative">
-                  <input type="password" placeholder="비밀번호" class="form-control" required/>
+                  <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" required/>
                   <span
                   ><i id="passwordToggler" class="bi bi-eye-slash"></i
                   ></span>
