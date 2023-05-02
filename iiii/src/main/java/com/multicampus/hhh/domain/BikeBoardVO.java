@@ -1,4 +1,4 @@
-package com.multicampus.hhh.dto;
+package com.multicampus.hhh.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-public class BikeBoardDTO {
+public class BikeBoardVO {
 
 
     private int bike_id;
