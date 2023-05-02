@@ -2,7 +2,6 @@ package com.multicampus.hhh.mapper;
 
 import com.multicampus.hhh.domain.QaBoard;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,5 +20,9 @@ public interface QaBoardMapper {
     void qamodify(QaBoard qaBoard);
 
     void qadelete(int qaid);
+
+
+
+
 
 }

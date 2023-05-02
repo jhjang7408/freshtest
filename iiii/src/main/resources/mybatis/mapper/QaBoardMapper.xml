@@ -5,7 +5,7 @@
 <mapper namespace="com.multicampus.hhh.mapper.QaBoardMapper">
 
     <select id="findAll" resultType="com.multicampus.hhh.domain.QaBoard">
-        SELECT * FROM qa_board;
+        SELECT * FROM qa_board order by qa_id desc;
     </select>
 
 
@@ -28,6 +28,12 @@
     <delete id="qadelete" parameterType="int">
         delete from qa_board where qa_id = #{qaid};
     </delete>
+
+
+    <select id="qacount" resultType="int">
+        select count(qa_id) from qa_board;
+    </select>
+
 
 
 
