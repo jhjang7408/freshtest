@@ -5,6 +5,7 @@ import com.multicampus.hhh.dto.AccBoardDTO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.dto.PageRequestDTO;
 import com.multicampus.hhh.service.BikeBoardService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -25,13 +26,21 @@ import java.util.List;
 @Controller
 @Log4j2
 @RequestMapping("/sell")
+@RequiredArgsConstructor
 public class BikeBoardController {
 
-    private BikeBoardService service;
+    private final BikeBoardService service;
+
+    @GetMapping("/bikeList")
+    public void list(Model model){
+        log.info("bike list.......");
+        model.addAttribute("bikeList", service.getAll());
+    }
+
 //todo
 
 
-//@RequestMapping("/list")
+//@RequestMapping("/bikeList")
 //public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model){
 //
 //    log.info(pageRequestDTO);
@@ -40,27 +49,23 @@ public class BikeBoardController {
 //        pageRequestDTO = PageRequestDTO.builder().build();
 //    }
 //
-//    model.addAttribute("responseDTO", service.list(pageRequestDTO));
+//    model.addAttribute("responseDTO", service.getList(pageRequestDTO));
 //}
+
 
     @GetMapping("/productRegister")
     public void registerGET() {
         log.info("GET bike register.......");
     }
 
-//	@PostMapping("/register")
-//	public String registerPost(TodoDTO todoDTO, RedirectAttributes redirectAttributes) {
-//		log.info("POST todo register.......");
-//		log.info(todoDTO);
-//	return "redirect:/todo/list";
-//	}
+
 
     @PostMapping("/productRegister")
     public String registerPost(@Valid BikeBoardDTO bikeBoardDTO,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
 
-        log.info("POST todo register.......");
+        log.info("POST bike register.......");
 
         if(bindingResult.hasErrors()) {
             log.info("has errors.......");
@@ -68,8 +73,15 @@ public class BikeBoardController {
             return "redirect:/sell/productRegister";
         }
         log.info(bikeBoardDTO);
-        return "redirect:/sell/productRegister";
+        return "redirect:/sell/bikeList";
     }
+
+    @GetMapping("/productSingle")
+    public void read(){
+    }
+
+
+
 
 //    @GetMapping({"/read","/modify"})
 //    public void read(Long bike_id, Model model) {

@@ -59,42 +59,43 @@ public class BikeBoardServiceImpl implements BikeBoardService{
         bikeBoardMapper.insert(bikeBoardVO);
     }
 
-////	@Override
-////	public List<TodoDTO> getAll() {
-////
-////		List<TodoDTO> dtoList = todoMapper.selectAll().stream()
-////				.map(vo -> modelMapper.map(vo, TodoDTO.class))
-////				.collect(Collectors.toList());
-////
-////		return dtoList;
-////	}
+    @Override
+	public List<BikeBoardDTO> getAll() {
+
+		List<BikeBoardDTO> dtoList = bikeBoardMapper.selectAll().stream()
+				.map(vo -> modelMapper.map(vo, BikeBoardDTO.class))
+				.collect(Collectors.toList());
+
+		return dtoList;
+	}
+    @Override
+    public PageResponseDTO<BikeBoardDTO> getList(PageRequestDTO pageRequestDTO) {
+
+        List<BikeBoardVO> voList = bikeBoardMapper.selectList(pageRequestDTO);
+        List<BikeBoardDTO> dtoList = voList.stream()
+                .map(vo -> modelMapper.map(vo, BikeBoardDTO.class))
+                .collect(Collectors.toList());
+
+
+        PageResponseDTO<BikeBoardDTO> pageResponseDTO = PageResponseDTO.<BikeBoardDTO>withAll()
+                .dtoList(dtoList)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
+    }
+
 //
 //    @Override
-//    public PageResponseDTO<BikeBoardDTO> list(PageRequestDTO pageRequestDTO) {
+//    public BikeBoardDTO readOne(Long bike_id) {
 //
-//        List<BikeBoardVO> voList = bikeBoardMapper.read(pageRequestDTO);
-//        List<BikeBoardDTO> dtoList = voList.stream()
-//                .map(vo -> modelMapper.map(vo, BikeBoardDTO.class))
-//                .collect(Collectors.toList());
-//
-//
-//        PageResponseDTO<BikeBoardDTO> pageResponseDTO = PageResponseDTO.<BikeBoardDTO>withAll()
-//                .dtoList(dtoList)
-//                .pageRequestDTO(pageRequestDTO)
-//                .build();
-//
-//        return pageResponseDTO;
-//    }
-//
-//    @Override
-//    public BikeBoardDTO getOne(Long tno) {
-//
-//        BikeBoardVO bikeBoardVO = BikeBoardMapper.selectOne(tno);
+//        BikeBoardVO bikeBoardVO = bikeBoardMapper.selectOne(bike_id);
 //
 //        BikeBoardDTO bikeBoardDTO = modelMapper.map(bikeBoardVO, BikeBoardDTO.class);
 //
 //        return bikeBoardDTO;
 //    }
+
 //
 //    @Override
 //    public void remove(Long tno) {

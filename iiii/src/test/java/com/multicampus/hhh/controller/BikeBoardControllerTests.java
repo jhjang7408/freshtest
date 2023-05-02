@@ -3,6 +3,7 @@ package com.multicampus.hhh.controller;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;

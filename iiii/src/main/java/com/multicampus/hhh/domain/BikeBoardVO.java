@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -27,7 +28,7 @@ public class BikeBoardVO {
     @NotBlank
     private String image;
 
-    @NotBlank
+    @NotNull
     private int price;
     private String info;
     private String status;

@@ -18,6 +18,7 @@ public class AccBoardController {
 
     private AccBoardService service;
 
+
 //    @GetMapping("/list")
 //    public void list(Model model)
 //    {

@@ -7,23 +7,23 @@
 <mapper namespace="com.multicampus.hhh.mapper.BikeBoardMapper">
 
     <!--판매글 등록-->
-    <insert id="insert">
+    <insert id="insert" >
         insert into bike_board(bike_id,user_id,product_name, title,image, price,info,status,regdate)
-        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, )
+        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9})
     </insert>
 
     <!--구매 게시판 목록 조회-->
-    <select id="readAll">
+    <select id="selectAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
         select * from bike_board order by bike_id desc
     </select>
 
     <!--특정 게시물 조회-->
-    <select id="readOne">
+    <select id="selectOne">
         select * from bike_board where bike_id = #{bike_id}
     </select>
 
     <!--게시글 수정(게시글 작성자 + 관리자만 가능)-->
-    <update id="modify">
+    <update id="update">
         update bike_board set
     </update>
     <!--게시글 삭제(게시글 작성자 + 관리자만 가능)-->

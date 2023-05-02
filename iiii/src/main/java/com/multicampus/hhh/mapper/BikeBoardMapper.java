@@ -2,13 +2,21 @@ package com.multicampus.hhh.mapper;
 
 import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
+import com.multicampus.hhh.dto.PageRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface BikeBoardMapper {
     //insert,radAll,readOne,modify,delete
-    void insert(BikeBoardVO bikeBoardDTO);
-    BikeBoardDTO read(Long ac_id);
-    int delete(String user_id);
-    int modify(BikeBoardDTO bikeBoardDTO);
+    void insert(BikeBoardVO bikeBoardVO);
+    List<BikeBoardVO> selectAll();
+
+    BikeBoardDTO selectOne(Long bike_id);
+    void delete(String user_id);
+    void update(BikeBoardVO bikeBoardVO);
+
+
+    List<BikeBoardVO> selectList(PageRequestDTO pageRequestDTO);
 }
