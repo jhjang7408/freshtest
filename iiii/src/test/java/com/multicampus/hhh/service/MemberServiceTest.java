@@ -2,6 +2,7 @@ package com.multicampus.hhh.service;
 
 import com.multicampus.hhh.dto.MemberDTO;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,7 @@ class MemberServiceTest {
     @Test
     public void servicetest(){
         MemberDTO memberDTO = new MemberDTO().builder()
-                        .user_id("test1323")
+                        .userid("test1323")
                         .name("test")
                         .password("1234")
                         .name("testnm").nickname("testni").email("test@email.com")
@@ -27,6 +28,11 @@ class MemberServiceTest {
 
 
         memberService.saveMember(memberDTO);
+    }
+
+    @Test
+    @DisplayName("로그인 체크 테스트")
+    public void loginCheck(){
     }
 
 }

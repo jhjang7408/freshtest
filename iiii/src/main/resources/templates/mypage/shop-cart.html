@@ -57,12 +57,12 @@
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
           <div class="col-xxl-2 col-lg-3">
-            <a class="navbar-brand d-none d-lg-block" href="../index.html">
+            <a class="navbar-brand d-none d-lg-block" href="/">
               <img th:src="@{/images/수신호멈.jpg}"
                    alt="eCommerce HTML Template"/>
             </a>
             <div class="d-flex justify-content-between w-100 d-lg-none">
-              <a class="navbar-brand" href="../index.html">
+              <a class="navbar-brand" href="/">
                 <img
                         th:src="@{/images/logo/freshcart-logo.svg}"
                         alt="eCommerce HTML Template"
@@ -202,12 +202,17 @@
 
           <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
             <div class="list-inline">
-              <div class="list-inline-item">
+              <div class="list-inline-item" th:if="${session.loginId == null}">
                 <a href="/member/signin">로그인</a>
               </div>
+              <div class="list-inline-item" th:if="${session.loginId != null}">
+                <a href="/member/logout">로그아웃</a>
+              </div>
 
-              <div class="list-inline-item">
-                <li class="nav-item dropdown">
+
+
+              <div class="list-inline-item" th:if="${session.loginId != null}">
+                <li class="nav-item dropdown" >
                   <a
                           class="nav-link dropdown-toggle"
                           href="#"
@@ -268,7 +273,7 @@
           <div
                   class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
           >
-            <a href="../index.html"
+            <a href="/"
             ><img
                     th:src="@{../images/logo/freshcart-logo.svg}"
                     alt="eCommerce HTML Template"
@@ -338,7 +343,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="../index.html"
+                    <a class="dropdown-item" href="../index"
                     >악세서리 판매 등록</a
                     >
                   </li>
@@ -374,7 +379,7 @@
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="../pages/shop-cart.html"
+                    <a class="dropdown-item" href="/mypage/shop-cart"
                     >장바구니</a
                     >
                   </li>
@@ -475,7 +480,7 @@
                       <div class="col-3 col-md-2">
                         <!-- 제품 사진 -->
                         <img
-                          src="../assets/images/products/product-img-1.jpg"
+                          th:src="@{/images/products/product-img-1.jpg}"
                           alt="Ecommerce"
                           class="img-fluid"
                         />
@@ -921,6 +926,7 @@
                     </div>
                   </li>
                 </ul>
+
                 <!-- btn -->
                 <div class="d-flex justify-content-between mt-4">
                   <a href="#!" class="btn btn-primary">초록색 버튼</a>
@@ -935,7 +941,7 @@
               <div class="mb-5 card mt-6">
                 <div class="card-body p-6">
                   <!-- heading -->
-                  <h2 class="h5 mb-4">Summary</h2>
+                  <h2 class="h5 mb-4">결제하기</h2>
                   <div class="card mb-2">
                     <!-- list group -->
                     <ul class="list-group list-group-flush">
@@ -975,18 +981,9 @@
                       class="btn btn-primary btn-lg d-flex justify-content-between align-items-center"
                       type="submit"
                     >
-                      결제하기 <span class="fw-bold">총결제금액 보여주기</span>
+                     <span class="fw-bold">결제하기</span>
                     </button>
                   </div>
-                  <!-- text -->
-                  <p>
-                    <small
-                      >정책 ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                      <a href="#!">정책 URL</a> and
-                      <a href="#!">개인정보정책 URL</a>
-                    </small>
-                  </p>
-
                   <!-- heading -->
                 </div>
               </div>
