@@ -499,13 +499,13 @@
             </div>
           </section>
         <!-- row -->
-        <div class="row">
+        <div class="row mt-3">
 
-          <div class="col-lg-8 col-12">
+          <div class="col">
             <!-- card -->
-            <div class="card mb-6 card-lg">
+            <div class="card">
               <!-- card body -->
-              <div class="card-body p-6 ">
+              <div class="card-body">
                 <h4 class="mb-4 h5">읽기</h4>
                 <div class="row">
                   <!-- input -->
@@ -529,26 +529,99 @@
                     <input type="text" class="form-control" th:value="${qaview.content}" readonly>
                   </div>
 
-                  <!-- input -->
+
+
+
+
+                  <table class="table">
+
+                    <thead>
+
+                    <tr>
+
+                      <th scope="col">번호</th>
+                      <th scope="col">내용</th>
+                      <th scope="col">작성자</th>
+                      <th scope="col">시간</th>
+                      <th scope="col">ㅇ</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="board : ${qareply}">
+
+                      <td th:text="${board.qareplyid}">번호</td>
+                      <td th:text="${board.content}">내용</td>
+                      <td th:text="${board.userid}">작성자</td>
+                      <td th:text="${board.regdate}">시간</td>
+                      <td><div><button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${session.loginId.userid == board.userid}" >x</button></div>
+                      </td>
+                      </br>
+                    </tr>
+                    </tbody>
+
+
+                  </table>
+
+                  <form th:action="@{qareplyregister}" method="post">
+                    <div class="mb-3 col-lg-8">
+                      <input type="hidden" class="form-control" name="qaid" th:value="${qaview.qaid}" readonly>
+                    </div>
+                    <!-- input -->
+                    <div class="mb-3 col-lg-8">
+
+                     <input type="hidden" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
+                    </div>
+                    <!-- input -->
+                    <div class="mb-8 col-lg-8">
+
+                      <input type="text" class="form-control" name="content"  placeholder="내용" required>
+
+                    </div>
+
+
+
+                    <div class="my-4">
+                      <div class="float-end">
+                          <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                      </div>
+                    </div>
+
+                  </form>
+
 
                   <div class="my-4">
                     <div class="float-end">
                       <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
 
 
-
                       <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${session.loginId.userid == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
 
                       <button type="button" class="btn btn-danger" id="delete-btn" th:if="${session.loginId.userid == qaview.userid}">삭제</button>
 
-
-
-
                     </div>
                   </div>
+
+
+
+
+
+
+
                 </div>
+
+
+
+
               </div>
+
+
+
             </div>
+
+
+
 
           </div>
 
@@ -558,10 +631,9 @@
 
 
 
-          
-
-
       </div>
+
+
     </main>
 
   </div>
@@ -587,10 +659,10 @@
         'qaid' : qaid
       };
 
-      if(confirm("정말 계정을 삭제 하시겠습니까?")) {
+      if(confirm("정말 게시물을 삭제 하시겠습니까?")) {
         $.ajax({
           type : 'POST',
-          url : '/qa/qadelete',
+          url : '/qa/qadelete', /*/qa/qareplydelete*/
           data: data,
           success : function (){
             alert('게시글 삭제 되었습니다.')
@@ -603,6 +675,41 @@
         })
                 .done(function(){
                   window.location.href="/qa/qalist";
+                });
+      } else {
+
+      }
+    });
+  });
+
+
+  $(document).ready(function () {
+    $('#deletereply-btn').click(function() {
+
+      const qareplyid = $('#qareplyid').val();
+
+      const qaid= $('#qaid').val();
+
+      const data = {
+        'qareplyid' : qareplyid
+      };
+
+      if(confirm("정말 댓글을 삭제 하시겠습니까?")) {
+        $.ajax({
+          type : 'POST',
+          url : '/qa/qareplydeleteone',
+          data: data,
+          success : function (){
+            alert('댓글 삭제 되었습니다.')
+
+          },
+          error : function () {
+            alert('오류가 발생했습니다.')
+
+          }
+        })
+                .done(function(){
+                  window.location.href="/qa/qaview?qa_id=" + qaid;
                 });
       } else {
 

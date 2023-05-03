@@ -14,6 +14,22 @@
     </select>
 
 
+    <select id="findreplyById" resultType="com.multicampus.hhh.domain.QaBoardReply">
+        select * from qa_board_reply where qa_id = #{param1};
+    </select>
+
+
+    <insert id="qareplyregister" parameterType="com.multicampus.hhh.domain.QaBoardReply">
+        insert into qa_board_reply (qa_id, user_id, content) values (#{qaid}, #{userid}, #{content});
+    </insert>
+
+
+    <delete id="qareplydelete" parameterType="int">
+        delete from qa_board_reply where qa_id = #{qaid};
+    </delete>
+
+
+
     <insert id="qaregister" parameterType="com.multicampus.hhh.domain.QaBoard">
         insert into qa_board (title, content, user_id) values (#{title}, #{content}, #{userid});
     </insert>
@@ -28,6 +44,13 @@
     <delete id="qadelete" parameterType="int">
         delete from qa_board where qa_id = #{qaid};
     </delete>
+
+
+    <delete id="qareplydeleteone" parameterType="int">
+        delete from qa_board_reply where qa_reply_id = #{qareplyid};
+    </delete>
+
+
 
 
     <select id="qacount" resultType="int">
