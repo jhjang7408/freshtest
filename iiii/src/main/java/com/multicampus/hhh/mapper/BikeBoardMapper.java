@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper
 public interface BikeBoardMapper {
     //insert,radAll,readOne,modify,delete
-    void insert(BikeBoardVO bikeBoardVO);
-    List<BikeBoardVO> selectAll();
+    void insert(BikeBoardDTO bikeBoardDTO);
+    List<BikeBoardDTO> selectAll();
 
     BikeBoardDTO selectOne(Long bike_id);
     void delete(String user_id);

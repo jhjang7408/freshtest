@@ -53,17 +53,16 @@ public class BikeBoardServiceImpl implements BikeBoardService{
     @Override
     public void register(BikeBoardDTO bikeBoardDTO) {
 
-        log.info(modelMapper);
-        BikeBoardVO bikeBoardVO = modelMapper.map(bikeBoardDTO, BikeBoardVO.class);
-        log.info(bikeBoardVO);
-        bikeBoardMapper.insert(bikeBoardVO);
+//        log.info("serviceRegister1");
+//        BikeBoardVO bikeBoardVO = modelMapper.map(bikeBoardDTO, BikeBoardVO.class);
+//        log.info("serviceRegister2");
+        bikeBoardMapper.insert(bikeBoardDTO);
     }
 
     @Override
 	public List<BikeBoardDTO> getAll() {
 
 		List<BikeBoardDTO> dtoList = bikeBoardMapper.selectAll().stream()
-				.map(vo -> modelMapper.map(vo, BikeBoardDTO.class))
 				.collect(Collectors.toList());
 
 		return dtoList;

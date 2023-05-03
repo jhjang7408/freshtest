@@ -9,7 +9,7 @@ import java.util.List;
 public interface AccBoardService {
     //register 처리를 sell에서?
 
-    List<AccBoardDTO> list();
+    List<AccBoardDTO> getAll();
     Long register(AccBoardDTO AccBoardDTO);
     AccBoardDTO readOne(Long ac_id);
     void modify(AccBoardDTO accBoardDTO);

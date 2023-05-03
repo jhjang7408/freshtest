@@ -13,22 +13,22 @@ import java.time.LocalDateTime;
 public class BikeBoardVO {
 
 
-    private int bike_id;
-    @NotBlank
+    private int bikeid;
+
     @Length(min=4, max=20)
-    private String user_id;
+    private String userid;
 
-    @NotBlank
+
     @Length(min=3, max=50)
-    private String product_name;
+    private String productname;
 
-    @NotBlank
+
     private String title;
 
-    @NotBlank
+
     private String image;
 
-    @NotNull
+
     private int price;
     private String info;
     private String status;

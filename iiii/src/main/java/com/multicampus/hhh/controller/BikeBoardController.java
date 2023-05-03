@@ -1,5 +1,6 @@
 package com.multicampus.hhh.controller;
 
+import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 
 import com.multicampus.hhh.dto.BikeBoardDTO;
@@ -16,16 +17,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Member;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
 @Log4j2
-@RequestMapping("/sell")
+@RequestMapping("/bike")
 @RequiredArgsConstructor
 public class BikeBoardController {
 
@@ -33,7 +40,7 @@ public class BikeBoardController {
 
     @GetMapping("/bikeList")
     public void list(Model model){
-        log.info("bike list.......");
+        log.info("자전거 구매게시판");
         model.addAttribute("bikeList", service.getAll());
     }
 
@@ -63,21 +70,36 @@ public class BikeBoardController {
     @PostMapping("/productRegister")
     public String registerPost(@Valid BikeBoardDTO bikeBoardDTO,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes) {
+                               RedirectAttributes redirectAttributes, MultipartFile file) throws IOException {
+//        //session에서 userid를 가져옴
+//        MemberVO userid = (MemberVO) session.getAttribute("userid");
+//
+//        //로그인 하지 않았을 경우 로그인 페이지로 이동
+//        if(userid == null){
+//            log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
+//            return "member/signin";
+//        }
 
-        log.info("POST bike register.......");
+        log.info("자전거 등록");
 
-        if(bindingResult.hasErrors()) {
-            log.info("has errors.......");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
-            return "redirect:/sell/productRegister";
-        }
-        log.info(bikeBoardDTO);
-        return "redirect:/sell/bikeList";
+//        if(bindingResult.hasErrors()) {
+//            log.info("has errors.......");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
+//            return "redirect:/sell/productRegister";
+//        }
+
+        //이미지 업로드 처리 upload 메서드를 따로 만들어야하나?
+        String fileName = file.getOriginalFilename();
+        Path path = Paths.get("upload/" + fileName);
+        file.transferTo(path);
+        service.register(bikeBoardDTO);
+
+        return "redirect:/bike/bikeList";
     }
 
     @GetMapping("/productSingle")
     public void read(){
+        log.info("상세페이지");
     }
 
 

@@ -7,19 +7,19 @@
 <mapper namespace="com.multicampus.hhh.mapper.AccBoardMapper">
 
     <!--판매글 등록-->
-    <insert id="insert">
-        insert into acc_board(ac_id,product_name, image, price,amount,info,brand_name)
-        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6},#{param7})
+    <insert id="insert" parameterType="com.multicampus.hhh.dto.AccBoardDTO">
+        insert into bike_board(user_id,product_name, image, price,amount,info,brand_name)
+        values (#{userid}, #{productname}, #{image}, #{price},#{amount}, #{info}, #{brandname})
     </insert>
 
     <!--구매 게시판 목록 조회-->
-    <select id="readAll">
-        select * from acc_board order by ac_id desc
+    <select id="selectAll" resultType="com.multicampus.hhh.dto.AccBoardDTO">
+        select * from bike_board order by bike_id desc
     </select>
 
     <!--특정 게시글 조회-->
-    <select id="readtOne">
-        select * from acc_board where ac_id = #{ac_id}
+    <select id="selectOne">
+        select * from acc_board where ac_id = #{acid}
     </select>
     <!--게시글 수정(관리자만 가능)-->
     <update id="modify">
