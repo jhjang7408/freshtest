@@ -49,7 +49,10 @@ public class AccBoardController {
 
         return "redirect:/acc/accList";
     }
+    @GetMapping("productSingle")
+    public void readOne(){
 
+    }
 //    @GetMapping("/list")
 //    public void list(Model model)
 //    {

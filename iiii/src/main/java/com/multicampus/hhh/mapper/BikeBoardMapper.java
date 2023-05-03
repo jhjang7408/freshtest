@@ -4,6 +4,7 @@ import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.dto.PageRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public interface BikeBoardMapper {
     //insert,radAll,readOne,modify,delete
     void insert(BikeBoardDTO bikeBoardDTO);
-    List<BikeBoardDTO> selectAll();
+    List<BikeBoardDTO> findAll();
 
     BikeBoardDTO selectOne(Long bike_id);
     void delete(String user_id);

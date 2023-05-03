@@ -13,10 +13,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -39,9 +36,10 @@ public class BikeBoardController {
     private final BikeBoardService service;
 
     @GetMapping("/bikeList")
-    public void list(Model model){
+    public String list(Model model){
         log.info("자전거 구매게시판");
-        model.addAttribute("bikeList", service.getAll());
+        model.addAttribute("bikeList", service.findAll());
+        return "bike/bikeList";
     }
 
 //todo
@@ -70,7 +68,7 @@ public class BikeBoardController {
     @PostMapping("/productRegister")
     public String registerPost(@Valid BikeBoardDTO bikeBoardDTO,
                                BindingResult bindingResult,
-                               RedirectAttributes redirectAttributes, MultipartFile file) throws IOException {
+                               RedirectAttributes redirectAttributes, @RequestParam("imgFile") MultipartFile imgFile) throws IOException {
 //        //session에서 userid를 가져옴
 //        MemberVO userid = (MemberVO) session.getAttribute("userid");
 //
@@ -87,19 +85,25 @@ public class BikeBoardController {
 //            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
 //            return "redirect:/sell/productRegister";
 //        }
+        if (imgFile != null && !imgFile.isEmpty()) {
+            // 이미지 파일 저장
+            String fileName = imgFile.getOriginalFilename();
+            File file = new File("C:\\upload", fileName);
+            imgFile.transferTo(file);
+            // 이미지 파일명을 DTO에 설정
+            bikeBoardDTO.setImage(fileName);
+        }
 
-        //이미지 업로드 처리 upload 메서드를 따로 만들어야하나?
-        String fileName = file.getOriginalFilename();
-        Path path = Paths.get("upload/" + fileName);
-        file.transferTo(path);
         service.register(bikeBoardDTO);
 
         return "redirect:/bike/bikeList";
     }
 
-    @GetMapping("/productSingle")
-    public void read(){
-        log.info("상세페이지");
+    @GetMapping("/productSingle/{bikeid}")
+    public String readOne(@PathVariable Long bikeid, Model model) {
+        BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
+        model.addAttribute("bike", bikeBoardDTO);
+        return "bike/productSingle";
     }
 
 
