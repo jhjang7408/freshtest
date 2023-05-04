@@ -360,7 +360,7 @@
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/index-2.html"
+                  <a class="dropdown-item" href="/sell/productRegister"
                   >자전거 판매 등록</a
                   >
                 </li>
@@ -410,7 +410,7 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="./pages/blog.html"
+                  <a class="dropdown-item" href="./sell/bikeList"
                   >가이드</a
                   >
                 </li>
@@ -2369,7 +2369,7 @@
                 <a href="#!" class="nav-link">자전거 구매</a>
               </li>
               <li class="nav-item mb-2">
-                <a href="/mypage/shop-cart" class="nav-link">장바구니</a>
+                <a href="/mypage/shop-cart" class="nav-link" th:if="${session.loginId != null}">장바구니</a>
               </li>
             </ul>
           </div>

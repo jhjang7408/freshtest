@@ -35,4 +35,12 @@ class MemberServiceTest {
     public void loginCheck(){
     }
 
+    @Test
+    @DisplayName("이메일 인증 확인")
+    public void emailCheck(){
+        String code = memberService.mailSend("fktbzpsk@naver.com");
+
+        log.info("인증번호 : "+code);
+    }
+
 }

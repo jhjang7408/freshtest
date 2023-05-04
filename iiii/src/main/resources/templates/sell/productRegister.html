@@ -59,7 +59,7 @@
         <div class="container">
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
-                    <a class="navbar-brand d-none d-lg-block" href="../index.html">
+                    <a class="navbar-brand d-none d-lg-block" href="/">
                         <img th:src="@{/images/수신호멈.jpg}"
                              alt="eCommerce HTML Template"/>
                     </a>
@@ -377,7 +377,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="../pages/shop-cart.html"
+                                    <a class="dropdown-item" href="/mypage/shop-cart"
                                     >장바구니</a
                                     >
                                 </li>
@@ -514,6 +514,10 @@
                                     <div class="mb-3 col-lg-6">
                                         <label class="form-label">제품명</label>
                                         <input type="text" class="form-control" name="productname" placeholder="제품 이름을 입력하세요" required>
+                                    </div>
+                                    <div class="mb-3 col-lg-6">
+                                        <label class="form-label">작성자</label>
+                                        <input type="text" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
                                     </div>
                                     <div class="mb-3 col-lg-6">
                                         <label class="form-label">가격</label>

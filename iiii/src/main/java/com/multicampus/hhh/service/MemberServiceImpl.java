@@ -7,7 +7,12 @@ import com.multicampus.hhh.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import java.lang.reflect.Member;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -15,8 +20,9 @@ import org.springframework.stereotype.Service;
 public class MemberServiceImpl implements MemberService {
 
     private final ModelMapper modelMapper;
-
     private final MemberMapper memberMapper;
+    private final JavaMailSender javaMailSender;
+
 
 
     @Override
@@ -65,6 +71,68 @@ public class MemberServiceImpl implements MemberService {
         log.info(memberVO.getUserid());
         memberMapper.deleterole(memberVO.getUserid());
         memberMapper.deleteuser(memberVO.getUserid());
+    }
+
+    @Override
+    public void modifyPassMember(MemberVO memberVO) {
+        memberMapper.updateUserPass(memberVO);
+
+    }
+
+    @Override
+    public String mailSend(String email) {  // 인증번호 메일로 보내기
+
+        Random random = new Random();   //난수 생성
+        String key = "";
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+
+        for (int i = 0; i < 3; i++) {
+            int index = random.nextInt(25) + 65;
+
+            key += (char) index;
+        }
+        int numIndex = random.nextInt(9999) + 1000;
+
+        key += numIndex;
+        message.setSubject("인증번호 입력을 위한 메일 전송");
+        message.setText("인증번호 : " + key);
+    
+        javaMailSender.send(message);
+        
+        return key; //인증키값 반환
+    }
+
+    @Override
+    public String memberEmail(String id, String email) {
+        MemberVO memberVO = memberMapper.findUser(id);
+        String key = "abc";
+        if (memberVO != null) {
+            String emailv2 = memberVO.getEmail();
+            if (email.equals(emailv2)){
+                key = mailSend(email);
+            }
+        }
+        log.info("서비스 메일 검증");
+        return key;
+    }
+
+    @Override
+    public void changePass(String id, String password) {
+        MemberVO memberVO= memberMapper.findUser(id);
+        memberVO.setPassword(password);
+        log.info("비밀번호 변경 테스트중"+ memberVO.getUserid());
+        memberMapper.updateUserPass(memberVO);
+    }
+
+    @Override
+    public String findPassword(String userid) {
+        MemberVO memberVO = memberMapper.findPass(userid);
+        if(memberVO.getEmail() == null){
+            return "이메일이 존재하지 않습니다.";
+        }
+        return memberVO.getEmail();
     }
 
 

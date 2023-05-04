@@ -62,16 +62,16 @@ public class BikeBoardController {
 
     @PostMapping("/productRegister")
     public String registerPost(@Valid BikeBoardDTO bikeBoardDTO,
-                               BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
 
         log.info("POST bike register.......");
 
-        if(bindingResult.hasErrors()) {
-            log.info("has errors.......");
-            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
-            return "redirect:/sell/productRegister";
-        }
+//        if(bindingResult.hasErrors()) {
+//            log.info("has errors.......");
+//            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
+//            return "redirect:/sell/productRegister";
+//        }
+        service.register(bikeBoardDTO);
         log.info(bikeBoardDTO);
         return "redirect:/sell/bikeList";
     }

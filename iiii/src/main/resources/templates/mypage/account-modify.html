@@ -697,12 +697,9 @@
                         <!-- input -->
                         <div class="mb-5">
                           <label class="form-label">주소</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="주소 api"
-                            name="address"
-                          />
+<!--                          <input type="text" class="form-control" placeholder="주소 api" name="address" />-->
+                          <input type="text" id="addrapi" name="address" class="form-control" placeholder="주소" readonly />
+                          <input type="text" name="address_detail" class="form-control"  placeholder="상세 주소" />
                         </div>
                         <!-- button -->
                         <div class="mb-3">
@@ -722,24 +719,12 @@
                     <!-- input -->
                     <div class="mb-3 col">
                       <label class="form-label">새로운 비밀번호</label>
-                      <input
-                              type="password"
-                              class="form-control"
-                              placeholder="************"
-                              id="newPassword"
-                              name="password1"
-                      />
+                      <input type="password" class="form-control" placeholder="************" id="newPassword" name="password1"/>
                     </div>
                     <!-- input -->
                     <div class="mb-3 col">
                       <label class="form-label">비밀번호 확인</label>
-                      <input
-                              type="password"
-                              class="form-control"
-                              placeholder="************"
-                              id="newPasswordCheck"
-                              name="password2"
-                      />
+                      <input type="password" class="form-control" placeholder="************" id="newPasswordCheck" name="password2"/>
                     </div>
                     <!-- button -->
                     <div class="mb-3">
@@ -922,6 +907,7 @@
 
   <!-- Theme JS -->
   <script th:src="@{/js/theme.min.js}"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
   <script>
     $(document).ready(function() {
@@ -965,12 +951,26 @@
             error : function () {
               alert('오류가 발생했습니다.')
             }
+          })
+          .done(function() {
+            window.location.href = "/";
           });
         } else {
 
         }
       });
     });
+
+    window.onload = function(){
+      document.getElementById("addrapi").addEventListener("click", function(){
+        new daum.Postcode({
+          oncomplete: function(data) { //선택시 입력값 세팅
+            document.getElementById("addrapi").value = data.address; // 주소 넣기
+            document.querySelector("input[name=address_detail]").focus(); //상세입력
+          }
+        }).open();
+      });
+    }
   </script>
   </body>
 </html>
