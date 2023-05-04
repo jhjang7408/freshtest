@@ -544,6 +544,7 @@
                       <th scope="col">작성자</th>
                       <th scope="col">시간</th>
                       <th scope="col">ㅇ</th>
+                      <th scope="col">ㄱ</th>
                     </tr>
                     </thead>
 
@@ -555,7 +556,10 @@
                       <td th:text="${board.content}">내용</td>
                       <td th:text="${board.userid}">작성자</td>
                       <td th:text="${board.regdate}">시간</td>
-                      <td><div><button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${session.loginId.userid == board.userid}" >x</button></div>
+                      <td>
+                        <div>
+                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${session.loginId != null && session.loginId.userid == board.userid}" >x</button>
+                        </div>
                       </td>
                       </br>
                     </tr>
@@ -564,12 +568,12 @@
 
                   </table>
 
-                  <form th:action="@{qareplyregister}" method="post">
+                  <form th:action="@{qareplyregister}" method="post" th:if="${session.loginId != null}">
                     <div class="mb-3 col-lg-8">
                       <input type="hidden" class="form-control" name="qaid" th:value="${qaview.qaid}" readonly>
                     </div>
                     <!-- input -->
-                    <div class="mb-3 col-lg-8">
+                    <div class="mb-3 col-lg-8" th:if="${session.loginId != null}">
 
                      <input type="hidden" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
                     </div>
@@ -591,14 +595,28 @@
                   </form>
 
 
+
                   <div class="my-4">
                     <div class="float-end">
+                      <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                        <a href="/member/signin">댓글 쓰기</a>
+                      </button>
+                    </div>
+                  </div>
+
+
+
+                  <div class="my-4">
+                    <div class="float-end">
+
                       <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
 
 
-                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${session.loginId.userid == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${session.loginId != null && session.loginId.userid == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
 
-                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${session.loginId.userid == qaview.userid}">삭제</button>
+                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${session.loginId != null && session.loginId.userid == qaview.userid}">삭제</button>
+
+
 
                     </div>
                   </div>
@@ -661,61 +679,68 @@
 
       if(confirm("정말 게시물을 삭제 하시겠습니까?")) {
         $.ajax({
-          type : 'POST',
-          url : '/qa/qadelete', /*/qa/qareplydelete*/
+          type: 'POST',
+          url: '/qa/qareplydelete',
           data: data,
-          success : function (){
-            alert('게시글 삭제 되었습니다.')
-
+          success: function (){
+            // 게시글 삭제 요청에 대한 처리
+            $.ajax({
+              type: 'POST',
+              url: '/qa/qadelete',
+              data: data,
+              success: function (){
+                // 댓글 삭제 요청에 대한 처리
+                alert('게시글과 댓글이 삭제되었습니다.');
+                window.location.href="/qa/qalist";
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                alert('댓글 삭제 오류가 발생했습니다.');
+              }
+            });
           },
-          error : function () {
-            alert('오류가 발생했습니다.')
-
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert('게시글 삭제 오류가 발생했습니다.');
           }
-        })
-                .done(function(){
-                  window.location.href="/qa/qalist";
-                });
-      } else {
-
+        });
       }
     });
   });
 
 
-  $(document).ready(function () {
-    $('#deletereply-btn').click(function() {
 
-      const qareplyid = $('#qareplyid').val();
 
-      const qaid= $('#qaid').val();
 
-      const data = {
-        'qareplyid' : qareplyid
-      };
-
-      if(confirm("정말 댓글을 삭제 하시겠습니까?")) {
-        $.ajax({
-          type : 'POST',
-          url : '/qa/qareplydeleteone',
-          data: data,
-          success : function (){
-            alert('댓글 삭제 되었습니다.')
-
-          },
-          error : function () {
-            alert('오류가 발생했습니다.')
-
-          }
-        })
-                .done(function(){
-                  window.location.href="/qa/qaview?qa_id=" + qaid;
-                });
-      } else {
-
-      }
+  $(document).ready(function() {
+    $('button#deletereply-btn').click(function() {
+      var qareplyid = $(this).closest('tr').find('td:first').text(); // 해당 버튼이 속한 행(tr)의 첫번째(td) 셀에서 qareplyid 값을 가져옴
+      deleteReply(qareplyid); // deleteReply 함수 호출
     });
   });
+
+  function deleteReply(qareplyid) {
+    if(confirm("정말 댓글을 삭제 하시겠습니까?")) {
+      $.ajax({
+        type: "POST",
+        url: "/qa/qareplydeleteone",
+        data: {
+          qareplyid: qareplyid
+        },
+        success: function (response) {
+          location.reload(); // 페이지를 새로고침하여 댓글 목록을 갱신함
+        },
+        error: function (xhr, status, error) {
+          alert('댓글 삭제에 실패하였습니다.'); // 오류 메시지 출력
+        }
+      });
+    }
+  }
+
+
+
+
+
 
 </script>
 
