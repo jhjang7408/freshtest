@@ -7,28 +7,28 @@
 <mapper namespace="com.multicampus.hhh.mapper.BikeBoardMapper">
 
     <!--판매글 등록-->
-    <insert id="insert" >
-        insert into bike_board(bike_id,user_id,product_name, title,image, price,info,status,regdate)
-        values (#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9})
-    </insert>
 
+    <insert id="insert" parameterType="com.multicampus.hhh.dto.BikeBoardDTO">
+        insert into bike_board(user_id,product_name, title,image, price,info,status,regdate)
+        values (#{userid}, #{productname}, #{title}, #{image}, #{price}, #{info}, #{status}, CURRENT_TIMESTAMP)
+    </insert>
     <!--구매 게시판 목록 조회-->
-    <select id="selectAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
+    <select id="findAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
         select * from bike_board order by bike_id desc
     </select>
 
     <!--특정 게시물 조회-->
-    <select id="selectOne">
-        select * from bike_board where bike_id = #{bike_id}
+    <select id="selectOne" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
+        select * from bike_board where bike_id = #{bikeid}
     </select>
 
     <!--게시글 수정(게시글 작성자 + 관리자만 가능)-->
-    <update id="update">
-        update bike_board set
+    <update id="update" parameterType="com.multicampus.hhh.dto.BikeBoardDTO">
+        update bike_board set (#{productname}, #{title}, #{image}, #{price}, #{info}) where bike_id = #{bikeid}
     </update>
     <!--게시글 삭제(게시글 작성자 + 관리자만 가능)-->
     <delete id = "delete">
-        delete from bike_board where id = #{user_id}
+        delete from bike_board where user_id = #{userid}
     </delete>
 
 </mapper>

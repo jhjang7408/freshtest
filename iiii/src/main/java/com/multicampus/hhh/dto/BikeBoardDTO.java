@@ -13,23 +13,26 @@ import java.time.LocalDateTime;
 public class BikeBoardDTO {
 
 
-    private int bike_id;
+    private int bikeid;
 
     @Length(min=4, max=20)
     private String userid;
 
-    @Length(min=3, max=50)
-    private String product_name;
 
-    @NotBlank
+    @Length(min=3, max=50)
+    private String productname;
+
+
     private String title;
+
 
     private String image;
 
-    @NotNull
+
     private int price;
     private String info;
     private String status;
+
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;

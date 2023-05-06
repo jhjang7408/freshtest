@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,20 +54,20 @@ public class BikeBoardServiceImpl implements BikeBoardService{
     @Override
     public void register(BikeBoardDTO bikeBoardDTO) {
 
-        log.info(modelMapper);
-        BikeBoardVO bikeBoardVO = modelMapper.map(bikeBoardDTO, BikeBoardVO.class);
-        log.info(bikeBoardVO);
-        bikeBoardMapper.insert(bikeBoardVO);
+//        log.info("serviceRegister1");
+//        BikeBoardVO bikeBoardVO = modelMapper.map(bikeBoardDTO, BikeBoardVO.class);
+//        log.info("serviceRegister2");
+        bikeBoardMapper.insert(bikeBoardDTO);
     }
 
     @Override
-	public List<BikeBoardDTO> getAll() {
+	public List<BikeBoardDTO> findAll() {
 
-		List<BikeBoardDTO> dtoList = bikeBoardMapper.selectAll().stream()
-				.map(vo -> modelMapper.map(vo, BikeBoardDTO.class))
-				.collect(Collectors.toList());
-
-		return dtoList;
+//		List<BikeBoardDTO> dtoList = bikeBoardMapper.findAll().stream()
+//				.collect(Collectors.toList());
+//
+//		return dtoList;
+        return bikeBoardMapper.findAll();
 	}
     @Override
     public PageResponseDTO<BikeBoardDTO> getList(PageRequestDTO pageRequestDTO) {
@@ -86,32 +87,24 @@ public class BikeBoardServiceImpl implements BikeBoardService{
     }
 
 //
-//    @Override
-//    public BikeBoardDTO readOne(Long bike_id) {
-//
-//        BikeBoardVO bikeBoardVO = bikeBoardMapper.selectOne(bike_id);
-//
-//        BikeBoardDTO bikeBoardDTO = modelMapper.map(bikeBoardVO, BikeBoardDTO.class);
-//
-//        return bikeBoardDTO;
-//    }
+    @Override
+    public BikeBoardDTO readOne(int bikeid) {
 
+        return bikeBoardMapper.selectOne(bikeid);
+    }
+    @Override
+    public void update(BikeBoardDTO bikeBoardDTO) {
+        bikeBoardMapper.update(bikeBoardDTO);
+    }
 //
 //    @Override
-//    public void remove(Long tno) {
+//    public void delete(Long tno) {
 //
 //        bikeBoardMapper.delete(tno);
 //
 //    }
 //
-//    @Override
-//    public void modify(TodoDTO todoDTO) {
-//
-//        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
-//
-//        todoMapper.update(todoVO);
-//
-//    }
+
 
 }
 
