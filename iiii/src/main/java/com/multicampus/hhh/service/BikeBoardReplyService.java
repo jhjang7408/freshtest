@@ -5,9 +5,7 @@ import com.multicampus.hhh.dto.BikeBoardReplyDTO;
 import com.multicampus.hhh.dto.PageResponseDTO;
 
 public interface BikeBoardReplyService {
-    Long register(BikeBoardReplyDTO replyDTO);
-
-    BikeBoardReplyDTO read(Long bike_id);
+    void register(BikeBoardReplyDTO replyDTO);
 
     void modify(BikeBoardReplyDTO replyDTO);
 

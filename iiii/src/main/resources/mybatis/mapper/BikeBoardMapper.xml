@@ -23,8 +23,8 @@
     </select>
 
     <!--게시글 수정(게시글 작성자 + 관리자만 가능)-->
-    <update id="update">
-        update bike_board set
+    <update id="update" parameterType="com.multicampus.hhh.dto.BikeBoardDTO">
+        update bike_board set (#{productname}, #{title}, #{image}, #{price}, #{info}) where bike_id = #{bikeid}
     </update>
     <!--게시글 삭제(게시글 작성자 + 관리자만 가능)-->
     <delete id = "delete">

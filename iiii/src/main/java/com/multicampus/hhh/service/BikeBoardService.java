@@ -12,8 +12,8 @@ public interface BikeBoardService {
 
     List<BikeBoardDTO> findAll();
     void register(BikeBoardDTO bikeBoardDTO);
-    BikeBoardDTO readOne(Long bike_id);
-//    void modify(BikeBoardDTO bikeBoardDTO);
+    BikeBoardDTO readOne(int bike_id);
+    void update(BikeBoardDTO bikeBoardDTO);
 //    void remove(Long bike_id);
 //
     PageResponseDTO<BikeBoardDTO> getList(PageRequestDTO pageRequestDTO);

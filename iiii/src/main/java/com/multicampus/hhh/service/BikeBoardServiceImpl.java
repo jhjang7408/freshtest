@@ -88,27 +88,23 @@ public class BikeBoardServiceImpl implements BikeBoardService{
 
 //
     @Override
-    public BikeBoardDTO readOne(Long bike_id) {
+    public BikeBoardDTO readOne(int bikeid) {
 
-        return bikeBoardMapper.selectOne(bike_id);
+        return bikeBoardMapper.selectOne(bikeid);
     }
-
+    @Override
+    public void update(BikeBoardDTO bikeBoardDTO) {
+        bikeBoardMapper.update(bikeBoardDTO);
+    }
 //
 //    @Override
-//    public void remove(Long tno) {
+//    public void delete(Long tno) {
 //
 //        bikeBoardMapper.delete(tno);
 //
 //    }
 //
-//    @Override
-//    public void modify(TodoDTO todoDTO) {
-//
-//        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
-//
-//        todoMapper.update(todoVO);
-//
-//    }
+
 
 }
 

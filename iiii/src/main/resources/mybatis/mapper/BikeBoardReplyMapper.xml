@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.multicampus.hhh.mapper.BikeBoardReplyMapper">
+    <insert id="insert" parameterType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
+        insert into bike_board_reply(bike_reply_id,user_id,bike_id,content,regdate)
+        values (#{bikereplyid},#{userid},#{bikeid},#{content}, CURRENT_TIMESTAMP)
+    </insert>
+
+</mapper>

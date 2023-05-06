@@ -14,9 +14,9 @@ public interface BikeBoardMapper {
     void insert(BikeBoardDTO bikeBoardDTO);
     List<BikeBoardDTO> findAll();
 
-    BikeBoardDTO selectOne(Long bike_id);
+    BikeBoardDTO selectOne(int bikeid);
     void delete(String user_id);
-    void update(BikeBoardVO bikeBoardVO);
+    void update(BikeBoardDTO bikeBoardDTO);
 
 
     List<BikeBoardVO> selectList(PageRequestDTO pageRequestDTO);

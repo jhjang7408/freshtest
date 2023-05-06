@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 
 public class BikeBoardReplyDTO {
 
-    private int bike_reply_id;
+    private int bikereplyid;
 
-    @NotBlank
+
     @Length(min=4, max=20)
-    private String user_id;
-    private int bike_id;
+    private String userid;
+    private int bikeid;
     private String content;
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
