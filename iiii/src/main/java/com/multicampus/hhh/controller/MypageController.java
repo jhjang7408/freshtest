@@ -21,13 +21,18 @@ public class MypageController {
 
 
     @GetMapping("/orderlist-bike")
-    public void orderbikelist(){
-        log.info("orderlistpage");
+    public void orderbikelist(HttpSession session, Model model){
+        MemberVO memberVO = (MemberVO) session.getAttribute("loginId");
+        if(memberVO == null) {
+//            model.addAllAttributes("loginError", "로그인 상태가 아닙니다.");
+            //오류 메세지 보내기
+        }
+        log.info("자전거 구매내역");
     }
 
     @GetMapping("/orderlist-acc")
     public void orderacclist(){
-        log.info("orderaccListpage");
+        log.info("악세사리 구매내역");
     }
     
     @GetMapping("/account-modify")
@@ -35,14 +40,17 @@ public class MypageController {
         log.info("개인정보수정 페이지");
     }
 
-    @PostMapping("/account-modify")
-    public String modifyInfo(HttpSession session, @ModelAttribute MemberVO memberVO){
+
+    @PostMapping("/account-modify")     //개인정보 수정
+    public String modifyInfo(HttpSession session, @ModelAttribute MemberVO memberVO, @RequestParam("address_detail") String addressd){
+
         memberService.modifyMember(memberVO);
         log.info("개인정보수정 테스트중");
         log.info(memberVO);
         return "redirect:/mypage/account-modify";
     }
-    
+
+
     @GetMapping("/listsell")
     public void listsell(){
         log.info("판매내역");
@@ -53,27 +61,27 @@ public class MypageController {
         log.info("장바구니");
     }
 
-    @PostMapping("/changepass")
+    @PostMapping("/changepass")     //비밀번호 변경
     public String changepassword(HttpSession session, @RequestParam("password") String password){
         MemberVO memberVO= (MemberVO) session.getAttribute("loginId");
         log.info(memberVO);
         log.info(password);
         memberVO.setPassword(password);
         log.info("비번 변경3");
-        memberService.modifyMember(memberVO);
+        memberService.modifyPassMember(memberVO);
         log.info("비밀번호 변경 완료");
 
         return "mypage/account-modify";
     }
 
     @PostMapping("/deleteMember")
-    public String remove(HttpSession session){
+    public void remove(HttpSession session){
         MemberVO memberVO= (MemberVO) session.getAttribute("loginId");
         log.info(memberVO);
         memberService.removeMember(memberVO);
         session.invalidate();
         log.info("회원탈퇴 확인");
 
-        return "redirect:/";
+//        return "redirect:/";
     }
 }

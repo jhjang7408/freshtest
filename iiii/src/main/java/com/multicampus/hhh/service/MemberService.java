@@ -15,6 +15,14 @@ public interface MemberService {
 
     void removeMember(MemberVO memberVO);
 
+    void modifyPassMember(MemberVO memberVO);
+
+    String mailSend(String email);
+    String memberEmail(String id, String email);
+    void changePass(String id, String password);
+
+    String findPassword(String userid);
+
 //    void modify(MemberVO memberVO);
 //
 //    void remove(String id);

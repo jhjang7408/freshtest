@@ -17,6 +17,10 @@
     </select>
 
     <update id="updateUser">
+        update user set email = #{email}, phnum = #{phnum}, address = #{address} where user_id = #{userid}
+    </update>
+
+    <update id="updateUserPass">
         update user set email = #{email}, password = #{password}, phnum = #{phnum}, address = #{address} where user_id = #{userid}
     </update>
 
@@ -44,4 +48,11 @@
         select * from user_role where user_role_id = #{userid}
     </select>
 
+    <select id="findPas" resultType="com.multicampus.hhh.domain.MemberVO">
+        select user_id,password,email from user where user_id = #{userid}
+    </select>
+
+    <select id="memberEmailcheck" resultType="com.multicampus.hhh.domain.MemberVO">
+        select * from user where user_id = #{userid} and email = #{email}
+    </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.multicampus.hhh.dto;
+package com.multicampus.hhh.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -10,20 +10,22 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-public class BikeBoardDTO {
+public class BikeBoardVO {
 
 
     private int bike_id;
-
+    @NotBlank
     @Length(min=4, max=20)
-    private String userid;
+    private String user_id;
 
+    @NotBlank
     @Length(min=3, max=50)
     private String product_name;
 
     @NotBlank
     private String title;
 
+    @NotBlank
     private String image;
 
     @NotNull
