@@ -14,18 +14,16 @@ public class BikeBoardDTO {
 
 
     private int bike_id;
-    @NotBlank
-    @Length(min=4, max=20)
-    private String user_id;
 
-    @NotBlank
+    @Length(min=4, max=20)
+    private String userid;
+
     @Length(min=3, max=50)
     private String product_name;
 
     @NotBlank
     private String title;
 
-    @NotBlank
     private String image;
 
     @NotNull
