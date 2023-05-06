@@ -5,29 +5,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class QaBoard {
+public class QaBoardReply {
+
+    private int qareplyid;
 
     private int qaid;
 
     private String userid;
 
-    private String title;
-
     private String content;
 
     private LocalDateTime regdate;
 
-    private String image;
 
-
-    public QaBoard(LocalDateTime regdate){
-        this.regdate=LocalDateTime.now();
-    }
 
 }

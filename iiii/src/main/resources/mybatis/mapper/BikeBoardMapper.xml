@@ -28,7 +28,7 @@
     </update>
     <!--게시글 삭제(게시글 작성자 + 관리자만 가능)-->
     <delete id = "delete">
-        delete from bike_board where id = #{user_id}
+        delete from bike_board where user_id = #{userid}
     </delete>
 
 </mapper>

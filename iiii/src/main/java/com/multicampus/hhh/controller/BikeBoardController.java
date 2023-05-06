@@ -115,7 +115,7 @@ public class BikeBoardController {
         BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
         if(userid.getUserid().equals(bikeBoardDTO.getUserid())){
             model.addAttribute("bike",bikeBoardDTO);
-        return "bike/productRegister";
+            return "bike/productRegister";
         }else{
             //아이디 불일치 시 오류
             model.addAttribute("errorMsg", "글 작성자만 수정할 수 있습니다.");

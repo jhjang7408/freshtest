@@ -14,6 +14,7 @@ public interface MemberMapper {
     void saveRole(MemberVO memberVO);
     MemberVO findUser(String user_id);    //회원조회
     void updateUser(MemberVO memberVO);
+    void updateUserPass(MemberVO memberVO);
 
     MemberVO findjoinUser(String user_id);
     MemberDTO findtest(String user_id);
@@ -21,5 +22,8 @@ public interface MemberMapper {
 
     void deleteuser(String user_id);
     void deleterole(String user_id);
+    MemberVO findPass(String userid);
+    MemberVO memberEmailcheck(String user_id, String email);
+
 
 }

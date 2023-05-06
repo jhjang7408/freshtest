@@ -41,91 +41,146 @@
 
 <body>
 
-<div class="border-bottom ">
-
-
+<div class="border-bottom">
   <div class="py-4 pt-lg-3 pb-lg-0">
     <div class="container">
       <div class="row w-100 align-items-center gx-lg-2 gx-0">
         <div class="col-xxl-2 col-lg-3">
-          <a class="navbar-brand d-none d-lg-block" href="../index.html">
-            <img th:src="@{/images/수신호멈.jpg}" alt="eCommerce HTML Template">
-
+          <a class="navbar-brand d-none d-lg-block" href="/">
+            <img th:src="@{/images/수신호멈.jpg}"
+                 alt="eCommerce HTML Template"/>
           </a>
           <div class="d-flex justify-content-between w-100 d-lg-none">
-            <a class="navbar-brand" href="../dist/index.html">
-              <img th:src="@{/images/logo/freshcart-logo.svg}" alt="eCommerce HTML Template">
-
+            <a class="navbar-brand" href="/">
+              <img
+                      th:src="@{/images/logo/freshcart-logo.svg}"
+                      alt="eCommerce HTML Template"
+              />
             </a>
 
             <div class="d-flex align-items-center lh-1">
-
               <div class="list-inline me-4">
                 <div class="list-inline-item">
-
-                  <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#userModal">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-user">
-                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <a
+                          href="#!"
+                          class="text-muted"
+                          data-bs-toggle="modal"
+                          data-bs-target="#userModal"
+                  >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-user"
+                    >
+                      <path
+                              d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
                       <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                   </a>
                 </div>
                 <div class="list-inline-item">
-
-                  <a class="text-muted position-relative " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                     href="#offcanvasExample" role="button" aria-controls="offcanvasRight">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-shopping-bag">
-                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                  <a
+                          class="text-muted position-relative"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasRight"
+                          href="#offcanvasExample"
+                          role="button"
+                          aria-controls="offcanvasRight"
+                  >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-shopping-bag"
+                    >
+                      <path
+                              d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                      ></path>
                       <line x1="3" y1="6" x2="21" y2="6"></line>
                       <path d="M16 10a4 4 0 0 1-8 0"></path>
                     </svg>
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                        1
-                        <span class="visually-hidden">unread messages</span>
-                      </span>
+                    <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"
+                    >
+                          1
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
                   </a>
                 </div>
-
               </div>
               <!-- Button -->
-              <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
-                      data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
-                      aria-label="Toggle navigation">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                     class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
+              <button
+                      class="navbar-toggler collapsed"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#navbar-default"
+                      aria-controls="navbar-default"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation"
+              >
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        fill="currentColor"
+                        class="bi bi-text-indent-left text-primary"
+                        viewBox="0 0 16 16"
+                >
                   <path
-                          d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                          d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                  />
                 </svg>
               </button>
-
             </div>
           </div>
-
         </div>
         <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-
           <form action="#">
-            <div class="input-group ">
-              <input class="form-control rounded" type="search" placeholder="Search for products">
+            <div class="input-group">
+              <input
+                      class="form-control rounded"
+                      type="search"
+                      placeholder="Search for products"
+              />
               <span class="input-group-append">
-                  <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-search">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                  </button>
-                </span>
+                    <button
+                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                            type="button"
+                    >
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                      >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </button>
+                  </span>
             </div>
-
           </form>
         </div>
-
 
         <!-- Button trigger modal -->
         <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
@@ -135,139 +190,268 @@
         <!-- </div>  -->
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
-
           <div class="list-inline">
-
-            <div class="list-inline-item">
-              <a href="../pages/signin.html">로그인</a>
+            <div class="list-inline-item" th:if="${session.loginId == null}">
+              <a href="/member/signin">로그인</a>
+            </div>
+            <div class="list-inline-item" th:if="${session.loginId != null}">
+              <a href="/member/logout">로그아웃</a>
             </div>
 
-            <div class="list-inline-item">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                   aria-expanded="false">
+
+
+            <div class="list-inline-item" th:if="${session.loginId != null}">
+              <li class="nav-item dropdown" >
+                <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                >
                   마이페이지
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="../pages/signin.html">장바구니</a></li>
-                  <li><a class="dropdown-item" href="../pages/signup.html">구매 목록</a></li>
-                  <li><a class="dropdown-item" href="../pages/forgot-password.html">판매 목록</a></li>
-                  <li><a class="dropdown-item" href="../pages/signup.html">개인정보 수정</a></li>
-                  <li><a class="dropdown-item" href="../pages/signup.html">주소 추가/수정</a></li>
+                  <li>
+                    <a class="dropdown-item" href="/mypage/shop-cart"
+                    >장바구니</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/orderlist-bike"
+                    >자전거 구매내역</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/orderlist-acc"
+                    >악세사리 구매내역</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/listsell"
+                    >판매 목록</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/account-modify"
+                    >개인정보 수정</a
+                    >
+                  </li>
                 </ul>
               </li>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </div>
 
-
-  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
+  <nav
+          class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
+  >
     <div class="container px-0 px-md-3">
-
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
-        <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-          <a href="../dist/index.html"><img src="../../static/images/logo/freshcart-logo.svg"
-                                            alt="eCommerce HTML Template"></a>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div
+                class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
+        >
+          <a href="/"
+          ><img
+                  th:src="@{../images/logo/freshcart-logo.svg}"
+                  alt="eCommerce HTML Template"
+          /></a>
+          <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+          ></button>
         </div>
         <div class="d-block d-lg-none my-4">
           <form action="#">
-            <div class="input-group ">
-              <input class="form-control rounded" type="search" placeholder="Search for products">
+            <div class="input-group">
+              <input
+                      class="form-control rounded"
+                      type="search"
+                      placeholder="Search for products"
+              />
               <span class="input-group-append">
-                <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                       class="feather feather-search">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                  </svg>
-                </button>
-              </span>
+                    <button
+                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                            type="button"
+                    >
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                      >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </button>
+                  </span>
             </div>
           </form>
           <div class="mt-2">
-            <button type="button" class="btn  btn-outline-gray-400 text-muted w-100 " data-bs-toggle="modal"
-                    data-bs-target="#locationModal">
+            <button
+                    type="button"
+                    class="btn btn-outline-gray-400 text-muted w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#locationModal"
+            >
               <i class="feather-icon icon-map-pin me-2"></i>Pick Location
             </button>
           </div>
-
         </div>
 
         <div class="d-none d-lg-block">
-          <ul class="navbar-nav align-items-center ">
-
+          <ul class="navbar-nav align-items-center">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
                 판매 등록 277줄
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../index.html">악세서리 판매 등록</a></li>
-                <li><a class="dropdown-item" href="../pages/index-2.html">자전거 판매 등록</a></li>
+                <li>
+                  <a class="dropdown-item" href="../index"
+                  >악세서리 판매 등록</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/index-2.html"
+                  >자전거 판매 등록</a
+                  >
+                </li>
               </ul>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
                 구매
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../pages/shop-grid.html">악세서리 구매</a></li>
-                <li><a class="dropdown-item" href="../pages/shop-grid-3-column.html">자전거 구매</a></li>
-                <li><a class="dropdown-item" href="../pages/shop-cart.html">장바구니</a></li>
+                <li>
+                  <a class="dropdown-item" href="../pages/shop-grid.html"
+                  >악세서리 구매</a
+                  >
+                </li>
+                <li>
+                  <a
+                          class="dropdown-item"
+                          href="../pages/shop-grid-3-column.html"
+                  >자전거 구매</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/mypage/shop-cart"
+                     th:if="${session.loginId != null}">장바구니</a
+                  >
+                </li>
               </ul>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
                 커뮤니티
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../pages/guide.html">가이드</a></li>
-                <li><a class="dropdown-item" href="../pages/qalist.html">질문/정보 게시판</a></li>
+                <li>
+                  <a class="dropdown-item" href="/qa/guide"
+                  >가이드</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/qa/qalist"
+                  >질문/정보 게시판</a
+                  >
+                </li>
               </ul>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
                 공지
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../pages/signin.html">공지</a></li>
-                <li><a class="dropdown-item" href="../pages/signup.html">이벤트</a></li>
+                <li>
+                  <a class="dropdown-item" href="../pages/signin.html"
+                  >공지</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/signup.html"
+                  >이벤트</a
+                  >
+                </li>
               </ul>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                 aria-expanded="false">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
                 고객센터
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../pages/moonlist.html">1:1문의</a></li>
-                <li><a class="dropdown-item" href="../pages/qamoonlist.html">자주 묻는 질문</a></li>
+                <li>
+                  <a class="dropdown-item" href="../pages/signin.html"
+                  >1:1문의</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/qa/qalist.html"
+                  >자주 묻는 질문</a
+                  >
+                </li>
               </ul>
             </li>
           </ul>
         </div>
-
       </div>
     </div>
-
   </nav>
 </div>
-
-
-
 
 
 
@@ -293,9 +477,9 @@
                   <!-- breadcrumb -->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="../index.html">메인</a></li>
+                  <li class="breadcrumb-item"><a href="/">메인</a></li>
                   <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-                  <li class="breadcrumb-item"><a href="../pages/qalist.html">질문정보게시판</a></li>
+                  <li class="breadcrumb-item"><a href="/qa/qalist">질문정보게시판</a></li>
                   <li class="breadcrumb-item active" aria-current="page">읽기</li>
                 </ol>
               </nav>
@@ -315,53 +499,188 @@
             </div>
           </section>
         <!-- row -->
-        <div class="row">
+        <div class="row mt-3">
 
-          <div class="col-lg-8 col-12">
+          <div class="col">
             <!-- card -->
-            <div class="card mb-6 card-lg">
+            <div class="card">
               <!-- card body -->
-              <div class="card-body p-6 ">
+              <div class="card-body">
                 <h4 class="mb-4 h5">읽기</h4>
                 <div class="row">
                   <!-- input -->
-
-
-
-
-                  <div class="container">
-                    <p>번호 : [[${qaview.qaid}]]</p>
-                    <p>제목 : [[${qaview.title}]]</p>
-                    <p>작성자 : [[${qaview.userid}]]</p>
-                    <p>내용 : [[${qaview.content}]]</p>
-
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">번호</label>
+                    <input type="text" class="form-control" id="qaid" th:value="${qaview.qaid}" readonly>
                   </div>
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">제목</label>
+                    <input type="text" class="form-control" th:value="${qaview.title}" readonly>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">작성자</label>
+                    <input type="text" class="form-control" th:value="${qaview.userid}" readonly>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-8 col-lg-8">
+                    <label class="form-label">내용</label>
+                    <input type="text" class="form-control" th:value="${qaview.content}" readonly>
+                  </div>
+
+
+
+
+
+                  <table class="table">
+
+                    <thead>
+
+                    <tr>
+
+                      <th scope="col">번호</th>
+                      <th scope="col">내용</th>
+                      <th scope="col">작성자</th>
+                      <th scope="col">시간</th>
+                      <th scope="col">ㅇ</th>
+                      <th scope="col">ㄱ</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="board : ${qareply}">
+
+                      <td th:text="${board.qareplyid}">번호</td>
+                      <td th:text="${board.content}">내용</td><!--&gt;
+                        <div class="content" th:text="${board.content}"></div>
+                        <button type="button" data-toggle="modal" data-target="#replymodify" th:if="${session.loginId != null && session.loginId.userid == board.userid}">수정</button>
+                      </td>-->
+                      <td th:text="${board.userid}">작성자</td>
+                      <td th:text="${board.regdate}">시간</td>
+                      <td>
+                        <div>
+                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${session.loginId != null && session.loginId.userid == board.userid}" >x</button>
+                        </div>
+                      </td>
+                      </br>
+
+
+
+                    </tr>
+                    </tbody>
+
+
+                  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <form th:action="@{qareplyregister}" method="post" th:if="${session.loginId != null}">
+                    <div class="mb-3 col-lg-8">
+                      <input type="hidden" class="form-control" name="qaid" th:value="${qaview.qaid}" readonly>
+                    </div>
+                    <!-- input -->
+                    <div class="mb-3 col-lg-8" th:if="${session.loginId != null}">
+
+                     <input type="hidden" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
+                    </div>
+                    <!-- input -->
+                    <div class="mb-8 col-lg-8">
+
+                      <input type="text" class="form-control" name="content"  placeholder="내용" required>
+
+                    </div>
+
+                    <div class="my-4">
+                      <div class="float-end">
+                        <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                      </div>
+                    </div>
+
+
+
+                  </form>
+
 
 
                   <div class="my-4">
                     <div class="float-end">
-                        <a href="qalist.html"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
-                        <button type="button" class="btn btn-secondary modBtn">수정</button>
-                        <button type="button" class="btn btn-danger removeBtn">삭제</button>
+                      <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                        <a href="/member/signin">댓글 쓰기</a>
+                      </button>
                     </div>
                   </div>
-                  
+
+
+
+                  <div class="my-4">
+                    <div class="float-end">
+
+                      <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
+
+
+                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${session.loginId != null && session.loginId.userid == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+
+                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${session.loginId != null && session.loginId.userid == qaview.userid}">삭제</button>
+
+
+
+                    </div>
+                  </div>
+
+
+
+
+
+
+
                 </div>
 
 
 
+
               </div>
+
+
+
             </div>
 
-           
+
+
+
           </div>
-          
+
 
         </div>
+
+
+
+
       </div>
+
+
     </main>
 
   </div>
+
+
+
+
+
 
 <!-- Libs JS -->
 <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
@@ -373,6 +692,84 @@
 <script th:src="@{/libs/quill/dist/quill.min.js}"></script>
 <script th:src="@{/js/vendors/editor.js}"></script>
 <script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#delete-btn').click(function() {
+
+      const qaid = $('#qaid').val();
+
+      const data = {
+        'qaid' : qaid
+      };
+
+      if(confirm("정말 게시물을 삭제 하시겠습니까?")) {
+        $.ajax({
+          type: 'POST',
+          url: '/qa/qareplydelete',
+          data: data,
+          success: function (){
+            // 게시글 삭제 요청에 대한 처리
+            $.ajax({
+              type: 'POST',
+              url: '/qa/qadelete',
+              data: data,
+              success: function (){
+                // 댓글 삭제 요청에 대한 처리
+                alert('게시글과 댓글이 삭제되었습니다.');
+                window.location.href="/qa/qalist";
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                alert('댓글 삭제 오류가 발생했습니다.');
+              }
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert('게시글 삭제 오류가 발생했습니다.');
+          }
+        });
+      }
+    });
+  });
+
+
+
+
+
+  $(document).ready(function() {
+    $('button#deletereply-btn').click(function() {
+      var qareplyid = $(this).closest('tr').find('td:first').text(); // 해당 버튼이 속한 행(tr)의 첫번째(td) 셀에서 qareplyid 값을 가져옴
+      deleteReply(qareplyid); // deleteReply 함수 호출
+    });
+  });
+
+  function deleteReply(qareplyid) {
+    if(confirm("정말 댓글을 삭제 하시겠습니까?")) {
+      $.ajax({
+        type: "POST",
+        url: "/qa/qareplydeleteone",
+        data: {
+          qareplyid: qareplyid
+        },
+        success: function (response) {
+          location.reload(); // 페이지를 새로고침하여 댓글 목록을 갱신함
+        },
+        error: function (xhr, status, error) {
+          alert('댓글 삭제에 실패하였습니다.'); // 오류 메시지 출력
+        }
+      });
+    }
+  }
+
+
+
+
+
+
+</script>
+
 
 <!-- Footer -->
 <!-- footer -->

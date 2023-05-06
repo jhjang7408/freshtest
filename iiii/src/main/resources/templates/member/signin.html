@@ -487,7 +487,9 @@
             <h1 class="mb-1 h2 fw-bold">로그인</h1>
             <p>어서오십시오. 아이디와 비밀번호를 입력하세요.</p>
           </div>
-
+          <script th:if="${fixMsg != null}" th:inline="javascript">
+            alert(/*[[${fixMsg}]]*/);
+          </script>
           <form action="/member/signin" method="post" th:object="${loginMember}">
             <div class="row g-3">
               <!-- row -->
