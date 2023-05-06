@@ -781,8 +781,17 @@
                     <a href="#" class="btn btn-primary">댓글 작성</a>
                   </div>
                   <div class="d-flex justify-content-end">
-                    <a href="/bike/productRegister" class="btn btn-primary">수정</a>
+<!--                    <a href="/bike/productRegister" class="btn btn-primary">수정</a>-->
+                    <a th:href="@{'/bike/update/' + ${bike.bikeid}}" class="btn btn-primary">수정</a>
                   </div>
+                  <div th:if="${errorMsg}">
+                    <div class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
+                  </div>
+<!--                  <a th:href="@{'/bike/' + ${bike.bikeid} + '/delete'}" onclick="return confirm('삭제하시겠습니까?');" class="btn btn-danger">삭제</a>-->
+                  <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
+                    <input type="hidden" name="userid" th:value="${bike.userid}">
+                    <button type="submit" class="btn btn-danger">삭제</button>
+                  </form>
                 </div>
               </div>
             </div>

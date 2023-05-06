@@ -12,9 +12,9 @@ public interface BikeBoardService {
 
     List<BikeBoardDTO> findAll();
     void register(BikeBoardDTO bikeBoardDTO);
-    BikeBoardDTO readOne(int bike_id);
+    BikeBoardDTO readOne(int bikeid);
     void update(BikeBoardDTO bikeBoardDTO);
-//    void remove(Long bike_id);
+    void delete(int bikeid);
 //
     PageResponseDTO<BikeBoardDTO> getList(PageRequestDTO pageRequestDTO);
 }

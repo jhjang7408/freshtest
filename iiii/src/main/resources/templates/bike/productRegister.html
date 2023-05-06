@@ -472,109 +472,151 @@
 
 
     <!-- main -->
-    <main class="main-content-wrapper">
-        <!-- container -->
-        <div class="container">
-            <!-- row -->
-            <div class="row mb-8">
-                <div class="col-md-12">
-                    <div class="d-md-flex justify-content-between align-items-center">
-                        <!-- page header -->
-<!--                        <div>-->
-<!--                            <h2>제품 등록</h2>-->
-
-
-<!--                        </div>-->
-                        <div th:if="${bike == null}">
-                            <h2>제품글 등록</h2>
-                        </div>
-                        <div th:if="${bike != null}">
-                            <h2>제품글 수정</h2>
-                        </div>
-                        <!-- button -->
-                        <div>
-                            <a th:href="@{products.html}" class="btn btn-light">Back to Product</a>
-                        </div>
+<!--    <form th:action="${bike == null} ? @{/bike/productRegister} : @{/bike/update}" th:object="${bike}" method="post" enctype="multipart/form-data">-->
+    <form th:action="${bike == null} ? @{/bike/productRegister} : @{/bike/update/{bikeid}(bikeid=${bike.bikeid})}" th:object="${bike}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{bikeid}" />
+        <div class="card mb-6 card-lg">
+            <div class="card-body p-6">
+                <h4 class="mb-4 h5">제품 정보</h4>
+                <div class="row">
+                    <div class="mb-3 col-lg-6">
+                        <label class="form-label">제목</label>
+                        <input type="text" class="form-control" th:field="*{title}" placeholder="제목을 입력하세요" required>
                     </div>
-
-                </div>
-            </div>
-            <!-- row -->
-            <div class="row">
-                <div class="col-lg-8 col-12">
-                    <form th:action="@{productRegister}" method="post" enctype="multipart/form-data">
-                        <div class="card mb-6 card-lg">
-                            <div class="card-body p-6">
-                                <h4 class="mb-4 h5">제품 정보</h4>
-                                <div class="row">
-                                    <div class="mb-3 col-lg-6">
-                                        <label class="form-label">제목</label>
-                                        <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요" required>
-                                    </div>
-                                    <div class="mb-3 col-lg-6">
-                                        <label class="form-label">제품 종류</label>
-                                        <select class="form-select" name="category">
-                                            <option selected>종류 선택</option>
-                                            <option value="Dairy, Bread &amp; Eggs">악세서리</option>
-                                            <option value="Snacks &amp; Munchies">자전거</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3 col-lg-6">
-                                        <label class="form-label">제품명</label>
-                                        <input type="text" class="form-control" name="productname" placeholder="제품 이름을 입력하세요" required>
-                                    </div>
-                                    <div class="mb-3 col-lg-6">
-                                        <label class="form-label">작성자명</label>
-                                        <input type="text" class="form-control" name="userid" th:value="${userid}" readonly>
-                                    </div>
-                                    <div class="mb-3 col-lg-6">
-                                        <label class="form-label">가격</label>
-                                        <input type="text" class="form-control" name="price" placeholder="판매 가격을 입력하세요" required>
-                                    </div>
-                                    <div class="mb-3 col-lg-12 mt-5">
-                                        <h4 class="mb-3 h5">제품 이미지</h4>
-                                        <div class="d-block dropzone border-dashed rounded-2">
-                                            <div class="fallback">
-                                                <input name="imgFile" type="file" multiple>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 col-lg-12 mt-5">
-                                        <h4 class="mb-3 h5">제품 설명</h4>
-                                        <div class="py-8" id="editor"></div>
-                                        <input type="text" class="form-control" name="info" placeholder="제품 스펙을 입력하세요" required>
-                                    </div>
-
-                                </div>
+                    <div class="mb-3 col-lg-6">
+                        <label class="form-label">제품명</label>
+                        <input type="text" class="form-control" th:field="*{productname}" placeholder="제품 이름을 입력하세요" required>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label class="form-label">작성자명</label>
+                        <input type="text" class="form-control" th:field="*{userid}" readonly>
+                    </div>
+                    <div class="mb-3 col-lg-6">
+                        <label class="form-label">가격</label>
+                        <input type="text" class="form-control" th:field="*{price}" placeholder="판매 가격을 입력하세요" required>
+                    </div>
+                    <div class="mb-3 col-lg-12 mt-5">
+                        <h4 class="mb-3 h5">제품 이미지</h4>
+                        <div class="d-block dropzone border-dashed rounded-2">
+                            <div class="fallback">
+                                <input name="imgFile" type="file" multiple>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">등록</button>
-                        <button type="reset" class="btn btn-secondary mb-2">취소</button>
-
-                    </form>
-                </div>
-
-                <div class="col-lg-4 col-12">
-                    <!-- card -->
-
-                    <!-- card -->
-
-                    <!-- card -->
-                    <div class="card mb-6 card-lg">
-                        <!-- card body -->
-
                     </div>
-                    <!-- button -->
-                    <!-- <div class="d-grid">
-                      <a href="#" class="btn btn-primary">
-                        Create Product
-                      </a>
-                    </div> -->
+                    <div class="mb-3 col-lg-12 mt-5">
+                        <h4 class="mb-3 h5">제품 설명</h4>
+                        <div class="py-8" id="editor"></div>
+                        <input type="text" class="form-control" th:field="*{info}" placeholder="제품 스펙을 입력하세요" required>
+                    </div>
                 </div>
-
             </div>
         </div>
-    </main>
+        <button type="submit" class="btn btn-primary mb-2" th:text="${bike == null} ? '등록' : '수정'">저장</button>
+        <button type="reset" class="btn btn-secondary mb-2">취소</button>
+    </form>
+<!--    <main class="main-content-wrapper">-->
+<!--        &lt;!&ndash; container &ndash;&gt;-->
+<!--        <div class="container">-->
+<!--            &lt;!&ndash; row &ndash;&gt;-->
+<!--            <div class="row mb-8">-->
+<!--                <div class="col-md-12">-->
+<!--                    <div class="d-md-flex justify-content-between align-items-center">-->
+<!--                        &lt;!&ndash; page header &ndash;&gt;-->
+<!--&lt;!&ndash;                        <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <h2>제품 등록</h2>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--                        <div th:if="${bike == null}">-->
+<!--                            <h2>제품글 등록</h2>-->
+<!--                        </div>-->
+<!--                        <div th:if="${bike != null}">-->
+<!--                            <h2>제품글 수정</h2>-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; button &ndash;&gt;-->
+<!--                        <div>-->
+<!--                            <a th:href="@{products.html}" class="btn btn-light">Back to Product</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; row &ndash;&gt;-->
+<!--            <div class="row">-->
+<!--                <div class="col-lg-8 col-12">-->
+<!--                    <form th:action="@{productRegister}" method="post" enctype="multipart/form-data">-->
+<!--                        <div class="card mb-6 card-lg">-->
+<!--                            <div class="card-body p-6">-->
+<!--                                <h4 class="mb-4 h5">제품 정보</h4>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="mb-3 col-lg-6">-->
+<!--                                        <label class="form-label">제목</label>-->
+<!--                                        <input type="text" class="form-control" name="title" placeholder="제목을 입력하세요" required>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-lg-6">-->
+<!--                                        <label class="form-label">제품 종류</label>-->
+<!--                                        <select class="form-select" name="category">-->
+<!--                                            <option selected>종류 선택</option>-->
+<!--                                            <option value="Dairy, Bread &amp; Eggs">악세서리</option>-->
+<!--                                            <option value="Snacks &amp; Munchies">자전거</option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-lg-6">-->
+<!--                                        <label class="form-label">제품명</label>-->
+<!--                                        <input type="text" class="form-control" name="productname" placeholder="제품 이름을 입력하세요" required>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-lg-6">-->
+<!--                                        <label class="form-label">작성자명</label>-->
+<!--                                        <input type="text" class="form-control" name="userid" th:value="${userid}" readonly>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-lg-6">-->
+<!--                                        <label class="form-label">가격</label>-->
+<!--                                        <input type="text" class="form-control" name="price" placeholder="판매 가격을 입력하세요" required>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-lg-12 mt-5">-->
+<!--                                        <h4 class="mb-3 h5">제품 이미지</h4>-->
+<!--                                        <div class="d-block dropzone border-dashed rounded-2">-->
+<!--                                            <div class="fallback">-->
+<!--                                                <input name="imgFile" type="file" multiple>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="mb-3 col-lg-12 mt-5">-->
+<!--                                        <h4 class="mb-3 h5">제품 설명</h4>-->
+<!--                                        <div class="py-8" id="editor"></div>-->
+<!--                                        <input type="text" class="form-control" name="info" placeholder="제품 스펙을 입력하세요" required>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-primary mb-2">등록</button>-->
+<!--                        <button type="reset" class="btn btn-secondary mb-2">취소</button>-->
+
+<!--                    </form>-->
+<!--                </div>-->
+
+<!--                <div class="col-lg-4 col-12">-->
+<!--                    &lt;!&ndash; card &ndash;&gt;-->
+
+<!--                    &lt;!&ndash; card &ndash;&gt;-->
+
+<!--                    &lt;!&ndash; card &ndash;&gt;-->
+<!--                    <div class="card mb-6 card-lg">-->
+<!--                        &lt;!&ndash; card body &ndash;&gt;-->
+
+<!--                    </div>-->
+<!--                    &lt;!&ndash; button &ndash;&gt;-->
+<!--                    &lt;!&ndash; <div class="d-grid">-->
+<!--                      <a href="#" class="btn btn-primary">-->
+<!--                        Create Product-->
+<!--                      </a>-->
+<!--                    </div> &ndash;&gt;-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+<!--    </main>-->
 
 </div>
 

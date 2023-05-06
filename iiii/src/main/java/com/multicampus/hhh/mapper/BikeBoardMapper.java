@@ -15,7 +15,7 @@ public interface BikeBoardMapper {
     List<BikeBoardDTO> findAll();
 
     BikeBoardDTO selectOne(int bikeid);
-    void delete(String user_id);
+    void delete(int bikeid);
     void update(BikeBoardDTO bikeBoardDTO);
 
 

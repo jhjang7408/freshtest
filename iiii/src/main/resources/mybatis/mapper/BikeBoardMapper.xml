@@ -24,11 +24,11 @@
 
     <!--게시글 수정(게시글 작성자 + 관리자만 가능)-->
     <update id="update" parameterType="com.multicampus.hhh.dto.BikeBoardDTO">
-        update bike_board set (#{productname}, #{title}, #{image}, #{price}, #{info}) where bike_id = #{bikeid}
+        update bike_board set product_name = #{productname}, title=#{title}, image=#{image},price= #{price}, info=#{info} where bike_id = #{bikeid}
     </update>
     <!--게시글 삭제(게시글 작성자 + 관리자만 가능)-->
-    <delete id = "delete">
-        delete from bike_board where user_id = #{userid}
+    <delete id="delete" parameterType="int">
+        delete from bike_board where bike_id = #{bikeid}
     </delete>
 
 </mapper>

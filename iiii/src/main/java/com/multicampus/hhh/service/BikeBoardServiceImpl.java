@@ -96,14 +96,14 @@ public class BikeBoardServiceImpl implements BikeBoardService{
     public void update(BikeBoardDTO bikeBoardDTO) {
         bikeBoardMapper.update(bikeBoardDTO);
     }
-//
-//    @Override
-//    public void delete(Long tno) {
-//
-//        bikeBoardMapper.delete(tno);
-//
-//    }
-//
+
+    @Override
+    public void delete(int bikeid) {
+
+        bikeBoardMapper.delete(bikeid);
+
+    }
+
 
 
 }

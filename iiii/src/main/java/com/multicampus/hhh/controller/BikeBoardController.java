@@ -123,15 +123,15 @@ public class BikeBoardController {
         }
     }
 
-    @PostMapping("/update/")
+    @PostMapping("/update/{bikeid}")
     public String UpdatePost(@Valid BikeBoardDTO bikeBoardDTO, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
                              @RequestParam("imgFile") MultipartFile imgFile,
-                             HttpSession session) throws IOException{
+                             HttpSession session, @PathVariable int bikeid) throws IOException{
         //세션에서 아이디 가져옴
         MemberVO userid = (MemberVO) session.getAttribute("loginId");
-        BikeBoardDTO bikeid = service.readOne(bikeBoardDTO.getBikeid());
-        String writer = bikeid.getUserid();
+        BikeBoardDTO bikeidDTO = service.readOne(bikeBoardDTO.getBikeid());
+        String writer = bikeidDTO.getUserid();
 
         if (userid != null && userid.getUserid().equals(writer)) {
 
@@ -152,6 +152,18 @@ public class BikeBoardController {
             redirectAttributes.addFlashAttribute("errorMsg", "글 작성자만 수정할 수 있습니다.");
             return "redirect:/bike/productSingle/" + bikeBoardDTO.getBikeid();
         }
+    }
+    @GetMapping("/bike/{bikeid}/delete")
+    public String deleteGet(@PathVariable int bikeid, HttpSession session){
+        MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        service.delete(bikeid);
+        return "redirect:/bike/bikeList";
+    }
+    @PostMapping("/bike/{bikeid}/delete")
+    public String deletePost(@PathVariable int bikeid,HttpSession session){
+        MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        service.delete(bikeid);
+        return "redirect:/bike/bikeList";
     }
 
 
