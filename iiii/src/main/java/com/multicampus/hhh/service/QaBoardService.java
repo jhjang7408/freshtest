@@ -70,6 +70,12 @@ public class QaBoardService {
 
 
 
+    /*public void qareplymodify(int qareplyid){
+        qaBoardMapper.qareplymodify(qareplyid);
+    }*/
+
+
+
 
 
 

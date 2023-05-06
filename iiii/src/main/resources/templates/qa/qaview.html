@@ -553,7 +553,10 @@
                     <tr th:each="board : ${qareply}">
 
                       <td th:text="${board.qareplyid}">번호</td>
-                      <td th:text="${board.content}">내용</td>
+                      <td th:text="${board.content}">내용</td><!--&gt;
+                        <div class="content" th:text="${board.content}"></div>
+                        <button type="button" data-toggle="modal" data-target="#replymodify" th:if="${session.loginId != null && session.loginId.userid == board.userid}">수정</button>
+                      </td>-->
                       <td th:text="${board.userid}">작성자</td>
                       <td th:text="${board.regdate}">시간</td>
                       <td>
@@ -562,11 +565,29 @@
                         </div>
                       </td>
                       </br>
+
+
+
                     </tr>
                     </tbody>
 
 
                   </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                   <form th:action="@{qareplyregister}" method="post" th:if="${session.loginId != null}">
                     <div class="mb-3 col-lg-8">
@@ -584,13 +605,13 @@
 
                     </div>
 
-
-
                     <div class="my-4">
                       <div class="float-end">
-                          <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                        <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
                       </div>
                     </div>
+
+
 
                   </form>
 
@@ -655,6 +676,11 @@
     </main>
 
   </div>
+
+
+
+
+
 
 <!-- Libs JS -->
 <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>

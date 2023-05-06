@@ -130,6 +130,23 @@ public class QaBoardController {
     }
 
 
+    /*@PostMapping("/qareplymodify")
+    public String qareplymodify(QaBoardReply qaBoardReply){
+
+        int qareplyid = qaBoardReply.getQareplyid();
+        qaBoardService.qareplymodify(qareplyid);
+
+        return "redirect:/qa/qaview?qa_id=" + qaBoardReply.getQaid();
+    }*/
+
+
+
+
+
+
+
+
+
     @PostMapping("/qadelete")
     public String qadelete(QaBoard qaBoard){
 
@@ -163,6 +180,13 @@ public class QaBoardController {
 
         return "redirect:/qa/qalist";
     }
+
+
+
+
+
+
+
 
 
 

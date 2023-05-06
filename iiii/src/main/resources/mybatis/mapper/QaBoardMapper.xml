@@ -51,6 +51,11 @@
     </delete>
 
 
+    <!--<update id="qareplymodify" parameterType="=com.multicampus.hhh.domain.QaBoardReply">
+        update qa_board_reply set content = #{content} where qa_reply_id = #{qareplyid};
+    </update>-->
+
+
 
 
     <select id="qacount" resultType="int">

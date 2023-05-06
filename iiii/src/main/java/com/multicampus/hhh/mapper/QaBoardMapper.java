@@ -31,4 +31,6 @@ public interface QaBoardMapper {
 
     void qareplydeleteone(int qareplyid);
 
+    /*void qareplymodify(int qareplyid);*/
+
 }
