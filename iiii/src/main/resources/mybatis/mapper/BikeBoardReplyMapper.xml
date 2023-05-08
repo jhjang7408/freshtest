@@ -10,4 +10,11 @@
         values (#{bikereplyid},#{userid},#{bikeid},#{content}, CURRENT_TIMESTAMP)
     </insert>
 
+    <update id="update" parameterType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
+        update bike_board_reply set content = #{content} where bike_id = #{bikeid}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from bike_board where bike_id = #{bikeid}
+    </delete>
 </mapper>

@@ -9,7 +9,7 @@ public interface BikeBoardReplyService {
 
     void modify(BikeBoardReplyDTO replyDTO);
 
-    void remove(Long rno);
+    void delete(String userid);
 
     PageResponseDTO<BikeBoardReplyDTO> getListOfBoard(Long bike_id, PageRequestDTO pageRequestDTO);
 }

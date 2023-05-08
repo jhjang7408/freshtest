@@ -153,16 +153,18 @@ public class BikeBoardController {
             return "redirect:/bike/productSingle/" + bikeBoardDTO.getBikeid();
         }
     }
-    @GetMapping("/bike/{bikeid}/delete")
-    public String deleteGet(@PathVariable int bikeid, HttpSession session){
+
+    @PostMapping("/{bikeid}/delete")
+    public String deletePost(@PathVariable int bikeid,HttpSession session,Model model){
+        //로그인한 id
         MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
+
+        //작성자 id
+        String writer = bikeBoardDTO.getUserid();
+        model.addAttribute("writer", writer);
         service.delete(bikeid);
-        return "redirect:/bike/bikeList";
-    }
-    @PostMapping("/bike/{bikeid}/delete")
-    public String deletePost(@PathVariable int bikeid,HttpSession session){
-        MemberVO userid = (MemberVO) session.getAttribute("loginId");
-        service.delete(bikeid);
+        log.info("삭제진행");
         return "redirect:/bike/bikeList";
     }
 

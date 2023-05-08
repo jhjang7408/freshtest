@@ -680,38 +680,40 @@
 <!--              <span class="fw-bold text-dark">$320</span>-->
             </div>
             <!-- hr -->
-            <hr class="my-6">
-            <div class="mb-5">
+<!--            <hr class="my-6">-->
+<!--            <div class="mb-5">-->
               <div>
 
 
                 <!-- input -->
-                <div class="input-group input-spinner  ">
-                  <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                  <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
-                  <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
-                </div>
+<!--                수량 선택 기능도 악세서리일때만 보이도록 바꿔야함-->
+<!--                <div class="input-group input-spinner  ">-->
+<!--                  <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">-->
+<!--                  <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">-->
+<!--                  <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">-->
+<!--                </div>-->
 
               </div>
-              <div class="mt-3 row justify-content-start g-2 align-items-center">
+<!--              <div class="mt-3 row justify-content-start g-2 align-items-center">-->
 
-                <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
-                  <!-- button -->
-                  <!-- btn --> <button type="button" onclick="location.href='shop-checkout.html' " class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>Add to
-                  cart</button>
-                </div>
-                <div class="col-md-4 col-4">
-                  <!-- btn -->
-                </div>
-              </div>
+<!--                악세서리 일때만 장바구니 버튼 보이도록 바꿔야함-->
+<!--                <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">-->
+<!--                  &lt;!&ndash; button &ndash;&gt;-->
+<!--                  &lt;!&ndash; btn &ndash;&gt; <button type="button" onclick="location.href='shop-checkout.html' " class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>Add to-->
+<!--                  cart</button>-->
+<!--                </div>-->
+<!--                <div class="col-md-4 col-4">-->
+<!--                  &lt;!&ndash; btn &ndash;&gt;-->
+<!--                </div>-->
+<!--              </div>-->
               <!-- hr -->
-              <hr class="my-6">
+<!--              <hr class="my-6">-->
               <div>
                 <!-- table -->
 
 
               </div>
-              <div class="mt-8">
+<!--              <div class="mt-8">-->
                 <!-- dropdown -->
 
               </div>
@@ -770,16 +772,7 @@
                   </div>
                   <!-- form control -->
 
-                  <div class=" py-4 mb-4">
-                    <!-- heading -->
-                    <h5>Add a written review 댓글</h5>
-                    <textarea class="form-control" rows="3"
-                              placeholder="댓글 작성 부분"></textarea>
-                  </div>
-                  <!-- button -->
-                  <div class="d-flex justify-content-end">
-                    <a href="#" class="btn btn-primary">댓글 작성</a>
-                  </div>
+
                   <div class="d-flex justify-content-end">
 <!--                    <a href="/bike/productRegister" class="btn btn-primary">수정</a>-->
                     <a th:href="@{'/bike/update/' + ${bike.bikeid}}" class="btn btn-primary">수정</a>
@@ -788,10 +781,49 @@
                     <div class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
                   </div>
 <!--                  <a th:href="@{'/bike/' + ${bike.bikeid} + '/delete'}" onclick="return confirm('삭제하시겠습니까?');" class="btn btn-danger">삭제</a>-->
-                  <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
-                    <input type="hidden" name="userid" th:value="${bike.userid}">
-                    <button type="submit" class="btn btn-danger">삭제</button>
+                  <div th:if="${loginId == authorId}">
+                    <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
+                      <button type="submit" class="btn btn-danger">삭제</button>
+                    </form>
+                  </div>
+                  <!-- 댓글 작성 폼 -->
+                  <form action="/bike/productSingle/${bikeId}/bikereply" method="post">
+                    <input type="hidden" name="bikeId" th:value="${bikeId}">
+
+                    <label for="content">Comment:</label>
+                    <textarea id="content" name="content" required></textarea>
+                    <button type="submit">Submit</button>
                   </form>
+
+
+
+                  <!-- 댓글 목록 -->
+                  <div th:each="reply : ${replies}">
+                    <p>User ID: <span th:text="${reply.userId}"></span></p>
+                    <p>Content: <span th:text="${reply.content}"></span></p>
+                    <p>Created At: <span th:text="${reply.regdate}"></span></p>
+                    <form th:action="@{/bike/productSingle/{bikeId}/bikereply/{id}(bikeId=${bikeId},id=${reply.id})}" method="post">
+                      <input type="hidden" name="bikeId" th:value="${bikeId}">
+                      <label for="content">Comment:</label>
+                      <textarea id="content" name="content" th:text="${reply.content}" required></textarea>
+                      <button type="submit">Update</button>
+                    </form>
+                    <form th:action="@{/bike/productSingle/{bikeId}/bikereply/{id}/delete(bikeId=${bikeId},id=${reply.id})}" method="post">
+                      <input type="hidden" name="bikeId" th:value="${bikeId}">
+                      <button type="submit">Delete</button>
+                    </form>
+                  </div>
+
+<!--                  <div class=" py-4 mb-4">-->
+<!--                    &lt;!&ndash; heading &ndash;&gt;-->
+<!--                    <h5>Add a written review 댓글</h5>-->
+<!--                    <textarea class="form-control" rows="3"-->
+<!--                              placeholder="댓글 작성 부분"></textarea>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; button &ndash;&gt;-->
+<!--                  <div class="d-flex justify-content-end">-->
+<!--                    <a href="#" class="btn btn-primary">댓글 작성</a>-->
+<!--                  </div>-->
                 </div>
               </div>
             </div>

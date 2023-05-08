@@ -30,8 +30,8 @@ public class BikeBoardReplyServiceImpl implements BikeBoardReplyService {
 
 
     @Override
-    public void remove(Long rno) {
-
+    public void delete(String userid) {
+        bikeBoardReplyMapper.delete(userid);
     }
 
     @Override

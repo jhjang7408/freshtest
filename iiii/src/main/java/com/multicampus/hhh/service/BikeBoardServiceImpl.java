@@ -15,33 +15,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//내가 만들었던 것
-//public class BikeBoardServiceImpl implements BikeBoardService{
-//    @Override
-//    public BikeBoardDTO readOne(Long bike_id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void modify(BikeBoardDTO bikeBoardDTO) {
-//
-//    }
-//
-//    @Override
-//    public void remove(Long bike_id) {
-//
-//    }
-//
-//    @Override
-//    public Long register(BikeBoardDTO bikeBoardDTO) {
-//        return null;
-//    }
-//
-//    @Override
-//    public PageResponseDTO<BikeBoardDTO> list(@Valid PageRequestDTO pageRequestDTO) {
-//        return null;
-//    }
-//}
 @Service
 @Log4j2
 @RequiredArgsConstructor

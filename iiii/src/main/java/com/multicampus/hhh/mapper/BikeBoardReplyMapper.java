@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BikeBoardReplyMapper {
     void insert(BikeBoardReplyDTO bikeBoardReplyDTO);
     void modify(BikeBoardReplyDTO bikeBoardReplyDTO);
-    void delete(int userid);
+    void delete(String userid);
 }
