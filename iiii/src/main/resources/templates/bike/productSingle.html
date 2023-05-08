@@ -781,38 +781,20 @@
                     <div class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
                   </div>
 <!--                  <a th:href="@{'/bike/' + ${bike.bikeid} + '/delete'}" onclick="return confirm('삭제하시겠습니까?');" class="btn btn-danger">삭제</a>-->
-                  <div th:if="${loginId == authorId}">
+                  <div th:if="${loginId == writer}">
                     <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
                       <button type="submit" class="btn btn-danger">삭제</button>
                     </form>
                   </div>
                   <!-- 댓글 작성 폼 -->
-                  <form action="/bike/productSingle/${bikeId}/bikereply" method="post">
-                    <input type="hidden" name="bikeId" th:value="${bikeId}">
-
+                  <form th:action="@{'/bike/productSingle/' + ${bike.bikeid} + '/bikereply'}" method="post">
+                    <input type="hidden" name="bikeid" th:value="${bike.bikeid}">
                     <label for="content">Comment:</label>
                     <textarea id="content" name="content" required></textarea>
                     <button type="submit">Submit</button>
                   </form>
 
 
-
-                  <!-- 댓글 목록 -->
-                  <div th:each="reply : ${replies}">
-                    <p>User ID: <span th:text="${reply.userId}"></span></p>
-                    <p>Content: <span th:text="${reply.content}"></span></p>
-                    <p>Created At: <span th:text="${reply.regdate}"></span></p>
-                    <form th:action="@{/bike/productSingle/{bikeId}/bikereply/{id}(bikeId=${bikeId},id=${reply.id})}" method="post">
-                      <input type="hidden" name="bikeId" th:value="${bikeId}">
-                      <label for="content">Comment:</label>
-                      <textarea id="content" name="content" th:text="${reply.content}" required></textarea>
-                      <button type="submit">Update</button>
-                    </form>
-                    <form th:action="@{/bike/productSingle/{bikeId}/bikereply/{id}/delete(bikeId=${bikeId},id=${reply.id})}" method="post">
-                      <input type="hidden" name="bikeId" th:value="${bikeId}">
-                      <button type="submit">Delete</button>
-                    </form>
-                  </div>
 
 <!--                  <div class=" py-4 mb-4">-->
 <!--                    &lt;!&ndash; heading &ndash;&gt;-->
