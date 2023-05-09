@@ -24,6 +24,7 @@ public interface MemberMapper {
     void deleterole(String user_id);
     MemberVO findPass(String userid);
     MemberVO memberEmailcheck(String user_id, String email);
+    void socialInsert(MemberVO memberVO);
 
 
 }

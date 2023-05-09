@@ -1,10 +1,13 @@
 package com.multicampus.hhh.controller;
 
+import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
 import com.multicampus.hhh.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,7 +78,8 @@ public class MemberController {
     }
 
     @PostMapping("/signin")
-    public String login(@Valid @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult,HttpSession session) throws Exception{
+    public String login(@Valid @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult,HttpSession session, Authentication auth, Model model) throws Exception{
+        log.info("로그인 POST");
 
         if(bindingResult.hasErrors()){
             log.info("binding오류");
@@ -90,6 +94,11 @@ public class MemberController {
             return "redirect:/member/signin";
         }
         session.setAttribute("loginId",memberVO);
+
+//        PrincipalDetails user = (PrincipalDetails) auth.getPrincipal();
+//        System.out.println("로그인 정보 확인용 =========================" + user.getMemberVO());
+//        model.addAttribute("socialLogin", user.getMemberVO());
+
         log.info("로그인 세션 부여");
 
         return "redirect:/";
@@ -157,46 +166,13 @@ public class MemberController {
         }
     }
 
-
-
-//    @PostMapping("findpassword")
-//    public String findpassPOST(@RequestParam("userid") String userid, @RequestParam("email") String email) {
-//        String checkNum="";
-//        String checkmail = memberService.findMember(userid).getEmail();
-//        if(checkmail.equals(email)) {
-//            checkNum = memberService.mailSend(email);
-//        } else {
-////            return "redirect:/member/findpassword";
-//            log.info("이메일 인증코드를 보내지 못했습니다.");
-//        }
-//
-//        // checkNum을 html로 보내서 인증번호를 확인해야한다.
-//        //PostMapping 을 하나 더 만들어서 인증번호 확인
-//
-////        return "/member/signin";
-//        return checkNum;
-//    }
-
-//    @PostMapping("checkCode")
-//    public String checkCode(@RequestParam("mailCode") String code){
-//
-//        boolean abc = memberService.checkCode(code);
-//
-//        if(abc){
-//            return "/"
-//        } else {
-//
-//        }
-//
-//    }
-
-
-
     public boolean isValidEmail(String email) {
         String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+
 
 }
