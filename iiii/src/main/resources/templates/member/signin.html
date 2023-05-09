@@ -490,28 +490,26 @@
           <script th:if="${fixMsg != null}" th:inline="javascript">
             alert(/*[[${fixMsg}]]*/);
           </script>
-          <form action="/member/signin" method="post" th:object="${loginMember}">
+<!--          th:object="${loginMember}"-->
+          <form action="/login" method="post">
             <div class="row g-3">
-              <!-- row -->
-
               <div class="col-12">
-                <!-- input -->
-                <input type="text" th:field="*{userid}" class="form-control" placeholder="아이디" required/>
+<!--                th:field="*{userid}"-->
+                <input type="text" name="username" class="form-control" placeholder="아이디" required/>
               </div>
               <div th:if="${loginError}" id="errorMsg">
                 <p th:text="${loginError}" style="color: red;"></p>
               </div>
               <div class="col-12">
-                <!-- input -->
                 <div class="password-field position-relative">
-                  <input type="password" th:field="*{password}" placeholder="비밀번호" class="form-control" required/>
+<!--                  th:field="*{password}"-->
+                  <input type="password" name="password" placeholder="비밀번호" class="form-control" required/>
                   <span
                   ><i id="passwordToggler" class="bi bi-eye-slash"></i
                   ></span>
                 </div>
               </div>
               <div class="d-flex justify-content-between">
-                <!-- form check -->
                 <div class="form-check">
                   <input
                           class="form-check-input"
@@ -519,7 +517,6 @@
                           value=""
                           id="flexCheckDefault"
                   />
-                  <!-- label -->
                   <label class="form-check-label" for="flexCheckDefault">
                     자동 로그인
                   </label>
@@ -528,9 +525,9 @@
                   <a href="/member/findpassword">비밀번호 찾기</a>
                 </div>
               </div>
-              <!-- btn -->
               <div class="col-12 d-grid">
-                <button type="submit" class="btn btn-primary">
+<!--                type="submit"-->
+                <button class="btn btn-primary">
                   로그인
                 </button>
               </div>

@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,7 +29,10 @@ import java.util.regex.Pattern;
 public class MemberController {
 
     @Autowired
-    MemberService memberService;
+    private MemberService memberService;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/signup")
     public String signup(Model model){
@@ -55,6 +59,8 @@ public class MemberController {
             model.addAttribute("errorMsg","이미 등록된 아이디 입니다.");
             return "member/signup";
         }
+        String password = bCryptPasswordEncoder.encode(memberDTO.getPassword());
+        memberDTO.setPassword(password);
         String address = memberDTO.getAddress() + " " + addressDetail;
         memberDTO.setAddress(address);
         log.info("주소 저장");
@@ -64,45 +70,54 @@ public class MemberController {
         return "redirect:/member/signin";
     }
 
-    @GetMapping("/signin")
-    public String loginpage(@ModelAttribute("loginMember") MemberDTO memberDTO){
-        log.info("로그인 페이지");
-//        String id = (String) session.getAttribute("userid");
-//        if(id != null){ //로그인 상태
-//            MemberVO memberVO = memberService.findMember(id);
-//            model.addAttribute("Member",memberVO);
-//            return "redirect:/";
-//        }
 
+    @GetMapping("signin")
+    public String loginForm(){
         return "member/signin";
     }
-
-    @PostMapping("/signin")
-    public String login(@Valid @ModelAttribute MemberDTO memberDTO, BindingResult bindingResult,HttpSession session, Authentication auth, Model model) throws Exception{
-        log.info("로그인 POST");
-
-        if(bindingResult.hasErrors()){
-            log.info("binding오류");
-            return "redirect:/member/signin";
-        }
-        MemberVO memberVO= memberService.checkMember(memberDTO.getUserid(), memberDTO.getPassword());
-        log.info(memberVO);
-
-        if(memberVO == null){
-            bindingResult.reject("loginError", "아이디 또는 비밀번호가 맞지 않습니다.");
-            log.info("로그인 오류");
-            return "redirect:/member/signin";
-        }
-        session.setAttribute("loginId",memberVO);
-
+//    @GetMapping("/signin")
+//    public String loginpage(@ModelAttribute("loginMember") MemberVO memberVO){
+//        log.info("로그인 페이지");
+////        String id = (String) session.getAttribute("userid");
+////        if(id != null){ //로그인 상태
+////            MemberVO memberVO = memberService.findMember(id);
+////            model.addAttribute("Member",memberVO);
+////            return "redirect:/";
+////        }
+//
+//        return "member/signin";
+//    }
+//
+//    @PostMapping("/signin")
+//    public String login(@Valid @ModelAttribute MemberVO memberVO, BindingResult bindingResult,HttpSession session, Authentication auth, Model model) throws Exception{
+//        log.info("로그인 POST");
+//        MemberVO member = new MemberVO();
+//        if(bindingResult.hasErrors()){
+//            log.info("binding오류");
+//            return "redirect:/member/signin";
+//        }
+//
+////        MemberVO memberVO= memberService.checkMember(memberDTO.getUserid(), memberDTO.getPassword());
+//        String userid = memberVO.getUserid();
+//        member = memberService.findMember(userid);
+//        log.info(memberVO + "======================================");
+//
+//        if(member == null){
+//            bindingResult.reject("loginError", "아이디 또는 비밀번호가 맞지 않습니다.");
+//            log.info("로그인 오류");
+//            return "redirect:/member/signin";
+//        }
+////        session.setAttribute("loginId",member);
+//
 //        PrincipalDetails user = (PrincipalDetails) auth.getPrincipal();
 //        System.out.println("로그인 정보 확인용 =========================" + user.getMemberVO());
-//        model.addAttribute("socialLogin", user.getMemberVO());
-
-        log.info("로그인 세션 부여");
-
-        return "redirect:/";
-    }
+//        session.setAttribute("loginId",user);
+////        model.addAttribute("socialLogin", user.getMemberVO());
+//
+//        log.info("로그인 세션 부여");
+//
+//        return "redirect:/";
+//    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session){
@@ -160,7 +175,8 @@ public class MemberController {
             model.addAttribute("userid", userid);
             return "/member/findpassword3";
         } else {
-            memberService.changePass(userid, newPassword);
+            String regPasword = bCryptPasswordEncoder.encode(newPassword);
+            memberService.changePass(userid, regPasword);
             redirectAttributes.addFlashAttribute("fixMsg","비밀번호가 변경되었습니다.");
             return "redirect:/member/signin";
         }

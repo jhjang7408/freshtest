@@ -2,6 +2,7 @@ package com.multicampus.hhh.config.auth;
 
 import com.multicampus.hhh.domain.MemberVO;
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -33,7 +34,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         collect.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return memberVO.getMemberRole().name();
+                return memberVO.getMemberRole().toString();
             }
         });
         return collect;

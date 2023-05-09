@@ -20,7 +20,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         MemberVO member = memberMapper.findUser(username);
-        log.info("PrincipalDetailsService 클래스");
+        log.info("PrincipalDetailsService 클래스 유저아이디가 뭔데 " + username);
         if(member != null) {
             return new PrincipalDetails(member);
         }
