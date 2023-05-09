@@ -139,7 +139,7 @@
           <div class="list-inline">
 
             <div class="list-inline-item">
-              <a href="./pages/signin.html">로그인</a>
+              <a th:href="@{/member/signin}">로그인</a>
             </div>
 
             <div class="list-inline-item">
@@ -208,8 +208,8 @@
                 판매 등록
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/acc/productRegister">악세서리 판매 등록</a></li>
-                <li><a class="dropdown-item" href="bike/productRegister">자전거 판매 등록</a></li>
+                <li><a class="dropdown-item" th:href="@{/acc/productRegister}">악세서리 판매 등록</a></li>
+                <li><a class="dropdown-item" th:href="@{/bike/productRegister}">자전거 판매 등록</a></li>
               </ul>
             </li>
 
@@ -219,8 +219,8 @@
                 구매
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/acc/accList">악세서리 구매</a></li>
-                <li><a class="dropdown-item" href="bike/bikeList">자전거 구매</a></li>
+                <li><a class="dropdown-item" th:href="@{/acc/accList}">악세서리 구매</a></li>
+                <li><a class="dropdown-item" th:href="@{/bike/bikeList}">자전거 구매</a></li>
                 <li><a class="dropdown-item" href="../pages/shop-cart.html">장바구니</a></li>
               </ul>
             </li>
@@ -754,7 +754,7 @@
                 <div>
 
                   <p>제품 설명: <span th:text="${bike.info}"></span></p>
-
+                  <p>작성자: <span th:text="${bike.userid}"></span></p>
 
                 </div>
 <!--                <form action="/bike/productRegister" method="post">-->
@@ -772,27 +772,75 @@
                   </div>
                   <!-- form control -->
 
-
-                  <div class="d-flex justify-content-end">
-<!--                    <a href="/bike/productRegister" class="btn btn-primary">수정</a>-->
-                    <a th:href="@{'/bike/update/' + ${bike.bikeid}}" class="btn btn-primary">수정</a>
+                  <div class="d-flex justify-content-end" th:if="${loginId == writer}">
+                    <a th:href="@{'/bike/update/' + ${bike.bikeid}}" class="btn btn-primary mr-2">게시물 수정</a>
+                    <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
+                      <button type="submit" class="btn btn-danger">게시물 삭제</button>
+                    </form>
                   </div>
+
                   <div th:if="${errorMsg}">
                     <div class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>
                   </div>
-<!--                  <a th:href="@{'/bike/' + ${bike.bikeid} + '/delete'}" onclick="return confirm('삭제하시겠습니까?');" class="btn btn-danger">삭제</a>-->
-                  <div th:if="${loginId == writer}">
-                    <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
-                      <button type="submit" class="btn btn-danger">삭제</button>
+
+<!--                  작성자 본인일때만 수정, 삭제 버튼 보이게, 작성자 본인도 버튼이 안 보임...-->
+<!--                  <div class="d-flex justify-content-end" th:if="${loginId != null and writer != null and loginId.userid == writer}">-->
+<!--                    <a th:href="@{'/bike/update/' + ${bike.bikeid}}" class="btn btn-primary">수정</a>-->
+<!--                  </div>-->
+<!--                  <div th:if="${errorMsg}">-->
+<!--                    <div class="alert alert-danger" role="alert" th:text="${errorMsg}"></div>-->
+<!--                  </div>-->
+
+<!--                  <div th:if="${loginId != null and writer != null and loginId.userid == writer}">-->
+<!--                    <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">-->
+<!--                      <button type="submit" class="btn btn-danger">게시물 삭제</button>-->
+<!--                    </form>-->
+<!--                  </div>-->
+
+                  <!--                  댓글 목록-->
+                  <div id="replies">
+                    <h5>댓글 목록</h5>
+                    <ul>
+                      <li th:each="reply : ${replies}">
+                        <p th:text="${reply.userid}">작성자 ID</p>
+                        <p th:text="${reply.content}">댓글 내용</p>
+                        <p th:text="${reply.regdate}">작성일시</p>
+                        <hr>
+                      </li>
+                    </ul>
+                  </div>
+<!--                  <form th:if="${reply != null}" th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">-->
+<!--                    <button type="submit">댓글 삭제</button>-->
+<!--                  </form>-->
+                  <div th:each="reply : ${replies}">
+                    <!-- 댓글 내용을 표시하는 코드 -->
+
+                    <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
+                      <button type="submit" class="btn btn-danger">댓글 삭제</button>
                     </form>
                   </div>
+                  <!--                  <div class="comments-area">-->
+                  <!--                    <h4 th:text="${#lists.size(replies)} + ' Comments'">Comments</h4>-->
+                  <!--                    <div th:each="reply : ${replies}">-->
+                  <!--                      <div class="comment-list">-->
+                  <!--                        <div class="single-comment">-->
+                  <!--                          <div class="content">-->
+                  <!--                            <h4 th:text="${reply.username}">Username</h4>-->
+                  <!--                            <p th:text="${reply.content}">Comment content</p>-->
+                  <!--                          </div>-->
+                  <!--                        </div>-->
+                  <!--                      </div>-->
+                  <!--                    </div>-->
+                  <!--                  </div>-->
+
                   <!-- 댓글 작성 폼 -->
                   <form th:action="@{'/bike/productSingle/' + ${bike.bikeid} + '/bikereply'}" method="post">
                     <input type="hidden" name="bikeid" th:value="${bike.bikeid}">
-                    <label for="content">Comment:</label>
-                    <textarea id="content" name="content" required></textarea>
-                    <button type="submit">Submit</button>
+                    <label for="content">댓글</label>
+                    <textarea id="content" name="content"class="form-control" rows="3" required></textarea>
+                    <button type="submit" class="btn btn-primary">등록</button>
                   </form>
+
 
 
 
@@ -867,8 +915,8 @@
             <h6 class="mb-4">구매</h6>
             <!-- list -->
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
+              <li class="nav-item mb-2"><a th:href="@{/acc/accList}" class="nav-link">악세서리 구매</a></li>
+              <li class="nav-item mb-2"><a th:href="@{/bike/bikeList}" class="nav-link">자전거 구매</a></li>
               <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
             </ul>
           </div>

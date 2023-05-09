@@ -31,7 +31,7 @@ public class AccBoardController {
     }
     @GetMapping("/productRegister")
     public void registerGET() {
-        log.info("GET bike register.......");
+        log.info("GET acc register.......");
     }
 
 
@@ -42,7 +42,7 @@ public class AccBoardController {
                                RedirectAttributes redirectAttributes) {
 
 
-        log.info("자전거 등록");
+        log.info("악세서리 등록");
 
 
         service.register(accBoardDTO);
@@ -51,6 +51,10 @@ public class AccBoardController {
     }
     @GetMapping("productSingle")
     public void readOne(){
+
+    }
+    @GetMapping("payment")
+    public void pay(){
 
     }
 

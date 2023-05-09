@@ -32,7 +32,7 @@ public class BikeBoardServiceImpl implements BikeBoardService{
 //        log.info("serviceRegister2");
         bikeBoardMapper.insert(bikeBoardDTO);
     }
-
+//게시물 전체 조회
     @Override
 	public List<BikeBoardDTO> findAll() {
 
@@ -59,7 +59,7 @@ public class BikeBoardServiceImpl implements BikeBoardService{
         return pageResponseDTO;
     }
 
-//
+//게시물 하나 조회
     @Override
     public BikeBoardDTO readOne(int bikeid) {
 

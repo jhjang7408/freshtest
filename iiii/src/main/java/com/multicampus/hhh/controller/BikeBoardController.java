@@ -4,7 +4,9 @@ import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 
 import com.multicampus.hhh.dto.BikeBoardDTO;
+import com.multicampus.hhh.dto.BikeBoardReplyDTO;
 import com.multicampus.hhh.dto.PageRequestDTO;
+import com.multicampus.hhh.service.BikeBoardReplyService;
 import com.multicampus.hhh.service.BikeBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -36,7 +38,7 @@ import java.util.UUID;
 public class BikeBoardController {
 
     private final BikeBoardService service;
-
+    private final BikeBoardReplyService replyService;
     @Value("${com.multicampus.upload.path}")
     private String uploadPath;
 
@@ -97,6 +99,9 @@ public class BikeBoardController {
     @GetMapping("/productSingle/{bikeid}")
     public String readOne(@PathVariable int bikeid, Model model) {
         BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
+        //아래 2줄 댓글 보기위해 추가
+        List<BikeBoardReplyDTO> replies = replyService.findByBikeId(bikeid);
+        model.addAttribute("replies", replies);
         model.addAttribute("bike", bikeBoardDTO);
         return "bike/productSingle";
     }
@@ -160,12 +165,22 @@ public class BikeBoardController {
         MemberVO userid = (MemberVO) session.getAttribute("loginId");
         BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
 
+        //로그인 하지 않았을 경우
+        if (userid == null) {
+            return "redirect:/member/signin";
+        }
         //작성자 id
         String writer = bikeBoardDTO.getUserid();
         model.addAttribute("writer", writer);
-        service.delete(bikeid);
-        log.info("삭제진행");
-        return "redirect:/bike/bikeList";
+
+        if(userid.getUserid().equals(writer)){
+            service.delete(bikeid);
+            log.info("삭제진행");
+            return "redirect:/bike/bikeList";
+        }
+        else{
+            return "redirect:/bike" + bikeid;
+        }
     }
 
 

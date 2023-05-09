@@ -40,13 +40,15 @@ public class BikeBoardReplyController {
         return "redirect:/bike/productSingle/" + bikeid;
     }
 
-//    @PostMapping()
-//    public String modify(){
-//        return "redirect:/bike/productSingle/{bikeid}";
-//    }
+//    @PostMapping("productSingle/{bikeid}/{bikereplyid}/update/")
+//    public String modify(@PathVariable int bikeid, @PathVariable int bikereplyid){
 //
-//    @PostMapping()
-//    public String delete(){
-//        return "redirect:/bike/productSingle/{bikeid}";
+//        return "redirect:/bike/productSingle/" + bikeid;
 //    }
+
+    @PostMapping("productSingle/{bikeid}/{bikereplyid}/delete/")
+    public String delete(@PathVariable int bikeid, @PathVariable int bikereplyid){
+        bikeBoardReplyService.delete(bikereplyid);
+        return "redirect:/bike/productSingle/" + bikeid;
+    }
 }

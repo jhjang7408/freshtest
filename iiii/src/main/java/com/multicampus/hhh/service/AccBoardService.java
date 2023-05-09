@@ -11,9 +11,11 @@ public interface AccBoardService {
 
     List<AccBoardDTO> getAll();
     Long register(AccBoardDTO AccBoardDTO);
-    AccBoardDTO readOne(Long ac_id);
+    AccBoardDTO readOne(Long acid);
     void modify(AccBoardDTO accBoardDTO);
-    void remove(Long ac_id);
+    void remove(Long acid);
+
+
 
 
 

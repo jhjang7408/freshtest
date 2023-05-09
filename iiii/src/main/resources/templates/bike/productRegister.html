@@ -343,12 +343,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/acc/productRegister"
+                                    <a class="dropdown-item" th:href="@{/acc/productRegister}"
                                     >악세서리 판매 등록</a
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/bike/productRegister"
+                                    <a class="dropdown-item" th:href="@{/bike/productRegister}"
                                     >자전거 판매 등록</a
                                     >
                                 </li>
@@ -367,14 +367,14 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/acc/accList"
+                                    <a class="dropdown-item" th:href="@{/acc/accList}"
                                     >악세서리 구매</a
                                     >
                                 </li>
                                 <li>
                                     <a
                                             class="dropdown-item"
-                                            href="/bike/bikeList"
+                                            th:href="@{/bike/bikeList}"
                                     >자전거 구매</a
                                     >
                                 </li>
@@ -641,10 +641,10 @@
                         <!-- list -->
                         <ul class="nav flex-column">
                             <li class="nav-item mb-2">
-                                <a href="#!" class="nav-link">악세서리 구매</a>
+                                <a th:href="@{/acc/accList}" class="nav-link">악세서리 구매</a>
                             </li>
                             <li class="nav-item mb-2">
-                                <a href="#!" class="nav-link">자전거 구매</a>
+                                <a th:href="@{/bike/bikeList}" class="nav-link">자전거 구매</a>
                             </li>
                             <li class="nav-item mb-2">
                                 <a href="#1" class="nav-link">장바구니</a>

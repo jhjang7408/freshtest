@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -24,14 +26,19 @@ public class BikeBoardReplyServiceImpl implements BikeBoardReplyService {
 
 
     @Override
-    public void modify(BikeBoardReplyDTO replyDTO) {
+    public void update(BikeBoardReplyDTO replyDTO) {
         bikeBoardReplyMapper.modify(replyDTO);
     }
 
 
     @Override
-    public void delete(String userid) {
-        bikeBoardReplyMapper.delete(userid);
+    public void delete(int bikereplyid) {
+        bikeBoardReplyMapper.delete(bikereplyid);
+    }
+
+    @Override
+    public List<BikeBoardReplyDTO> findByBikeId(int bikeid) {
+        return bikeBoardReplyMapper.findByBikeId(bikeid);
     }
 
     @Override
