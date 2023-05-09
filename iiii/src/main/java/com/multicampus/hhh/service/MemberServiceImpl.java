@@ -135,6 +135,11 @@ public class MemberServiceImpl implements MemberService {
         return memberVO.getEmail();
     }
 
+    @Override
+    public void socialInsert(MemberVO memberVO) {
+        memberMapper.socialInsert(memberVO);
+    }
+
 
 //    @Override
 //    public void modify(MemberVO memberVO) {
