@@ -55,4 +55,8 @@
     <select id="memberEmailcheck" resultType="com.multicampus.hhh.domain.MemberVO">
         select * from user where user_id = #{userid} and email = #{email}
     </select>
+
+    <update id="socialInsert">
+        update user set nickname = #{nickname}, address = #{address}, phnum = #{phnum} where user_id = #{userid}
+    </update>
 </mapper>

@@ -23,6 +23,8 @@ public interface MemberService {
 
     String findPassword(String userid);
 
+    void socialInsert(MemberVO memberVO);
+
 //    void modify(MemberVO memberVO);
 //
 //    void remove(String id);
