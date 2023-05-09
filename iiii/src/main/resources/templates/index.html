@@ -458,14 +458,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../pages/signin.html"
-                  >1:1문의</a
-                  >
+                  <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/signup.html"
-                  >자주 묻는 질문</a
-                  >
+                  <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>

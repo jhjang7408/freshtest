@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multicampus.hhh.mapper.QaMoonBoardMapper">
+
+    <select id="findmoonById" resultType="com.multicampus.hhh.domain.QaMoonBoard">
+        select * from moon_board where user_id = #{userid} order by moon_id desc;
+    </select>
+
+
+    <select id="findById" resultType="com.multicampus.hhh.domain.QaMoonBoard">
+        select * from moon_board where moon_id = #{param1};
+    </select>
+
+
+    <insert id="qamoonregister" parameterType="com.multicampus.hhh.domain.QaMoonBoard">
+        insert into moon_board (user_id, title, content) values (#{userid}, #{title}, #{content});
+    </insert>
+
+
+    <update id="qamoonmodify" parameterType="com.multicampus.hhh.domain.QaMoonBoard">
+        update moon_board set title=#{title}, content=#{content} where moon_id=#{moonid};
+    </update>
+
+
+    <delete id="qamoondelete" parameterType="int">
+        delete from moon_board where moon_id=#{moonid};
+    </delete>
+
+    <delete id="qamoonreplydelete" parameterType="int">
+        delete from moon_board_reply where moon_id=#{moonid};
+    </delete>
+
+    <insert id="qamoonreplyregister" parameterType="com.multicampus.hhh.domain.QaMoonBoardReply">
+        insert into moon_board_reply(moon_id, user_id, content) values (#{moonid}, #{userid}, #{content});
+    </insert>
+
+    <select id="findreplyById" resultType="com.multicampus.hhh.domain.QaMoonBoardReply">
+        select * from moon_board_reply where moon_id=#{param1};
+    </select>
+
+    <delete id="qamoonreplydeleteone" parameterType="int">
+        delete from moon_board_reply where moon_reply_id = #{moonreplyid};
+    </delete>
+
+</mapper>

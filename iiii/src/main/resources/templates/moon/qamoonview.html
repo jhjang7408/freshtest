@@ -453,328 +453,397 @@
   </nav>
 </div>
 
-<!-- section 여기부터는 가이드 페이지 나오는듯 -->
-<main>
-  <div class="mt-4">
-    <div class="container">
-      <div class="row ">
-        <div class="col-12">
-          <!-- breadcrumb -->
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="/">메인</a></li>
-          <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-          <li class="breadcrumb-item"><a href="/qa/guide">가이드</a></li>
-          <li class="breadcrumb-item active" aria-current="page">관리방법</li>
-        </ol>
-      </nav>
-      </div>
-      </div>
-    </div>
-  </div>
-  <!-- section -->
-  <section class="mt-8">
-    <div class="container">
-      <div class="row">
-        <!-- logo -->
-        <div class="col-12">
-          <h1 class="fw-bold">관리 방법</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- section -->
-  <section class="mt-6 mb-lg-14 mb-8">
-    <!-- container -->
-  <div class="container">
+
+
+  <!-- main wrapper -->
+
+  <div>
+    <!-- navbar vertical -->
+
+
+
     
-    <!-- row -->
-    <div class="row" style="text-align: center;">
-        <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거타이어.jpg" width="300" height="300" alt="" style="display: inline-block;">
+
+    <!-- main -->
+    <main>
+      
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="mt-4">
+            <div class="container">
+              <div class="row ">
+                <div class="col-12">
+                  <!-- breadcrumb -->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item"><a href="/">메인</a></li>
+                  <li class="breadcrumb-item"><a href="/moon/moonlist">고객센터</a></li>
+                  <li class="breadcrumb-item"><a href="/moon/qamoonlist">1:1문의</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">읽기</li>
+                </ol>
+              </nav>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <section class="mt-8">
+            <div class="container">
+              <div class="row">
+                <!-- logo -->
+                <div class="col-12">
+                  <h1 class="fw-bold">문의글 보기</h1>
                 </div>
-              </a>
+              </div>
             </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">타이어</h2>
-              <p>내용</p>
-            </div>
-          </div>
+          </section>
+        <!-- row -->
+        <div class="row mt-3">
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거바퀴.jpg" width="300" height="300"alt="" style="display: inline-block;">
+          <div class="col">
+            <!-- card -->
+            <div class="card">
+              <!-- card body -->
+              <div class="card-body">
+                <h4 class="mb-4 h5">보기</h4>
+                <div class="row">
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">번호</label>
+                    <input type="text" class="form-control" id="moonid" th:value="${qamoonview.moonid}" readonly>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">제목</label>
+                    <input type="text" class="form-control" th:value="${qamoonview.title}" readonly>
+                  </div>
+                  <!-- input -->
+
+                  <!-- input -->
+                  <div class="mb-8 col-lg-8">
+                    <label class="form-label">내용</label>
+                    <textarea cols="40" rows="10" type="text" class="form-control" th:text="${qamoonview.content}" readonly></textarea>
+                  </div>
+
+
+
+
+
+                  <table class="table">
+
+                    <thead>
+
+                    <tr>
+
+                      <th scope="col">번호</th>
+                      <th scope="col">내용</th>
+                      <th scope="col">작성자</th>
+                      <th scope="col">시간</th>
+                      <th scope="col">ㅇ</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr th:each="board : ${qamoonreply}">
+
+                      <td th:text="${board.moonreplyid}">번호</td>
+                      <td th:text="${board.content}">내용</td><!--&gt;
+                        <div class="content" th:text="${board.content}"></div>
+                        <button type="button" data-toggle="modal" data-target="#replymodify" th:if="${session.loginId != null && session.loginId.userid == board.userid}">수정</button>
+                      </td>-->
+                      <td th:text="${board.userid}">작성자</td>
+                      <td th:text="${board.regdate}">시간</td>
+                      <td>
+                        <div>
+                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${session.loginId != null && session.loginId.userid == board.userid}" >x</button>
+                        </div>
+                      </td>
+                      </br>
+
+
+
+                    </tr>
+                    </tbody>
+
+
+                  </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <form th:action="@{qamoonreplyregister}" method="post" th:if="${session.loginId != null}">
+                    <div class="mb-3 col-lg-8">
+                      <input type="hidden" class="form-control" name="moonid" th:value="${qamoonview.moonid}" readonly>
+                    </div>
+                    <!-- input -->
+                    <div class="mb-3 col-lg-8" th:if="${session.loginId != null}">
+
+                     <input type="hidden" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
+                    </div>
+                    <!-- input -->
+                    <div class="mb-8 col-lg-8">
+
+                      <textarea cols="40" rows="3" type="text" class="form-control" name="content"  placeholder="내용" required></textarea>
+
+                    </div>
+
+                    <div class="my-4">
+                      <div class="float-end">
+                        <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                      </div>
+                    </div>
+
+
+
+                  </form>
+
+
+
+                  <div class="my-4">
+                    <div class="float-end">
+                      <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                        <a href="/member/signin">댓글 쓰기</a>
+                      </button>
+                    </div>
+                  </div>
+
+
+
+                  <div class="my-4">
+                    <div class="float-end">
+
+                      <a href="/moon/qamoonlist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
+
+
+                      <a th:href="@{/moon/qamoonmodify(moon_id =${qamoonview.moonid})}" th:if="${session.loginId != null && session.loginId.userid == qamoonview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+
+                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${session.loginId != null && session.loginId.userid == qamoonview.userid}">삭제</button>
+
+
+
+                    </div>
+                  </div>
+
+
+
+
+
+
+
                 </div>
-              </a>
+
+
+
+
+              </div>
+
+
+
             </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">바퀴</h2>
-              <p>내용</p>
-            </div>
+
+
+
+
           </div>
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거브레이크.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">브레이크</h2>
-              <p>내용</p>
-            </div>
+
+        </div>
+
+
+
+
+      </div>
+
+
+    </main>
+
+  </div>
+
+
+
+
+
+
+<!-- Libs JS -->
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
+
+<!-- Theme JS -->
+<script th:src="@{/js/theme.min.js}"></script>
+<script th:src="@{/libs/quill/dist/quill.min.js}"></script>
+<script th:src="@{/js/vendors/editor.js}"></script>
+<script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#delete-btn').click(function() {
+
+      const moonid = $('#moonid').val();
+
+      const data = {
+        'moonid' : moonid
+      };
+
+      if(confirm("정말 게시물을 삭제 하시겠습니까?")) {
+        $.ajax({
+          type: 'POST',
+          url: '/moon/qamoonreplydelete',
+          data: data,
+          success: function (){
+            // 게시글 삭제 요청에 대한 처리
+            $.ajax({
+              type: 'POST',
+              url: '/moon/qamoondelete',
+              data: data,
+              success: function (){
+                // 댓글 삭제 요청에 대한 처리
+                alert('게시글과 댓글이 삭제되었습니다.');
+                window.location.href="/moon/qamoonlist";
+              },
+              error: function (jqXHR, textStatus, errorThrown) {
+                console.log(errorThrown);
+                alert('댓글 삭제 오류가 발생했습니다.');
+              }
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+            alert('게시글 삭제 오류가 발생했습니다.');
+          }
+        });
+      }
+    });
+  });
+
+
+
+
+
+  $(document).ready(function() {
+    $('button#deletereply-btn').click(function() {
+      var moonreplyid = $(this).closest('tr').find('td:first').text(); // 해당 버튼이 속한 행(tr)의 첫번째(td) 셀에서 qareplyid 값을 가져옴
+      deleteReply(moonreplyid); // deleteReply 함수 호출
+    });
+  });
+
+  function deleteReply(moonreplyid) {
+    if(confirm("정말 댓글을 삭제 하시겠습니까?")) {
+      $.ajax({
+        type: "POST",
+        url: "/moon/qamoonreplydeleteone",
+        data: {
+          moonreplyid: moonreplyid
+        },
+        success: function (response) {
+          location.reload(); // 페이지를 새로고침하여 댓글 목록을 갱신함
+        },
+        error: function (xhr, status, error) {
+          alert('댓글 삭제에 실패하였습니다.'); // 오류 메시지 출력
+        }
+      });
+    }
+  }
+
+
+
+
+
+
+</script>
+
+
+<!-- Footer -->
+<!-- footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4 py-4">
+
+
+
+      <div class="col-12 col-md-12 col-lg-8">
+        <div class="row g-4">
+
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">판매 등록</h6>
+            <!-- list -->
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
+            </ul>
           </div>
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거변속기.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">변속기</h2>
-              <p>내용</p>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">구매</h6>
+            <!-- list -->
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
+              <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
+            </ul>
           </div>
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거체인.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">체인</h2>
-              <p>내용</p>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">커뮤니티</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
+              <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
+            </ul>
           </div>
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거스템.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">스템</h2>
-              <p>내용</p>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">공지</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
+            </ul>
           </div>
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거서스펜션포크.jpg" width="300" height="300" alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">서스펜션포크</h2>
-              <p>내용</p>
-            </div>
+          <div class="col-6 col-sm-6 col-md-3">
+            <h6 class="mb-4">고객센터</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
+              <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
+            </ul>
           </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거헤드셋.jpg" width="300" height="300" alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">헤드셋</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거크랭크.jpg" width="300" height="300" alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">크랭크</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거케이블.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">케이블</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거안장.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">안장</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6 mb-3 mb-lg-0">
-          <div>
-            <a href="/" class="btn btn-dark">홈으로</a>
-            <a href="/qa/guide" class="btn btn-dark">가이드</a>
-          </div>
-
         </div>
       </div>
     </div>
-
 
 
 
 
   </div>
-  </section>
+</footer>
+<!-- Javascript-->
+<!-- Libs JS -->
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
-</main>
-
-
-
-
-
-
-
-
+<!-- Theme JS -->
+<script th:src="@{/js/theme.min.js}"></script>
 
 
 
 
+</body>
 
-   <!-- Footer -->
-  <!-- footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row g-4 py-4">
-
-        
-
-        <div class="col-12 col-md-12 col-lg-8">
-          <div class="row g-4">
-
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">판매 등록</h6>
-                <!-- list -->
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
-              </ul>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">구매</h6>
-                <!-- list -->
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
-                <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
-              </ul>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">커뮤니티</h6>
-              <ul class="nav flex-column">
-                    <!-- list -->
-                <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
-                <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
-              </ul>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">공지</h6>
-              <ul class="nav flex-column">
-                  <!-- list -->
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
-              </ul>
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-3">
-              <h6 class="mb-4">고객센터</h6>
-              <ul class="nav flex-column">
-                  <!-- list -->
-                <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
-                <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-  </footer>
-    <!-- Javascript-->
-    <!-- Libs JS -->
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
-  
-  <!-- Theme JS -->
-  <script src="../assets/js/theme.min.js"></script>
-  
-  
-  
-  
-  </body>
-  
-  </html>
+</html>

@@ -5,33 +5,33 @@
 <head>
 
   <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta content="Codescandy" name="author">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta content="Codescandy" name="author">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'G-M8S4MT3EYG');
-  </script>
+  gtag('config', 'G-M8S4MT3EYG');
+</script>
 
-  <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
-
-
-  <!-- Libs CSS -->
-  <link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
-  <link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
-  <link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
 
 
-  <!-- Theme CSS -->
-  <link rel="stylesheet" th:href="@{/css/theme.min.css}">
+<!-- Libs CSS -->
+<link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
+<link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
+<link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
 
   <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet">
@@ -453,253 +453,196 @@
   </nav>
 </div>
 
-<!-- section 여기부터는 가이드 페이지 나오는듯 -->
-<main>
-  <div class="mt-4">
-    <div class="container">
-      <div class="row ">
-        <div class="col-12">
-          <!-- breadcrumb -->
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="/">메인</a></li>
-          <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-          <li class="breadcrumb-item"><a href="/qa/guide">가이드</a></li>
-          <li class="breadcrumb-item active" aria-current="page">관리방법</li>
-        </ol>
-      </nav>
-      </div>
-      </div>
-    </div>
-  </div>
-  <!-- section -->
-  <section class="mt-8">
-    <div class="container">
-      <div class="row">
-        <!-- logo -->
-        <div class="col-12">
-          <h1 class="fw-bold">관리 방법</h1>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- section -->
-  <section class="mt-6 mb-lg-14 mb-8">
-    <!-- container -->
-  <div class="container">
+
+
+
+
+
+  <!-- main wrapper -->
+
+  <div>
+    <!-- navbar vertical -->
+
+
+
     
-    <!-- row -->
-    <div class="row" style="text-align: center;">
-        <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거타이어.jpg" width="300" height="300" alt="" style="display: inline-block;">
+
+    <!-- main -->
+    <main>
+      
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="mt-4">
+            <div class="container">
+              <div class="row ">
+                <div class="col-12">
+                  <!-- breadcrumb -->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item"><a href="/">메인</a></li>
+                  <li class="breadcrumb-item"><a href="#!">고객센터</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">자주 묻는 질문</li>
+                </ol>
+              </nav>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <section class="mt-8">
+            <div class="container">
+              <div class="row">
+                <!-- logo -->
+                <div class="col-12">
+                  <h1 class="fw-bold">자주 묻는 질문</h1>
                 </div>
-              </a>
+              </div>
             </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">타이어</h2>
-              <p>내용</p>
-            </div>
-          </div>
+          </section>
+        <!-- row -->
+        <div layout:fragment="content">
 
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거바퀴.jpg" width="300" height="300"alt="" style="display: inline-block;">
+
+        
+        
+            <div class="row mt-3">
+                <div class="col">
+        
+                    <div class="card">
+                        <div class="card-header">
+                            자주 묻는 질문
+                        </div>
+                        <div class="card-body" >
+                            <h5 class="card-title"> 질문 </h5>
+        
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">제목</th>
+                                    <th scope="col">내용</th>
+                                </tr>
+                                </thead>
+        
+                                <tbody>
+                                <tr>
+                                    <td>자주 묻는 질문1</td>
+                                    <td>내용1ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇ리마넝리;ㅏㅁ넝라ㅣ;먼이;ㅏ러미;ㅏㄴ어리;ㅏㅁ언라ㅣ;ㅓ</td>
+                                </tr>
+                                </tbody>
+        
+        
+                            </table>
+        
+                            <div class="float-end">
+
+                                <div class="my-4">
+
+
+
+                                  <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                                    <a href="/member/signin">1:1문의하기</a>
+                                  </button>
+                                  <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId != null}">
+                                    <a href="/moon/qamoonlist">1:1문의하기</a>
+                                  </button>
+
+
+
+
+                                  </div>
+                            </div>
+        
+        
+                        </div><!--end card body-->
+                    </div><!--end card-->
+                </div><!-- end col-->
+            </div><!-- end row-->
+        
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
                 </div>
-              </a>
             </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">바퀴</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거브레이크.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">브레이크</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거변속기.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">변속기</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거체인.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">체인</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거스템.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">스템</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거서스펜션포크.jpg" width="300" height="300" alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">서스펜션포크</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거헤드셋.jpg" width="300" height="300" alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">헤드셋</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거크랭크.jpg" width="300" height="300" alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">크랭크</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거케이블.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">케이블</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-          <div class="col-9 col-md-4 col-lg-3 mb-8">
-            <div class="mb-4">
-              <a href="#!">
-                <!-- img -->
-                <div class="img-zoom">
-                  <img src="/images/자전거안장.jpg" width="300" height="300"alt="" style="display: inline-block;">
-                </div>
-              </a>
-            </div>
-            <!-- text -->
-            <div>
-              <h2 class="h5">안장</h2>
-              <p>내용</p>
-            </div>
-          </div>
-
-    </div>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-12 col-md-6 mb-3 mb-lg-0">
-          <div>
-            <a href="/" class="btn btn-dark">홈으로</a>
-            <a href="/qa/guide" class="btn btn-dark">가이드</a>
-          </div>
+            
+            
+        
+        </div>
+        
+        
+        <script layout:fragment="script" th:inline="javascript">
+        
+            document.querySelector(".pagination").addEventListener("click", function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+        
+                const target = e.target
+        
+                if(target.tagName !== 'A') {
+                    return
+                }
+        
+                const num = target.getAttribute("data-num")
+        
+                const formObj = document.querySelector("form")
+        
+                formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+        
+                formObj.submit();
+        
+            },false)
+        
+            document.querySelector(".clearBtn").addEventListener("click", function (e){
+                e.preventDefault()
+                e.stopPropagation()
+        
+                self.location =''
+        
+            },false)
+        
+            //show modal
+            const result = [[${result}]]
+        
+            const modal = new bootstrap.Modal(document.querySelector(".modal"))
+        
+            if(result){
+                modal.show()
+            }
+        
+        
+        
+        </script>
+        
+        
 
         </div>
       </div>
-    </div>
-
-
-
-
+    </main>
 
   </div>
-  </section>
 
-</main>
+    <!-- Libs JS -->
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
-
-
-
-
-
-
-
-
-
-
-
+<!-- Theme JS -->
+<script th:src="@{/js/theme.min.js}"></script>
+  <script th:src="@{/libs/quill/dist/quill.min.js}"></script>
+  <script th:src="@{/js/vendors/editor.js}"></script>
+  <script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
 
    <!-- Footer -->
   <!-- footer -->
@@ -761,16 +704,18 @@
       </div>
 
 
+      
+      
     </div>
   </footer>
     <!-- Javascript-->
     <!-- Libs JS -->
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/libs/simplebar/dist/simplebar.min.js"></script>
+  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+  <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
   
   <!-- Theme JS -->
-  <script src="../assets/js/theme.min.js"></script>
+  <script th:src="@{/js/theme.min.js}"></script>
   
   
   
