@@ -18,6 +18,10 @@
         delete from bike_board_reply where bike_reply_id = #{bikereplyid}
     </delete>
 
+    <delete id="deleteByBikeId" parameterType="int">
+        delete from bike_board_reply where bike_id = #{bikeId}
+    </delete>
+
     <select id="findByBikeId" resultType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
         SELECT * FROM bike_board_reply WHERE bike_id = #{bikeid} ORDER BY regdate DESC
     </select>
