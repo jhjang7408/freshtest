@@ -12,7 +12,7 @@ public interface BikeBoardReplyService {
     void update(BikeBoardReplyDTO replyDTO);
 
     void delete(int bikereplyid);
-
+    void deleteByBikeId(int bikeid);
     List<BikeBoardReplyDTO> findByBikeId(int bikeid);
 
     PageResponseDTO<BikeBoardReplyDTO> getListOfBoard(Long bike_id, PageRequestDTO pageRequestDTO);

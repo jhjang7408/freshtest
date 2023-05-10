@@ -937,7 +937,7 @@
                 <div>
 
                   <p>제품 설명: <span th:text="${bike.info}"></span></p>
-                  <p>작성자: <span th:text="${bike.userid}"></span></p>
+
 
                 </div>
 <!--                <form action="/bike/productRegister" method="post">-->
@@ -988,33 +988,17 @@
                         <p th:text="${reply.userid}">작성자 ID</p>
                         <p th:text="${reply.content}">댓글 내용</p>
                         <p th:text="${reply.regdate}">작성일시</p>
+
+                        <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
+                          <button type="submit" class="btn btn-danger">삭제</button>
+                        </form>
                         <hr>
                       </li>
                     </ul>
                   </div>
-<!--                  <form th:if="${reply != null}" th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">-->
-<!--                    <button type="submit">댓글 삭제</button>-->
-<!--                  </form>-->
-                  <div th:each="reply : ${replies}">
-                    <!-- 댓글 내용을 표시하는 코드 -->
 
-                    <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
-                      <button type="submit" class="btn btn-danger">댓글 삭제</button>
-                    </form>
-                  </div>
-                  <!--                  <div class="comments-area">-->
-                  <!--                    <h4 th:text="${#lists.size(replies)} + ' Comments'">Comments</h4>-->
-                  <!--                    <div th:each="reply : ${replies}">-->
-                  <!--                      <div class="comment-list">-->
-                  <!--                        <div class="single-comment">-->
-                  <!--                          <div class="content">-->
-                  <!--                            <h4 th:text="${reply.username}">Username</h4>-->
-                  <!--                            <p th:text="${reply.content}">Comment content</p>-->
-                  <!--                          </div>-->
-                  <!--                        </div>-->
-                  <!--                      </div>-->
-                  <!--                    </div>-->
-                  <!--                  </div>-->
+
+
 
                   <!-- 댓글 작성 폼 -->
                   <form th:action="@{'/bike/productSingle/' + ${bike.bikeid} + '/bikereply'}" method="post">

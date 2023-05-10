@@ -37,6 +37,12 @@ public class BikeBoardReplyServiceImpl implements BikeBoardReplyService {
     }
 
     @Override
+    public void deleteByBikeId(int bikeid) {
+        bikeBoardReplyMapper.deleteByBikeId(bikeid);
+    }
+
+
+    @Override
     public List<BikeBoardReplyDTO> findByBikeId(int bikeid) {
         return bikeBoardReplyMapper.findByBikeId(bikeid);
     }
