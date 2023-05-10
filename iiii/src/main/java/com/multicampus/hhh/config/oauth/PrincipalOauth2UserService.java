@@ -2,6 +2,8 @@ package com.multicampus.hhh.config.oauth;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.config.oauth.provider.GoogleUserInfo;
+import com.multicampus.hhh.config.oauth.provider.KakaoUserInfo;
+import com.multicampus.hhh.config.oauth.provider.NaverUserInfo;
 import com.multicampus.hhh.config.oauth.provider.Oauth2UserInfo;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
@@ -15,6 +17,8 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.Map;
 
 @Service
 @Log4j2
@@ -37,8 +41,16 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         if(userRequest.getClientRegistration().getRegistrationId().equals("google")){
             System.out.println("구글 로그인 요청");
             oauth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+
+        } else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")){
+            System.out.println("네이버 로그인 요청");
+            oauth2UserInfo = new NaverUserInfo((Map)oAuth2User.getAttributes().get("response"));
+
+        } else if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")){
+            System.out.println("카카오 로그인 요청");
+            oauth2UserInfo = new KakaoUserInfo((Map)oAuth2User.getAttributes().get("kakao_account"));
         } else {
-            System.out.println("구글만 지원");
+            System.out.println("구글,네이버,카카오만 지원");
         }
         
         String provider = oauth2UserInfo.getProvider();
@@ -61,6 +73,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .memberRole(MemberRole.USER)
                     .social(true)
                     .build();
+            log.info("user_role_id 확인 " + member.getMemberRole());
             memberMapper.save(member);
             memberMapper.saveRole(member);
         } else {

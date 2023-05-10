@@ -85,7 +85,6 @@ public class MypageController {
         log.info("판매내역");
     }
 
-    @Secured("ROLE_ADMIN")
     @GetMapping("/shop-cart")
     public  void cartPage(){
         log.info("장바구니");

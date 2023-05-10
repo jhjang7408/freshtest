@@ -511,15 +511,14 @@
               </div>
               <div class="d-flex justify-content-between">
                 <div class="form-check">
-                  <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id="flexCheckDefault"
-                  />
-                  <label class="form-check-label" for="flexCheckDefault">
+                  <input class="form-check-input" type="checkbox" name="remember-me">
+                  <label class="form-check-label">
                     자동 로그인
                   </label>
+<!--                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>-->
+<!--                  <label class="form-check-label" for="flexCheckDefault">-->
+<!--                    자동 로그인-->
+<!--                  </label>-->
                 </div>
                 <div>
                   <a href="/member/findpassword">비밀번호 찾기</a>
@@ -535,7 +534,19 @@
           </form>
           <div class="col-12 d-grid">
             <a href="/oauth2/authorization/google"><button class="btn btn-primary">
-              소셜 로그인
+              구글 로그인
+            </button>
+            </a>
+          </div>
+          <div class="col-12 d-grid">
+            <a href="/oauth2/authorization/naver"><button class="btn btn-primary">
+              네이버 로그인
+            </button>
+            </a>
+          </div>
+          <div class="col-12 d-grid">
+            <a href="/oauth2/authorization/kakao"><button class="btn btn-primary">
+              카카오 로그인
             </button>
             </a>
           </div>
