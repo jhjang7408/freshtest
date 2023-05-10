@@ -551,7 +551,7 @@
                         <button type="button" data-toggle="modal" data-target="#replymodify" th:if="${session.loginId != null && session.loginId.userid == board.userid}">수정</button>
                       </td>-->
                       <td th:text="${board.userid}">작성자</td>
-                      <td th:text="${board.regdate}">시간</td>
+                      <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
                       <td>
                         <div>
                           <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${#authentication.principal.memberVO.userid == board.userid}" >x</button>

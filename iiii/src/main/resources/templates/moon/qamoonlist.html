@@ -527,7 +527,7 @@
                                     <td><a th:href="@{/moon/qamoonview(moon_id =${board.moonid})}" class="text-decoration-none"  th:text="${board.title}">제목</a></td>
 
                                     <!--<td><a th:href="@{/moon/qamoonview(moon_id =${board.moonid})}" class="text-decoration-none"  th:text="${board.content}">내용</td>-->
-                                    <td th:text="${board.regdate}">시간</td>
+                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
                                 </tr>
                                 </tbody>
         

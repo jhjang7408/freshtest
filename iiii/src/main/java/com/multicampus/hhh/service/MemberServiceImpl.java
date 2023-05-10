@@ -1,5 +1,6 @@
 package com.multicampus.hhh.service;
 
+import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
@@ -12,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
+import java.util.List;
 import java.util.Random;
 
 @Service
@@ -138,6 +140,22 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void socialInsert(MemberVO memberVO) {
         memberMapper.socialInsert(memberVO);
+    }
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public List<BikeBoardVO> findbike(String userid) {
+        List<BikeBoardVO> bikelist = memberMapper.findbike(userid);
+        return bikelist;
     }
 
 

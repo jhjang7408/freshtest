@@ -527,7 +527,7 @@
                                     <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
                                     <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
                                     <td th:text="${board.userid}">작성자</td>
-                                    <td th:text="${board.regdate}">시간</td>
+                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
                                 </tr>
                                 </tbody>
         

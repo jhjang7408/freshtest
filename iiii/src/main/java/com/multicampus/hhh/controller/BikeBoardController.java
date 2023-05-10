@@ -62,10 +62,10 @@ public class BikeBoardController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
         //로그인 하지 않았을 경우 로그인 페이지로 이동
-        /*if(userid == null){
+        if(userid == null){
             log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
             return "redirect:/member/signin";
-        }*/
+        }
         model.addAttribute("userid", userid.getUserid());
         log.info("로그인 확인되어 등록페이지로 이동");
         return "bike/productRegister";
