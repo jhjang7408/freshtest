@@ -254,9 +254,7 @@
     </div>
   </div>
 
-  <nav
-          class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
-  >
+  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
     <div class="container px-0 px-md-3">
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
         <div
@@ -385,12 +383,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="qa/guide"
+                  <a class="dropdown-item" href="/qa/guide"
                   >가이드</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="qa/qalist"
+                  <a class="dropdown-item" href="/qa/qalist"
                   >질문/정보 게시판</a
                   >
                 </li>
@@ -433,13 +431,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                  <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                  <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
+                  <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -457,7 +455,7 @@
 
   <!-- main wrapper -->
 
-  <div>
+
     <!-- navbar vertical -->
 
 
@@ -529,7 +527,7 @@
                                     <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
                                     <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
                                     <td th:text="${board.userid}">작성자</td>
-                                    <td th:text="${board.regdate}">시간</td>
+                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
                                 </tr>
                                 </tbody>
         
@@ -542,10 +540,10 @@
 
 
 
-                                  <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
                                     <a href="/member/signin">글쓰기</a>
                                   </button>
-                                  <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId != null}">
+                                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
                                     <a href="qaregister">글쓰기</a>
                                   </button>
 
@@ -630,10 +628,10 @@
         
 
         </div>
-      </div>
+
     </main>
 
-  </div>
+
 
     <!-- Libs JS -->
 <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>

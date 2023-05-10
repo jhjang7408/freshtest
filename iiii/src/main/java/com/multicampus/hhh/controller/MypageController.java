@@ -1,6 +1,7 @@
 package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
+import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
 import com.multicampus.hhh.service.MemberService;
@@ -81,9 +82,27 @@ public class MypageController {
 
 
     @GetMapping("/listsell")
-    public void listsell(){
+    public String listsell(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
+
+        String userid = memberVO.getUserid();
+        List<BikeBoardVO> bikeBoard = memberService.findbike(userid);
+        model.addAttribute("bikelist", bikeBoard);
         log.info("판매내역");
+        return "/mypage/listsell";
     }
+
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/shop-cart")
     public  void cartPage(){

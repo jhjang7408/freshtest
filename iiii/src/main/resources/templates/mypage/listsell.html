@@ -544,20 +544,26 @@
                     <!-- Table Head -->
                     <thead class="bg-light">
                       <tr>
-                        <th>&nbsp;</th>
-                        <th>상품명</th>
-                        <th>주문번호</th>
-                        <th>날짜</th>
-                        <th>갯수</th>
-                        <th>거래상태</th>
+                        <th>상품번호</th>
+                        <th>제목</th>
                         <th>가격</th>
-
-                        <th></th>
+                        <th>상태</th>
+                        <th>등록일</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <tr th:each="bikelists : ${bikelist}">
+                        <td th:text="${bikelists.bikeid}">상품번호</td>
+                        <td th:text="${bikelists.title}">제목</td>
+                        <td th:text="${bikelists.price}">가격</a></td>
+                        <td th:text="${bikelists.status}">상태</a></td>
+                        <td th:text="${#temporals.format(bikelists.regdate, 'yyyy-MM-dd')}">등록일</a></td>
+                      </tr>
+
+
+
                       <!-- Table body -->
-                      <tr>
+                      <!--<tr>
                         <td class="align-middle border-top-0 w-0">
                           <a href="#">
                             <img
@@ -768,7 +774,7 @@
                             ><i class="feather-icon icon-eye"></i
                           ></a>
                         </td>
-                      </tr>
+                      </tr>-->
                     </tbody>
                   </table>
                 </div>

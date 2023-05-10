@@ -59,4 +59,12 @@
     <update id="socialInsert">
         update user set nickname = #{nickname}, address = #{address}, phnum = #{phnum} where user_id = #{userid}
     </update>
+
+
+    <select id="findbike" resultType="com.multicampus.hhh.domain.BikeBoardVO">
+        select * from bike_board where user_id =#{userid} order by bike_id desc;
+    </select>
+
+
+
 </mapper>

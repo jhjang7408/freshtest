@@ -1,7 +1,10 @@
 package com.multicampus.hhh.service;
 
+import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
+
+import java.util.List;
 
 public interface MemberService {
 
@@ -28,4 +31,6 @@ public interface MemberService {
 //    void modify(MemberVO memberVO);
 //
 //    void remove(String id);
+
+    List<BikeBoardVO> findbike(String userid);
 }

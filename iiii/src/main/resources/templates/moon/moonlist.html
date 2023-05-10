@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 
@@ -191,16 +191,14 @@
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
-            <div class="list-inline-item" th:if="${session.loginId == null}">
+            <div class="list-inline-item" sec:authorize="!isAuthenticated()">
               <a href="/member/signin">로그인</a>
             </div>
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <a href="/member/logout">로그아웃</a>
             </div>
-
-
-
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <!--            th:if="${session.loginId != null}"-->
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <li class="nav-item dropdown" >
                 <a
                         class="nav-link dropdown-toggle"
@@ -254,9 +252,7 @@
     </div>
   </div>
 
-  <nav
-          class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
-  >
+  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
     <div class="container px-0 px-md-3">
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
         <div
@@ -332,12 +328,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../index"
+                  <a class="dropdown-item" href="/acc/productRegister"
                   >악세서리 판매 등록</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/index-2.html"
+                  <a class="dropdown-item" href="/bike/productRegister"
                   >자전거 판매 등록</a
                   >
                 </li>
@@ -356,25 +352,23 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../pages/shop-grid.html"
+                  <a class="dropdown-item" href="/acc/accList"
                   >악세서리 구매</a
                   >
                 </li>
                 <li>
                   <a
                           class="dropdown-item"
-                          href="../pages/shop-grid-3-column.html"
+                          href="/bike/bikeList"
                   >자전거 구매</a
                   >
                 </li>
                 <li>
                   <a class="dropdown-item" href="/mypage/shop-cart"
-                     th:if="${session.loginId != null}">장바구니</a
-                  >
+                     sec:authorize="isAuthenticated()">장바구니</a>
                 </li>
               </ul>
             </li>
-
             <li class="nav-item dropdown">
               <a
                       class="nav-link dropdown-toggle"
@@ -435,14 +429,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/moon/qamoonlist"
-                  >1:1문의</a
-                  >
+                  <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/moon/moonlist"
-                  >자주 묻는 질문</a
-                  >
+                  <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -628,7 +621,7 @@
         
 
         </div>
-      </div>
+
     </main>
 
   </div>
@@ -710,12 +703,12 @@
   </footer>
     <!-- Javascript-->
     <!-- Libs JS -->
-  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<!--  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
   <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
   <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
   
-  <!-- Theme JS -->
-  <script th:src="@{/js/theme.min.js}"></script>
+  &lt;!&ndash; Theme JS &ndash;&gt;
+  <script th:src="@{/js/theme.min.js}"></script>-->
   
   
   

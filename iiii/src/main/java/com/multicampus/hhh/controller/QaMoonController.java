@@ -1,11 +1,14 @@
 package com.multicampus.hhh.controller;
 
+import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.domain.QaMoonBoard;
 import com.multicampus.hhh.domain.QaMoonBoardReply;
 import com.multicampus.hhh.service.QaMoonBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,9 +35,12 @@ public class QaMoonController {
 
 
     @GetMapping("/qamoonlist")
-    public String qamoonList(HttpSession session, Model model) {
+    public String qamoonList(Model model) {
 
-        MemberVO memberVO = (MemberVO) session.getAttribute("loginId"); // 로그인한 아이디 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
+
+       // MemberVO memberVO = (MemberVO) session.getAttribute("loginId"); // 로그인한 아이디 가져오기
         log.info(memberVO + "ssssssssssssssssssssssssssssssss");
         String userid= memberVO.getUserid();
         List<QaMoonBoard> qaMoonList = qaMoonBoardService.findmoonById(userid); // 아이디에 해당하는 게시글 가져오기

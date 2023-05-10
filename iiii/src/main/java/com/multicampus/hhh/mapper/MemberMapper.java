@@ -1,10 +1,13 @@
 package com.multicampus.hhh.mapper;
 
+import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Mapper
 @Component
@@ -26,5 +29,7 @@ public interface MemberMapper {
     MemberVO memberEmailcheck(String user_id, String email);
     void socialInsert(MemberVO memberVO);
 
+
+    List<BikeBoardVO> findbike(String userid);
 
 }
