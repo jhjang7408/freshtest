@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 
@@ -191,16 +191,14 @@
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
-            <div class="list-inline-item" th:if="${session.loginId == null}">
+            <div class="list-inline-item" sec:authorize="!isAuthenticated()">
               <a href="/member/signin">로그인</a>
             </div>
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <a href="/member/logout">로그아웃</a>
             </div>
-
-
-
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <!--            th:if="${session.loginId != null}"-->
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <li class="nav-item dropdown" >
                 <a
                         class="nav-link dropdown-toggle"
@@ -332,12 +330,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../index"
+                  <a class="dropdown-item" href="/acc/productRegister"
                   >악세서리 판매 등록</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/index-2.html"
+                  <a class="dropdown-item" href="/bike/productRegister"
                   >자전거 판매 등록</a
                   >
                 </li>
@@ -356,25 +354,23 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../pages/shop-grid.html"
+                  <a class="dropdown-item" href="/acc/accList"
                   >악세서리 구매</a
                   >
                 </li>
                 <li>
                   <a
                           class="dropdown-item"
-                          href="../pages/shop-grid-3-column.html"
+                          href="/bike/bikeList"
                   >자전거 구매</a
                   >
                 </li>
                 <li>
                   <a class="dropdown-item" href="/mypage/shop-cart"
-                     th:if="${session.loginId != null}">장바구니</a
-                  >
+                     sec:authorize="isAuthenticated()">장바구니</a>
                 </li>
               </ul>
             </li>
-
             <li class="nav-item dropdown">
               <a
                       class="nav-link dropdown-toggle"
@@ -435,14 +431,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/moon/qamoonlist"
-                  >1:1문의</a
-                  >
+                  <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/moon/moonlist"
-                  >자주 묻는 질문</a
-                  >
+                  <a class="dropdown-item" href="/moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -561,7 +556,7 @@
                       <td th:text="${board.regdate}">시간</td>
                       <td>
                         <div>
-                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${session.loginId != null && session.loginId.userid == board.userid}" >x</button>
+                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${#authentication.principal.memberVO.userid == board.userid}" >x</button>
                         </div>
                       </td>
                       </br>
@@ -589,14 +584,14 @@
 
 
 
-                  <form th:action="@{qareplyregister}" method="post" th:if="${session.loginId != null}">
+                  <form th:action="@{qareplyregister}" method="post" sec:authorize="isAuthenticated()">
                     <div class="mb-3 col-lg-8">
                       <input type="hidden" class="form-control" name="qaid" th:value="${qaview.qaid}" readonly>
                     </div>
                     <!-- input -->
-                    <div class="mb-3 col-lg-8" th:if="${session.loginId != null}">
+                    <div class="mb-3 col-lg-8" sec:authorize="isAuthenticated()">
 
-                     <input type="hidden" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
+                     <input type="hidden" class="form-control" name="userid" th:value="${#authentication.principal.memberVO.userid}" readonly>
                     </div>
                     <!-- input -->
                     <div class="mb-8 col-lg-8">
@@ -619,7 +614,7 @@
 
                   <div class="my-4">
                     <div class="float-end">
-                      <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                      <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
                         <a href="/member/signin">댓글 쓰기</a>
                       </button>
                     </div>
@@ -633,9 +628,9 @@
                       <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
 
 
-                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${session.loginId != null && session.loginId.userid == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${#authentication.principal.memberVO.userid == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
 
-                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${session.loginId != null && session.loginId.userid == qaview.userid}">삭제</button>
+                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${#authentication.principal.memberVO.userid == qaview.userid}">삭제</button>
 
 
 
