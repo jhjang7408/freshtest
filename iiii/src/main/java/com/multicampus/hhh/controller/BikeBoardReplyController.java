@@ -1,11 +1,15 @@
 package com.multicampus.hhh.controller;
 
 
+import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.dto.BikeBoardReplyDTO;
 import com.multicampus.hhh.service.BikeBoardReplyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,11 +24,14 @@ import javax.servlet.http.HttpSession;
 public class BikeBoardReplyController {
 
     private final BikeBoardReplyService bikeBoardReplyService;
-
+    @Secured("ROLE_USER")
     @PostMapping("productSingle/{bikeid}/bikereply")
     public String register(@PathVariable int bikeid, BikeBoardDTO bikeBoardDTO, BikeBoardReplyDTO bikeBoardReplyDTO, Model model, HttpSession session){
         int bikereplyid = bikeBoardReplyDTO.getBikereplyid();
-        MemberVO userid = (MemberVO) session.getAttribute("loginId");
+
+        //MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
         //'user_id' cannot be null오류 발생해서
         if (userid != null) {
             bikeBoardReplyDTO.setUserid(userid.getUserid());
