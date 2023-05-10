@@ -30,6 +30,7 @@ public class AccBoardController {
         log.info("악세서리 구매게시판");
         model.addAttribute("accList", service.getAll());
     }
+
     @GetMapping("/productRegister")
     public void registerGET() {
         log.info("GET acc register.......");

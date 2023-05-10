@@ -122,17 +122,17 @@ public class MemberController {
 //        return "redirect:/";
 //    }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-        session.invalidate();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication != null){
-            new SecurityContextLogoutHandler().logout(request,response,authentication);
-        }
-        log.info("로그아웃됨");
-
-        return "redirect:/";
-    }
+//    @GetMapping("/logout")
+//    public String logout(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+//        session.invalidate();
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        if(authentication != null){
+//            new SecurityContextLogoutHandler().logout(request,response,authentication);
+//        }
+//        log.info("로그아웃됨");
+//
+//        return "redirect:/";
+//    }
 
     @GetMapping("/findpassword")
     public String findpassGET(HttpSession session, Model model) {
