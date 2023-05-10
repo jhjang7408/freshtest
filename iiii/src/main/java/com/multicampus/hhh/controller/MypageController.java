@@ -6,8 +6,10 @@ import com.multicampus.hhh.dto.MemberDTO;
 import com.multicampus.hhh.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -26,17 +29,14 @@ public class MypageController {
 
     @Autowired
     private MemberService memberService;
+
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @GetMapping("/orderlist-bike")
     public void orderbikelist(HttpSession session, Model model){
-        MemberVO memberVO = (MemberVO) session.getAttribute("loginId");
-        if(memberVO == null) {
-//            model.addAllAttributes("loginError", "로그인 상태가 아닙니다.");
-            //오류 메세지 보내기
-        }
+
         log.info("자전거 구매내역");
     }
 
@@ -46,11 +46,26 @@ public class MypageController {
     }
 
     @GetMapping("/account-modify")
-    public void accountmod(Model model){
-
+    public void accountmod(Model model,HttpSession session){
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String userId = authentication.getName();
+//
+//        model.addAttribute("userId", userId);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
-        model.addAttribute("userId", userId);
+        MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
+        log.info("로그인 아이디 ROLE 확인 =====================" + memberVO.getMemberRole().name());
+
+        List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
+        log.info("로그인 아이디 권한 확인 =====================" + authorities);
+
+        Collection<? extends GrantedAuthority> abc =
+                SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+
+        log.info("현재 로그인 아이디 권한들 목록");
+        for (GrantedAuthority authority : abc) {
+            System.out.println(authority.getAuthority());
+        }
+
         log.info("개인정보수정 페이지");
     }
 
@@ -69,7 +84,8 @@ public class MypageController {
     public void listsell(){
         log.info("판매내역");
     }
-    
+
+    @Secured("ROLE_ADMIN")
     @GetMapping("/shop-cart")
     public  void cartPage(){
         log.info("장바구니");

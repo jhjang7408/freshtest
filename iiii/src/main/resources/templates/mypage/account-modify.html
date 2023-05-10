@@ -667,7 +667,7 @@
                             readonly
                             name="userid"
                             sec:authorize="isAuthenticated()"
-                            th:value="${userId}"
+                            th:value= "${#authentication.principal.memberVO.userid}"
                           />
                         </div>
                         <!-- input -->
