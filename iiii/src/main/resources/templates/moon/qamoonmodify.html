@@ -252,9 +252,7 @@
     </div>
   </div>
 
-  <nav
-          class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
-  >
+  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
     <div class="container px-0 px-md-3">
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
         <div
@@ -431,10 +429,10 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                  <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                  <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
@@ -648,12 +646,12 @@
 </footer>
 <!-- Javascript-->
 <!-- Libs JS -->
-<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<!--<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
-<!-- Theme JS -->
-<script th:src="@{/js/theme.min.js}"></script>
+&lt;!&ndash; Theme JS &ndash;&gt;
+<script th:src="@{/js/theme.min.js}"></script>-->
 
 
 
