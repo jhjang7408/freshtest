@@ -31,15 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/mypage/**").authenticated()
+                .antMatchers("/mypage/**").authenticated()  //인증 처리
                 .anyRequest().permitAll()
                 .and()
-                .formLogin().loginPage("/member/signin")
+                .formLogin().loginPage("/member/signin")    //일반 로그인
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/")
                 .and()
-                .oauth2Login()
-                .loginPage("/member/signin")
+                .oauth2Login().loginPage("/member/signin")  //소셜 로그인
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService)
                 .and()
@@ -47,7 +46,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(new CustomAccessDenieHandler())    //접근 권한 설정
-                .authenticationEntryPoint(new CustomAuthenticationEntryPoint());    //인증 설정
+                .authenticationEntryPoint(new CustomAuthenticationEntryPoint())    //인증 설정
+                .and()
+                .logout()   //로그아웃
+                .logoutUrl("/member/logout")
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .permitAll()
+                .and()
+                .rememberMe()   //자동 로그인
+                .key("remember-me");
     }
 
 //    @Override
