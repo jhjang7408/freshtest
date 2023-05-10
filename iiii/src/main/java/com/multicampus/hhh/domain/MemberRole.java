@@ -15,4 +15,9 @@ public enum MemberRole {
     public int getValue() {
         return value;
     }
+
+    @Override
+    public String toString() {
+        return this.name();
+    }
 }

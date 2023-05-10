@@ -1,6 +1,5 @@
 package com.multicampus.hhh.controller;
 
-import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 
@@ -14,8 +13,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -56,17 +55,14 @@ public class BikeBoardController {
     @GetMapping("/productRegister")
     public String registerGET(Model model, HttpSession session) {
         //session에서 userid를 가져옴
-        //MemberVO userid = (MemberVO) session.getAttribute("loginId");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
-
+        MemberVO userid = (MemberVO) session.getAttribute("loginId");
 
         //로그인 하지 않았을 경우 로그인 페이지로 이동
-//        if(authentication == null){
-//            log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
-//            return "redirect:/member/signin";
-//        }
-//        model.addAttribute("userid", userid.getUserid());
+        if(userid == null){
+            log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
+            return "redirect:/member/signin";
+        }
+        model.addAttribute("userid", userid.getUserid());
         log.info("로그인 확인되어 등록페이지로 이동");
         return "bike/productRegister";
     }

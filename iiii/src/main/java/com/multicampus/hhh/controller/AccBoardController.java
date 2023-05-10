@@ -5,6 +5,7 @@ import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.service.AccBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
