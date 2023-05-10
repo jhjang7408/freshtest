@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Map;
 
 @Data
+@Log4j2
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private MemberVO memberVO;
@@ -31,12 +32,17 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     @Override   // 회원의 권한 리턴
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect = new ArrayList<>();
-        collect.add(new GrantedAuthority() {
-            @Override
-            public String getAuthority() {
-                return memberVO.getMemberRole().toString();
-            }
-        });
+        if(memberVO.getMemberRole() != null){
+            collect.add(new CustomGrantedAuthority("ROLE_"+memberVO.getMemberRole().name()));
+        } else {
+            log.error("eraseraseraseraser" + getUsername());
+        }
+//                new GrantedAuthority() {
+//            @Override
+//            public String getAuthority() {
+//                return "ROLE_"+memberVO.getMemberRole().name();
+//            }
+//        };
         return collect;
     }
 

@@ -19,9 +19,6 @@ public class MemberVO {
     private String phnum;
     private boolean social;
 
-
-
-
     private MemberRole memberRole = MemberRole.USER;
 
     public void addRole(MemberRole memberRole) {
