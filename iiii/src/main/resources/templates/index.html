@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
   <title>FreshCart - eCommerce HTML Template</title>
   <link
@@ -214,16 +215,14 @@
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
-            <div class="list-inline-item" th:if="${session.loginId == null}">
+            <div class="list-inline-item" sec:authorize="!isAuthenticated()">
               <a href="/member/signin">로그인</a>
             </div>
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <a href="/member/logout">로그아웃</a>
             </div>
-
-
 <!--            th:if="${session.loginId != null}"-->
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <li class="nav-item dropdown" >
                 <a
                         class="nav-link dropdown-toggle"
@@ -392,12 +391,10 @@
                 </li>
                 <li>
                   <a class="dropdown-item" href="/mypage/shop-cart"
-                     th:if="${session.loginId != null}">장바구니</a
-                  >
+                     sec:authorize="isAuthenticated()">장바구니</a>
                 </li>
               </ul>
             </li>
-
             <li class="nav-item dropdown">
               <a
                       class="nav-link dropdown-toggle"

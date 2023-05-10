@@ -62,6 +62,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .social(true)
                     .build();
             memberMapper.save(member);
+            memberMapper.saveRole(member);
         } else {
             System.out.println("로그인을 한적이 있습니다.");
         }
