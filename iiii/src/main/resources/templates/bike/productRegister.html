@@ -539,7 +539,7 @@
             <!-- row -->
             <div class="row">
                 <div class="col-lg-8 col-12">
-                    <form th:action="@{productRegister}" method="post" enctype="multipart/form-data">
+                    <form th:action="@{${bike == null} ? '/bike/productRegister' : '/bike/update/' + ${bike.bikeid}}" method="post" enctype="multipart/form-data">
                         <div class="card mb-6 card-lg">
                             <div class="card-body p-6">
                                 <h4 class="mb-4 h5">제품 정보</h4>

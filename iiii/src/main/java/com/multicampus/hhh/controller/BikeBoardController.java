@@ -185,6 +185,8 @@ public class BikeBoardController {
         model.addAttribute("writer", writer);
 
         if(userid.getUserid().equals(writer)){
+            //외래키 제약 조건 때문에 replyService.deleteByBikeId로 댓글부터 삭제
+            replyService.deleteByBikeId(bikeid);
             service.delete(bikeid);
             log.info("삭제진행");
             return "redirect:/bike/bikeList";
@@ -193,9 +195,5 @@ public class BikeBoardController {
             return "redirect:/bike" + bikeid;
         }
     }
-
-
-
-
 
 }
