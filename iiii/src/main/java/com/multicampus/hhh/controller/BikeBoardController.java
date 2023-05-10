@@ -1,5 +1,6 @@
 package com.multicampus.hhh.controller;
 
+import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 
@@ -15,6 +16,8 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -51,12 +54,13 @@ public class BikeBoardController {
         return "bike/bikeList";
     }
 
-
+    @Secured("ROLE_USER")
     @GetMapping("/productRegister")
     public String registerGET(Model model, HttpSession session) {
         //session에서 userid를 가져옴
-        MemberVO userid = (MemberVO) session.getAttribute("loginId");
-
+        //MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
         //로그인 하지 않았을 경우 로그인 페이지로 이동
         /*if(userid == null){
             log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
@@ -107,12 +111,13 @@ public class BikeBoardController {
         model.addAttribute("bike", bikeBoardDTO);
         return "bike/productSingle";
     }
-
+    @Secured("ROLE_USER")
     @GetMapping("/update/{bikeid}")
     public String UpdateGet(@PathVariable int bikeid,Model model,HttpSession session){
         //session에서 userid를 가져옴
-        MemberVO userid = (MemberVO) session.getAttribute("loginId");
-
+        //MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
         //로그인 하지 않았을 경우 로그인 페이지로 이동
         if(userid == null){
             log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
@@ -129,14 +134,16 @@ public class BikeBoardController {
             return "redirect:/bike/productSingle/" + bikeid;
         }
     }
-
+    @Secured("ROLE_USER")
     @PostMapping("/update/{bikeid}")
     public String UpdatePost(@Valid BikeBoardDTO bikeBoardDTO, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
                              @RequestParam("imgFile") MultipartFile imgFile,
                              HttpSession session, @PathVariable int bikeid) throws IOException{
         //세션에서 아이디 가져옴
-        MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        //MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
         BikeBoardDTO bikeidDTO = service.readOne(bikeBoardDTO.getBikeid());
         String writer = bikeidDTO.getUserid();
 
@@ -160,11 +167,13 @@ public class BikeBoardController {
             return "redirect:/bike/productSingle/" + bikeBoardDTO.getBikeid();
         }
     }
-
+    @Secured("ROLE_USER")
     @PostMapping("/{bikeid}/delete")
     public String deletePost(@PathVariable int bikeid,HttpSession session,Model model){
         //로그인한 id
-        MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        //MemberVO userid = (MemberVO) session.getAttribute("loginId");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
         BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
 
         //로그인 하지 않았을 경우
