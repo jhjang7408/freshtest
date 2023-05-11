@@ -1,8 +1,10 @@
 package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.domain.PagingVO;
 import com.multicampus.hhh.domain.QaBoard;
 import com.multicampus.hhh.domain.QaBoardReply;
+import com.multicampus.hhh.service.PageService;
 import com.multicampus.hhh.service.QaBoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +22,27 @@ import javax.servlet.http.HttpSession;
 public class QaBoardController {
 
     private final QaBoardService qaBoardService;
+    private final PageService pageService;
 
     @GetMapping("/qalist")
-    public String main(Model model){
-        model.addAttribute("qalist", qaBoardService.qaBoardList());
+    public String main(PagingVO vo, Model model
+            , @RequestParam(value="nowPage", required=false)String nowPage
+            , @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+
+        int total = pageService.countBoard();
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
+        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        model.addAttribute("paging", vo);
+        model.addAttribute("viewAll", pageService.selectBoard(vo));
+
+//        model.addAttribute("qalist", qaBoardService.qaBoardList());
 
         return "/qa/qalist";
     }

@@ -16,13 +16,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PageRequestDTO {
-//todo의 pagerequestDTO
-    @Builder.Default
+
     @Min(value = 1)
     @Positive
     private int page = 1;
 
-    @Builder.Default
     @Min(value = 10)
     @Max(value = 100)
     @Positive
