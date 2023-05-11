@@ -1,5 +1,6 @@
 package com.multicampus.hhh.service;
 
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.dto.MemberDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.DisplayName;
@@ -43,4 +44,10 @@ class MemberServiceTest {
         log.info("인증번호 : "+code);
     }
 
+    @Test
+    @DisplayName("롤값 불러오기")
+    public void findRole(){
+        MemberRole memberRole = memberService.findRole("test");
+        log.info("============================= "+ memberRole);
+    }
 }

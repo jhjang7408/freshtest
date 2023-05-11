@@ -2,17 +2,21 @@ package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.BikeBoardVO;
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
 import com.multicampus.hhh.service.MemberService;
+import com.sun.security.auth.UserPrincipal;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +33,7 @@ import java.util.List;
 public class MypageController {
 
     @Autowired
-    private MemberService memberService;
+    MemberService memberService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -46,15 +50,19 @@ public class MypageController {
         log.info("악세사리 구매내역");
     }
 
+
+    //테스트
     @GetMapping("/account-modify")
-    public void accountmod(Model model,HttpSession session){
+    public void accountmod(Model model, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, @AuthenticationPrincipal PrincipalDetails principalDetails){
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        String userId = authentication.getName();
 //
 //        model.addAttribute("userId", userId);
+        log.info("UserDetails 확인 : "+userDetails);
+        log.info("PrincipalDetails 확인 : " + principalDetails);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
-        log.info("로그인 아이디 ROLE 확인 =====================" + memberVO.getMemberRole().name());
+        log.info("로그인 아이디 ROLE 확인 =====================" + memberVO.getMemberRole());
 
         List<GrantedAuthority> authorities = (List<GrantedAuthority>) authentication.getAuthorities();
         log.info("로그인 아이디 권한 확인 =====================" + authorities);
@@ -82,7 +90,7 @@ public class MypageController {
 
 
     @GetMapping("/listsell")
-    public String listsell(Model model){
+    public void listsell(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
 
@@ -90,18 +98,8 @@ public class MypageController {
         List<BikeBoardVO> bikeBoard = memberService.findbike(userid);
         model.addAttribute("bikelist", bikeBoard);
         log.info("판매내역");
-        return "/mypage/listsell";
+//        return "/mypage/listsell";
     }
-
-
-
-
-
-
-
-
-
-
 
 
     @GetMapping("/shop-cart")
@@ -110,7 +108,8 @@ public class MypageController {
     }
 
     @PostMapping("/changepass")     //비밀번호 변경
-    public String changepassword(@RequestParam("userid") String userid, @RequestParam("password") String password, Model model){
+    public String changepassword(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("password") String password, Model model){
+        String userid = principalDetails.getUsername();
         log.info("비밀번호 변경 아이디 확인" + userid);
         MemberVO memberVO = memberService.findMember(userid);
 //        MemberVO memberVO= (MemberVO) session.getAttribute("loginId");

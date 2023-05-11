@@ -666,9 +666,10 @@
                             placeholder="로그인한 아이디 표시"
                             readonly
                             name="userid"
-                            sec:authorize="isAuthenticated()"
-                            th:value= "${#authentication.principal.memberVO.userid}"
+                            th:text="${#authentication.getName()}"
                           />
+<!--                          th:text= "${#authentication.name}"-->
+                          <!--                            th:value= "${#authentication.principal.memberVO.userid}"-->
                         </div>
                         <!-- input -->
                         <div class="mb-3">

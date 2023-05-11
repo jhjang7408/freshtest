@@ -8,6 +8,7 @@ import com.multicampus.hhh.config.oauth.provider.Oauth2UserInfo;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.mapper.MemberMapper;
+import com.multicampus.hhh.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private MemberService memberService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -58,7 +61,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
         String username = provider + "_" + providerId;
         String password = bCryptPasswordEncoder.encode("겟인데어");
         String email = oauth2UserInfo.getEmail();
-//        String role = "USER";
+        String role = "USER";
         String name = oauth2UserInfo.getName();
         MemberVO member = memberMapper.findUser(email);
 
@@ -80,6 +83,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
             System.out.println("로그인을 한적이 있습니다.");
         }
 
-        return new PrincipalDetails(member, oAuth2User.getAttributes());
+        return new PrincipalDetails(member, oAuth2User.getAttributes(), memberService);
     }
 }
