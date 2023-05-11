@@ -1,6 +1,7 @@
 package com.multicampus.hhh.service;
 
 import com.multicampus.hhh.domain.BikeBoardVO;
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.MemberDTO;
 
@@ -27,6 +28,8 @@ public interface MemberService {
     String findPassword(String userid);
 
     void socialInsert(MemberVO memberVO);
+
+    MemberRole findRole(String userid);
 
 //    void modify(MemberVO memberVO);
 //

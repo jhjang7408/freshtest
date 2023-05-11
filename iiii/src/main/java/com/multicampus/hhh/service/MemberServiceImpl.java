@@ -8,8 +8,10 @@ import com.multicampus.hhh.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
@@ -24,8 +26,6 @@ public class MemberServiceImpl implements MemberService {
     private final ModelMapper modelMapper;
     private final MemberMapper memberMapper;
     private final JavaMailSender javaMailSender;
-
-
 
     @Override
     public void saveMember(MemberDTO memberDTO) {
@@ -142,14 +142,12 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.socialInsert(memberVO);
     }
 
-
-
-
-
-
-
-
-
+    @Override
+    public MemberRole findRole(String userid) {
+        int roleValue = memberMapper.findRole(userid);
+        MemberRole role = MemberRole.valueOf(roleValue);
+        return role;
+    }
 
 
     @Override
