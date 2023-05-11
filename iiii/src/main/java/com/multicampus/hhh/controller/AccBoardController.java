@@ -132,10 +132,9 @@ public class AccBoardController {
     }
 
 
-    @GetMapping("payment")
-    public void pay(){
-
-
+    @GetMapping("/payment")
+    public String pay() {
+        return "acc/payment";
     }
 
 }
