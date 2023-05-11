@@ -510,7 +510,7 @@
                         </div>
                         <div class="card-body" >
                             <h5 class="card-title">게시글 </h5>
-        
+
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -522,38 +522,56 @@
                                 </thead>
         
                                 <tbody>
-                                <tr th:each="board : ${qalist}">
+<!--                                <tr th:each="board : ${qalist}">-->
 
-                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
-                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
-                                    <td th:text="${board.userid}">작성자</td>
-                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
-                                </tr>
+<!--                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>-->
+<!--                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>-->
+<!--                                    <td th:text="${board.userid}">작성자</td>-->
+<!--                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>-->
+<!--                                </tr>-->
+                                            <tr th:each="board : ${viewAll}">
+
+                                              <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
+                                              <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
+                                              <td th:text="${board.userid}">작성자</td>
+                                              <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
+                                            </tr>
+
                                 </tbody>
-        
-        
                             </table>
-        
-                            <div class="float-end">
+                          <div style="display: block; text-align: center;">
+                            <span th:if="${paging.startPage != 1}">
+                                <a th:href="@{/qa/qalist(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>
+                            </span>
+                                                    <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                                <span th:if="${p == paging.nowPage}">
+                                    <b th:text="${p}"></b>
+                                </span>
+                                <span th:unless="${p == paging.nowPage}">
+                                    <a th:href="@{/qa/qalist(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>
+                                </span>
+                            </span>
+                                                    <span th:if="${paging.endPage != paging.lastPage}">
+                                <a th:href="@{/qa/qalist(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>
+                            </span>
+                          </div>
 
+
+
+
+
+                          <div class="float-end">
                                 <div class="my-4">
-
-
-
                                   <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
                                     <a href="/member/signin">글쓰기</a>
                                   </button>
                                   <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
                                     <a href="qaregister">글쓰기</a>
                                   </button>
-
-
-
-
                                   </div>
                             </div>
-        
-        
+
+
                         </div><!--end card body-->
                     </div><!--end card-->
                 </div><!-- end col-->
@@ -643,6 +661,14 @@
   <script th:src="@{/libs/quill/dist/quill.min.js}"></script>
   <script th:src="@{/js/vendors/editor.js}"></script>
   <script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
+
+<!--                          페이징 처리 스크립트-->
+<script>
+  function selChange() {
+    const sel = document.getElementById('cntPerPage').value;
+    location.href="qalist?nowPage=${paging.nowPage}&cntPerPage="+sel;
+  }
+</script>
 
    <!-- Footer -->
   <!-- footer -->

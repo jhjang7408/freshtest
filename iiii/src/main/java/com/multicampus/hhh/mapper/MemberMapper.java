@@ -29,6 +29,8 @@ public interface MemberMapper {
     MemberVO memberEmailcheck(String user_id, String email);
     void socialInsert(MemberVO memberVO);
 
+    int findRole(String userid);
+
 
     List<BikeBoardVO> findbike(String userid);
 
