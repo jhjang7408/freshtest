@@ -18,16 +18,17 @@
     </select>
 
     <!--특정 게시글 조회-->
-    <select id="selectOne">
+    <select id="selectOne" resultType="com.multicampus.hhh.dto.AccBoardDTO">
         select * from acc_board where ac_id = #{acid}
     </select>
     <!--게시글 수정(관리자만 가능)-->
-    <update id="modify">
-        update acc_board set
+    <update id="update" parameterType="com.multicampus.hhh.dto.AccBoardDTO">
+        update acc_board set product_name = #{productname}, image=#{image},price= #{price},amount = #{amount}, info=#{info},brand_name = #{brandname} where ac_id = #{acid}
     </update>
+
     <!--게시글 삭제(관리자만 가능)-->
-    <delete id = "delete">
-        delete from acc_board where
+    <delete id = "delete" parameterType="int">
+        delete from acc_board where ac_id = #{acid}
     </delete>
 
 

@@ -47,17 +47,17 @@ public class AccBoardServiceImpl implements AccBoardService{
 
     @Override
     public AccBoardDTO readOne(int acid) {
-        return null;
+        return accBoardMapper.selectOne(acid);
     }
 
     @Override
-    public void modify(AccBoardDTO accBoardDTO) {
-
+    public void update(AccBoardDTO accBoardDTO) {
+        accBoardMapper.update(accBoardDTO);
     }
 
     @Override
-    public void remove(int acid) {
-
+    public void delete(int acid) {
+        accBoardMapper.delete(acid);
     }
 
 

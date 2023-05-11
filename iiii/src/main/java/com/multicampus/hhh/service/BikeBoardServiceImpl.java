@@ -42,22 +42,7 @@ public class BikeBoardServiceImpl implements BikeBoardService{
 //		return dtoList;
         return bikeBoardMapper.findAll();
 	}
-    @Override
-    public PageResponseDTO<BikeBoardDTO> getList(PageRequestDTO pageRequestDTO) {
 
-        List<BikeBoardVO> voList = bikeBoardMapper.selectList(pageRequestDTO);
-        List<BikeBoardDTO> dtoList = voList.stream()
-                .map(vo -> modelMapper.map(vo, BikeBoardDTO.class))
-                .collect(Collectors.toList());
-
-
-        PageResponseDTO<BikeBoardDTO> pageResponseDTO = PageResponseDTO.<BikeBoardDTO>withAll()
-                .dtoList(dtoList)
-                .pageRequestDTO(pageRequestDTO)
-                .build();
-
-        return pageResponseDTO;
-    }
 
 //게시물 하나 조회
     @Override

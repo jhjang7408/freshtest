@@ -16,5 +16,5 @@ public interface BikeBoardService {
     void update(BikeBoardDTO bikeBoardDTO);
     void delete(int bikeid);
 //
-    PageResponseDTO<BikeBoardDTO> getList(PageRequestDTO pageRequestDTO);
+
 }

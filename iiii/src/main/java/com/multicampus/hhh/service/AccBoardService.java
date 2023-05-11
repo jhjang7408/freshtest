@@ -12,8 +12,8 @@ public interface AccBoardService {
     List<AccBoardDTO> getAll();
     void register(AccBoardDTO AccBoardDTO);
     AccBoardDTO readOne(int acid);
-    void modify(AccBoardDTO accBoardDTO);
-    void remove(int acid);
+    void update(AccBoardDTO accBoardDTO);
+    void delete(int acid);
 
 
 

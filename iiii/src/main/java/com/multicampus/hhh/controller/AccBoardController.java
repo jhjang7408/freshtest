@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +72,9 @@ public class AccBoardController {
             String imageName = imgFile.getOriginalFilename();
             String savedName = UUID.randomUUID().toString() + imageName;
             //이미지 파일 저장할 저장공간 설정
-            File file = new File("C:\\upload", savedName);
+            String absolutePath = System.getProperty("user.dir");
+            String path = absolutePath + "/src/main/resources/static/uploadImg";
+            File file = new File(path, savedName);
             imgFile.transferTo(file);
             // 이미지 파일명을 DTO에 설정
             accBoardDTO.setImage(savedName);
@@ -81,33 +84,57 @@ public class AccBoardController {
 
         return "redirect:/acc/accList";
     }
-    @GetMapping("productSingle{acid}")
-    public String readOne(@PathVariable int accid, Model model){
-        AccBoardDTO accBoardDTO = service.readOne(accid);
+    @GetMapping("/productSingle/{acid}")
+    public String readOne(@PathVariable int acid, Model model){
+        AccBoardDTO accBoardDTO = service.readOne(acid);
         model.addAttribute("acc", accBoardDTO);
         return "acc/productSingle";
     }
 
-//    @Secured("ROLE_ADMIN")
-//    @GetMapping("/update/{acid}")
-//    public String UpdateGet(@PathVariable int acid, Model model){
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
-//       //로그인 확인
-//        if(userid == null){
-//            log.info("로그인 하지 않았을 경우 로그인 화면으로 이동");
-//            return "redirect:/member/signin";
-//        }
-//        AccBoardDTO accBoardDTO = service.readOne(acid);
-//        //관리자만 수정가능하게
-//
-//    }
+    @Secured("ROLE_ADMIN")
+    @GetMapping("/update/{acid}")
+    public String UpdateGet(@PathVariable int acid,Model model){
 
+        AccBoardDTO accBoardDTO = service.readOne(acid);
+        model.addAttribute("acc",accBoardDTO);
+         return "acc/productRegister";
 
+    }
+    @Secured("ROLE_ADMIN")
+    @PostMapping("/update/{acid}")
+    public String UpdatePost(@Valid AccBoardDTO accBoardDTO, BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes,
+                             @RequestParam("imgFile") MultipartFile imgFile,
+                             HttpSession session, @PathVariable int acid) throws IOException {
+
+        if (imgFile != null && !imgFile.isEmpty()) {
+            // 업로드 한 이미지 파일명 저장
+            String imageName = imgFile.getOriginalFilename();
+            String savedName = UUID.randomUUID().toString() + imageName;
+            //이미지 파일 저장할 저장공간 설정
+            String absolutePath = System.getProperty("user.dir");
+            String path = absolutePath + "/src/main/resources/static/uploadImg";
+            File file = new File(path, savedName);
+            imgFile.transferTo(file);
+            // 이미지 파일명을 DTO에 설정
+            accBoardDTO.setImage(savedName);
+        }
+
+        service.update(accBoardDTO);
+        return "redirect:/acc/productSingle/" + accBoardDTO.getAcid();
+    }
+
+    @Secured("ROLE_ADMIN")
+    @PostMapping("/{acid}/delete")
+    public String deletePost(@PathVariable int acid){
+        service.delete(acid);
+        return "redirect:/acc/accList";
+    }
 
 
     @GetMapping("payment")
     public void pay(){
+
 
     }
 

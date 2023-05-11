@@ -14,7 +14,7 @@ public interface AccBoardMapper {
     void insert(AccBoardDTO accBoardDTO);
     AccBoardDTO selectOne(int acid);
 
-    int modify(AccBoardDTO accBoardDTO);
-    int delete();
+    void update(AccBoardDTO accBoardDTO);
+    void delete(int acid);
 
 }
