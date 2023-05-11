@@ -65,7 +65,7 @@
         select * from bike_board where user_id =#{userid} order by bike_id desc;
     </select>
 
-    <select id="findRole" resultType="Integer">
+    <select id="findRole" resultType="int">
         select role_name from user_role where user_role_id = #{userid}
     </select>
 

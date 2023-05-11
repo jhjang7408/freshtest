@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/member/signin")    //일반 로그인
                 .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/")
-                .failureHandler(new CustomLoginFailHandler())
+                .failureHandler(new CustomLoginFailHandler())   //로그인 실패 핸들러
                 .and()
                 .oauth2Login().loginPage("/member/signin")  //소셜 로그인
                 .userInfoEndpoint()
