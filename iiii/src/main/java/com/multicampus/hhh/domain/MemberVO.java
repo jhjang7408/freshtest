@@ -19,12 +19,11 @@ public class MemberVO {
     private String phnum;
     private boolean social;
 
-    private MemberRole memberRole = MemberRole.USER;
+    private MemberRole memberRole;
 
     public void addRole(MemberRole memberRole) {
         if (this.memberRole == null) {
             this.memberRole = memberRole;
         }
     }
-
 }

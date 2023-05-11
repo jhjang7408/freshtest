@@ -1,8 +1,12 @@
 package com.multicampus.hhh.config.auth;
 
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.service.MemberService;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -15,25 +19,38 @@ import java.util.Map;
 @Log4j2
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
+    private final MemberService memberService;
+
     private MemberVO memberVO;
     private Map<String,Object> attributes;
 
     //일반 로그인
-    public PrincipalDetails (MemberVO memberVO){
+    @Autowired
+    public PrincipalDetails (MemberVO memberVO, MemberService memberService){
         this.memberVO = memberVO;
+        this.memberService = memberService;
     }
 
     // 소셜 로그인
-    public PrincipalDetails(MemberVO memberVO, Map<String, Object> attributes){
+    public PrincipalDetails(MemberVO memberVO, Map<String, Object> attributes, MemberService memberService){
         this.memberVO = memberVO;
         this.attributes = attributes;
+        this.memberService = memberService;
     }
 
     @Override   // 회원의 권한 리턴
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        String userid = memberVO.getUserid();
+        log.info("----------------------------------------"+userid);
+        log.info("-------------------------------- 권한 확인 : " + memberService.findRole("test"));
+        MemberRole memberRole = memberService.findRole(userid);
+
+
         Collection<GrantedAuthority> collect = new ArrayList<>();
-        if(memberVO.getMemberRole() != null){
-            collect.add(new CustomGrantedAuthority("ROLE_"+memberVO.getMemberRole().name()));
+        if(memberRole != null){
+            log.info("GrantedAuthority 확인 : "+ memberRole + "  name() 사용시 : " + memberRole);
+            collect.add(new CustomGrantedAuthority("ROLE_"+memberRole.name()));
         } else {
             log.error("eraseraseraseraser" + getUsername());
         }

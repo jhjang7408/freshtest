@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/mypage/**").authenticated()  //인증 처리
+                .antMatchers("/mypage/**").authenticated()  // 인증된 회원만 접속가능
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/member/signin")    //일반 로그인

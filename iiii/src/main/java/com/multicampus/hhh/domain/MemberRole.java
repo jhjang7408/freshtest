@@ -20,4 +20,13 @@ public enum MemberRole {
     public String toString() {
         return this.name();
     }
+
+    public static MemberRole valueOf(int value) {
+        for (MemberRole role : MemberRole.values()) {
+            if (role.getValue() == value) {
+                return role;
+            }
+        }
+        throw new IllegalArgumentException("MemberRole enum error " + value);
+    }
 }
