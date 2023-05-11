@@ -16,4 +16,27 @@
             LIMIT #{cntPerPage} OFFSET #{start}
     </select>
 
+    <select id="countBikeBoard" resultType="int">
+        SELECT COUNT(*) FROM bike_board
+    </select>
+
+    <!-- 페이징 처리 후 게시글 조회 -->
+    <select id="selectBikeBoard" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
+        SELECT *
+        FROM bike_board
+        ORDER BY bike_id DESC
+            LIMIT #{cntPerPage} OFFSET #{start}
+    </select>
+
+    <select id="countAccBoard" resultType="int">
+        SELECT COUNT(*) FROM acc_board
+    </select>
+
+    <!-- 페이징 처리 후 게시글 조회 -->
+    <select id="selectAccBoard" resultType="com.multicampus.hhh.dto.AccBoardDTO">
+        SELECT *
+        FROM acc_board
+        ORDER BY qa_id DESC
+            LIMIT #{cntPerPage} OFFSET #{start}
+    </select>
 </mapper>

@@ -2,6 +2,7 @@ package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.domain.PagingVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 
 import com.multicampus.hhh.dto.BikeBoardDTO;
@@ -9,6 +10,7 @@ import com.multicampus.hhh.dto.BikeBoardReplyDTO;
 import com.multicampus.hhh.dto.PageRequestDTO;
 import com.multicampus.hhh.service.BikeBoardReplyService;
 import com.multicampus.hhh.service.BikeBoardService;
+import com.multicampus.hhh.service.PageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -44,12 +46,29 @@ public class BikeBoardController {
 
     private final BikeBoardService service;
     private final BikeBoardReplyService replyService;
+    private final PageService pageService;
+
     @Value("${com.multicampus.upload.path}")
     private String uploadPath;
 
     @GetMapping("/bikeList")
     public String list(Model model){
-        log.info("자전거 구매게시판");
+//    public String list(PagingVO vo, Model model
+//            , @RequestParam(value="nowPage", required=false)String nowPage
+//            , @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+//        int total = pageService.countBikeBoard();
+//        if (nowPage == null && cntPerPage == null) {
+//            nowPage = "1";
+//            cntPerPage = "100";
+//        } else if (nowPage == null) {
+//            nowPage = "1";
+//        } else if (cntPerPage == null) {
+//            cntPerPage = "100";
+//        }
+//        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+//        model.addAttribute("paging", vo);
+//        model.addAttribute("viewAll", pageService.selectBikeBoard(vo));
+//        log.info("자전거 구매게시판");
         model.addAttribute("bikeList", service.findAll());
         return "bike/bikeList";
     }
@@ -91,7 +110,9 @@ public class BikeBoardController {
             String imageName = imgFile.getOriginalFilename();
             String savedName = UUID.randomUUID().toString() + imageName;
             //이미지 파일 저장할 저장공간 설정
-            File file = new File("C:\\upload", savedName);
+            String absolutePath = System.getProperty("user.dir");
+            String path = absolutePath + "/src/main/resources/static/uploadImg";
+            File file = new File(path, savedName);
             imgFile.transferTo(file);
             // 이미지 파일명을 DTO에 설정
             bikeBoardDTO.setImage(savedName);
