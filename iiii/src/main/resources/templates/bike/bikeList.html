@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
 <head>
     <title>FreshCart - eCommerce HTML Template</title>
     <!-- Required meta tags -->
@@ -917,33 +919,15 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex mt-2 mt-lg-0">
-                                <div class="me-2 flex-grow-1">
-                                    <!-- select option -->
-                                    <select class="form-select">
-                                        <option selected>Show: 50</option>
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                    </select></div>
-                                <div>
-                                    <!-- select option -->
-                                    <select class="form-select">
-                                        <option selected>Sort by: Featured</option>
-                                        <option value="Low to High">Price: Low to High</option>
-                                        <option value="High to Low"> Price: High to Low</option>
-                                        <option value="Release Date"> Release Date</option>
-                                        <option value="Avg. Rating"> Avg. Rating</option>
 
-                                    </select></div>
+                    <style>
+                        .card {
+                            margin-right: 25px; /* 우측에 25px 간격 추가 */
+                        }
+                    </style>
 
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="row g-4 row-cols-4 mt-2">
-                        <div class="col">
-                            <div class="card card-product mb-3" th:each="bike : ${bikeList}">
+                    <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2" >
+                            <div class="card card-product mb-3"  th:each="bike : ${bikeList}">
                                 <div class="card-body">
                                     <tbody>
                                     <tr>
@@ -951,16 +935,14 @@
                                             <div class="text-center position-relative">
                                                 <a th:href="@{/bike/productSingle/{bikeid}(bikeid=${bike.bikeid})}" th:text="${bike.productname}"></a>
                                                 <a th:href="@{/bike/productSingle/{bikeid}(bikeid=${bike.bikeid})}">
-                                                    <img th:src="@{'/upload/' + ${bike.image}}" alt="Bike Image" width="100" height="100">
+                                                    <img th:src="@{'/uploadImg/' + ${bike.image}}" alt="Bike Image" width="100" height="100">
                                                 </a>
                                             </div>
                                         </td>
                                         <td th:text="${bike.userid}"></td>
                                         <td th:text="${bike.productname}"></td>
                                         <td th:text="${bike.title}"></td>
-                                        <td>
-                                            <img th:src="@{'/upload/' + ${bike.image}}" alt="이미지 출력 오류">
-                                        </td>
+
                                         <td th:text="${bike.price}"></td>
                                         <td th:text="${bike.info}"></td>
                                         <td th:text="${bike.status}"></td>
@@ -968,9 +950,27 @@
                                     </tr>
                                     </tbody>
                                 </div>
-                            </div>
+
+
                         </div>
+<!--                        <div style="display: block; text-align: center;">-->
+<!--                            <span th:if="${paging.startPage != 1}">-->
+<!--                                <a th:href="@{/bike/bikeList(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>-->
+<!--                            </span>-->
+<!--                            <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">-->
+<!--                                <span th:if="${p == paging.nowPage}">-->
+<!--                                    <b th:text="${p}"></b>-->
+<!--                                </span>-->
+<!--                                <span th:unless="${p == paging.nowPage}">-->
+<!--                                    <a th:href="@{/bike/bikeList(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>-->
+<!--                                </span>-->
+<!--                            </span>-->
+<!--                            <span th:if="${paging.endPage != paging.lastPage}">-->
+<!--                                <a th:href="@{/bike/bikeList(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>-->
+<!--                            </span>-->
+<!--                        </div>-->
                     </div>
+
 
                     <!-- row -->
 <!--                    <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">-->
@@ -1082,6 +1082,49 @@
             </div>
         </div>
     </div>
+<!--<script layout:fragment="script" th:inline="javascript">-->
+
+<!--    document.querySelector(".pagination").addEventListener("click", function (e) {-->
+<!--        e.preventDefault()-->
+<!--        e.stopPropagation()-->
+
+<!--        const target = e.target-->
+
+<!--        if(target.tagName !== 'A') {-->
+<!--            return-->
+<!--        }-->
+
+<!--        const num = target.getAttribute("data-num")-->
+
+<!--        const formObj = document.querySelector("form")-->
+
+<!--        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`-->
+
+<!--        formObj.submit();-->
+
+<!--    },false)-->
+
+<!--    document.querySelector(".clearBtn").addEventListener("click", function (e){-->
+<!--        e.preventDefault()-->
+<!--        e.stopPropagation()-->
+
+<!--        self.location =''-->
+
+<!--    },false)-->
+
+<!--    //show modal-->
+<!--    const result = [[${result}]]-->
+
+<!--    const modal = new bootstrap.Modal(document.querySelector(".modal"))-->
+
+<!--    if(result){-->
+<!--        modal.show()-->
+<!--    }-->
+
+
+
+</script>
+
 </main>
 
 

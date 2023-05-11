@@ -476,10 +476,16 @@
                 <div class="col-md-12">
                     <div class="d-md-flex justify-content-between align-items-center">
                         <!-- page header -->
-                        <div>
-                            <h2>제품 등록</h2>
+                        <!--                        <div>-->
+                        <!--                            <h2>제품 등록</h2>-->
 
 
+                        <!--                        </div>-->
+                        <div th:if="${acc == null}">
+                            <h2>제품글 등록</h2>
+                        </div>
+                        <div th:if="${acc != null}">
+                            <h2>제품글 수정</h2>
                         </div>
                         <!-- button -->
                         <div>
@@ -492,7 +498,7 @@
             <!-- row -->
             <div class="row">
                 <div class="col-lg-8 col-12">
-                    <form th:action="@{productRegister}" method="post">
+                    <form th:action="@{${acc == null} ? '/acc/productRegister' : '/acc/update/' + ${acc.acid}}" method="post" enctype="multipart/form-data">
                         <div class="card mb-6 card-lg">
                             <div class="card-body p-6">
                                 <h4 class="mb-4 h5">제품 정보</h4>
@@ -514,9 +520,10 @@
                                         <input type="text" class="form-control" name="productname" placeholder="제품 이름을 입력하세요" required>
                                     </div>
                                     <div class="mb-3 col-lg-6">
-                                        <label class="form-label">작성자명</label>
-                                        <input type="text" class="form-control" name="userid" th:value="${session.loginId.userid}" readonly>
+                                        <label class="form-label">브랜드명</label>
+                                        <input type="text" class="form-control" name="brandname" placeholder="브랜드 이름을 입력하세요" required>
                                     </div>
+
                                     <div class="mb-3 col-lg-6">
                                         <label class="form-label">가격</label>
                                         <input type="text" class="form-control" name="price" placeholder="판매 가격을 입력하세요" required>
@@ -525,18 +532,16 @@
                                         <h4 class="mb-3 h5">제품 이미지</h4>
                                         <div class="d-block dropzone border-dashed rounded-2">
                                             <div class="fallback">
-                                                <input name="file" type="file" multiple>
+                                                <input name="imgFile" type="file" multiple>
                                             </div>
                                         </div>
                                     </div>
-<!--                                    <div class="mb-3 col-lg-12 mt-5">-->
-<!--                                        <h4 class="mb-3 h5">제품 설명</h4>-->
-<!--                                        <div class="py-8" id="editor"></div>-->
-<!--                                    </div>-->
-                                    <div class="mb-3 col-lg-6">
-                                        <label class="form-label">제품 설명</label>
-                                        <input type="text" class="form-control" name="info" placeholder="설명을 입력하세요" required>
+                                    <div class="mb-3 col-lg-12 mt-5">
+                                        <h4 class="mb-3 h5">제품 설명</h4>
+
+                                        <textarea class="form-control" name="info" placeholder="제품 스펙을 입력하세요" required></textarea>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

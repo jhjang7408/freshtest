@@ -41,12 +41,12 @@ public class AccBoardServiceImpl implements AccBoardService{
     }
 
     @Override
-    public Long register(AccBoardDTO AccBoardDTO) {
-        return null;
+    public void register(AccBoardDTO accBoardDTO) {
+       accBoardMapper.insert(accBoardDTO);
     }
 
     @Override
-    public AccBoardDTO readOne(Long ac_id) {
+    public AccBoardDTO readOne(int acid) {
         return null;
     }
 
@@ -56,7 +56,7 @@ public class AccBoardServiceImpl implements AccBoardService{
     }
 
     @Override
-    public void remove(Long ac_id) {
+    public void remove(int acid) {
 
     }
 

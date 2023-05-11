@@ -12,7 +12,7 @@ public interface AccBoardMapper {
 
     List<AccBoardDTO> selectAll();
     void insert(AccBoardDTO accBoardDTO);
-    AccBoardDTO selectOne(Long ac_id);
+    AccBoardDTO selectOne(int acid);
 
     int modify(AccBoardDTO accBoardDTO);
     int delete();
