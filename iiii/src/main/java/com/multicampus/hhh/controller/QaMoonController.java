@@ -1,9 +1,11 @@
 package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.domain.QaMoonBoard;
 import com.multicampus.hhh.domain.QaMoonBoardReply;
+import com.multicampus.hhh.service.MemberService;
 import com.multicampus.hhh.service.QaMoonBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+import static com.multicampus.hhh.domain.MemberRole.ADMIN;
+import static com.multicampus.hhh.domain.MemberRole.USER;
+
 @Controller
 @RequestMapping("/moon")
 @RequiredArgsConstructor
@@ -26,6 +31,7 @@ import java.util.List;
 public class QaMoonController {
 
     private final QaMoonBoardService qaMoonBoardService;
+    private final MemberService memberService;
 
     @GetMapping("/moonlist")    //이건 자주 묻는 질문 html 연결한거임
     public String moonlist(){
@@ -42,11 +48,28 @@ public class QaMoonController {
 
        // MemberVO memberVO = (MemberVO) session.getAttribute("loginId"); // 로그인한 아이디 가져오기
         log.info(memberVO + "ssssssssssssssssssssssssssssssss");
+
+
         String userid= memberVO.getUserid();
-        List<QaMoonBoard> qaMoonList = qaMoonBoardService.findmoonById(userid); // 아이디에 해당하는 게시글 가져오기
-        log.info(qaMoonList+"dddddddddddddddddddddddddddddddddddddddd");
-        model.addAttribute("qamoonlist", qaMoonList); //
-        return "/moon/qamoonlist"; //
+
+        log.info(memberService.findRole(userid)+"<<<<<이것이 바로 권한인가");
+
+        if(memberService.findRole(userid) == USER) {
+
+            List<QaMoonBoard> qaMoonList = qaMoonBoardService.findmoonById(userid); // 아이디에 해당하는 게시글 가져오기
+
+            log.info(qaMoonList + "dddddddddddddddddddddddddddddddddddddddd");
+            model.addAttribute("qamoonlist", qaMoonList); //
+            return "/moon/qamoonlist"; //
+        } else if(memberService.findRole(userid) == ADMIN){
+            List<QaMoonBoard> qaMoonList = qaMoonBoardService.findmoonAll(); // 아이디에 해당하는 게시글 가져오기
+
+            log.info(qaMoonList + "dddddddddddddddddddddddddddddddddddddddd");
+            model.addAttribute("qamoonlist", qaMoonList); //
+            return "/moon/qamoonlist"; //
+        } else {
+            return "/moon/moonlist";
+        }
     }
 
 

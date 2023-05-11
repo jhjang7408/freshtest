@@ -56,6 +56,15 @@ class MemberMapperTest {
 
     @Test
     public void RoleFind(){
-        log.info("==============================" + memberMapper.findRole("test"));
+        log.info("==============================" + memberMapper.findRole("jhjang7408@naver.com"));
+        int aa = memberMapper.findRole("jhjang7408@naver.com");
+        log.info(aa + "<<<<<<<<<<<<<<<<<<");
+
+
     }
+
+
+
+
+
 }

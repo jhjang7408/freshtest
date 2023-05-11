@@ -144,8 +144,11 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberRole findRole(String userid) {
-        int roleValue = memberMapper.findRole(userid);
+        Integer roleValue = memberMapper.findRole(userid);
+        log.info(roleValue + "<><><><><><><><><><><><>");
+
         MemberRole role = MemberRole.valueOf(roleValue);
+        log.info(role + "<<<<<<<<<<<<<sfsfsfsfsfsfsfsf");
         return role;
     }
 
