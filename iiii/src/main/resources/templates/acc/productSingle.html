@@ -872,7 +872,8 @@
 
                               <div class="input-group input-spinner  ">
                                 <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
+<!--                                payment에서 quantity 쓰고 싶어서 id="product-quantity" 추가함 -->
+                                <input type="number" step="1" max="10" value="1" name="quantity" id="product-quantity"  class="quantity-field form-control-sm form-input   ">
                                 <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
                               </div>
 
@@ -882,7 +883,10 @@
 
                             <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
                               <!-- button -->
-                              <!-- btn --> <a th:href="@{/acc/payment(acid=${acid})}" class="btn btn-primary mr-2">결제</a>
+                              <!-- btn -->
+                              <a th:attr="onclick='saveQuantity(' + ${acid} + ')'" class="btn btn-primary mr-2">결제</a>
+<!--                              <a onclick="saveQuantity([[${acid}]])" class="btn btn-primary mr-2">결제</a>-->
+<!--                              <a th:href="@{/acc/payment(acid=${acid})}" class="btn btn-primary mr-2">결제</a>-->
                               <a th:href="@{'/mypage/shop-cart'}" class="btn btn-primary mr-2">장바구니</a>
                             </div>
                             <div class="col-md-4 col-4">
@@ -890,6 +894,14 @@
                             </div>
                           </div>
 
+<!--            수량 저장하려고 사용-->
+<script>
+  function saveQuantity(acid) {
+  var productQuantity = document.getElementById("product-quantity").value;
+  localStorage.setItem("productQuantity", productQuantity);
+  window.location.href = "/acc/payment?acid=" + acid; // 결제 페이지로 이동
+}
+</script>
                           <hr class="my-6">
             <div>
               <!-- table -->

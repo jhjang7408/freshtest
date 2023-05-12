@@ -133,16 +133,26 @@ public class AccBoardController {
         return "redirect:/acc/accList";
     }
 
-
+    @Secured("ROLE_USER")
     @GetMapping("/payment")
     public String pay(Model model,@RequestParam("acid") int acid) {
         //상품 정보 가져오기 위해서 사용
-//        AccBoardDTO accBoardDTO = service.readOne(acid);
-//        model.addAttribute("productName", accBoardDTO.getProductname());
-//        model.addAttribute("productPrice", accBoardDTO.getPrice());
-//        log.info(accBoardDTO.getProductname());
-//        log.info(accBoardDTO.getPrice());
+        AccBoardDTO accBoardDTO = service.readOne(acid);
+        model.addAttribute("productName", accBoardDTO.getProductname());
+        model.addAttribute("productPrice", accBoardDTO.getPrice());
+        model.addAttribute("productImg",accBoardDTO.getImage());
 
+        model.addAttribute("acid", acid);
+
+        //productSingle.html에서 amount가져오게 만들어야함
+
+
+        //사용자 정보 가져오기 위해 사용
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
+        model.addAttribute("userid", userid.getName());
+        model.addAttribute("userAddress", userid.getAddress());
+        model.addAttribute("userPhnum", userid.getPhnum());
         return "acc/payment";
     }
 
