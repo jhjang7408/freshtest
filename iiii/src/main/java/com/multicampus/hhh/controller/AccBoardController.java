@@ -137,11 +137,11 @@ public class AccBoardController {
     @GetMapping("/payment")
     public String pay(Model model,@RequestParam("acid") int acid) {
         //상품 정보 가져오기 위해서 사용
-        AccBoardDTO accBoardDTO = service.readOne(acid);
-        model.addAttribute("productName", accBoardDTO.getProductname());
-        model.addAttribute("productPrice", accBoardDTO.getPrice());
-        log.info(accBoardDTO.getProductname());
-        log.info(accBoardDTO.getPrice());
+//        AccBoardDTO accBoardDTO = service.readOne(acid);
+//        model.addAttribute("productName", accBoardDTO.getProductname());
+//        model.addAttribute("productPrice", accBoardDTO.getPrice());
+//        log.info(accBoardDTO.getProductname());
+//        log.info(accBoardDTO.getPrice());
 
         return "acc/payment";
     }
