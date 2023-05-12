@@ -3,6 +3,7 @@ package com.multicampus.hhh.service;
 import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.dto.BasketDTO;
 import com.multicampus.hhh.dto.MemberDTO;
 import com.multicampus.hhh.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -147,6 +148,22 @@ public class MemberServiceImpl implements MemberService {
         int roleValue = memberMapper.findRole(userid);
         MemberRole role = MemberRole.valueOf(roleValue);
         return role;
+    }
+
+    @Override
+    public List<BasketDTO> shopCart(String userid) {
+        List<BasketDTO> cart = memberMapper.shopCart(userid);
+        return cart;
+    }
+
+    @Override
+    public void addCart(BasketDTO basketDTO) {
+        memberMapper.addCart(basketDTO);
+    }
+
+    @Override
+    public void revmoveCart(int bagid) {
+        memberMapper.deleteCart(bagid);
     }
 
 

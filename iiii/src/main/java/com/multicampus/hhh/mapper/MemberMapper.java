@@ -3,6 +3,7 @@ package com.multicampus.hhh.mapper;
 import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.dto.BasketDTO;
 import com.multicampus.hhh.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -28,8 +29,12 @@ public interface MemberMapper {
     MemberVO findPass(String userid);
     MemberVO memberEmailcheck(String user_id, String email);
     void socialInsert(MemberVO memberVO);
-
     int findRole(String userid);
+    List<BasketDTO> shopCart(String userid);
+    void addCart(BasketDTO basketDTO);
+    void deleteCart(int bagid);
+    int modifyCart(BasketDTO basketDTO);
+    BasketDTO checkCart(BasketDTO basketDTO);
 
 
     List<BikeBoardVO> findbike(String userid);

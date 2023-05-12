@@ -70,7 +70,7 @@ public class QaBoardController {
         model.addAttribute("qaview", findqaid);
         model.addAttribute("qareply", qaBoardService.qaBoardReplyList(qaid));
 
-        return "/qa/qaview";
+        return "qa/qaview";
     }
 
 

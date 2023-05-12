@@ -10,9 +10,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class BasketDTO {
-    private String bag_id;
-    private String user_id;
-    private Integer ac_id;
-    private Integer count;
+    private int bagid;
+    private String userid;
+    private int acid;
+    private int count;
+
+    private String pName;
+    private int price;
+    private String image;
 }
