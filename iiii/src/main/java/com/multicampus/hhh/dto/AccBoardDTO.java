@@ -10,13 +10,10 @@ public class AccBoardDTO {
 
     private int acid;
 
-
     private String productname;
 
 
     private String image;
-
-
 
     private int price;
     private int amount;
