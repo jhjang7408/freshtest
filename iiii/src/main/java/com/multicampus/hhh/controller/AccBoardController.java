@@ -5,6 +5,7 @@ import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.service.AccBoardService;
+import com.multicampus.hhh.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,6 +32,7 @@ import java.util.UUID;
 public class AccBoardController {
 
     private final AccBoardService service;
+    private final MemberService memberService;
     //bike와 구분 안 해도 되나?
     @Value("${com.multicampus.upload.path}")
     private String uploadPath;
@@ -132,10 +134,16 @@ public class AccBoardController {
     }
 
 
-    @GetMapping("payment")
-    public void pay(){
+    @GetMapping("/payment")
+    public String pay(Model model,@RequestParam("acid") int acid) {
+        //상품 정보 가져오기 위해서 사용
+//        AccBoardDTO accBoardDTO = service.readOne(acid);
+//        model.addAttribute("productName", accBoardDTO.getProductname());
+//        model.addAttribute("productPrice", accBoardDTO.getPrice());
+//        log.info(accBoardDTO.getProductname());
+//        log.info(accBoardDTO.getPrice());
 
-
+        return "acc/payment";
     }
 
 }
