@@ -65,10 +65,29 @@
         select * from bike_board where user_id =#{userid} order by bike_id desc;
     </select>
 
-    <select id="findRole" resultType="Integer">
+    <select id="findRole" resultType="int">
         select role_name from user_role where user_role_id = #{userid}
     </select>
 
+    <!-- 장바구니 -->
+    <select id="shopCart" resultType="com.multicampus.hhh.dto.BasketDTO">
+        select a.bag_id, a.user_id, a.ac_id, a.count, b.product_name pName, b.price, b.image from basket a join acc_board b on a.ac_id = b.ac_id  where user_id = #{userid}
+    </select>
 
+    <insert id="addCart">
+        insert into basket (user_id, ac_id) values (#{userid}, #{acid})
+    </insert>
+
+    <delete id="deleteCart">
+        delete from basket where bag_id=#{bagid}
+    </delete>
+
+    <update id="modifyCart">
+        update basket set count = #{count} where bag_id = #{bagid}
+    </update>
+
+    <select id="checkCart" resultType="com.multicampus.hhh.dto.BasketDTO">
+        select * from basket where user_id = #{userid} and bag_id = #{bagid}
+    </select>
 
 </mapper>

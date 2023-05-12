@@ -195,7 +195,4 @@ public class MemberController {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
-
-
 }

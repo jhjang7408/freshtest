@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)   //0428 정재욱 주석처리
+@Transactional(readOnly = true)
 public class QaBoardService {
 
     private final QaBoardMapper qaBoardMapper;
