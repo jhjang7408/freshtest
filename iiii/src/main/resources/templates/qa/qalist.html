@@ -7,33 +7,33 @@
 <head>
 
   <!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta content="Codescandy" name="author">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta content="Codescandy" name="author">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-M8S4MT3EYG');
-</script>
+    gtag('config', 'G-M8S4MT3EYG');
+  </script>
 
-<!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
-
-
-<!-- Libs CSS -->
-<link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
-<link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
-<link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+  <!-- Favicon icon-->
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
 
 
-<!-- Theme CSS -->
-<link rel="stylesheet" th:href="@{/css/theme.min.css}">
+  <!-- Libs CSS -->
+  <link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
+  <link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
+  <link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
 
   <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet">
@@ -453,97 +453,97 @@
 
 
 
-  <!-- main wrapper -->
+<!-- main wrapper -->
 
 
-    <!-- navbar vertical -->
+<!-- navbar vertical -->
 
 
 
-    
 
-    <!-- main -->
-    <main>
-      
-      <!-- container -->
+
+<!-- main -->
+<main>
+
+  <!-- container -->
+  <div class="container">
+    <!-- row -->
+    <div class="mt-4">
       <div class="container">
-        <!-- row -->
-        <div class="mt-4">
-            <div class="container">
-              <div class="row ">
-                <div class="col-12">
-                  <!-- breadcrumb -->
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0">
-                  <li class="breadcrumb-item"><a href="/">메인</a></li>
-                  <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">질문정보게시판</li>
-                </ol>
-              </nav>
-              </div>
-              </div>
-            </div>
+        <div class="row ">
+          <div class="col-12">
+            <!-- breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="/">메인</a></li>
+                <li class="breadcrumb-item"><a href="#!">커뮤니티</a></li>
+                <li class="breadcrumb-item active" aria-current="page">질문정보게시판</li>
+              </ol>
+            </nav>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <section class="mt-8">
-            <div class="container">
-              <div class="row">
-                <!-- logo -->
-                <div class="col-12">
-                  <h1 class="fw-bold">질문정보게시판</h1>
-                </div>
-              </div>
+    <section class="mt-8">
+      <div class="container">
+        <div class="row">
+          <!-- logo -->
+          <div class="col-12">
+            <h1 class="fw-bold">질문정보게시판</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- row -->
+    <div layout:fragment="content">
+
+
+
+
+      <div class="row mt-3">
+        <div class="col">
+
+          <div class="card">
+            <div class="card-header">
+              질문정보게시판
             </div>
-          </section>
-        <!-- row -->
-        <div layout:fragment="content">
+            <div class="card-body" >
+              <h5 class="card-title">게시글 </h5>
 
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">번호</th>
+                  <th scope="col">제목</th>
+                  <th scope="col">작성자</th>
+                  <th scope="col">날짜</th>
+                </tr>
+                </thead>
 
-        
-        
-            <div class="row mt-3">
-                <div class="col">
-        
-                    <div class="card">
-                        <div class="card-header">
-                            질문정보게시판
-                        </div>
-                        <div class="card-body" >
-                            <h5 class="card-title">게시글 </h5>
+                <tbody>
+                <!--                                <tr th:each="board : ${qalist}">-->
 
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">번호</th>
-                                    <th scope="col">제목</th>
-                                    <th scope="col">작성자</th>
-                                    <th scope="col">날짜</th>
-                                </tr>
-                                </thead>
-        
-                                <tbody>
-<!--                                <tr th:each="board : ${qalist}">-->
+                <!--                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>-->
+                <!--                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>-->
+                <!--                                    <td th:text="${board.userid}">작성자</td>-->
+                <!--                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>-->
+                <!--                                </tr>-->
+                <tr th:each="board : ${viewAll}">
 
-<!--                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>-->
-<!--                                    <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>-->
-<!--                                    <td th:text="${board.userid}">작성자</td>-->
-<!--                                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>-->
-<!--                                </tr>-->
-                                            <tr th:each="board : ${viewAll}">
+                  <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
+                  <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
+                  <td th:text="${board.userid}">작성자</td>
+                  <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
+                </tr>
 
-                                              <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.qaid}">번호</a></td>
-                                              <td><a th:href="@{/qa/qaview(qa_id =${board.qaid})}" class="text-decoration-none" th:text="${board.title}">제목</a></td>
-                                              <td th:text="${board.userid}">작성자</td>
-                                              <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
-                                            </tr>
-
-                                </tbody>
-                            </table>
-                          <div style="display: block; text-align: center;">
+                </tbody>
+              </table>
+              <div style="display: block; text-align: center;">
                             <span th:if="${paging.startPage != 1}">
                                 <a th:href="@{/qa/qalist(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>
                             </span>
-                                                    <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">
                                 <span th:if="${p == paging.nowPage}">
                                     <b th:text="${p}"></b>
                                 </span>
@@ -551,116 +551,116 @@
                                     <a th:href="@{/qa/qalist(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>
                                 </span>
                             </span>
-                                                    <span th:if="${paging.endPage != paging.lastPage}">
+                <span th:if="${paging.endPage != paging.lastPage}">
                                 <a th:href="@{/qa/qalist(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>
                             </span>
-                          </div>
+              </div>
 
 
 
 
 
-                          <div class="float-end">
-                                <div class="my-4">
-                                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
-                                    <a href="/member/signin">글쓰기</a>
-                                  </button>
-                                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
-                                    <a href="qaregister">글쓰기</a>
-                                  </button>
-                                  </div>
-                            </div>
-
-
-                        </div><!--end card body-->
-                    </div><!--end card-->
-                </div><!-- end col-->
-            </div><!-- end row-->
-        
-            <div class="modal" tabindex="-1">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Modal body text goes here.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
+              <div class="float-end">
+                <div class="my-4">
+                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
+                    <a href="/member/signin">글쓰기</a>
+                  </button>
+                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
+                    <a href="qaregister">글쓰기</a>
+                  </button>
                 </div>
+              </div>
+
+
+            </div><!--end card body-->
+          </div><!--end card-->
+        </div><!-- end col-->
+      </div><!-- end row-->
+
+      <div class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
-            
-        
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
         </div>
-        
-        
-        <script layout:fragment="script" th:inline="javascript">
-
-            document.querySelector(".pagination").addEventListener("click", function (e) {
-                e.preventDefault()
-                e.stopPropagation()
-
-                const target = e.target
-
-                if(target.tagName !== 'A') {
-                    return
-                }
-
-                const num = target.getAttribute("data-num")
-
-                const formObj = document.querySelector("form")
-
-                formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
-
-                formObj.submit();
-
-            },false)
-
-            document.querySelector(".clearBtn").addEventListener("click", function (e){
-                e.preventDefault()
-                e.stopPropagation()
-
-                self.location =''
-
-            },false)
-
-            //show modal
-            const result = [[${result}]]
-
-            const modal = new bootstrap.Modal(document.querySelector(".modal"))
-
-            if(result){
-                modal.show()
-            }
+      </div>
 
 
 
-        </script>
-        
-        
-
-        </div>
-
-    </main>
+    </div>
 
 
+    <script layout:fragment="script" th:inline="javascript">
 
-    <!-- Libs JS -->
+      document.querySelector(".pagination").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const target = e.target
+
+        if(target.tagName !== 'A') {
+          return
+        }
+
+        const num = target.getAttribute("data-num")
+
+        const formObj = document.querySelector("form")
+
+        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+
+        formObj.submit();
+
+      },false)
+
+      document.querySelector(".clearBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
+
+        self.location =''
+
+      },false)
+
+      //show modal
+      const result = [[${result}]]
+
+      const modal = new bootstrap.Modal(document.querySelector(".modal"))
+
+      if(result){
+        modal.show()
+      }
+
+
+
+    </script>
+
+
+
+  </div>
+
+</main>
+
+
+
+<!-- Libs JS -->
 <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
 <!-- Theme JS -->
 <script th:src="@{/js/theme.min.js}"></script>
-  <script th:src="@{/libs/quill/dist/quill.min.js}"></script>
-  <script th:src="@{/js/vendors/editor.js}"></script>
-  <script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
+<script th:src="@{/libs/quill/dist/quill.min.js}"></script>
+<script th:src="@{/js/vendors/editor.js}"></script>
+<script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
 
 <!--                          페이징 처리 스크립트-->
 <script>
@@ -670,71 +670,71 @@
   }
 </script>
 
-   <!-- Footer -->
-  <!-- footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="row g-4 py-4">
+<!-- Footer -->
+<!-- footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4 py-4">
 
-        
 
-        <div class="col-12 col-md-12 col-lg-8">
-          <div class="row g-4">
 
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">판매 등록</h6>
-                <!-- list -->
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
-              </ul>
-            </div>
+      <div class="col-12 col-md-12 col-lg-8">
+        <div class="row g-4">
 
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">구매</h6>
-                <!-- list -->
-              <ul class="nav flex-column">
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
-                <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
-              </ul>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">판매 등록</h6>
+            <!-- list -->
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
+            </ul>
+          </div>
 
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">커뮤니티</h6>
-              <ul class="nav flex-column">
-                    <!-- list -->
-                <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
-                <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
-              </ul>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">구매</h6>
+            <!-- list -->
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
+              <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
+            </ul>
+          </div>
 
-            <div class="col-6 col-sm-6 col-md-2">
-              <h6 class="mb-4">공지</h6>
-              <ul class="nav flex-column">
-                  <!-- list -->
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
-                <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
-              </ul>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">커뮤니티</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
+              <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
+            </ul>
+          </div>
 
-            <div class="col-6 col-sm-6 col-md-3">
-              <h6 class="mb-4">고객센터</h6>
-              <ul class="nav flex-column">
-                  <!-- list -->
-                <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
-                <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
-              </ul>
-            </div>
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">공지</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-sm-6 col-md-3">
+            <h6 class="mb-4">고객센터</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
+              <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
+            </ul>
           </div>
         </div>
       </div>
-
-
-      
-      
     </div>
-  </footer>
 
-  </body>
-  
-  </html>
+
+
+
+  </div>
+</footer>
+
+</body>
+
+</html>

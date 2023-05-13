@@ -9,7 +9,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PagingVO {
+public class PagingMoonVO {
+
+    private String userid;
 
     private int nowPage;
     private int startPage;
@@ -23,7 +25,8 @@ public class PagingVO {
     private int start;
     private int end;
 
-    public PagingVO(int total, int nowPage, int cntPerPage){
+    public PagingMoonVO(String userid, int total, int nowPage, int cntPerPage){
+        setUserid(userid);
         setNowPage(nowPage);
         setCntPerPage(cntPerPage);
         setTotal(total);
@@ -32,6 +35,9 @@ public class PagingVO {
         calcStartEnd(getNowPage(), getCntPerPage());
     }
 
+
+
+
     // 마지막 페이지 계산
     public void calcLastPage(int total, int cntPerPage){
         setLastPage((int)Math.ceil((double)total / (double)cntPerPage));
@@ -39,14 +45,14 @@ public class PagingVO {
 
     // 시작, 끝 페이지 계산
     public void calcStartEndPage(int nowPage,int cntPerPage){
-        setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
-        if(getLastPage() < getEndPage()){
-            setEndPage(getLastPage());
-        }
-        setStartPage(getEndPage() - cntPage +1);
-        if(getStartPage() < 1 ){
-            setStartPage(1);
-        }
+     setEndPage(((int)Math.ceil((double)nowPage / (double)cntPage)) * cntPage);
+     if(getLastPage() < getEndPage()){
+         setEndPage(getLastPage());
+     }
+     setStartPage(getEndPage() - cntPage +1);
+     if(getStartPage() < 1 ){
+         setStartPage(1);
+     }
     }
 
 

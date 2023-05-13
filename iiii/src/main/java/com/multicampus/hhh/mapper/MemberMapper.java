@@ -35,6 +35,7 @@ public interface MemberMapper {
     void deleteCart(int bagid);
     int modifyCart(BasketDTO basketDTO);
     BasketDTO checkCart(BasketDTO basketDTO);
+    int updateCartCount(int id, int count);
 
 
     List<BikeBoardVO> findbike(String userid);

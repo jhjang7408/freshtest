@@ -93,11 +93,8 @@ public class MypageController {
 
 
     @GetMapping("/listsell")
-    public void listsell(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
-
-        String userid = memberVO.getUserid();
+    public void listsell(Model model,@AuthenticationPrincipal PrincipalDetails principalDetails){
+        String userid =        principalDetails.getMemberVO().getUserid();
         List<BikeBoardVO> bikeBoard = memberService.findbike(userid);
         model.addAttribute("bikelist", bikeBoard);
         log.info("판매내역");
@@ -111,8 +108,25 @@ public class MypageController {
         String userid = principalDetails.getMemberVO().getUserid();
         List<BasketDTO> cart = memberService.shopCart(userid);
         model.addAttribute("cart",cart);
+
+        int totalSum = 0;
+        for (BasketDTO basket : cart) {
+            totalSum += basket.getPrice()*basket.getCount();
+        }
+        model.addAttribute("totalSum", totalSum);
     }
 
+    @PostMapping("/update-cart")
+    public String updateCart(@RequestParam int cartId, @RequestParam int quantity) {
+        boolean updated = memberService.updateCartQuantity(cartId, quantity);
+        if (updated) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
+
+    @Secured("ROLE_USER")
     @PostMapping("/addcart")
     public String addCart(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("acid") int acid){
         String userid = principalDetails.getMemberVO().getUserid();
@@ -120,7 +134,7 @@ public class MypageController {
                 .userid(userid)
                 .acid(acid)
                 .build();
-
+        log.info("제대로 작동하는지 확인");
         memberService.addCart(basketDTO);
         return "/acc/accList";
     }

@@ -87,7 +87,11 @@
     </update>
 
     <select id="checkCart" resultType="com.multicampus.hhh.dto.BasketDTO">
-        select * from basket where user_id = #{userid} and bag_id = #{bagid}
+        select * from basket where user_id = #{userid} and ac_id = #{acid}
     </select>
+
+    <update id="updateCartCount">
+        update basket set count = #{count} where bag_id=#{id}
+    </update>
 
 </mapper>

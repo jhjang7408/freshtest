@@ -36,7 +36,8 @@ public interface MemberService {
     void addCart(BasketDTO basketDTO);
     void revmoveCart(int bagid);
 
-//    void modify(MemberVO memberVO);
+    void modify(MemberVO memberVO);
+    boolean updateCartQuantity(int id, int count);
 //
 //    void remove(String id);
 

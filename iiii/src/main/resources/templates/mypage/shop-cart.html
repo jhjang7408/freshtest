@@ -469,62 +469,18 @@
 
                 <!-- 장바구니 제품 페이지 -->
                 <ul class="list-group list-group-flush" >
-                  <li class="list-group-item py-3 py-lg-0 px-0 border-top">
-                    <div class="row align-items-center">
-                      <div class="col-3 col-md-2">
-
-                        <!-- 제품 이미지-->
-                        <img th:src="@{/images/products/product-img-1.jpg}" alt="Ecommerce" class="img-fluid"/>
-                      </div>
-                      <div class="col-4 col-md-5">
-
-                        <!-- 제품명 -->
-                        <a href="shop-single.html" class="text-inherit">
-                          <h6 class="mb-0">제품정보 이름</h6></a>
-                        <!-- th:href="@{/product/read(name=${response.name]})}"-->
-
-                        <!-- 삭제버튼 동작하게 만들기 -->
-                        <div class="mt-2 small lh-1">
-                          <a href="#!" class="text-decoration-none text-inherit">
-                            <span class="me-1 align-text-bottom">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 text-success">
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line></svg></span>
-                            <span class="text-muted">삭제 버튼</span></a>
-                        </div>
-                      </div>
-
-                      <!-- 갯수 조정 버튼 -->
-                      <div class="col-3 col-md-3 col-lg-2">
-                        <!-- input -->
-                        <div class="input-group input-spinner">
-                          <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"/>
-                          <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input"/>
-                          <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"/>
-                        </div>
-                      </div>
-
-                      <!-- 가격 -->
-                      <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                        <span class="fw-bold">$ 80,000</span>
-                      </div>
-                    </div>
-                  </li>
-
+                  <li class="list-group-item py-3 py-lg-0 px-0 border-top"/>
                   <li class="list-group-item py-3 py-lg-0 px-0" th:each="cart : ${cart}">
                     <div class="row align-items-center">
                       <!-- 이미지 파일-->
                       <div class="col-3 col-md-2">
-                        <img src="../assets/images/products/product-img-2.jpg" alt="Ecommerce" class="img-fluid"/>
+                        <img th:src="@{'/uploadImg/' + ${cart.image}}" alt="Ecommerce" class="img-fluid"/>
                       </div>
                       <div class="col-4 col-md-5">
 
                         <!-- 상품명 -->
-                        <a href="shop-single.html" class="text-inherit" th:text="${cart.pName}">
-                          <h6 class="mb-0">NutriChoice Digestive</h6></a>
-
+                        <h5 class="mb-0">  <a th:href="@{/acc/productSingle/{acid}(acid=${cart.acid})}" class="text-inherit" th:text="${cart.pName}"></a>
+                          </h5>
 
                         <!-- 삭제버튼 링크 -->
                         <div class="mt-2 small lh-1">
@@ -542,316 +498,32 @@
                                    class="feather feather-trash-2 text-success"
                               >
                                 <polyline points="3 6 5 6 21 6"></polyline>
-                                <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                ></path>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                                 <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line
-                                        x1="14"
-                                        y1="11"
-                                        x2="14"
-                                        y2="17"
-                                ></line></svg></span>
-                            <span class="text-muted">Remove</span>
+                                <line x1="14" y1="11" x2="14" y2="17"></line></svg></span>
+                            <span class="text-muted">삭제</span>
                           </button>
                         </div>
                       </div>
 
                       <!-- 장바구니 수량 + - 버튼 -->
                       <div class="col-3 col-md-3 col-lg-2">
-                        <!-- input -->
                         <div class="input-group input-spinner">
                           <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"/>
-                          <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input"/>
+                          <input type="number" step="1" max="10" th:value="${cart.count}"  name="quantity" class="quantity-field form-control-sm form-input"/>
                           <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"/>
                         </div>
                       </div>
 
-                      <!-- 가격 -->
                       <div class="col-2 text-lg-end text-start text-md-end col-md-2">
-                        <span class="fw-bold text-danger" th:text="${cart.price}"/>
-<!--                        <span class="fw-bold text-danger" th:text="${#numbers.formatDecimal(cart.price, 0, 'NUMBER', '.', ',')}" />-->
-                        <div class="text-decoration-line-through text-muted small">
-                          $26.00
-                        </div>
+                        <span class="fw-bold text-danger" th:text="'&#8361; ' + ${cart.price}"></span>
                       </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item py-3 py-lg-0 px-0">
-                    <!-- row -->
-                    <div class="row align-items-center">
-                      <div class="col-3 col-md-2">
-                        <!-- img -->
-                        <img
-                                src="../assets/images/products/product-img-3.jpg"
-                                alt="Ecommerce"
-                                class="img-fluid"
-                        />
-                      </div>
-                      <div class="col-4 col-md-5">
-                        <!-- title -->
-                        <a href="shop-single.html" class="text-inherit"
-                        ><h6 class="mb-0">Cadbury 5 Star Chocolate</h6></a
-                        >
-                        <span><small class="text-muted">1 kg</small></span>
-                        <!-- text -->
-                        <div class="mt-2 small lh-1">
-                          <a
-                                  href="#!"
-                                  class="text-decoration-none text-inherit"
-                          >
-                            <span class="me-1 align-text-bottom">
-                              <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="14"
-                                      height="14"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      stroke-width="2"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      class="feather feather-trash-2 text-success"
-                              >
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                ></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line
-                                        x1="14"
-                                        y1="11"
-                                        x2="14"
-                                        y2="17"
-                                ></line></svg></span
-                            ><span class="text-muted">Remove</span></a
-                          >
-                        </div>
-                      </div>
-                      <!-- input group -->
-                      <div class="col-3 col-md-3 col-lg-2">
-                        <!-- input -->
-                        <div class="input-group input-spinner">
-                          <input
-                                  type="button"
-                                  value="-"
-                                  class="button-minus btn btn-sm"
-                                  data-field="quantity"
-                          />
-                          <input
-                                  type="number"
-                                  step="1"
-                                  max="10"
-                                  value="1"
-                                  name="quantity"
-                                  class="quantity-field form-control-sm form-input"
-                          />
-                          <input
-                                  type="button"
-                                  value="+"
-                                  class="button-plus btn btn-sm"
-                                  data-field="quantity"
-                          />
-                        </div>
-                      </div>
-                      <!-- price -->
-                      <div
-                              class="col-2 text-lg-end text-start text-md-end col-md-2"
-                      >
-                        <span class="fw-bold">$15.00</span>
-                        <div
-                                class="text-decoration-line-through text-muted small"
-                        >
-                          $20.00
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li class="list-group-item py-3 py-lg-0 px-0">
-                    <!-- row -->
-                    <div class="row align-items-center">
-                      <div class="col-3 col-md-2">
-                        <!-- img -->
-                        <img
-                                src="../assets/images/products/product-img-4.jpg"
-                                alt="Ecommerce"
-                                class="img-fluid"
-                        />
-                      </div>
-                      <div class="col-4 col-md-5">
-                        <!-- title -->
-                        <a href="shop-single.html" class="text-inherit">
-                          <h6 class="mb-0">Onion Flavour Potato</h6></a
-                        >
-                        <!-- text -->
-                        <div class="mt-2 small lh-1">
-                          <a
-                                  href="#!"
-                                  class="text-decoration-none text-inherit"
-                          >
-                            <span class="me-1 align-text-bottom">
-                              <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="14"
-                                      height="14"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      stroke-width="2"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      class="feather feather-trash-2 text-success"
-                              >
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                ></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line
-                                        x1="14"
-                                        y1="11"
-                                        x2="14"
-                                        y2="17"
-                                ></line></svg></span
-                            ><span class="text-muted">Remove</span></a
-                          >
-                        </div>
-                      </div>
-                      <!-- input group -->
-                      <div class="col-3 col-md-3 col-lg-2">
-                        <!-- input -->
-                        <div class="input-group input-spinner">
-                          <input
-                                  type="button"
-                                  value="-"
-                                  class="button-minus btn btn-sm"
-                                  data-field="quantity"
-                          />
-                          <input
-                                  type="number"
-                                  step="1"
-                                  max="10"
-                                  value="1"
-                                  name="quantity"
-                                  class="quantity-field form-control-sm form-input"
-                          />
-                          <input
-                                  type="button"
-                                  value="+"
-                                  class="button-plus btn btn-sm"
-                                  data-field="quantity"
-                          />
-                        </div>
-                      </div>
-                      <!-- price -->
-                      <div
-                              class="col-2 text-lg-end text-start text-md-end col-md-2"
-                      >
-                        <span class="fw-bold">$15.00</span>
-                        <div
-                                class="text-decoration-line-through text-muted small"
-                        >
-                          $20.00
-                        </div>
-                      </div>
+
                     </div>
                   </li>
                   <li class="list-group-item py-3 py-lg-0 px-0 border-bottom">
-                    <!-- row -->
-                    <div class="row align-items-center">
-                      <div class="col-3 col-md-2">
-                        <!-- img -->
-                        <img
-                                src="../assets/images/products/product-img-5.jpg"
-                                alt="Ecommerce"
-                                class="img-fluid"
-                        />
-                      </div>
-                      <div class="col-4 col-md-5">
-                        <!-- title -->
-                        <a href="shop-single.html" class="text-inherit"
-                        ><h6 class="mb-0">Salted Instant Popcorn</h6></a
-                        >
-                        <span><small class="text-muted">100g</small></span>
-                        <!-- text -->
-                        <div class="mt-2 small lh-1">
-                          <a
-                                  href="#!"
-                                  class="text-decoration-none text-inherit"
-                          >
-                            <span class="me-1 align-text-bottom">
-                              <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="14"
-                                      height="14"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      stroke-width="2"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      class="feather feather-trash-2 text-success"
-                              >
-                                <polyline points="3 6 5 6 21 6"></polyline>
-                                <path
-                                        d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                                ></path>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line
-                                        x1="14"
-                                        y1="11"
-                                        x2="14"
-                                        y2="17"
-                                ></line></svg></span
-                            ><span class="text-muted">Remove</span></a
-                          >
-                        </div>
-                      </div>
-                      <!-- input group -->
-                      <div class="col-3 col-md-3 col-lg-2">
-                        <!-- input -->
-                        <div class="input-group input-spinner">
-                          <input
-                                  type="button"
-                                  value="-"
-                                  class="button-minus btn btn-sm"
-                                  data-field="quantity"
-                          />
-                          <input
-                                  type="number"
-                                  step="1"
-                                  max="10"
-                                  value="1"
-                                  name="quantity"
-                                  class="quantity-field form-control-sm form-input"
-                          />
-                          <input
-                                  type="button"
-                                  value="+"
-                                  class="button-plus btn btn-sm"
-                                  data-field="quantity"
-                          />
-                        </div>
-                      </div>
-                      <!-- price -->
-                      <div
-                              class="col-2 text-lg-end text-start text-md-end col-md-2"
-                      >
-                        <span class="fw-bold">$15.00</span>
-                        <div
-                                class="text-decoration-line-through text-muted small"
-                        >
-                          $25.00
-                        </div>
-                      </div>
-                    </div>
                   </li>
                 </ul>
-
-<!--                <div class="d-flex justify-content-between mt-4">-->
-<!--                  <a href="#!" class="btn btn-primary">초록색 버튼</a>-->
-<!--                  <a href="#!" class="btn btn-dark">선택 삭제</a>-->
-<!--                </div>-->
               </div>
             </div>
 
@@ -865,25 +537,25 @@
                         <div class="me-auto">
                           <div>총 주문 금액</div>
                         </div>
-                        <span>총 주문 금액 보여주기</span>
+                        <span th:text="'&#8361; ' + ${totalSum}" ></span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="me-auto">
                           <div>예상 배송비</div>
                         </div>
-                        <span>ㅇㅇㅇㅇㅇㅇㅇㅇ</span>
+                        <span>&#8361; 3000</span>
                       </li>
                       <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="me-auto">
                           <div class="fw-bold">총 결제 금액</div>
                         </div>
-                        <span class="fw-bold">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</span>
+                        <span class="fw-bold" th:text="'&#8361; ' + ${totalSum + 3000}"></span>
                       </li>
                     </ul>
                   </div>
                   <div class="d-grid mb-1 mt-4">
                     <!-- btn -->
-                    <button class="btn btn-primary btn-lg d-flex justify-content-between align-items-center" type="submit">
+                    <button class="btn btn-primary btn-lg d-flex justify-content-center align-items-center" type="submit">
                      <span class="fw-bold">결제하기</span>
                     </button>
                   </div>
@@ -1003,7 +675,50 @@
         });
       });
     });
+
+
   </script>
+
+<!--    <script th:inline="javascript">-->
+<!--      /*<![CDATA[*/-->
+<!--      const minusButtons = document.querySelectorAll(".button-minus");-->
+<!--      const plusButtons = document.querySelectorAll(".button-plus");-->
+<!--      minusButtons.forEach((button, index) => {-->
+<!--      button.addEventListener("click", function() {-->
+<!--        updateQuantityAndPrice(index, -1);-->
+<!--      });-->
+<!--    });-->
+
+<!--      plusButtons.forEach((button, index) => {-->
+<!--      button.addEventListener("click", function() {-->
+<!--        updateQuantityAndPrice(index, 1);-->
+<!--      });-->
+<!--    });-->
+
+<!--      function updateQuantityAndPrice(index, change) {-->
+<!--        const quantityInput = document.querySelector("#quantity_" + index);-->
+<!--        let quantity = parseInt(quantityInput.value);-->
+<!--        if ((change == -1 && quantity > 1) || (change == 1 && quantity < 10)) {-->
+<!--          quantity += change;-->
+<!--          quantityInput.value = quantity;-->
+<!--          let cartId = quantityInput.getAttribute('data-cartid');-->
+<!--          const priceDisplay = document.querySelector("#price_" + cartId);-->
+<!--          let totalPrice = parseFloat(priceDisplay.textContent.replace('$', ''));-->
+<!--          let pricePerItem = totalPrice / (quantity - change);-->
+<!--          totalPrice = quantity * pricePerItem;-->
+<!--          priceDisplay.textContent = "$" + totalPrice.toFixed(2);-->
+<!--          fetch('/mypage/update-cart', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--              'Content-Type': 'application/json',-->
+<!--            },-->
+<!--            body: JSON.stringify({cartId: cartId, quantity: quantity}),-->
+<!--          });-->
+<!--        }-->
+<!--      }-->
+
+<!--      /*]]>*/-->
+<!--  </script>-->
 
   </body>
 </html>

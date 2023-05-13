@@ -158,7 +158,20 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void addCart(BasketDTO basketDTO) {
-        memberMapper.addCart(basketDTO);
+        //basketDTO에 userid와 acid값만 있음
+        BasketDTO basketDTO2 = null;
+        if (memberMapper.checkCart(basketDTO) == null) {
+            log.info("장바구니 추가 서비스 테스트");
+            memberMapper.addCart(basketDTO);
+        } else {
+            log.info("장바구니 추가 서비스 테스트 ++++");
+            basketDTO2 = memberMapper.checkCart(basketDTO);
+            basketDTO2.setCount(basketDTO2.getCount() + 1);
+            log.info(basketDTO.getUserid(), basketDTO.getAcid() + " ======================");
+            log.info(basketDTO2.getUserid(), basketDTO2.getAcid() + " ==================================");
+            log.info("장바구니 추가 중복시 카운트 추가 ===================" + basketDTO.getCount());
+            memberMapper.modifyCart(basketDTO2);
+        }
     }
 
     @Override
@@ -174,12 +187,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
-//    @Override
-//    public void modify(MemberVO memberVO) {
-//
-//    }
-//
-//
+    @Override
+    public void modify(MemberVO memberVO) {
+
+    }
+
+    @Override
+    public boolean updateCartQuantity(int id, int count) {
+        memberMapper.updateCartCount(id, count);
+        return true;
+    }
+
+
 //    @Override
 //    public void remove(String id) {
 //

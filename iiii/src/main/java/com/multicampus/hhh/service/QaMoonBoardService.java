@@ -35,6 +35,14 @@ public class QaMoonBoardService {
     }
 
 
+    public List<QaMoonBoard> findmoonAll(){
+        List<QaMoonBoard> qamoonlist = qaMoonBoardMapper.findmoonAll();
+        return qamoonlist;
+    }
+
+
+
+
     public QaMoonBoard findById(int moonid){
         QaMoonBoard findmoonid = qaMoonBoardMapper.findById(moonid);
         return findmoonid;
