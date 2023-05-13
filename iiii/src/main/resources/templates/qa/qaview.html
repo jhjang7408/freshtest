@@ -448,26 +448,26 @@
 
 
 
-  <!-- main wrapper -->
+<!-- main wrapper -->
 
-  <div>
-    <!-- navbar vertical -->
+<div>
+  <!-- navbar vertical -->
 
 
 
-    
 
-    <!-- main -->
-    <main>
-      
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="mt-4">
-            <div class="container">
-              <div class="row ">
-                <div class="col-12">
-                  <!-- breadcrumb -->
+
+  <!-- main -->
+  <main>
+
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="mt-4">
+        <div class="container">
+          <div class="row ">
+            <div class="col-12">
+              <!-- breadcrumb -->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                   <li class="breadcrumb-item"><a href="/">메인</a></li>
@@ -476,169 +476,182 @@
                   <li class="breadcrumb-item active" aria-current="page">읽기</li>
                 </ol>
               </nav>
-              </div>
-              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <section class="mt-8">
-            <div class="container">
-              <div class="row">
-                <!-- logo -->
-                <div class="col-12">
-                  <h1 class="fw-bold">게시물 보기</h1>
-                </div>
-              </div>
+      <section class="mt-8">
+        <div class="container">
+          <div class="row">
+            <!-- logo -->
+            <div class="col-12">
+              <h1 class="fw-bold">게시물 보기</h1>
             </div>
-          </section>
-        <!-- row -->
-        <div class="row mt-3">
+          </div>
+        </div>
+      </section>
+      <!-- row -->
+      <div class="row mt-3">
 
-          <div class="col">
-            <!-- card -->
-            <div class="card">
-              <!-- card body -->
-              <div class="card-body">
-                <h4 class="mb-4 h5">읽기</h4>
-                <div class="row">
-                  <!-- input -->
+        <div class="col">
+          <!-- card -->
+          <div class="card">
+            <!-- card body -->
+            <div class="card-body">
+              <h4 class="mb-4 h5">읽기</h4>
+              <div class="row">
+                <!-- input -->
+                <div class="mb-3 col-lg-8">
+                  <label class="form-label">번호</label>
+                  <input type="text" class="form-control" id="qaid" th:value="${qaview.qaid}" readonly>
+                </div>
+                <!-- input -->
+                <div class="mb-3 col-lg-8">
+                  <label class="form-label">제목</label>
+                  <input type="text" class="form-control" th:value="${qaview.title}" readonly>
+                </div>
+                <!-- input -->
+                <div class="mb-3 col-lg-8">
+                  <label class="form-label">작성자</label>
+                  <input type="text" class="form-control" th:value="${qaview.userid}" readonly>
+                </div>
+                <!-- input -->
+                <div class="mb-8 col-lg-8">
+                  <label class="form-label">내용</label>
+                  <textarea cols="40" rows="10" type="text" class="form-control" th:text="${qaview.content}" readonly></textarea>
+                </div>
+
+
+
+
+
+                <table class="table">
+
+                  <thead>
+
+                  <tr>
+
+                    <th scope="col">번호</th>
+                    <th scope="col">내용</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">시간</th>
+                    <th scope="col">ㅇ</th>
+                    <th scope="col">ㄱ</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+
+                  <tr th:each="board : ${viewReplyAll}">
+
+                    <td th:text="${board.qareplyid}">번호</td>
+                    <td th:text="${board.content}">내용</td><!--&gt;
+                        <div class="content" th:text="${board.content}"></div>
+                        <button type="button" data-toggle="modal" data-target="#replymodify" th:if="${session.loginId != null && session.loginId.userid == board.userid}">수정</button>
+                      </td>-->
+                    <td th:text="${board.userid}">작성자</td>
+                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
+                    <td>
+                      <div sec:authorize="isAuthenticated()">
+                        <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${#authentication.name == board.userid}">x</button>
+                      </div>
+                    </td>
+                    </br>
+
+
+
+                  </tr>
+                  </tbody>
+
+
+                </table>
+
+
+                <div style="display: block; text-align: center;">
+                            <span th:if="${pagingReply.startPage != 1}">
+                                <a th:href="@{/qa/qaview(qa_id =${qaview.qaid}, nowPage=${pagingReply.startPage - 1},cntPerPage=${pagingReply.cntPerPage})}">&lt;</a>
+                            </span>
+                  <span th:each="p : ${#numbers.sequence(pagingReply.startPage, pagingReply.endPage)}">
+                                <span th:if="${p == pagingReply.nowPage}">
+                                    <b th:text="${p}"></b>
+                                </span>
+                                <span th:unless="${p == pagingReply.nowPage}">
+                                    <a th:href="@{/qa/qaview(qa_id =${qaview.qaid}, nowPage=${p},cntPerPage=${pagingReply.cntPerPage})}" th:text="${p}"></a>
+                                </span>
+                            </span>
+                  <span th:if="${pagingReply.endPage != pagingReply.lastPage}">
+                                <a th:href="@{/qa/qaview(qa_id =${qaview.qaid}, nowPage=${pagingReply.endPage + 1},cntPerPage=${pagingReply.cntPerPage})}">&gt;</a>
+                            </span>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <form th:action="@{qareplyregister}" method="post" sec:authorize="isAuthenticated()">
                   <div class="mb-3 col-lg-8">
-                    <label class="form-label">번호</label>
-                    <input type="text" class="form-control" id="qaid" th:value="${qaview.qaid}" readonly>
+                    <input type="hidden" class="form-control" name="qaid" th:value="${qaview.qaid}" readonly>
                   </div>
                   <!-- input -->
-                  <div class="mb-3 col-lg-8">
-                    <label class="form-label">제목</label>
-                    <input type="text" class="form-control" th:value="${qaview.title}" readonly>
-                  </div>
-                  <!-- input -->
-                  <div class="mb-3 col-lg-8">
-                    <label class="form-label">작성자</label>
-                    <input type="text" class="form-control" th:value="${qaview.userid}" readonly>
+                  <div class="mb-3 col-lg-8" sec:authorize="isAuthenticated()">
+
+                    <input type="hidden" class="form-control" name="userid" th:value="${#authentication.name}" readonly>
                   </div>
                   <!-- input -->
                   <div class="mb-8 col-lg-8">
-                    <label class="form-label">내용</label>
-                    <textarea cols="40" rows="10" type="text" class="form-control" th:text="${qaview.content}" readonly></textarea>
+
+                    <textarea cols="40" rows="2" type="text" class="form-control" name="content"  placeholder="내용" required></textarea>
+
                   </div>
-
-
-
-
-
-                  <table class="table">
-
-                    <thead>
-
-                    <tr>
-
-                      <th scope="col">번호</th>
-                      <th scope="col">내용</th>
-                      <th scope="col">작성자</th>
-                      <th scope="col">시간</th>
-                      <th scope="col">ㅇ</th>
-                      <th scope="col">ㄱ</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-                    <tr th:each="board : ${qareply}">
-
-                      <td th:text="${board.qareplyid}">번호</td>
-                      <td th:text="${board.content}">내용</td>
-                      <td th:text="${board.userid}">작성자</td>
-                      <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
-                      <td>
-                        <div sec:authorize="isAuthenticated()">
-                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${#authentication.name == board.userid}" >x</button>
-                        </div>
-                      </td>
-<!--                      </br>-->
-
-
-
-                    </tr>
-                    </tbody>
-
-
-                  </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <form th:action="@{qareplyregister}" method="post" sec:authorize="isAuthenticated()">
-                    <div class="mb-3 col-lg-8">
-                      <input type="hidden" class="form-control" name="qaid" th:value="${qaview.qaid}" readonly>
-                    </div>
-                    <!-- input -->
-                    <div class="mb-3 col-lg-8" sec:authorize="isAuthenticated()">
-
-                     <input type="hidden" class="form-control" name="userid" th:value="${#authentication.name}" readonly>
-                    </div>
-                    <!-- input -->
-                    <div class="mb-8 col-lg-8">
-
-                      <textarea cols="40" rows="2" type="text" class="form-control" name="content"  placeholder="내용" required></textarea>
-
-                    </div>
-
-                    <div class="my-4">
-                      <div class="float-end">
-                        <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
-                      </div>
-                    </div>
-
-
-
-                  </form>
-
-
 
                   <div class="my-4">
                     <div class="float-end">
-                      <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
-                        <a href="/member/signin">댓글 쓰기</a>
-                      </button>
+                      <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
                     </div>
                   </div>
 
 
 
-                  <div class="my-4">
-                    <div class="float-end">
-
-                      <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
-
-
-                      <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${#authentication.name == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
-
-                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${#authentication.name == qaview.userid}">삭제</button>
+                </form>
 
 
 
-                    </div>
+                <div class="my-4">
+                  <div class="float-end">
+                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
+                      <a href="/member/signin">댓글 쓰기</a>
+                    </button>
                   </div>
-
-
-
-
-
-
-
                 </div>
+
+
+
+                <div class="my-4">
+                  <div class="float-end">
+
+                    <a href="qalist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
+
+
+                    <a th:href="@{/qa/qamodify(qa_id =${qaview.qaid})}" th:if="${#authentication.name == qaview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+
+                    <button type="button" class="btn btn-danger" id="delete-btn" th:if="${#authentication.name == qaview.userid}">삭제</button>
+
+
+
+                  </div>
+                </div>
+
+
+
 
 
 
@@ -647,25 +660,30 @@
 
 
 
+
             </div>
 
 
 
-
           </div>
+
+
 
 
         </div>
 
 
-
-
       </div>
 
 
-    </main>
 
-  </div>
+
+    </div>
+
+
+  </main>
+
+</div>
 
 
 

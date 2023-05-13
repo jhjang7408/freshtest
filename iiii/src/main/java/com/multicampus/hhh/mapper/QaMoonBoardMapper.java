@@ -14,6 +14,8 @@ public interface QaMoonBoardMapper {
 
     List<QaMoonBoard> findmoonById(String userid);
 
+    List<QaMoonBoard> findmoonAll();
+
     QaMoonBoard findById(int moonid);
 
     void qamoonregister(QaMoonBoard qaMoonBoard);
