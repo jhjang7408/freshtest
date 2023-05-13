@@ -340,18 +340,14 @@
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                             >
-                                판매 등록 277줄
+                                판매 등록
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/acc/productRegister"
-                                    >악세서리 판매 등록</a
-                                    >
+                                    <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/bike/productRegister"
-                                    >자전거 판매 등록</a
-                                    >
+                                    <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                                 </li>
                             </ul>
                         </li>
@@ -397,12 +393,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="qa/guide"
+                                    <a class="dropdown-item" th:href="@{'../qa/guide'}"
                                     >가이드</a
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="qa/qalist"
+                                    <a class="dropdown-item" th:href="@{'../qa/gulist'}"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
@@ -451,7 +447,7 @@
                                     <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
+                                    <a class="dropdown-item" th:href="@{'../mooon/moonlist'}">자주 묻는 질문</a>
                                 </li>
                             </ul>
                         </li>
@@ -833,9 +829,9 @@
                     <!-- breadcrumb -->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="#!">홈</a></li>
-                            <li class="breadcrumb-item"><a href="#!">자전거 구매</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">구매</li>
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                            <li class="breadcrumb-item">자전거 구매</a></li>
+
                         </ol>
                     </nav>
                 </div>
@@ -927,7 +923,7 @@
                     </style>
 
                     <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2" >
-                            <div class="card card-product mb-3"  th:each="bike : ${bikeList}">
+                            <div class="card card-product mb-3"  th:each="bike : ${viewAll}">
                                 <div class="card-body">
                                     <tbody>
                                     <tr>
@@ -953,173 +949,83 @@
 
 
                         </div>
-<!--                        <div style="display: block; text-align: center;">-->
-<!--                            <span th:if="${paging.startPage != 1}">-->
-<!--                                <a th:href="@{/bike/bikeList(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>-->
-<!--                            </span>-->
-<!--                            <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">-->
-<!--                                <span th:if="${p == paging.nowPage}">-->
-<!--                                    <b th:text="${p}"></b>-->
-<!--                                </span>-->
-<!--                                <span th:unless="${p == paging.nowPage}">-->
-<!--                                    <a th:href="@{/bike/bikeList(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>-->
-<!--                                </span>-->
-<!--                            </span>-->
-<!--                            <span th:if="${paging.endPage != paging.lastPage}">-->
-<!--                                <a th:href="@{/bike/bikeList(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>-->
-<!--                            </span>-->
-<!--                        </div>-->
+                        <div style="display: block; text-align: center;">
+                            <span th:if="${paging.startPage != 1}">
+                                <a th:href="@{/bike/bikeList(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>
+                            </span>
+                            <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                                <span th:if="${p == paging.nowPage}">
+                                    <b th:text="${p}"></b>
+                                </span>
+                                <span th:unless="${p == paging.nowPage}">
+                                    <a th:href="@{/bike/bikeList(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>
+                                </span>
+                            </span>
+                            <span th:if="${paging.endPage != paging.lastPage}">
+                                <a th:href="@{/bike/bikeList(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>
+                            </span>
+                        </div>
                     </div>
 
 
                     <!-- row -->
-<!--                    <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">-->
-
-<!--                        &lt;!&ndash; col &ndash;&gt;-->
-<!--                        <div class="col">-->
-<!--                            &lt;!&ndash; card &ndash;&gt;-->
-<!--                            <div class="card card-product">-->
-<!--                                <div class="card-body">-->
-
-<!--                                    &lt;!&ndash; badge &ndash;&gt;-->
-<!--&lt;!&ndash;                                    <div class="text-center position-relative ">&ndash;&gt;-->
-
-<!--&lt;!&ndash;                                        <a href="/bike/productSingle">&ndash;&gt;-->
-<!--&lt;!&ndash;                                            &lt;!&ndash; img &ndash;&gt;<img src="../assets/images/products/bike/bike-1.jpg"&ndash;&gt;-->
-<!--&lt;!&ndash;                                                             alt="Grocery Ecommerce Template" class="mb-3 img-fluid"></a>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        &lt;!&ndash; action btn &ndash;&gt;&ndash;&gt;-->
-
-<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
-
-<!--                                    &lt;!&ndash;이미지 클릭시 상세페이지로 이동&ndash;&gt;-->
-<!--                                    <tbody>-->
-<!--                                    <tr th:each="bike : ${bikeList}">-->
-
-<!--&lt;!&ndash;                                        <td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <div class="text-center position-relative">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <a th:href="@{/bike/productSingle/{bikeid}(bikeid=${bike.bikeid})}" th:text="${bike.productname}"></a>&ndash;&gt;-->
-<!--&lt;!&ndash;                                                         이미지 클릭시?&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <a th:href="@{/bike/productSingle/{bikeid}(bikeid=${bike.bikeid})}">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                    <img th:src="@{'\\upload\\' + ${bike.image}}" alt="Bike Image" width="100" height="100">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                    &ndash;&gt;-->
-<!--&lt;!&ndash;                                                </a>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        </td>&ndash;&gt;-->
-
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                    &lt;!&ndash; heading &ndash;&gt;-->
-<!--                                    <body>-->
-<!--                                    <h1>자전거</h1>-->
-<!--                                    <table>-->
-<!--                                        <thead>-->
-<!--                                        <tr>-->
-<!--                                            <th>번호</th>-->
-<!--                                            <th>작성자</th>-->
-<!--                                            <th>제품명</th>-->
-<!--                                            <th>제목</th>-->
-<!--                                            <th>이미지</th>-->
-<!--&lt;!&ndash;                                            <th>가격</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <th>정보</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <th>상태</th>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <th>등록일자</th>&ndash;&gt;-->
-<!--                                        </tr>-->
-<!--                                        </thead>-->
-<!--                                        <tbody>-->
-<!--                                        <tr th:each="bike : ${bikeList}">-->
-<!--                                            <td><a th:href="@{/bike/productSingle/{bikeid}(bikeid=${bike.bikeid})}" th:text="${bike.bikeid}"></a></td>-->
-<!--                                            <td th:text="${bike.userid}"></td>-->
-<!--                                            <td th:text="${bike.productname}"></td>-->
-<!--                                            <td th:text="${bike.title}"></td>-->
-<!--                                            <td>-->
-<!--                                                <img src="/upload/image.jpg" alt="이미지 출력 오류">-->
-<!--                                            </td>-->
-
-<!--                                            <p>이미지 파일 이름: <span th:text="${bike.image}"></span></p>-->
-<!--&lt;!&ndash;                                            <td th:text="${bike.price}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <td th:text="${bike.info}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <td th:text="${bike.status}"></td>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <td th:text="${bike.regdate}"></td>&ndash;&gt;-->
-<!--                                        </tr>-->
-<!--                                        </tbody>-->
-<!--                                    </table>-->
-<!--                                    </body>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                        </div>
+                    </div>
                 </section>
             </div>
 
 
-</html>
+
                     <div class="row mt-8">
                         <div class="col">
                             <!-- nav -->
-                            <!--밑에 페이징?-->
-<!--                            <nav>-->
-<!--                                <ul class="pagination">-->
-<!--                                    <li class="page-item disabled">-->
-<!--                                        <a class="page-link  mx-1 " href="#" aria-label="Previous">-->
-<!--                                            <i class="feather-icon icon-chevron-left"></i>-->
-<!--                                        </a>-->
-<!--                                    </li>-->
-<!--                                    <li class="page-item "><a class="page-link  mx-1 active" href="#">1</a></li>-->
-<!--                                    <li class="page-item"><a class="page-link mx-1 text-body" href="#">2</a></li>-->
 
-<!--                                    <li class="page-item"><a class="page-link mx-1 text-body" href="#">...</a></li>-->
-<!--                                    <li class="page-item"><a class="page-link mx-1 text-body" href="#">12</a></li>-->
-<!--                                    <li class="page-item">-->
-<!--                                        <a class="page-link mx-1 text-body" href="#" aria-label="Next">-->
-<!--                                            <i class="feather-icon icon-chevron-right"></i>-->
-<!--                                        </a>-->
-<!--                                    </li>-->
-<!--                                </ul>-->
-<!--                            </nav>-->
                         </div>
                     </div>
                 </section>
             </div>
         </div>
     </div>
-<!--<script layout:fragment="script" th:inline="javascript">-->
+<!--페이징-->
 
-<!--    document.querySelector(".pagination").addEventListener("click", function (e) {-->
-<!--        e.preventDefault()-->
-<!--        e.stopPropagation()-->
+<script layout:fragment="script" th:inline="javascript">
 
-<!--        const target = e.target-->
+    document.querySelector(".pagination").addEventListener("click", function (e) {
+        e.preventDefault()
+        e.stopPropagation()
 
-<!--        if(target.tagName !== 'A') {-->
-<!--            return-->
-<!--        }-->
+        const target = e.target
 
-<!--        const num = target.getAttribute("data-num")-->
+        if(target.tagName !== 'A') {
+            return
+        }
 
-<!--        const formObj = document.querySelector("form")-->
+        const num = target.getAttribute("data-num")
 
-<!--        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`-->
+        const formObj = document.querySelector("form")
 
-<!--        formObj.submit();-->
+        formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
 
-<!--    },false)-->
+        formObj.submit();
 
-<!--    document.querySelector(".clearBtn").addEventListener("click", function (e){-->
-<!--        e.preventDefault()-->
-<!--        e.stopPropagation()-->
+    },false)
 
-<!--        self.location =''-->
+    document.querySelector(".clearBtn").addEventListener("click", function (e){
+        e.preventDefault()
+        e.stopPropagation()
 
-<!--    },false)-->
+        self.location =''
 
-<!--    //show modal-->
-<!--    const result = [[${result}]]-->
+    },false)
 
-<!--    const modal = new bootstrap.Modal(document.querySelector(".modal"))-->
+    //show modal
+    const result = [[${result}]]
 
-<!--    if(result){-->
-<!--        modal.show()-->
-<!--    }-->
+    const modal = new bootstrap.Modal(document.querySelector(".modal"))
+
+    if(result){
+        modal.show()
+    }
 
 
 

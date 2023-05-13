@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <title>FreshCart - eCommerce HTML Template</title>
     <!-- Required meta tags -->
@@ -338,7 +339,7 @@
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                             >
-                                판매 등록 277줄
+                                판매 등록
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
@@ -395,12 +396,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="qa/guide"
+                                    <a class="dropdown-item" th:href="@{'../qa/guide'}"
                                     >가이드</a
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="qa/qalist"
+                                    <a class="dropdown-item" th:href="@{'../qa/gulist'}"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
@@ -449,7 +450,7 @@
                                     <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
+                                    <a class="dropdown-item" th:href="@{'../mooon/moonlist'}">자주 묻는 질문</a>
                                 </li>
                             </ul>
                         </li>
@@ -831,9 +832,9 @@
                     <!-- breadcrumb -->
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0">
-                            <li class="breadcrumb-item"><a href="#!">홈</a></li>
-                            <li class="breadcrumb-item"><a href="#!">악세서리 구매</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">구매</li>
+                            <li class="breadcrumb-item"><a href="/">홈</a></li>
+                            <li class="breadcrumb-item">악세서리 구매</a></li>
+
                         </ol>
                     </nav>
                 </div>
@@ -870,11 +871,11 @@
                                                 <ul class="nav flex-column nav-links">
                                                     <!-- nav item -->
                                                     <li class="nav-item">
-                                                        <a href="../pages/acc.html" class="nav-link">악세서리 구매</a>
+                                                        <a th:href="@{'../acc/accList'}" class="nav-link">악세서리 구매</a>
                                                     </li>
                                                     <!-- nav item -->
                                                     <li class="nav-item">
-                                                        <a href="../pages/bike.html" class="nav-link">자전거 구매</a>
+                                                        <a th:href="@{'../bike/bikeList'}" class="nav-link">자전거 구매</a>
                                                     </li>
 
                                                 </ul>
@@ -904,111 +905,124 @@
                     <!-- card -->
 
                     <!-- list icon -->
-                    <div class="d-lg-flex justify-content-between align-items-center">
-                        <div class="mb-3 mb-lg-0">
-                            <p class="mb-0"> <span class="text-dark">24 </span> Products found </p>
-                        </div>
 
-                        <!-- icon -->
-                        <div class="d-md-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div>
-
-
-                                </div>
-                                <div class="ms-2 d-lg-none">
-                                    <a class="btn btn-outline-gray-400 text-muted" data-bs-toggle="offcanvas" href="#offcanvasCategory" role="button" aria-controls="offcanvasCategory"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                                                                                                                                                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                                                                                                                                                             class="feather feather-filter me-2">
-                                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
-                                    </svg> Filters</a>
-                                </div>
-                            </div>
-
-                            <div class="d-flex mt-2 mt-lg-0">
-                                <div class="me-2 flex-grow-1">
-                                    <!-- select option -->
-                                    <select class="form-select">
-                                        <option selected>Show: 50</option>
-                                        <option value="10">10</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                    </select></div>
-                                <div>
-                                    <!-- select option -->
-                                    <select class="form-select">
-                                        <option selected>Sort by: Featured</option>
-                                        <option value="Low to High">Price: Low to High</option>
-                                        <option value="High to Low"> Price: High to Low</option>
-                                        <option value="Release Date"> Release Date</option>
-                                        <option value="Avg. Rating"> Avg. Rating</option>
-
-                                    </select></div>
-
-                            </div>
-
-                        </div>
-                    </div>
                     <style>
-                        .card {
-                            margin-right: 25px; /* 우측에 25px 간격 추가 */
+                        .card-product {
+                            padding: 1rem;
+                            /*카드 테두리 제거*/
+                            border: none;
+                        }
+
+                        .card-product img {
+                            width: 100%;
+                            height: auto;
+                            object-fit: cover;
+                            border-radius: 10px;
+
+                        }
+                        .product-info {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 100%;
                         }
                     </style>
+
                     <!-- row -->
-                    <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2" >
-                        <div class="card card-product mb-3"  th:each="acc : ${accList}">
-                            <div class="card-body">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="text-center position-relative">
-                                            <a th:href="@{/acc/productSingle/{acid}(acid=${acc.acid})}" th:text="${acc.productname}"></a>
-                                            <a th:href="@{/acc/productSingle/{acid}(acid=${acc.acid})}">
-                                                <img th:src="@{'/uploadImg/' + ${acc.image}}" alt="acc Image" width="100" height="100">
-                                            </a>
-                                        </div>
-                                    </td>
-
-                                    <td th:text="${acc.productname}"></td>
-                                    <td th:text="${acc.brandname}"></td>
-
-                                    <td th:text="${acc.price}"></td>
-                                    <td th:text="${acc.info}"></td>
-
-                                </tr>
-                                </tbody>
+                    <div class="row g-4 row-cols-xl-4 row-cols-lg-3 row-cols-2 row-cols-md-2 mt-2">
+                        <div class="col" th:each="acc : ${viewAll}">
+                            <div class="card card-product mb-3 shadow-lg border">
+                                <div class="card-body">
+                                    <div class="text-center position-relative">
+                                        <a th:href="@{/acc/productSingle/{acid}(acid=${acc.acid})}">
+                                            <img th:src="@{'/uploadImg/' + ${acc.image}}" alt="acc Image" class="img-fluid">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">브랜드명:</th>
+                                            <td th:text="${acc.brandname}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">제품명:</th>
+                                            <td th:text="${acc.productname}"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">가격:</th>
+                                            <td th:text="${acc.price + '원'}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
                         </div>
                     </div>
-                    <div class="row mt-8">
-                        <div class="col">
-                            <!-- nav -->
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled">
-                                        <a class="page-link  mx-1 " href="#" aria-label="Previous">
-                                            <i class="feather-icon icon-chevron-left"></i>
-                                        </a>
-                                    </li>
-                                    <li class="page-item "><a class="page-link  mx-1 active" href="#">1</a></li>
-                                    <li class="page-item"><a class="page-link mx-1 text-body" href="#">2</a></li>
-
-                                    <li class="page-item"><a class="page-link mx-1 text-body" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link mx-1 text-body" href="#">12</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link mx-1 text-body" href="#" aria-label="Next">
-                                            <i class="feather-icon icon-chevron-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
+                    <div style="display: block; text-align: center;">
+                            <span th:if="${paging.startPage != 1}">
+                                <a th:href="@{/bike/bikeList(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>
+                            </span>
+                        <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">
+                                <span th:if="${p == paging.nowPage}">
+                                    <b th:text="${p}"></b>
+                                </span>
+                                <span th:unless="${p == paging.nowPage}">
+                                    <a th:href="@{/bike/bikeList(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>
+                                </span>
+                            </span>
+                        <span th:if="${paging.endPage != paging.lastPage}">
+                                <a th:href="@{/bike/bikeList(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>
+                            </span>
                     </div>
+
                 </section>
             </div>
         </div>
     </div>
+    <script layout:fragment="script" th:inline="javascript">
+
+        document.querySelector(".pagination").addEventListener("click", function (e) {
+            e.preventDefault()
+            e.stopPropagation()
+
+            const target = e.target
+
+            if(target.tagName !== 'A') {
+                return
+            }
+
+            const num = target.getAttribute("data-num")
+
+            const formObj = document.querySelector("form")
+
+            formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+
+            formObj.submit();
+
+        },false)
+
+        document.querySelector(".clearBtn").addEventListener("click", function (e){
+            e.preventDefault()
+            e.stopPropagation()
+
+            self.location =''
+
+        },false)
+
+        //show modal
+        const result = [[${result}]]
+
+        const modal = new bootstrap.Modal(document.querySelector(".modal"))
+
+        if(result){
+            modal.show()
+        }
+
+
+
+    </script>
 </main>
 
 

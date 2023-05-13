@@ -327,18 +327,14 @@
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
               >
-                판매 등록 277줄
+                판매 등록
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/acc/productRegister"
-                  >악세서리 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/bike/productRegister"
-                  >자전거 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                 </li>
               </ul>
             </li>
@@ -384,12 +380,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="qa/guide"
+                  <a class="dropdown-item" th:href="@{'../qa/guide'}"
                   >가이드</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="qa/qalist"
+                  <a class="dropdown-item" th:href="@{'../qa/gulist'}"
                   >질문/정보 게시판</a
                   >
                 </li>
@@ -438,7 +434,7 @@
                   <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
+                  <a class="dropdown-item" th:href="@{'../mooon/moonlist'}">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -955,7 +951,7 @@
                   </div>
                   <!-- form control -->
 
-                  <div class="d-flex justify-content-end" th:if="${loginId == writer}">
+                  <div class="d-flex justify-content-end" th:if="${loginId == writer or #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                     <a th:href="@{'/bike/update/' + ${bike.bikeid}}" class="btn btn-primary mr-2">게시물 수정</a>
                     <form th:action="@{'/bike/' + ${bike.bikeid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
                       <button type="submit" class="btn btn-danger">게시물 삭제</button>
@@ -989,7 +985,7 @@
                         <p th:text="${reply.content}">댓글 내용</p>
                         <p th:text="${reply.regdate}">작성일시</p>
 
-                        <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
+                        <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post" th:if="${reply.userid} == ${loginId}">
                           <button type="submit" class="btn btn-danger">삭제</button>
                         </form>
                         <hr>
