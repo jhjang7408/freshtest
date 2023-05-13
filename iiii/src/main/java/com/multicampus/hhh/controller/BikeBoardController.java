@@ -1,6 +1,7 @@
 package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.domain.PagingVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
@@ -35,6 +36,7 @@ import java.lang.reflect.Member;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,28 +54,28 @@ public class BikeBoardController {
     private String uploadPath;
 
     @GetMapping("/bikeList")
-    public String list(Model model){
-//    public String list(PagingVO vo, Model model
-//            , @RequestParam(value="nowPage", required=false)String nowPage
-//            , @RequestParam(value="cntPerPage", required=false)String cntPerPage){
-//        int total = pageService.countBikeBoard();
-//        if (nowPage == null && cntPerPage == null) {
-//            nowPage = "1";
-//            cntPerPage = "100";
-//        } else if (nowPage == null) {
-//            nowPage = "1";
-//        } else if (cntPerPage == null) {
-//            cntPerPage = "100";
-//        }
-//        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
-//        model.addAttribute("paging", vo);
-//        model.addAttribute("viewAll", pageService.selectBikeBoard(vo));
-//        log.info("자전거 구매게시판");
-        model.addAttribute("bikeList", service.findAll());
+    //public String list(Model model){
+    public String list(PagingVO vo, Model model
+            , @RequestParam(value="nowPage", required=false)String nowPage
+            , @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+        int total = pageService.countBikeBoard();
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "10";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "10";
+        }
+        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        model.addAttribute("paging", vo);
+        model.addAttribute("viewAll", pageService.selectBikeBoard(vo));
+        log.info("자전거 구매게시판");
+       // model.addAttribute("bikeList", service.findAll());
         return "bike/bikeList";
     }
 
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/productRegister")
     public String registerGET(Model model, HttpSession session) {
         //session에서 userid를 가져옴
@@ -124,15 +126,27 @@ public class BikeBoardController {
     }
 
     @GetMapping("/productSingle/{bikeid}")
-    public String readOne(@PathVariable int bikeid, Model model) {
+    public String readOne(@PathVariable int bikeid, Model model, Principal principal) {
         BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
         //아래 2줄 댓글 보기위해 추가
         List<BikeBoardReplyDTO> replies = replyService.findByBikeId(bikeid);
         model.addAttribute("replies", replies);
         model.addAttribute("bike", bikeBoardDTO);
+
+        // loginId 추가
+        if (principal != null) {
+            String loginId = principal.getName();
+            model.addAttribute("loginId", loginId);
+        }
+
+
+        // writer 추가
+        String writer = bikeBoardDTO.getUserid();
+        model.addAttribute("writer", writer);
         return "bike/productSingle";
     }
-    @Secured("ROLE_USER")
+
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/update/{bikeid}")
     public String UpdateGet(@PathVariable int bikeid,Model model,HttpSession session){
         //session에서 userid를 가져옴
@@ -155,7 +169,7 @@ public class BikeBoardController {
             return "redirect:/bike/productSingle/" + bikeid;
         }
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/update/{bikeid}")
     public String UpdatePost(@Valid BikeBoardDTO bikeBoardDTO, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
@@ -188,7 +202,7 @@ public class BikeBoardController {
             return "redirect:/bike/productSingle/" + bikeBoardDTO.getBikeid();
         }
     }
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("/{bikeid}/delete")
     public String deletePost(@PathVariable int bikeid,HttpSession session,Model model){
         //로그인한 id

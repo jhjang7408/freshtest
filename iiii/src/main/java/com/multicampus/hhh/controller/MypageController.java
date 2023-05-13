@@ -48,10 +48,10 @@ public class MypageController {
         log.info("자전거 구매내역");
     }
 
-    @GetMapping("/orderlist-acc")
-    public void orderacclist(){
-        log.info("악세사리 구매내역");
-    }
+//    @GetMapping("/orderlist-acc")
+//    public void orderacclist(){
+//        log.info("악세사리 구매내역");
+//    }
 
 
     //테스트
