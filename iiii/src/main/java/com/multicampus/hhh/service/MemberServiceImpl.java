@@ -3,6 +3,7 @@ package com.multicampus.hhh.service;
 import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.dto.BasketDTO;
 import com.multicampus.hhh.dto.MemberDTO;
 import com.multicampus.hhh.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
@@ -149,6 +150,35 @@ public class MemberServiceImpl implements MemberService {
         return role;
     }
 
+    @Override
+    public List<BasketDTO> shopCart(String userid) {
+        List<BasketDTO> cart = memberMapper.shopCart(userid);
+        return cart;
+    }
+
+    @Override
+    public void addCart(BasketDTO basketDTO) {
+        //basketDTO에 userid와 acid값만 있음
+        BasketDTO basketDTO2 = null;
+        if (memberMapper.checkCart(basketDTO) == null) {
+            log.info("장바구니 추가 서비스 테스트");
+            memberMapper.addCart(basketDTO);
+        } else {
+            log.info("장바구니 추가 서비스 테스트 ++++");
+            basketDTO2 = memberMapper.checkCart(basketDTO);
+            basketDTO2.setCount(basketDTO2.getCount() + 1);
+            log.info(basketDTO.getUserid(), basketDTO.getAcid() + " ======================");
+            log.info(basketDTO2.getUserid(), basketDTO2.getAcid() + " ==================================");
+            log.info("장바구니 추가 중복시 카운트 추가 ===================" + basketDTO.getCount());
+            memberMapper.modifyCart(basketDTO2);
+        }
+    }
+
+    @Override
+    public void revmoveCart(int bagid) {
+        memberMapper.deleteCart(bagid);
+    }
+
 
     @Override
     public List<BikeBoardVO> findbike(String userid) {
@@ -157,12 +187,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
-//    @Override
-//    public void modify(MemberVO memberVO) {
-//
-//    }
-//
-//
+    @Override
+    public void modify(MemberVO memberVO) {
+
+    }
+
+    @Override
+    public boolean updateCartQuantity(int id, int count) {
+        memberMapper.updateCartCount(id, count);
+        return true;
+    }
+
+
 //    @Override
 //    public void remove(String id) {
 //

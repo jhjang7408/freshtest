@@ -666,7 +666,7 @@
                             placeholder="로그인한 아이디 표시"
                             readonly
                             name="userid"
-                            th:text="${#authentication.getName()}"
+                            th:value="${#authentication.principal.memberVO.name}"
                           />
 <!--                          th:text= "${#authentication.name}"-->
                           <!--                            th:value= "${#authentication.principal.memberVO.userid}"-->

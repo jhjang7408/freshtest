@@ -18,3 +18,21 @@
 .signup-expl {
     text-align: right;
 }
+
+.kakao-button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.kakao-button img {
+    width: 80%;
+    height: auto;
+}
+
+.naver-button img{
+    width: 120px;
+    height: 40px;
+}

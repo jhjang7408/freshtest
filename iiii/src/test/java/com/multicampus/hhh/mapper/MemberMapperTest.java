@@ -2,6 +2,7 @@ package com.multicampus.hhh.mapper;
 
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.dto.BasketDTO;
 import com.multicampus.hhh.dto.MemberDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -57,5 +58,12 @@ class MemberMapperTest {
     @Test
     public void RoleFind(){
         log.info("==============================" + memberMapper.findRole("test"));
+    }
+
+    @Test
+    public void addCartTes(){
+        BasketDTO basketDTO = BasketDTO.builder().acid(5).userid("tjqk77@gmail.com").build();
+        log.info("========"+basketDTO+"============================");
+        log.info(memberMapper.checkCart(basketDTO) + " ================ ");
     }
 }

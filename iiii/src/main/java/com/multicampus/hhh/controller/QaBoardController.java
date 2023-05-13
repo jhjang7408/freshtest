@@ -1,9 +1,7 @@
 package com.multicampus.hhh.controller;
 
-import com.multicampus.hhh.domain.MemberVO;
-import com.multicampus.hhh.domain.PagingVO;
-import com.multicampus.hhh.domain.QaBoard;
-import com.multicampus.hhh.domain.QaBoardReply;
+import com.multicampus.hhh.domain.*;
+import com.multicampus.hhh.service.PageReplyService;
 import com.multicampus.hhh.service.PageService;
 import com.multicampus.hhh.service.QaBoardService;
 
@@ -23,6 +21,7 @@ public class QaBoardController {
 
     private final QaBoardService qaBoardService;
     private final PageService pageService;
+    private final PageReplyService pageReplyService;
 
     @GetMapping("/qalist")
     public String main(PagingVO vo, Model model
@@ -49,29 +48,70 @@ public class QaBoardController {
 
 
 
- /*   @GetMapping("/qaview")
+
+    /*@GetMapping("/qaview")
     public String qaview(@RequestParam(name = "qa_id") int qaid, Model model){
 
         QaBoard findqaid = qaBoardService.findById(qaid);
 
         model.addAttribute("qaview", findqaid);
-        return "/qa/qaview";
-    }
 
-*/
-
-
-    @GetMapping("/qaview")
-    public String qaview(@RequestParam(name = "qa_id") int qaid, Model model){
-
-        QaBoard findqaid = qaBoardService.findById(qaid);
-
-
-        model.addAttribute("qaview", findqaid);
         model.addAttribute("qareply", qaBoardService.qaBoardReplyList(qaid));
 
         return "/qa/qaview";
     }
+*/
+
+    @GetMapping("/qaview")
+    public String qaview(@RequestParam(name = "qa_id") int qaid, Model model,
+                         PagingReplyVO vo,
+                         @RequestParam(value = "nowPage", required = false) String nowPage,
+                         @RequestParam(value = "cntPerPage", required = false) String cntPerPage) {
+
+        QaBoard findqaid = qaBoardService.findById(qaid);
+
+        model.addAttribute("qaview", findqaid);
+
+
+        int total = pageReplyService.countReplyBoard(qaid);
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "3";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "3";
+        }
+        vo = new PagingReplyVO(qaid, total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        model.addAttribute("pagingReply", vo);
+        model.addAttribute("viewReplyAll", pageReplyService.selectReplyBoard(vo));
+
+        return "/qa/qaview";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     @PostMapping("/qareplyregister")

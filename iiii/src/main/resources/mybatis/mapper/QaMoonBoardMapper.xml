@@ -9,6 +9,11 @@
     </select>
 
 
+    <select id="findmoonAll" resultType="com.multicampus.hhh.domain.QaMoonBoard">
+        select * from moon_board;
+    </select>
+
+
     <select id="findById" resultType="com.multicampus.hhh.domain.QaMoonBoard">
         select * from moon_board where moon_id = #{param1};
     </select>
