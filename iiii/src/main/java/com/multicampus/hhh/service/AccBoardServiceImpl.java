@@ -60,8 +60,10 @@ public class AccBoardServiceImpl implements AccBoardService{
         accBoardMapper.delete(acid);
     }
 
-
-
+    @Override
+    public List<AccBoardDTO> listTen() {
+        return accBoardMapper.listTen();
+    }
 
 
 }
