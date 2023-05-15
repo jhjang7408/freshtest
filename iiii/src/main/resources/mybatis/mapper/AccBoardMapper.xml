@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.multicampus.hhh.mapper.AccBoardMapper">
+
+    <!--판매글 등록-->
+    <insert id="insert" parameterType="com.multicampus.hhh.dto.AccBoardDTO">
+        insert into acc_board(ac_id,product_name, image, price,amount,info,brand_name)
+        values (#{acid}, #{productname}, #{image}, #{price},#{amount}, #{info}, #{brandname})
+    </insert>
+
+    <!--구매 게시판 목록 조회-->
+    <select id="selectAll" resultType="com.multicampus.hhh.dto.AccBoardDTO">
+        select * from acc_board order by ac_id desc
+    </select>
+
+    <!--특정 게시글 조회-->
+    <select id="selectOne" resultType="com.multicampus.hhh.dto.AccBoardDTO">
+        select * from acc_board where ac_id = #{acid}
+    </select>
+    <!--게시글 수정(관리자만 가능)-->
+    <update id="update" parameterType="com.multicampus.hhh.dto.AccBoardDTO">
+        update acc_board set product_name = #{productname}, image=#{image},price= #{price},amount = #{amount}, info=#{info},brand_name = #{brandname} where ac_id = #{acid}
+    </update>
+
+    <!--게시글 삭제(관리자만 가능)-->
+    <delete id = "delete" parameterType="int">
+        delete from acc_board where ac_id = #{acid}
+    </delete>
+
+    <!-- 자전거 판매 리스트 10개 가져오기-->
+    <select id="listTen" resultType="com.multicampus.hhh.domain.QaBoard">
+        select * from bike_board order by regdate desc limit 10
+    </select>
+
+
+</mapper>

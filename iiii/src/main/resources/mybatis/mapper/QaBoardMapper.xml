@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multicampus.hhh.mapper.QaBoardMapper">
+
+    <select id="findAll" resultType="com.multicampus.hhh.domain.QaBoard">
+        SELECT * FROM qa_board order by qa_id desc;
+    </select>
+
+
+    <select id="findById" resultType="com.multicampus.hhh.domain.QaBoard">
+        select * from qa_board where qa_id = #{param1};
+    </select>
+
+
+    <select id="findreplyById" resultType="com.multicampus.hhh.domain.QaBoardReply">
+        select * from qa_board_reply where qa_id = #{param1};
+    </select>
+
+
+    <insert id="qareplyregister" parameterType="com.multicampus.hhh.domain.QaBoardReply">
+        insert into qa_board_reply (qa_id, user_id, content) values (#{qaid}, #{userid}, #{content});
+    </insert>
+
+
+    <delete id="qareplydelete" parameterType="int">
+        delete from qa_board_reply where qa_id = #{qaid};
+    </delete>
+
+
+
+    <insert id="qaregister" parameterType="com.multicampus.hhh.domain.QaBoard">
+        insert into qa_board (title, content, user_id) values (#{title}, #{content}, #{userid});
+    </insert>
+
+
+    <update id="qamodify" parameterType="com.multicampus.hhh.domain.QaBoard">
+        update qa_board set title=#{title}, content=#{content} where qa_id=#{qaid};
+    </update>
+
+
+
+    <delete id="qadelete" parameterType="int">
+        delete from qa_board where qa_id = #{qaid};
+    </delete>
+
+
+    <delete id="qareplydeleteone" parameterType="int">
+        delete from qa_board_reply where qa_reply_id = #{qareplyid};
+    </delete>
+
+
+    <!--<update id="qareplymodify" parameterType="=com.multicampus.hhh.domain.QaBoardReply">
+        update qa_board_reply set content = #{content} where qa_reply_id = #{qareplyid};
+    </update>-->
+
+
+
+
+    <select id="qacount" resultType="int">
+        select count(qa_id) from qa_board;
+    </select>
+
+
+
+
+</mapper>

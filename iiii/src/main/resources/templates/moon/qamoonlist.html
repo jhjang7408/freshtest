@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta content="Codescandy" name="author">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-M8S4MT3EYG');
+  </script>
+
+  <!-- Favicon icon-->
+  <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
+
+
+  <!-- Libs CSS -->
+  <link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
+  <link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
+  <link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" th:href="@{/css/theme.min.css}">
+
+
+  <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet">
+
+  <title>Dashboard</title>
+</head>
+
+<body>
+
+<div class="border-bottom">
+  <div class="py-4 pt-lg-3 pb-lg-0">
+    <div class="container">
+      <div class="row w-100 align-items-center gx-lg-2 gx-0">
+        <div class="col-xxl-2 col-lg-3">
+          <a class="navbar-brand d-none d-lg-block" href="/">
+            <img th:src="@{/images/수신호멈.jpg}"
+                 alt="eCommerce HTML Template"/>
+          </a>
+          <div class="d-flex justify-content-between w-100 d-lg-none">
+            <a class="navbar-brand" href="/">
+              <img
+                      th:src="@{/images/logo/freshcart-logo.svg}"
+                      alt="eCommerce HTML Template"
+              />
+            </a>
+
+            <div class="d-flex align-items-center lh-1">
+              <div class="list-inline me-4">
+                <div class="list-inline-item">
+                  <a
+                          href="#!"
+                          class="text-muted"
+                          data-bs-toggle="modal"
+                          data-bs-target="#userModal"
+                  >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-user"
+                    >
+                      <path
+                              d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                      ></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </a>
+                </div>
+                <div class="list-inline-item">
+                  <a
+                          class="text-muted position-relative"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasRight"
+                          href="#offcanvasExample"
+                          role="button"
+                          aria-controls="offcanvasRight"
+                  >
+                    <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-shopping-bag"
+                    >
+                      <path
+                              d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                      ></path>
+                      <line x1="3" y1="6" x2="21" y2="6"></line>
+                      <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                    <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"
+                    >
+                          1
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                  </a>
+                </div>
+              </div>
+              <!-- Button -->
+              <button
+                      class="navbar-toggler collapsed"
+                      type="button"
+                      data-bs-toggle="offcanvas"
+                      data-bs-target="#navbar-default"
+                      aria-controls="navbar-default"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation"
+              >
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="32"
+                        height="32"
+                        fill="currentColor"
+                        class="bi bi-text-indent-left text-primary"
+                        viewBox="0 0 16 16"
+                >
+                  <path
+                          d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
+          <form action="#">
+            <div class="input-group">
+              <input
+                      class="form-control rounded"
+                      type="search"
+                      placeholder="Search for products"
+              />
+              <span class="input-group-append">
+                    <button
+                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                            type="button"
+                    >
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                      >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </button>
+                  </span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
+        <!-- data-bs-target="#locationModal"> -->
+        <!-- <i class="feather-icon icon-map-pin me-2"></i>Location 옆 로그인210줄 -->
+        <!-- </button> -->
+        <!-- </div>  -->
+
+        <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
+          <div class="list-inline">
+            <div class="list-inline-item" sec:authorize="!isAuthenticated()">
+              <a href="/member/signin">로그인</a>
+            </div>
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
+              <a href="/member/logout">로그아웃</a>
+            </div>
+            <!--            th:if="${session.loginId != null}"-->
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
+              <li class="nav-item dropdown" >
+                <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                >
+                  마이페이지
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="/mypage/shop-cart"
+                    >장바구니</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/orderlist-bike"
+                    >자전거 구매내역</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/orderlist-acc"
+                    >악세사리 구매내역</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/listsell"
+                    >판매 목록</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                            class="dropdown-item"
+                            href="/mypage/account-modify"
+                    >개인정보 수정</a
+                    >
+                  </li>
+                </ul>
+              </li>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
+    <div class="container px-0 px-md-3">
+      <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
+        <div
+                class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
+        >
+          <a href="/"
+          ><img
+                  th:src="@{../images/logo/freshcart-logo.svg}"
+                  alt="eCommerce HTML Template"
+          /></a>
+          <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+          ></button>
+        </div>
+        <div class="d-block d-lg-none my-4">
+          <form action="#">
+            <div class="input-group">
+              <input
+                      class="form-control rounded"
+                      type="search"
+                      placeholder="Search for products"
+              />
+              <span class="input-group-append">
+                    <button
+                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                            type="button"
+                    >
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                      >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </button>
+                  </span>
+            </div>
+          </form>
+          <div class="mt-2">
+            <button
+                    type="button"
+                    class="btn btn-outline-gray-400 text-muted w-100"
+                    data-bs-toggle="modal"
+                    data-bs-target="#locationModal"
+            >
+              <i class="feather-icon icon-map-pin me-2"></i>Pick Location
+            </button>
+          </div>
+        </div>
+
+        <div class="d-none d-lg-block">
+          <ul class="navbar-nav align-items-center">
+            <li class="nav-item dropdown">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
+                판매 등록 277줄
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/acc/productRegister"
+                  >악세서리 판매 등록</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/bike/productRegister"
+                  >자전거 판매 등록</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
+                구매
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/acc/accList"
+                  >악세서리 구매</a
+                  >
+                </li>
+                <li>
+                  <a
+                          class="dropdown-item"
+                          href="/bike/bikeList"
+                  >자전거 구매</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/mypage/shop-cart"
+                     sec:authorize="isAuthenticated()">장바구니</a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
+                커뮤니티
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/qa/guide"
+                  >가이드</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/qa/qalist"
+                  >질문/정보 게시판</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
+                공지
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="../pages/signin.html"
+                  >공지</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/signup.html"
+                  >이벤트</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
+                고객센터
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+
+
+
+
+
+
+<!-- main wrapper -->
+
+<div>
+  <!-- navbar vertical -->
+
+
+
+
+
+  <!-- main -->
+  <main>
+
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="mt-4">
+        <div class="container">
+          <div class="row ">
+            <div class="col-12">
+              <!-- breadcrumb -->
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                  <li class="breadcrumb-item"><a href="/">메인</a></li>
+                  <li class="breadcrumb-item"><a href="/moon/moonlist">고객센터</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">1:1 문의 내역</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="mt-8">
+        <div class="container">
+          <div class="row">
+            <!-- logo -->
+            <div class="col-12">
+              <h1 class="fw-bold">1:1 문의 내역</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- row -->
+      <div layout:fragment="content">
+
+
+
+
+        <div class="row mt-3">
+          <div class="col">
+
+            <div class="card">
+              <div class="card-header">
+                1:1 문의 내역
+              </div>
+              <div class="card-body" >
+                <h5 class="card-title">1:1 문의 내역 </h5>
+
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+
+                    <!--<th scope="col">내용</th>-->
+                    <th scope="col">날짜</th>
+                  </tr>
+                  </thead>
+
+                  <tbody>
+                  <tr th:each="board : ${qamoonlist}">
+
+                    <td> <a th:href="@{/moon/qamoonview(moon_id =${board.moonid})}" class="text-decoration-none" th:text="${board.moonid}">번호</a></td>
+                    <td><a th:href="@{/moon/qamoonview(moon_id =${board.moonid})}" class="text-decoration-none"  th:text="${board.title}">제목</a></td>
+
+                    <!--<td><a th:href="@{/moon/qamoonview(moon_id =${board.moonid})}" class="text-decoration-none"  th:text="${board.content}">내용</td>-->
+                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
+                  </tr>
+                  </tbody>
+
+
+                </table>
+
+
+                <div style="display: block; text-align: center;">
+                            <span th:if="${pagingMoon.startPage != 1}">
+                                <a th:href="@{/moon/qamoonlist(nowPage=${pagingMoon.startPage - 1},cntPerPage=${pagingMoon.cntPerPage})}">&lt;</a>
+                            </span>
+                  <span th:each="p : ${#numbers.sequence(pagingMoon.startPage, pagingMoon.endPage)}">
+                                <span th:if="${p == pagingMoon.nowPage}">
+                                    <b th:text="${p}"></b>
+                                </span>
+                                <span th:unless="${p == pagingMoon.nowPage}">
+                                    <a th:href="@{/moon/qamoonlist(nowPage=${p},cntPerPage=${pagingMoon.cntPerPage})}" th:text="${p}"></a>
+                                </span>
+                            </span>
+                  <span th:if="${pagingMoon.endPage != pagingMoon.lastPage}">
+                                <a th:href="@{/moon/qamoonlist(nowPage=${pagingMoon.endPage + 1},cntPerPage=${pagingMoon.cntPerPage})}">&gt;</a>
+                            </span>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="float-end">
+
+                  <div class="my-4">
+
+
+
+                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
+                      <a href="/member/signin">글쓰기</a>
+                    </button>
+                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
+                      <a href="/moon/qamoonregister">글쓰기</a>
+                    </button>
+
+
+
+
+                  </div>
+                </div>
+
+
+              </div><!--end card body-->
+            </div><!--end card-->
+          </div><!-- end col-->
+        </div><!-- end row-->
+
+        <div class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Modal body text goes here.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+
+      <script layout:fragment="script" th:inline="javascript">
+
+        document.querySelector(".pagination").addEventListener("click", function (e) {
+          e.preventDefault()
+          e.stopPropagation()
+
+          const target = e.target
+
+          if(target.tagName !== 'A') {
+            return
+          }
+
+          const num = target.getAttribute("data-num")
+
+          const formObj = document.querySelector("form")
+
+          formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+
+          formObj.submit();
+
+        },false)
+
+        document.querySelector(".clearBtn").addEventListener("click", function (e){
+          e.preventDefault()
+          e.stopPropagation()
+
+          self.location =''
+
+        },false)
+
+        //show modal
+        const result = [[${result}]]
+
+        const modal = new bootstrap.Modal(document.querySelector(".modal"))
+
+        if(result){
+          modal.show()
+        }
+
+
+
+      </script>
+
+
+
+    </div>
+
+  </main>
+
+</div>
+
+
+
+
+
+<!-- Libs JS -->
+<script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
+
+<!-- Theme JS -->
+<script th:src="@{/js/theme.min.js}"></script>
+<script th:src="@{/libs/quill/dist/quill.min.js}"></script>
+<script th:src="@{/js/vendors/editor.js}"></script>
+<script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
+
+<!-- Footer -->
+<!-- footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4 py-4">
+
+
+
+      <div class="col-12 col-md-12 col-lg-8">
+        <div class="row g-4">
+
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">판매 등록</h6>
+            <!-- list -->
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">구매</h6>
+            <!-- list -->
+            <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
+              <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">커뮤니티</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
+              <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-sm-6 col-md-2">
+            <h6 class="mb-4">공지</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
+              <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-sm-6 col-md-3">
+            <h6 class="mb-4">고객센터</h6>
+            <ul class="nav flex-column">
+              <!-- list -->
+              <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
+              <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</footer>
+<!-- Javascript-->
+<!-- Libs JS -->
+<!-- <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+ <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+ <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
+
+ &lt;!&ndash; Theme JS &ndash;&gt;
+ <script th:src="@{/js/theme.min.js}"></script>-->
+
+
+
+
+</body>
+
+</html>

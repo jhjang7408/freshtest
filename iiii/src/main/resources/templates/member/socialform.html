@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>FreshCart - eCommerce HTML Template</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta name="description" content="" />
+  <meta content="Codescandy" name="author" />
+
+  <!-- Google tag (gtag.js) -->
+  <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-M8S4MT3EYG");
+  </script>
+
+  <!-- Favicon icon-->
+  <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          th:href="@{/images/favicon/favicon.ico}"
+  />
+
+  <!-- Libs CSS -->
+  <link
+          th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}"
+          rel="stylesheet"
+  />
+  <link
+          th:href="@{/libs/feather-webfont/dist/feather-icons.css}"
+          rel="stylesheet"
+  />
+  <link
+          th:href="@{/libs/simplebar/dist/simplebar.min.css}"
+          rel="stylesheet"
+  />
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" th:href="@{/css/theme.min.css}" />
+</head>
+
+  <body>
+    <!-- navigation -->
+    <div class="border-bottom shadow-sm">
+      <nav class="navbar navbar-light py-2">
+        <div
+          class="container justify-content-center justify-content-lg-between"
+        >
+          <a class="navbar-brand" href="/">
+            <img
+              th:src="@{/images/logo/freshcart-logo.svg}"
+              alt=""
+              class="d-inline-block align-text-top"
+            />
+          </a>
+          <span class="navbar-text">
+            계정이 이미 있습니까?
+            <a href="/member/signin" style="color: #007bff"
+              >로그인 하러가기</a
+            >
+          </span>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <section class="my-lg-14 my-8">
+        <div class="container">
+          <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-md-6 col-lg-4 order-lg-1 order-2">
+              <img src="../assets/images/svg-graphics/fp-g.svg" alt="" class="img-fluid"/>
+            </div>
+            <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1 d-flex align-items-center">
+              <div>
+                <div class="mb-lg-9 mb-5">
+                  <h1 class="mb-2 h2 fw-bold">추가정보 입력하기</h1>
+                  <script th:inline="javascript">
+                    /*<![CDATA[*/
+                    const fixMsg = /*[[${fixMsg}]]*/ null;
+                    if (fixMsg) {
+                      alert(fixMsg);
+                    }
+                    /*]]>*/
+                  </script>
+                  <form action="/social" method="post" >
+                  <div class="row g-3">
+                    <input type="hidden" name="userId" th:value="${userId}">
+                    <div class="col-12">
+                      <input type="text" id="inputnickname" name="nickname" class="form-control" placeholder="닉네임" required/>
+                    </div>
+                    <div class="col-12">
+                      <input type="text" id="inputphnum" name="phnum" class="form-control" placeholder="핸드폰 번호" required/>
+                    </div>
+                    <div class="col-12">
+                      <input type="text" id="inputaddress" name="address" class="form-control" placeholder="주소" required/>
+                      <input type="text" name="address_detail" class="form-control"  placeholder="상세 주소" />
+                    </div>
+                    <div class="col-12 d-grid gap-2">
+                      <button type="submit" class="btn btn-primary">
+                        등록하기
+                      </button>
+                      <a href="/member/signin" class="btn btn-light">돌아가기</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row g-4 py-4">
+          <div class="col-12 col-md-12 col-lg-8">
+            <div class="row g-4">
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">판매 등록</h6>
+                <!-- list -->
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">판매 등록</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">구매</h6>
+                <!-- list -->
+                <ul class="nav flex-column">
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">악세서리 구매</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">자전거 구매</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#1" class="nav-link">장바구니</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">커뮤니티</h6>
+                <ul class="nav flex-column">
+                  <!-- list -->
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">가이드</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">질문/정보 게시판</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-2">
+                <h6 class="mb-4">공지</h6>
+                <ul class="nav flex-column">
+                  <!-- list -->
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">공지</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">이벤트</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-6 col-sm-6 col-md-3">
+                <h6 class="mb-4">고객센터</h6>
+                <ul class="nav flex-column">
+                  <!-- list -->
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">1:1문의</a>
+                  </li>
+                  <li class="nav-item mb-2">
+                    <a href="#!" class="nav-link">자주 묻는 질문</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Javascript-->
+    <!-- Libs JS -->
+    <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
+    <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
+
+    <!-- Theme JS -->
+    <script th:src="@{/js/theme.min.js}"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      window.onload = function(){
+        document.getElementById("inputaddress").addEventListener("click", function(){
+          new daum.Postcode({
+            oncomplete: function(data) { //선택시 입력값 세팅
+              document.getElementById("inputaddress").value = data.address; // 주소 넣기
+              document.querySelector("input[name=address_detail]").focus(); //상세입력
+            }
+          }).open();
+        });
+      }
+    </script>
+<!--    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
+<!--    <script>-->
+<!--      $('#email-btn').click(function (){-->
+<!--        const userid = $('#inputid').val();-->
+<!--        const useremail = $('#inputmail').val();-->
+
+<!--        $.ajax({-->
+<!--          type: 'POST',-->
+<!--          url: '/member/emailAuth',-->
+<!--          data : {-->
+<!--            userid : userid,-->
+<!--            useremail : useremail-->
+<!--          },-->
+<!--          success: function (data) {-->
+<!--            if (data.fixMsg) {-->
+<!--              alert(fixMsg);-->
+<!--            }-->
+<!--          },-->
+<!--          error: function (xhr, status ,error) {-->
+<!--          }-->
+<!--        });-->
+<!--      });-->
+<!--    </script>-->
+<!--    <script>  비밀번호 찾기 이메일 인증-->
+<!--        $(function() {-->
+<!--        $('#email-btn').click(function(e) {-->
+<!--          e.preventDefault();-->
+<!--          $(this).prop('disabled', true);-->
+<!--          $('#email-btn').empty();-->
+<!--          const userid = $('inputid').val();-->
+<!--          const email = $('inputmail').val()-->
+<!--          $.ajax({-->
+<!--            type: 'POST',-->
+<!--            url: '/findpassword',-->
+<!--            data: {-->
+<!--              userid: userid,-->
+<!--              email: email-->
+<!--            },-->
+<!--            success: function(response) {-->
+<!--              const newInput = $('<input>').attr({-->
+<!--                type: 'text',-->
+<!--                id: 'emailcode',-->
+<!--                name: 'mailcode',-->
+<!--                class: 'form-control',-->
+<!--                placeholder: '인증코드를 입력하세요',-->
+<!--                required: true-->
+<!--              });-->
+<!--              $('#inputid, #inputmail').prop('readonly', true);-->
+<!--              $('#emailauth').append(newInput);-->
+<!--              const newButton = $('<button>').attr({-->
+<!--                type: 'submit',-->
+<!--                id: 'checkCode-btn'-->
+<!--              }).text('이메일 인증번호 확인');-->
+
+<!--              $(document).on('click','#checkCode-btn', function (e){-->
+<!--                e.preventDefault();-->
+<!--                const mailcode = $('#emailcode').val();-->
+<!--                $.ajax({-->
+<!--                  type: 'POST',-->
+<!--                  url: '/checkCode',-->
+<!--                  data: {-->
+<!--                    mailCode : mailcode-->
+<!--                  },-->
+<!--                  success: function (response){-->
+<!--                    alert('인증 확인 되었습니다.')-->
+<!--                  },-->
+<!--                  error: function (){-->
+<!--                    alert('오류가 발생했습니다.')-->
+<!--                  }-->
+<!--                });-->
+<!--              });-->
+
+<!--            }-->
+<!--          });-->
+<!--        });-->
+<!--      });-->
+<!--    </script>-->
+  </body>
+</html>

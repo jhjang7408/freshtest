@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multicampus.hhh.mapper.MemberMapper">
+    <insert id="save">
+        insert into user (user_id, password, name, nickname, email, address, phnum)
+        values (#{userid}, #{password}, #{name}, #{nickname}, #{email}, #{address}, #{phnum})
+    </insert>
+    <insert id="saveRole">
+        insert into user_role (user_role_id, role_name)
+        values (#{userid}, #{memberRole.ordinal})
+    </insert>
+
+    <select id="findUser" resultType="com.multicampus.hhh.domain.MemberVO">
+        select * from user where user_id = #{userid}
+    </select>
+
+    <update id="updateUser">
+        update user set email = #{email}, phnum = #{phnum}, address = #{address} where user_id = #{userid}
+    </update>
+
+    <update id="updateUserPass">
+        update user set email = #{email}, password = #{password}, phnum = #{phnum}, address = #{address} where user_id = #{userid}
+    </update>
+
+    <delete id="deleteuser">
+         delete from user where user_id = #{userid};
+    </delete>
+    <delete id="deleterole">
+        delete from user_role where user_role_id = #{userid};
+    </delete>
+
+    <select id="findjoinUser" resultType="com.multicampus.hhh.domain.MemberVO">
+        SELECT u.user_id, u.password, u.name, u.nickname, u.email, u.address, u.phnum, u.social, ur.role_name
+        FROM user u
+                 JOIN user_role ur ON u.user_id = ur.user_role_id
+        WHERE u.user_id= #{userid};
+    </select>
+
+    <select id="findtest" resultType="com.multicampus.hhh.dto.MemberDTO">
+        SELECT *
+        FROM user
+        WHERE user_id = #{userid};
+    </select>
+
+    <select id="roleFind" resultType="com.multicampus.hhh.domain.MemberRole">
+        select * from user_role where user_role_id = #{userid}
+    </select>
+
+    <select id="findPas" resultType="com.multicampus.hhh.domain.MemberVO">
+        select user_id,password,email from user where user_id = #{userid}
+    </select>
+
+    <select id="memberEmailcheck" resultType="com.multicampus.hhh.domain.MemberVO">
+        select * from user where user_id = #{userid} and email = #{email}
+    </select>
+
+    <update id="socialInsert">
+        update user set nickname = #{nickname}, address = #{address}, phnum = #{phnum} where user_id = #{userid}
+    </update>
+
+
+    <select id="findbike" resultType="com.multicampus.hhh.domain.BikeBoardVO">
+        select * from bike_board where user_id =#{userid} order by bike_id desc;
+    </select>
+
+    <select id="findRole" resultType="int">
+        select role_name from user_role where user_role_id = #{userid}
+    </select>
+
+    <!-- 장바구니 -->
+    <select id="shopCart" resultType="com.multicampus.hhh.dto.BasketDTO">
+        select a.bag_id, a.user_id, a.ac_id, a.count, b.product_name pName, b.price, b.image from basket a join acc_board b on a.ac_id = b.ac_id  where user_id = #{userid}
+    </select>
+
+    <insert id="addCart">
+        insert into basket (user_id, ac_id) values (#{userid}, #{acid})
+    </insert>
+
+    <delete id="deleteCart">
+        delete from basket where bag_id=#{bagid}
+    </delete>
+
+    <update id="modifyCart">
+        update basket set count = #{count} where bag_id = #{bagid}
+    </update>
+
+    <select id="checkCart" resultType="com.multicampus.hhh.dto.BasketDTO">
+        select * from basket where user_id = #{userid} and ac_id = #{acid}
+    </select>
+
+    <update id="updateCartCount">
+        update basket set count = #{count} where bag_id=#{id}
+    </update>
+
+</mapper>

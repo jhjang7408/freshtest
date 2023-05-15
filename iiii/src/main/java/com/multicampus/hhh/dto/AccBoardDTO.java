@@ -3,22 +3,22 @@ package com.multicampus.hhh.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class AccBoardDTO {
 
-    private int ac_id;
+    private int acid;
 
-    @NotBlank
-    private String product_name;
+    private String productname;
 
-    @NotBlank
+
     private String image;
 
     private int price;
     private int amount;
     private String info;
-    private String board_name;
+    private String brandname;
 
 
 }

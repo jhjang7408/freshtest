@@ -2,11 +2,18 @@ package com.multicampus.hhh.service;
 
 import com.multicampus.hhh.dto.AccBoardDTO;
 
-public interface AccBoardService {
-    //register 처리를 sell에서?
+import com.multicampus.hhh.dto.PageResponseDTO;
 
-    AccBoardDTO readOne(Long ac_id);
-    void modify(AccBoardDTO accBoardDTO);
-    void remove(Long ac_id);
+import java.util.List;
+
+public interface AccBoardService {
+
+    List<AccBoardDTO> getAll();
+    void register(AccBoardDTO AccBoardDTO);
+    AccBoardDTO readOne(int acid);
+    void update(AccBoardDTO accBoardDTO);
+    void delete(int acid);
+
+    List<AccBoardDTO> listTen();
 
 }

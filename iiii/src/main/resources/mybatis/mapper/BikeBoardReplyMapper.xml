@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.multicampus.hhh.mapper.BikeBoardReplyMapper">
+    <insert id="insert" parameterType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
+        insert into bike_board_reply(bike_reply_id,user_id,bike_id,content,regdate)
+        values (#{bikereplyid},#{userid},#{bikeid},#{content}, CURRENT_TIMESTAMP)
+    </insert>
+
+    <update id="modify" parameterType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
+        update bike_board_reply set content = #{content} where bike_reply_id = #{bikereplyid}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from bike_board_reply where bike_reply_id = #{bikereplyid}
+    </delete>
+
+    <delete id="deleteByBikeId" parameterType="int">
+        delete from bike_board_reply where bike_id = #{bikeId}
+    </delete>
+
+    <select id="findByBikeId" resultType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
+        SELECT * FROM bike_board_reply WHERE bike_id = #{bikeid} ORDER BY regdate DESC
+    </select>
+</mapper>

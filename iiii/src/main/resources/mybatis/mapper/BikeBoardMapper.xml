@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.multicampus.hhh.mapper.BikeBoardMapper">
+
+    <!--판매글 등록-->
+
+    <insert id="insert" parameterType="com.multicampus.hhh.dto.BikeBoardDTO">
+        insert into bike_board(user_id,product_name, title,image, price,info,status,regdate)
+        values (#{userid}, #{productname}, #{title}, #{image}, #{price}, #{info}, #{status}, CURRENT_TIMESTAMP)
+    </insert>
+    <!--구매 게시판 목록 조회-->
+    <select id="findAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
+        select * from bike_board order by bike_id desc
+    </select>
+
+    <!--특정 게시물 조회-->
+    <select id="selectOne" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
+        select * from bike_board where bike_id = #{bikeid}
+    </select>
+
+    <!--게시글 수정(게시글 작성자 + 관리자만 가능)-->
+    <update id="update" parameterType="com.multicampus.hhh.dto.BikeBoardDTO">
+        update bike_board set product_name = #{productname}, title=#{title}, image=#{image},price= #{price}, info=#{info} where bike_id = #{bikeid}
+    </update>
+    <!--게시글 삭제(게시글 작성자 + 관리자만 가능)-->
+    <delete id="delete" parameterType="int">
+        delete from bike_board where bike_id = #{bikeid}
+    </delete>
+
+</mapper>
