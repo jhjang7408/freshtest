@@ -338,18 +338,14 @@
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                 >
-                  판매 등록 277줄
+                  판매 등록
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="/acc/productRegister"
-                    >악세서리 판매 등록</a
-                    >
+                    <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="/bike/productRegister"
-                    >자전거 판매 등록</a
-                    >
+                    <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                   </li>
                 </ul>
               </li>
@@ -395,12 +391,12 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="qa/guide"
+                    <a class="dropdown-item" href="/qa/guide"
                     >가이드</a
                     >
                   </li>
                   <li>
-                    <a class="dropdown-item" href="qa/qalist"
+                    <a class="dropdown-item" href="/qa/qalist"
                     >질문/정보 게시판</a
                     >
                   </li>
@@ -443,13 +439,13 @@
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                    <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                    <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
                   </li>
                   <li>
-                    <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
+                    <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                   </li>
                 </ul>
               </li>
@@ -459,131 +455,15 @@
       </div>
     </nav>
   </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="locationModal"
-      tabindex="-1"
-      aria-labelledby="locationModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body p-6">
-            <div class="d-flex justify-content-between align-items-start">
-              <div>
-                <h5 class="mb-1" id="locationModalLabel">
-                  Choose your Delivery Location
-                </h5>
-                <p class="mb-0 small">
-                  Enter your address and we will specify the offer you area.
-                </p>
-              </div>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="my-5">
-              <input
-                type="search"
-                class="form-control"
-                placeholder="Search your area"
-              />
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-2">
-              <h6 class="mb-0">Select Location</h6>
-              <a href="#" class="btn btn-outline-gray-400 text-muted btn-sm"
-                >Clear All</a
-              >
-            </div>
-            <div>
-              <div data-simplebar style="height: 300px">
-                <div class="list-group list-group-flush">
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action active"
-                  >
-                    <span>Alabama</span><span>Min:$20</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Alaska</span><span>Min:$30</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Arizona</span><span>Min:$50</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>California</span><span>Min:$29</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Colorado</span><span>Min:$80</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Florida</span><span>Min:$90</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Arizona</span><span>Min:$50</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>California</span><span>Min:$29</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Colorado</span><span>Min:$80</span></a
-                  >
-                  <a
-                    href="#"
-                    class="list-group-item d-flex justify-content-between align-items-center px-2 py-3 list-group-item-action"
-                  >
-                    <span>Florida</span><span>Min:$90</span></a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
     <main>
-      <!-- section -->
       <section>
-        <!-- container -->
         <div class="container">
-          <!-- row -->
           <div class="row">
-            <!-- col -->
             <div class="col-12">
               <div
                 class="d-flex justify-content-between align-items-center d-md-none py-4"
               >
-                <!-- heading -->
                 <h3 class="fs-5 mb-0">마이페이지</h3>
-                <!-- button -->
                 <button
                   class="btn btn-outline-gray-400 text-muted d-md-none btn-icon btn-sm ms-3"
                   type="button"
@@ -604,17 +484,14 @@
                     <a
                             class="nav-link"
                             aria-current="page"
-                            href="/mypage/orderlist-bike"
-                    ><i class="feather-icon icon-shopping-bag me-2"></i>자전거
-                      구매내역</a
-                    >
+                            href="/mypage/orderlist-bike">
+                      <i class="feather-icon icon-shopping-bag me-2"></i>자전거 구매내역</a>
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
                     <a class="nav-link" href="/mypage/orderlist-acc"
                     ><i class="feather-icon icon-credit-card me-2"></i
-                    >악세사리 구매내역</a
-                    >
+                    >악세사리 구매내역</a >
                   </li>
                   <!-- nav item -->
                   <li class="nav-item">
@@ -652,7 +529,7 @@
                 </div>
                 <div>
                   <!-- heading -->
-                  <h5 class="mb-4">개인 정보</h5>
+                  <h5 class="mb-4"></h5>
                   <div class="row">
                     <div class="col-lg-5">
                       <!-- form -->

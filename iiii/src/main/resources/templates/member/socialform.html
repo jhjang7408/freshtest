@@ -58,7 +58,7 @@
         <div
           class="container justify-content-center justify-content-lg-between"
         >
-          <a class="navbar-brand" href="../index.html">
+          <a class="navbar-brand" href="/">
             <img
               th:src="@{/images/logo/freshcart-logo.svg}"
               alt=""
@@ -96,7 +96,7 @@
                   </script>
                   <form action="/social" method="post" >
                   <div class="row g-3">
-                    <input type="text" name="userId" th:value="${userId}">
+                    <input type="hidden" name="userId" th:value="${userId}">
                     <div class="col-12">
                       <input type="text" id="inputnickname" name="nickname" class="form-control" placeholder="닉네임" required/>
                     </div>
