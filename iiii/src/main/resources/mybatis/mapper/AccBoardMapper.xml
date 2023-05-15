@@ -32,8 +32,8 @@
     </delete>
 
     <!-- 자전거 판매 리스트 10개 가져오기-->
-    <select id="listTen" resultType="com.multicampus.hhh.domain.QaBoard">
-        select * from bike_board order by regdate desc limit 10
+    <select id="listTen" resultType="com.multicampus.hhh.dto.AccBoardDTO">
+        select * from acc_board order by ac_id desc limit 10
     </select>
 
 

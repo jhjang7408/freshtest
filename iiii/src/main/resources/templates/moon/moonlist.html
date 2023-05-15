@@ -5,33 +5,33 @@
 <head>
 
   <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta content="Codescandy" name="author">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta content="Codescandy" name="author">
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M8S4MT3EYG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'G-M8S4MT3EYG');
-  </script>
+  gtag('config', 'G-M8S4MT3EYG');
+</script>
 
-  <!-- Favicon icon-->
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
-
-
-  <!-- Libs CSS -->
-  <link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
-  <link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
-  <link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" th:href="@{/images/favicon/favicon.ico}">
 
 
-  <!-- Theme CSS -->
-  <link rel="stylesheet" th:href="@{/css/theme.min.css}">
+<!-- Libs CSS -->
+<link th:href="@{/libs/bootstrap-icons/font/bootstrap-icons.css}" rel="stylesheet"/>
+<link th:href="@{/libs/feather-webfont/dist/feather-icons.css}" rel="stylesheet"/>
+<link th:href="@{/libs/simplebar/dist/simplebar.min.css}" rel="stylesheet"/>
+
+
+<!-- Theme CSS -->
+<link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
 
   <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet">
@@ -208,13 +208,13 @@
                     >장바구니</a
                     >
                   </li>
-                  <li>
-                    <a
-                            class="dropdown-item"
-                            href="/mypage/orderlist-bike"
-                    >자전거 구매내역</a
-                    >
-                  </li>
+                  <!--                  <li>-->
+                  <!--                    <a-->
+                  <!--                            class="dropdown-item"-->
+                  <!--                            href="/mypage/orderlist-bike"-->
+                  <!--                    >자전거 구매내역</a-->
+                  <!--                    >-->
+                  <!--                  </li>-->
                   <li>
                     <a
                             class="dropdown-item"
@@ -442,26 +442,26 @@
 
 
 
-<!-- main wrapper -->
+  <!-- main wrapper -->
 
-<div>
-  <!-- navbar vertical -->
-
-
+  <div>
+    <!-- navbar vertical -->
 
 
 
-  <!-- main -->
-  <main>
+    
 
-    <!-- container -->
-    <div class="container">
-      <!-- row -->
-      <div class="mt-4">
-        <div class="container">
-          <div class="row ">
-            <div class="col-12">
-              <!-- breadcrumb -->
+    <!-- main -->
+    <main>
+      
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="mt-4">
+            <div class="container">
+              <div class="row ">
+                <div class="col-12">
+                  <!-- breadcrumb -->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                   <li class="breadcrumb-item"><a href="/">메인</a></li>
@@ -469,269 +469,269 @@
                   <li class="breadcrumb-item active" aria-current="page">자주 묻는 질문</li>
                 </ol>
               </nav>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <section class="mt-8">
-        <div class="container">
-          <div class="row">
-            <!-- logo -->
-            <div class="col-12">
-              <h1 class="fw-bold">자주 묻는 질문</h1>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- row -->
-      <div layout:fragment="content">
-
-
-
-
-        <div class="row mt-3">
-          <div class="col">
-
-            <div class="card">
-              <div class="card-header">
-                자주 묻는 질문
               </div>
-              <div class="card-body" >
-                <h5 class="card-title"> 질문 </h5>
+              </div>
+            </div>
+          </div>
 
-                <table class="table">
-                  <thead>
-                  <tr>
-                    <th scope="col"></th>
-                    <!--<th scope="col">내용</th>-->
-                  </tr>
-                  </thead>
-
-                  <tbody>
-                  <tr>
-                    <td><strong>상품의 상태는 어떻게 되나요?</strong></br>
-                      => 구매 전에 상품 설명을 자세히 읽어보고, 추가로 궁금한 점이 있다면 판매자에게 문의해야 합니다.</td>
-                  </tr>
-
-                  <tr>
-                    <td><strong>배송비는 얼마인가요?</strong></br>
-                      => 판매자는 배송비를 상세하게 표시해야 합니다. 일부 중고거래사이트에서는 구매자가 직접 배송비를 부담해야 하는 경우도 있으므로, 반드시 확인해야 합니다.</td>
-                  </tr>
-
-                  <tr>
-                    <td><strong>상품의 교환이나 반품이 가능한가요?</strong></br>
-                      => 판매자는 상품의 교환 또는 반품 가능 여부를 명시해야 합니다. 일부 판매자들은 교환 또는 반품을 받지 않는 경우도 있으므로, 상세히 확인해야 합니다.</td>
-                  </tr>
-
-                  <tr>
-                    <td><strong>가격을 깎아 줄 수 있나요?</strong></br>
-                      => 판매자는 가격을 깎아 줄 수 있는지 여부를 명시해야 합니다. 그러나 일반적으로 중고거래에서는 가격 깎임이 가능한 경우가 많으므로, 깎인 가격에 대해 협상해볼 만합니다.</td>
-                  </tr>
-
-                  <tr>
-                    <td><strong>상품의 사진을 더 요청할 수 있나요?</strong></br>
-                      => 판매자는 상품의 사진을 상세하게 제공해야 합니다. 그러나 사진에 대한 추가 요청은 판매자의 판단에 따라 가능하지 않을 수 있습니다.</td>
-                  </tr>
-
-                  <tr>
-                    <td><strong>결제 방법은 어떤 것이 있나요?</strong></br>
-                      => 판매자는 결제 방법을 명시해야 합니다. 중고거래에서는 계좌이체 등, 악세서리 경우 온라인 결제 방법을 제공하고 있습니다.</td>
-                  </tr>
-
-
-
-                  </tbody>
-
-
-                </table>
-
-                <div class="float-end">
-
-                  <div class="my-4">
-
-
-
-                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
-                      <a href="/member/signin">1:1문의하기</a>
-                    </button>
-                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
-                      <a href="/moon/qamoonlist">1:1문의하기</a>
-                    </button>
-
-
-
-
-                  </div>
+          <section class="mt-8">
+            <div class="container">
+              <div class="row">
+                <!-- logo -->
+                <div class="col-12">
+                  <h1 class="fw-bold">자주 묻는 질문</h1>
                 </div>
-
-
-              </div><!--end card body-->
-            </div><!--end card-->
-          </div><!-- end col-->
-        </div><!-- end row-->
-
-        <div class="modal" tabindex="-1">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <p>Modal body text goes here.</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
               </div>
             </div>
-          </div>
+          </section>
+        <!-- row -->
+        <div layout:fragment="content">
+
+
+        
+        
+            <div class="row mt-3">
+                <div class="col">
+        
+                    <div class="card">
+                        <div class="card-header">
+                            자주 묻는 질문
+                        </div>
+                        <div class="card-body" >
+                            <h5 class="card-title"> 질문 </h5>
+        
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <!--<th scope="col">내용</th>-->
+                                </tr>
+                                </thead>
+        
+                                <tbody>
+                                <tr>
+                                  <td><strong>상품의 상태는 어떻게 되나요?</strong></br>
+                                      => 구매 전에 상품 설명을 자세히 읽어보고, 추가로 궁금한 점이 있다면 판매자에게 문의해야 합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>배송비는 얼마인가요?</strong></br>
+                                    => 판매자는 배송비를 상세하게 표시해야 합니다. 일부 중고거래사이트에서는 구매자가 직접 배송비를 부담해야 하는 경우도 있으므로, 반드시 확인해야 합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>상품의 교환이나 반품이 가능한가요?</strong></br>
+                                    => 판매자는 상품의 교환 또는 반품 가능 여부를 명시해야 합니다. 일부 판매자들은 교환 또는 반품을 받지 않는 경우도 있으므로, 상세히 확인해야 합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>가격을 깎아 줄 수 있나요?</strong></br>
+                                    => 판매자는 가격을 깎아 줄 수 있는지 여부를 명시해야 합니다. 그러나 일반적으로 중고거래에서는 가격 깎임이 가능한 경우가 많으므로, 깎인 가격에 대해 협상해볼 만합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>상품의 사진을 더 요청할 수 있나요?</strong></br>
+                                    => 판매자는 상품의 사진을 상세하게 제공해야 합니다. 그러나 사진에 대한 추가 요청은 판매자의 판단에 따라 가능하지 않을 수 있습니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>결제 방법은 어떤 것이 있나요?</strong></br>
+                                    => 판매자는 결제 방법을 명시해야 합니다. 중고거래에서는 계좌이체 등, 악세서리 경우 온라인 결제 방법을 제공하고 있습니다.</td>
+                                </tr>
+
+
+
+                                </tbody>
+        
+        
+                            </table>
+        
+                            <div class="float-end">
+
+                                <div class="my-4">
+
+
+
+                                  <button type="button" class="btn btn-soft-primary mb-2 modBtn" sec:authorize="!isAuthenticated()">
+                                    <a href="/member/signin">1:1문의하기</a>
+                                  </button>
+                                  <button type="button" class="btn btn-soft-primary mb-2 modBtn"  sec:authorize="isAuthenticated()">
+                                    <a href="/moon/qamoonlist">1:1문의하기</a>
+                                  </button>
+
+
+
+
+                                  </div>
+                            </div>
+        
+        
+                        </div><!--end card body-->
+                    </div><!--end card-->
+                </div><!-- end col-->
+            </div><!-- end row-->
+        
+            <div class="modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Modal body text goes here.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+        
+        </div>
+        
+        
+        <script layout:fragment="script" th:inline="javascript">
+        
+            document.querySelector(".pagination").addEventListener("click", function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+        
+                const target = e.target
+        
+                if(target.tagName !== 'A') {
+                    return
+                }
+        
+                const num = target.getAttribute("data-num")
+        
+                const formObj = document.querySelector("form")
+        
+                formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
+        
+                formObj.submit();
+        
+            },false)
+        
+            document.querySelector(".clearBtn").addEventListener("click", function (e){
+                e.preventDefault()
+                e.stopPropagation()
+        
+                self.location =''
+        
+            },false)
+        
+            //show modal
+            const result = [[${result}]]
+        
+            const modal = new bootstrap.Modal(document.querySelector(".modal"))
+        
+            if(result){
+                modal.show()
+            }
+        
+        
+        
+        </script>
+        
+        
+
         </div>
 
+    </main>
 
+  </div>
 
-      </div>
-
-
-      <script layout:fragment="script" th:inline="javascript">
-
-        document.querySelector(".pagination").addEventListener("click", function (e) {
-          e.preventDefault()
-          e.stopPropagation()
-
-          const target = e.target
-
-          if(target.tagName !== 'A') {
-            return
-          }
-
-          const num = target.getAttribute("data-num")
-
-          const formObj = document.querySelector("form")
-
-          formObj.innerHTML += `<input type='hidden' name='page' value='${num}'>`
-
-          formObj.submit();
-
-        },false)
-
-        document.querySelector(".clearBtn").addEventListener("click", function (e){
-          e.preventDefault()
-          e.stopPropagation()
-
-          self.location =''
-
-        },false)
-
-        //show modal
-        const result = [[${result}]]
-
-        const modal = new bootstrap.Modal(document.querySelector(".modal"))
-
-        if(result){
-          modal.show()
-        }
-
-
-
-      </script>
-
-
-
-    </div>
-
-  </main>
-
-</div>
-
-<!-- Libs JS -->
+    <!-- Libs JS -->
 <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
 <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
 
 <!-- Theme JS -->
 <script th:src="@{/js/theme.min.js}"></script>
-<script th:src="@{/libs/quill/dist/quill.min.js}"></script>
-<script th:src="@{/js/vendors/editor.js}"></script>
-<script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
+  <script th:src="@{/libs/quill/dist/quill.min.js}"></script>
+  <script th:src="@{/js/vendors/editor.js}"></script>
+  <script th:src="@{/libs/dropzone/dist/min/dropzone.min.js}"></script>
 
-<!-- Footer -->
-<!-- footer -->
-<footer class="footer">
-  <div class="container">
-    <div class="row g-4 py-4">
+   <!-- Footer -->
+  <!-- footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4 py-4">
 
+        
 
+        <div class="col-12 col-md-12 col-lg-8">
+          <div class="row g-4">
 
-      <div class="col-12 col-md-12 col-lg-8">
-        <div class="row g-4">
+            <div class="col-6 col-sm-6 col-md-2">
+              <h6 class="mb-4">판매 등록</h6>
+                <!-- list -->
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
+              </ul>
+            </div>
 
-          <div class="col-6 col-sm-6 col-md-2">
-            <h6 class="mb-4">판매 등록</h6>
-            <!-- list -->
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">판매 등록</a></li>
-            </ul>
-          </div>
+            <div class="col-6 col-sm-6 col-md-2">
+              <h6 class="mb-4">구매</h6>
+                <!-- list -->
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
+                <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
+                <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
+              </ul>
+            </div>
 
-          <div class="col-6 col-sm-6 col-md-2">
-            <h6 class="mb-4">구매</h6>
-            <!-- list -->
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">악세서리 구매</a></li>
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">자전거 구매</a></li>
-              <li class="nav-item mb-2"><a href="#1" class="nav-link">장바구니</a></li>
-            </ul>
-          </div>
+            <div class="col-6 col-sm-6 col-md-2">
+              <h6 class="mb-4">커뮤니티</h6>
+              <ul class="nav flex-column">
+                    <!-- list -->
+                <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
+                <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
+              </ul>
+            </div>
 
-          <div class="col-6 col-sm-6 col-md-2">
-            <h6 class="mb-4">커뮤니티</h6>
-            <ul class="nav flex-column">
-              <!-- list -->
-              <li class="nav-item mb-2"><a href="/qa/guide" class="nav-link">가이드</a></li>
-              <li class="nav-item mb-2"><a href="/qa/qalist" class="nav-link">질문/정보 게시판</a></li>
-            </ul>
-          </div>
+            <div class="col-6 col-sm-6 col-md-2">
+              <h6 class="mb-4">공지</h6>
+              <ul class="nav flex-column">
+                  <!-- list -->
+                <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
+                <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
+              </ul>
+            </div>
 
-          <div class="col-6 col-sm-6 col-md-2">
-            <h6 class="mb-4">공지</h6>
-            <ul class="nav flex-column">
-              <!-- list -->
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">공지</a></li>
-              <li class="nav-item mb-2"><a href="#!" class="nav-link">이벤트</a></li>
-            </ul>
-          </div>
-
-          <div class="col-6 col-sm-6 col-md-3">
-            <h6 class="mb-4">고객센터</h6>
-            <ul class="nav flex-column">
-              <!-- list -->
-              <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
-              <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
-            </ul>
+            <div class="col-6 col-sm-6 col-md-3">
+              <h6 class="mb-4">고객센터</h6>
+              <ul class="nav flex-column">
+                  <!-- list -->
+                <li class="nav-item mb-2"><a href="/moon/qamoonlist" class="nav-link">1:1문의</a></li>
+                <li class="nav-item mb-2"><a href="/moon/moonlist" class="nav-link">자주 묻는 질문</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+
+
+      
+      
     </div>
-
-
-
-
-  </div>
-</footer>
-<!-- Javascript-->
-<!-- Libs JS -->
+  </footer>
+    <!-- Javascript-->
+    <!-- Libs JS -->
 <!--  <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
   <script th:src="@{/libs/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
   <script th:src="@{/libs/simplebar/dist/simplebar.min.js}"></script>
   
   &lt;!&ndash; Theme JS &ndash;&gt;
   <script th:src="@{/js/theme.min.js}"></script>-->
-
-
-
-
-</body>
-
-</html>
+  
+  
+  
+  
+  </body>
+  
+  </html>
