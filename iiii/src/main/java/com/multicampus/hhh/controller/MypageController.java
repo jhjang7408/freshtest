@@ -83,11 +83,12 @@ public class MypageController {
 
 
     @PostMapping("/account-modify")     //개인정보 수정
-    public String modifyInfo(HttpSession session, @ModelAttribute MemberVO memberVO, @RequestParam("address_detail") String addressd){
-
+    public String modifyInfo(@AuthenticationPrincipal PrincipalDetails principalDetails, @ModelAttribute MemberVO memberVO, @RequestParam("address_detail") String addressd){
+        String userid = principalDetails.getMemberVO().getUserid();
+        String address = memberVO.getAddress();
+        memberVO.setUserid(userid);
+        memberVO.setAddress(address +" "+ addressd);
         memberService.modifyMember(memberVO);
-        log.info("개인정보수정 테스트중");
-        log.info(memberVO);
         return "redirect:/mypage/account-modify";
     }
 
