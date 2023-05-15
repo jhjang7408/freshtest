@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
   <head>
-    <title>FreshCart - eCommerce HTML Template</title>
+    <title>OBARDA</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -463,13 +463,13 @@
                       </div>
 
                       <!-- 장바구니 수량 + - 버튼 -->
-                      <div class="col-3 col-md-3 col-lg-2">
-                        <div class="input-group input-spinner">
-                          <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"/>
-                          <input type="number" step="1" max="10" name="quantity" class="quantity-field form-control-sm form-input"/>
-                          <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"/>
-                        </div>
-                      </div>
+<!--                      <div class="col-3 col-md-3 col-lg-2">-->
+<!--                        <div class="input-group input-spinner">-->
+<!--                          <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"/>-->
+<!--                          <input type="number" step="1" max="10" name="quantity" class="quantity-field form-control-sm form-input"/>-->
+<!--                          <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"/>-->
+<!--                        </div>-->
+<!--                      </div>-->
 
                       <div class="col-2 text-lg-end text-start text-md-end col-md-2">
                         <span class="fw-bold text-danger" th:text="'&#8361; ' + ${cart.price}"></span>
@@ -613,6 +613,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
+    // 장바구니에서 삭제하기
   $('.remove-cart-btn').click(function (e) {
   e.preventDefault();
 
@@ -634,6 +635,29 @@
   },
   });
   });
+
+  // <!-- 결제금액 보내기 -->
+  // $(document).ready(function() {
+  //   $("button[type='submit'").click(function (e) {
+  //     e.preventDefault();
+  //
+  //     const totalSumWithFee = $("span[data-role='total-sum-with-fee']").text();
+  //
+  //     $.ajax({
+  //       url:"/",
+  //       type:'POST',
+  //       data:{
+  //         totalSum: totalSumWithFee
+  //       },
+  //       success: function (response){
+  //
+  //       },
+  //       error: function (xhr, status, error){
+  //
+  //       }
+  //     });
+  //   });
+  // });
   </script>
 
   <!--  <script>-->
