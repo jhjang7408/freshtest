@@ -69,6 +69,11 @@ public class BikeBoardController {
         }
         vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
         model.addAttribute("paging", vo);
+
+//      nickname값 null출력됨. 확인위해서 추가
+        List<BikeBoardDTO> bikeList = pageService.selectBikeBoard(vo);
+        bikeList.forEach(bike -> log.info("Bike nickname: " + bike.getNickname()));
+
         model.addAttribute("viewAll", pageService.selectBikeBoard(vo));
         log.info("자전거 구매게시판");
        // model.addAttribute("bikeList", service.findAll());
