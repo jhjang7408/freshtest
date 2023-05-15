@@ -106,6 +106,11 @@ public class BikeBoardController {
 
         log.info("자전거 등록");
 
+//      등록에서 정보 입력란에 개행문자로 구분해도 spacebar로 인식하는것을 해결하기 위해 <br>을 \n로 변환
+        String infoBr = bikeBoardDTO.getInfo().replace("\n", "<br>");
+        bikeBoardDTO.setInfo(infoBr);
+
+
 //        if(bindingResult.hasErrors()) {
 //            log.info("has errors.......");
 //            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );

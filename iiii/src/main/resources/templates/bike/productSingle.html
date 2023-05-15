@@ -37,7 +37,18 @@
   <!-- Theme CSS -->
   <link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
+<!--  로그인 시에만 댓글 작성 가능-->
+  <script>
+    document.getElementById("replyForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // 기본 동작인 폼 제출을 중단합니다.
 
+      // 이동할 URL을 지정합니다.
+      var url = "/bike/productRegister";
+
+      // 페이지 이동
+      window.location.href = url;
+    });
+  </script>
 </head>
 
 <body>
@@ -909,10 +920,7 @@
 <!--                  <p class="mb-0">내용</p>-->
 <!--                </div>-->
                 <div>
-
-                  <p>제품 설명: <span th:text="${bike.info}"></span></p>
-
-
+                  <p>제품 설명: <span th:utext="${bike.info}"></span></p>
                 </div>
 <!--                <form action="/bike/productRegister" method="post">-->
 
@@ -965,7 +973,7 @@
                             <p class="card-text" th:text="${reply.content}">댓글 내용</p>
                             <p class="card-text"><small class="text-muted" th:text=" '작성일시:' + ${reply.regdate}">작성일시</small></p>
                           </div>
-                          <div class="card-footer bg-transparent border-top-0" th:if="${reply.userid} == ${loginId}">
+                          <div class="card-footer bg-transparent border-top-0" th:if="${reply.userid} == ${loginId} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                             <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
                               <button type="submit" class="btn btn-danger">삭제</button>
                             </form>

@@ -50,6 +50,38 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" th:href="@{/css/theme.min.css}" />
+
+
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script th:inline="javascript">
+      var IMP = window.IMP;
+      IMP.init("imp01133206");
+      var productPrice = [[${totalSum}]] + 3000;
+      //카드 결제
+      function requestPay() {
+        console.log("Card payment requested");
+        console.log(productPrice);
+        IMP.request_pay({
+          pg : "html5_inicis",
+          pay_method : 'card',
+          merchant_uid: `INIpayTest`,
+          name : '장바구니',
+          amount : productPrice,
+          //name : '당근',
+          //amount : 1004,
+          buyer_email : 'Iamport@chai.finance',
+          buyer_name : '포트원 기술지원팀',
+          buyer_tel : '010-1234-5678',
+          buyer_addr : '서울특별시 강남구 삼성동',
+          buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+          //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+        });
+      }
+
+
+    </script>
+
   </head>
 
   <body>
@@ -514,9 +546,7 @@
                   </div>
                   <div class="d-grid mb-1 mt-4">
                     <!-- btn -->
-                    <button class="btn btn-primary btn-lg d-flex justify-content-center align-items-center" type="submit">
-                     <span class="fw-bold">결제하기</span>
-                    </button>
+                    <button onclick="requestPay()" class="btn btn-primary mb-2">결제하기</button>
                   </div>
                   <!-- heading -->
                 </div>
