@@ -1,10 +1,14 @@
 package com.multicampus.hhh.controller;
 
 import com.multicampus.hhh.config.auth.PrincipalDetails;
+import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.domain.PagingVO;
 import com.multicampus.hhh.dto.AccBoardDTO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.service.AccBoardService;
+import com.multicampus.hhh.service.MemberService;
+import com.multicampus.hhh.service.PageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.UUID;
 
 @Controller
@@ -31,14 +36,26 @@ import java.util.UUID;
 public class AccBoardController {
 
     private final AccBoardService service;
-    //bike와 구분 안 해도 되나?
-    @Value("${com.multicampus.upload.path}")
-    private String uploadPath;
+    private final MemberService memberService;
+    private final PageService pageService;
 
     @GetMapping("/accList")
-    public String list(Model model){
-        log.info("악세서리 구매게시판");
-        model.addAttribute("accList", service.getAll());
+    public String list(Model model, PagingVO vo,@RequestParam(value="nowPage", required=false)String nowPage
+            , @RequestParam(value="cntPerPage", required=false)String cntPerPage){
+
+        int total = pageService.countAccBoard();
+        if (nowPage == null && cntPerPage == null) {
+            nowPage = "1";
+            cntPerPage = "5";
+        } else if (nowPage == null) {
+            nowPage = "1";
+        } else if (cntPerPage == null) {
+            cntPerPage = "5";
+        }
+        vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+        model.addAttribute("paging", vo);
+        model.addAttribute("viewAll", pageService.selectAccBoard(vo));
+
         return "acc/accList";
     }
 
@@ -85,8 +102,14 @@ public class AccBoardController {
         return "redirect:/acc/accList";
     }
     @GetMapping("/productSingle/{acid}")
-    public String readOne(@PathVariable int acid, Model model){
+    public String readOne(@PathVariable int acid, Model model, Principal principal){
         AccBoardDTO accBoardDTO = service.readOne(acid);
+        if (principal != null) {
+            String userId = principal.getName();
+            MemberRole userRole = memberService.findRole(userId);
+            boolean isAdmin = userRole == MemberRole.ADMIN;
+            model.addAttribute("isAdmin", isAdmin);
+        }
         model.addAttribute("acc", accBoardDTO);
         return "acc/productSingle";
     }
@@ -131,11 +154,25 @@ public class AccBoardController {
         return "redirect:/acc/accList";
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/payment")
+    public String pay(Model model,@RequestParam("acid") int acid) {
+        //상품 정보 가져오기 위해서 사용
+        AccBoardDTO accBoardDTO = service.readOne(acid);
+        model.addAttribute("productName", accBoardDTO.getProductname());
+        model.addAttribute("productPrice", accBoardDTO.getPrice());
+        model.addAttribute("productImg",accBoardDTO.getImage());
 
-    @GetMapping("payment")
-    public void pay(){
+        model.addAttribute("acid", acid);
 
 
+        //사용자 정보 가져오기 위해 사용
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        MemberVO userid = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
+        model.addAttribute("userid", userid.getName());
+        model.addAttribute("userAddress", userid.getAddress());
+        model.addAttribute("userPhnum", userid.getPhnum());
+        return "acc/payment";
     }
 
 }

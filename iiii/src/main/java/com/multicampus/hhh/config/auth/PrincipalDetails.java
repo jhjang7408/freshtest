@@ -43,7 +43,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 
         String userid = memberVO.getUserid();
         log.info("----------------------------------------"+userid);
-
         MemberRole memberRole = memberService.findRole(userid);
 
 
@@ -101,5 +100,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     @Override
     public Map<String, Object> getAttributes() {
         return attributes;
+    }
+
+    public String getUserId(){
+        return memberVO.getUserid();
     }
 }

@@ -6,6 +6,7 @@ import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.dto.BikeBoardReplyDTO;
 import com.multicampus.hhh.service.BikeBoardReplyService;
+import com.multicampus.hhh.service.BikeBoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
@@ -17,12 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/bike")
 @RequiredArgsConstructor
 public class BikeBoardReplyController {
-
+    private final BikeBoardService service;
     private final BikeBoardReplyService bikeBoardReplyService;
     @Secured("ROLE_USER")
     @PostMapping("productSingle/{bikeid}/bikereply")
@@ -54,7 +56,17 @@ public class BikeBoardReplyController {
 //    }
 
     @PostMapping("productSingle/{bikeid}/{bikereplyid}/delete/")
-    public String delete(@PathVariable int bikeid, @PathVariable int bikereplyid){
+    public String delete(@PathVariable int bikeid, @PathVariable int bikereplyid, Principal principal, Model model){
+
+        BikeBoardDTO bikeBoardDTO = service.readOne(bikeid);
+        if (principal != null) {
+            String loginId = principal.getName();
+            model.addAttribute("loginId", loginId);
+        }
+
+        // writer 추가
+        String writer = bikeBoardDTO.getUserid();
+        model.addAttribute("writer", writer);
         bikeBoardReplyService.delete(bikereplyid);
         return "redirect:/bike/productSingle/" + bikeid;
     }

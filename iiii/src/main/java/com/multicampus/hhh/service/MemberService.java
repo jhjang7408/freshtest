@@ -3,6 +3,7 @@ package com.multicampus.hhh.service;
 import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.dto.BasketDTO;
 import com.multicampus.hhh.dto.MemberDTO;
 
 import java.util.List;
@@ -31,7 +32,12 @@ public interface MemberService {
 
     MemberRole findRole(String userid);
 
-//    void modify(MemberVO memberVO);
+    List<BasketDTO> shopCart(String userid);
+    void addCart(BasketDTO basketDTO);
+    void revmoveCart(int bagid);
+
+    void modify(MemberVO memberVO);
+    boolean updateCartQuantity(int id, int count);
 //
 //    void remove(String id);
 

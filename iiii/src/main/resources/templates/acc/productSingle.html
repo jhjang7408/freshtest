@@ -327,18 +327,14 @@
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
               >
-                판매 등록 277줄
+                판매 등록
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/acc/productRegister"
-                  >악세서리 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/bike/productRegister"
-                  >자전거 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                 </li>
               </ul>
             </li>
@@ -384,12 +380,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="qa/guide"
+                  <a class="dropdown-item" th:href="@{'../qa/guide'}"
                   >가이드</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="qa/qalist"
+                  <a class="dropdown-item" th:href="@{'../qa/gulist'}"
                   >질문/정보 게시판</a
                   >
                 </li>
@@ -438,7 +434,7 @@
                   <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="moon/moonlist">자주 묻는 질문</a>
+                  <a class="dropdown-item" th:href="@{'../mooon/moonlist'}">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -872,24 +868,38 @@
 
                               <div class="input-group input-spinner  ">
                                 <input type="button" value="-" class="button-minus  btn  btn-sm " data-field="quantity">
-                                <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input   ">
+<!--                                payment에서 quantity 쓰고 싶어서 id="product-quantity" 추가함 -->
+                                <input type="number" step="1" max="10" value="1" name="quantity" id="product-quantity"  class="quantity-field form-control-sm form-input   ">
                                 <input type="button" value="+" class="button-plus btn btn-sm " data-field="quantity">
                               </div>
 
             </div>
-                          <div class="mt-3 row justify-content-start g-2 align-items-center">
+                          <div class="mt-3 row justify-content-start g-2 align-items-center" >
 
 
                             <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
                               <!-- button -->
-                              <!-- btn --> <button type="button" onclick="location.href='shop-checkout.html' " class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>Add to
+                              <!-- btn --> <button id="addCartBtn" type="button" class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>Add to
                               cart</button>
+                              <!-- btn -->
+                              <a th:attr="onclick='saveQuantity(' + ${acid} + ')'" class="btn btn-primary mr-2">결제</a>
+<!--                              <a onclick="saveQuantity([[${acid}]])" class="btn btn-primary mr-2">결제</a>-->
+<!--                              <a th:href="@{/acc/payment(acid=${acid})}" class="btn btn-primary mr-2">결제</a>-->
+                              <a th:href="@{'/mypage/shop-cart'}" class="btn btn-primary mr-2">장바구니</a>
                             </div>
                             <div class="col-md-4 col-4">
                               <!-- btn -->
                             </div>
                           </div>
-             hr
+
+<!--            수량 저장하려고 사용-->
+<script>
+  function saveQuantity(acid) {
+  var productQuantity = document.getElementById("product-quantity").value;
+  localStorage.setItem("productQuantity", productQuantity);
+  window.location.href = "/acc/payment?acid=" + acid; // 결제 페이지로 이동
+}
+</script>
                           <hr class="my-6">
             <div>
               <!-- table -->
@@ -955,7 +965,7 @@
                   </div>
                   <!-- form control -->
 <!--loginid 대신에 어드민 확인하는 부분으로 변경해야함-->
-                  <div class="d-flex justify-content-end" th:if="${loginId == writer}">
+                  <div class="d-flex justify-content-end" th:if="${isAdmin}">
                     <a th:href="@{'/acc/update/' + ${acc.acid}}" class="btn btn-primary mr-2">게시물 수정</a>
                     <form th:action="@{'/acc/' + ${acc.acid} + '/delete'}" method="post" onsubmit="return confirm('삭제하시겠습니까?');">
                       <button type="submit" class="btn btn-danger">게시물 삭제</button>
@@ -1093,7 +1103,27 @@
 <script th:src="@{/js/vendors/tns-slider.js}"></script>
 <script th:src="@{/js/vendors/zoom.js}"></script>
 <script th:src="@{/js/vendors/increment-value.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+  $(document).ready(function() {
+    $('#addCartBtn').click(function() {
+      const acid = [[${acc.acid}]];
+
+      $.ajax({
+        url: '/mypage/addcart',
+        type: 'POST',
+        data: { 'acid': acid },
+        success: function(response) {
+          alert('장바구니에 추가했습니다.');
+        },
+        error: function(xhr, status, error) {
+          console.error('장바구니 추가 중 오류가 발생했습니다.');
+        }
+      });
+    });
+  });
+</script>
 
 
 

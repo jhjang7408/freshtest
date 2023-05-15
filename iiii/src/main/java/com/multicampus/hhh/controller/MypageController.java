@@ -4,7 +4,10 @@ import com.multicampus.hhh.config.auth.PrincipalDetails;
 import com.multicampus.hhh.domain.BikeBoardVO;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
+import com.multicampus.hhh.dto.AccBoardDTO;
+import com.multicampus.hhh.dto.BasketDTO;
 import com.multicampus.hhh.dto.MemberDTO;
+import com.multicampus.hhh.service.AccBoardService;
 import com.multicampus.hhh.service.MemberService;
 import com.sun.security.auth.UserPrincipal;
 import lombok.extern.log4j.Log4j2;
@@ -33,7 +36,7 @@ import java.util.List;
 public class MypageController {
 
     @Autowired
-    MemberService memberService;
+    private MemberService memberService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -45,10 +48,10 @@ public class MypageController {
         log.info("자전거 구매내역");
     }
 
-    @GetMapping("/orderlist-acc")
-    public void orderacclist(){
-        log.info("악세사리 구매내역");
-    }
+//    @GetMapping("/orderlist-acc")
+//    public void orderacclist(){
+//        log.info("악세사리 구매내역");
+//    }
 
 
     //테스트
@@ -90,11 +93,8 @@ public class MypageController {
 
 
     @GetMapping("/listsell")
-    public void listsell(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MemberVO memberVO = ((PrincipalDetails)authentication.getPrincipal()).getMemberVO();
-
-        String userid = memberVO.getUserid();
+    public void listsell(Model model,@AuthenticationPrincipal PrincipalDetails principalDetails){
+        String userid =        principalDetails.getMemberVO().getUserid();
         List<BikeBoardVO> bikeBoard = memberService.findbike(userid);
         model.addAttribute("bikelist", bikeBoard);
         log.info("판매내역");
@@ -103,8 +103,46 @@ public class MypageController {
 
 
     @GetMapping("/shop-cart")
-    public  void cartPage(){
-        log.info("장바구니");
+    public void cartPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
+        log.info("장바구니 페이지");
+        String userid = principalDetails.getMemberVO().getUserid();
+        List<BasketDTO> cart = memberService.shopCart(userid);
+        model.addAttribute("cart",cart);
+
+        int totalSum = 0;
+        for (BasketDTO basket : cart) {
+            totalSum += basket.getPrice()*basket.getCount();
+        }
+        model.addAttribute("totalSum", totalSum);
+    }
+
+    @PostMapping("/update-cart")
+    public String updateCart(@RequestParam int cartId, @RequestParam int quantity) {
+        boolean updated = memberService.updateCartQuantity(cartId, quantity);
+        if (updated) {
+            return "success";
+        } else {
+            return "error";
+        }
+    }
+
+    @Secured("ROLE_USER")
+    @PostMapping("/addcart")
+    public String addCart(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("acid") int acid){
+        String userid = principalDetails.getMemberVO().getUserid();
+        BasketDTO basketDTO = BasketDTO.builder()
+                .userid(userid)
+                .acid(acid)
+                .build();
+        log.info("제대로 작동하는지 확인");
+        memberService.addCart(basketDTO);
+        return "/acc/accList";
+    }
+
+    @PostMapping("/removeCart")
+    public String removeCart(@RequestParam("bagid") int bagid){
+        memberService.revmoveCart(bagid);
+        return "/mypage/shop-cart";
     }
 
     @PostMapping("/changepass")     //비밀번호 변경

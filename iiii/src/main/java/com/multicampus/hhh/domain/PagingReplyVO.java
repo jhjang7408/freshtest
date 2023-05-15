@@ -9,7 +9,9 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class PagingVO {
+public class PagingReplyVO {
+
+    private int qaid;
 
     private int nowPage;
     private int startPage;
@@ -17,13 +19,17 @@ public class PagingVO {
     private int total;
     private int cntPerPage;
     private int lastPage;
-    private int cntPage = 5;
+    private int cntPage = 3;
 
     // 쿼리에 사용할 data
     private int start;
     private int end;
 
-    public PagingVO(int total, int nowPage, int cntPerPage){
+
+
+
+    public PagingReplyVO(int qaid, int total, int nowPage, int cntPerPage){
+        setQaid(qaid);
         setNowPage(nowPage);
         setCntPerPage(cntPerPage);
         setTotal(total);

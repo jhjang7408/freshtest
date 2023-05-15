@@ -533,9 +533,12 @@
             </div>
           </form>
           <div class="button-container">
-            <a href="/oauth2/authorization/google"><button class="btn btn-secondary btn-sm">구글 로그인</button></a>
-            <a href="/oauth2/authorization/naver"><button class="btn btn-success btn-sm">네이버 로그인</button></a>
-            <a href="/oauth2/authorization/kakao"><button class="btn btn-warning btn-sm">카카오 로그인</button></a>
+            <a href="/oauth2/authorization/google"><button class="btn btn-secondary btn-sm google-button">
+              <img th:src="@{/images/구글 로그인 버튼.png}"></button></a>
+            <a href="/oauth2/authorization/naver"><button class="btn btn-success btn-sm naver-button">
+              <img th:src="@{/images/네이버 로그인 버튼.png}"></button></a>
+            <a href="/oauth2/authorization/kakao"><button class="btn btn-warning btn-sm kakao-button">
+              <img th:src="@{/images/카카오 로그인 버튼.png}"></button></a>
           </div>
 
 <!--          <div class="col-12 d-grid">-->
