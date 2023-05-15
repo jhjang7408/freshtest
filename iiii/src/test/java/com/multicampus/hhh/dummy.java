@@ -89,7 +89,7 @@ public class dummy {
 
     @Test
     public void createqaBoard(){
-        IntStream.rangeClosed(1,60).forEach(i->{
+        IntStream.rangeClosed(10,40).forEach(i->{
             QaBoard board = QaBoard.builder()
                     .userid("test"+i)
                     .title("제목 "+i)

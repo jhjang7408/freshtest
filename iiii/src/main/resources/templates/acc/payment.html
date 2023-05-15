@@ -319,13 +319,13 @@
                                         >장바구니</a
                                         >
                                     </li>
-                                    <li>
-                                        <a
-                                                class="dropdown-item"
-                                                href="/mypage/orderlist-bike"
-                                        >자전거 구매내역</a
-                                        >
-                                    </li>
+<!--                                    <li>-->
+<!--                                        <a-->
+<!--                                                class="dropdown-item"-->
+<!--                                                href="/mypage/orderlist-bike"-->
+<!--                                        >자전거 구매내역</a-->
+<!--                                        >-->
+<!--                                    </li>-->
                                     <li>
                                         <a
                                                 class="dropdown-item"
@@ -495,29 +495,7 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                공지
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="../pages/signin.html"
-                                    >공지</a
-                                    >
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="../pages/signup.html"
-                                    >이벤트</a
-                                    >
-                                </li>
-                            </ul>
-                        </li>
+
 
                         <li class="nav-item dropdown">
                             <a
@@ -938,7 +916,7 @@
                         <div class="mb-8">
                             <!-- text -->
                             <h1 class="fw-bold mb-0">주문</h1>
-<!--                            <p class="mb-0">계정이 있으신가요? <a href="#!">로그인</a>.</p>-->
+                            <!--                            <p class="mb-0">계정이 있으신가요? <a href="#!">로그인</a>.</p>-->
                         </div>
                     </div>
                 </div>
@@ -959,8 +937,8 @@
                                         <i class="feather-icon icon-map-pin me-2 text-muted"></i>배송지
                                     </a>
                                     <!-- btn -->
-<!--                                    <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"-->
-<!--                                       data-bs-target="#addAddressModal">새 배송지 입력 </a>-->
+                                    <!--                                    <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"-->
+                                    <!--                                       data-bs-target="#addAddressModal">새 배송지 입력 </a>-->
                                     <!-- collapse -->
                                 </div>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse show"
@@ -984,14 +962,14 @@
                                                         전화번호:<span th:text="${userPhnum}"></span>
 
                                                     </address>
-<!--                                                    <address> <strong>Jitu Chauhan</strong> <br>-->
+                                                    <!--                                                    <address> <strong>Jitu Chauhan</strong> <br>-->
 
-<!--                                                        4450 North Avenue Oakland, <br>-->
+                                                    <!--                                                        4450 North Avenue Oakland, <br>-->
 
-<!--                                                        Nebraska, United States,<br>-->
+                                                    <!--                                                        Nebraska, United States,<br>-->
 
-<!--                                                        <abbr title="Phone">P: 402-776-1106</abbr></address>-->
-<!--                                                    <span class="text-danger">Default address </span>-->
+                                                    <!--                                                        <abbr title="Phone">P: 402-776-1106</abbr></address>-->
+                                                    <!--                                                    <span class="text-danger">Default address </span>-->
 
                                                 </div>
                                             </div>
@@ -1003,75 +981,75 @@
                             </div>
                             <!-- accordion item -->
 
-<!--                            카드 결제만 구현 했을 때-->
-<!--                            <div class="accordion-item py-4">-->
+                            <!--                            카드 결제만 구현 했을 때-->
+                            <!--                            <div class="accordion-item py-4">-->
 
-<!--                                <a href="#" class="text-inherit h5"  data-bs-toggle="collapse"-->
-<!--                                   data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">-->
-<!--                                    <i class="feather-icon icon-credit-card me-2 text-muted"></i>결제 수단-->
-<!--                                    &lt;!&ndash; collapse &ndash;&gt; </a>-->
-<!--                                <div id="flush-collapseFour" class="accordion-collapse collapse "-->
-<!--                                     data-bs-parent="#accordionFlushExample">-->
+                            <!--                                <a href="#" class="text-inherit h5"  data-bs-toggle="collapse"-->
+                            <!--                                   data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">-->
+                            <!--                                    <i class="feather-icon icon-credit-card me-2 text-muted"></i>결제 수단-->
+                            <!--                                    &lt;!&ndash; collapse &ndash;&gt; </a>-->
+                            <!--                                <div id="flush-collapseFour" class="accordion-collapse collapse "-->
+                            <!--                                     data-bs-parent="#accordionFlushExample">-->
 
-<!--                                    <div class="mt-5">-->
-<!--                                        <div>-->
+                            <!--                                    <div class="mt-5">-->
+                            <!--                                        <div>-->
 
-<!--                                            <div class="card card-bordered shadow-none mb-2">-->
-<!--                                                &lt;!&ndash; card body &ndash;&gt;-->
-<!--                                                <div class="card-body p-6">-->
-<!--                                                    <div class="d-flex">-->
-<!--                                                        <div class="form-check">-->
-<!--                                                            &lt;!&ndash; checkbox &ndash;&gt;-->
-<!--                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">-->
-<!--                                                            <label class="form-check-label ms-2" for="paypal">-->
+                            <!--                                            <div class="card card-bordered shadow-none mb-2">-->
+                            <!--                                                &lt;!&ndash; card body &ndash;&gt;-->
+                            <!--                                                <div class="card-body p-6">-->
+                            <!--                                                    <div class="d-flex">-->
+                            <!--                                                        <div class="form-check">-->
+                            <!--                                                            &lt;!&ndash; checkbox &ndash;&gt;-->
+                            <!--                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">-->
+                            <!--                                                            <label class="form-check-label ms-2" for="paypal">-->
 
-<!--                                                            </label>-->
-<!--                                                        </div>-->
-<!--                                                        <div>-->
-<!--                                                            &lt;!&ndash; title &ndash;&gt;-->
-<!--                                                            <h5 class="mb-1 h6"> 카드결제</h5>-->
+                            <!--                                                            </label>-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div>-->
+                            <!--                                                            &lt;!&ndash; title &ndash;&gt;-->
+                            <!--                                                            <h5 class="mb-1 h6"> 카드결제</h5>-->
 
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            &lt;!&ndash; card &ndash;&gt;-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            &lt;!&ndash; card &ndash;&gt;-->
 
-<!--                                            &lt;!&ndash; card &ndash;&gt;-->
-<!--                                            <div class="card card-bordered shadow-none mb-2">-->
-<!--                                                &lt;!&ndash; card body &ndash;&gt;-->
-<!--                                                <div class="card-body p-6">-->
-<!--                                                    &lt;!&ndash; check input &ndash;&gt;-->
-<!--                                                    <div class="d-flex">-->
-<!--                                                        <div class="form-check">-->
-<!--                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="payoneer">-->
-<!--                                                            <label class="form-check-label ms-2" for="payoneer">-->
+                            <!--                                            &lt;!&ndash; card &ndash;&gt;-->
+                            <!--                                            <div class="card card-bordered shadow-none mb-2">-->
+                            <!--                                                &lt;!&ndash; card body &ndash;&gt;-->
+                            <!--                                                <div class="card-body p-6">-->
+                            <!--                                                    &lt;!&ndash; check input &ndash;&gt;-->
+                            <!--                                                    <div class="d-flex">-->
+                            <!--                                                        <div class="form-check">-->
+                            <!--                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="payoneer">-->
+                            <!--                                                            <label class="form-check-label ms-2" for="payoneer">-->
 
-<!--                                                            </label>-->
-<!--                                                        </div>-->
-<!--                                                        <div>-->
-<!--                                                            &lt;!&ndash; title &ndash;&gt;-->
-<!--                                                            <h5 class="mb-1 h6">카카오 페이</h5>-->
+                            <!--                                                            </label>-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div>-->
+                            <!--                                                            &lt;!&ndash; title &ndash;&gt;-->
+                            <!--                                                            <h5 class="mb-1 h6">카카오 페이</h5>-->
 
-<!--                                                        </div>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            &lt;!&ndash; card &ndash;&gt;-->
+                            <!--                                                        </div>-->
+                            <!--                                                    </div>-->
+                            <!--                                                </div>-->
+                            <!--                                            </div>-->
+                            <!--                                            &lt;!&ndash; card &ndash;&gt;-->
 
-<!--                                            &lt;!&ndash; Button &ndash;&gt;-->
-<!--                                            <div class="mt-5 d-flex justify-content-end">-->
-<!--                                                <a href="#" class="btn btn-outline-gray-400 text-muted"-->
-<!--                                                   data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"-->
-<!--                                                   aria-controls="flush-collapseThree">취소</a>-->
-<!--                                                &lt;!&ndash;                        <a href="#" class="btn btn-primary ms-2">주문</a>&ndash;&gt;-->
-<!--                                                <button onclick="requestPay()"class="btn btn-primary mb-2">결제하기</button> &lt;!&ndash; 결제하기 버튼 생성 &ndash;&gt;-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                            <!--                                            &lt;!&ndash; Button &ndash;&gt;-->
+                            <!--                                            <div class="mt-5 d-flex justify-content-end">-->
+                            <!--                                                <a href="#" class="btn btn-outline-gray-400 text-muted"-->
+                            <!--                                                   data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"-->
+                            <!--                                                   aria-controls="flush-collapseThree">취소</a>-->
+                            <!--                                                &lt;!&ndash;                        <a href="#" class="btn btn-primary ms-2">주문</a>&ndash;&gt;-->
+                            <!--                                                <button onclick="requestPay()"class="btn btn-primary mb-2">결제하기</button> &lt;!&ndash; 결제하기 버튼 생성 &ndash;&gt;-->
+                            <!--                                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
 
-<!--                            </div>-->
+                            <!--                            </div>-->
                             <div class="accordion-item py-4">
                                 <a href="#" class="text-inherit h5"  data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
                                     <i class="feather-icon icon-credit-card me-2 text-muted"></i>결제 수단

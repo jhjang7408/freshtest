@@ -3,6 +3,7 @@ package com.multicampus.hhh.mapper;
 import com.multicampus.hhh.domain.MemberRole;
 import com.multicampus.hhh.domain.MemberVO;
 import com.multicampus.hhh.dto.BasketDTO;
+import com.multicampus.hhh.dto.BikeBoardDTO;
 import com.multicampus.hhh.dto.MemberDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,9 @@ class MemberMapperTest {
 
     @Autowired
     private MemberMapper memberMapper;
+
+    @Autowired
+    private BikeBoardMapper bikeBoardMapper;
 
     @Test
     public void findTest(){
@@ -65,5 +69,11 @@ class MemberMapperTest {
         BasketDTO basketDTO = BasketDTO.builder().acid(5).userid("tjqk77@gmail.com").build();
         log.info("========"+basketDTO+"============================");
         log.info(memberMapper.checkCart(basketDTO) + " ================ ");
+    }
+
+    @Test
+    public void bikeSelectOne(){
+        BikeBoardDTO bikeBoardDTO = bikeBoardMapper.selectOne(32);
+        log.info(bikeBoardDTO);
     }
 }

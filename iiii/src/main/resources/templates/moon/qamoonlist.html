@@ -209,13 +209,13 @@
                     >장바구니</a
                     >
                   </li>
-                  <li>
-                    <a
-                            class="dropdown-item"
-                            href="/mypage/orderlist-bike"
-                    >자전거 구매내역</a
-                    >
-                  </li>
+                  <!--                  <li>-->
+                  <!--                    <a-->
+                  <!--                            class="dropdown-item"-->
+                  <!--                            href="/mypage/orderlist-bike"-->
+                  <!--                    >자전거 구매내역</a-->
+                  <!--                    >-->
+                  <!--                  </li>-->
                   <li>
                     <a
                             class="dropdown-item"
@@ -571,10 +571,10 @@
 
 
 
-                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
+                    <button type="button" class="btn btn-soft-primary mb-2" sec:authorize="!isAuthenticated()">
                       <a href="/member/signin">글쓰기</a>
                     </button>
-                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
+                    <button type="button" class="btn btn-soft-primary mb-2" sec:authorize="isAuthenticated()">
                       <a href="/moon/qamoonregister">글쓰기</a>
                     </button>
 

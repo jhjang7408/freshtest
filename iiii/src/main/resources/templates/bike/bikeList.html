@@ -229,13 +229,13 @@
                                         >장바구니</a
                                         >
                                     </li>
-                                    <li>
-                                        <a
-                                                class="dropdown-item"
-                                                href="/mypage/orderlist-bike"
-                                        >자전거 구매내역</a
-                                        >
-                                    </li>
+                                    <!--                    <li>-->
+                                    <!--                      <a-->
+                                    <!--                              class="dropdown-item"-->
+                                    <!--                              href="/mypage/orderlist-bike"-->
+                                    <!--                      >자전거 구매내역</a-->
+                                    <!--                      >-->
+                                    <!--                    </li>-->
                                     <li>
                                         <a
                                                 class="dropdown-item"
@@ -393,12 +393,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'/qa/guide'}"
+                                    <a class="dropdown-item" href="/qa/guide"
                                     >가이드</a
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'/qa/qalist'}"
+                                    <a class="dropdown-item" href="/qa/qalist"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
@@ -419,13 +419,13 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                                    <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                                    <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'/moon/moonlist'}">자주 묻는 질문</a>
+                                    <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                                 </li>
                             </ul>
                         </li>
