@@ -8,8 +8,8 @@
 
 <!--    결제 값 입력-->
     <insert id="insert" parameterType="com.multicampus.hhh.dto.OrderDTO">
-        insert into user_order(user_id,ac_id,status,image,amount,price,product_name)
-        values ( #{userid}, #{acid}, '구매',#{image},#{amount},#{price},#{productname})
+        insert into user_order(user_id,ac_id,status,amount,price,product_name)
+        values ( #{userid}, #{acid}, '구매',#{amount},#{price},#{productname})
     </insert>
 <!--    모든 결제 목록 확인-->
     <select id="findByUserId" parameterType="String" resultType="com.multicampus.hhh.dto.OrderDTO">
