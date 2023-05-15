@@ -16,6 +16,7 @@
 <!--    <select id="findAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">-->
 <!--        select * from bike_board order by bike_id desc-->
 <!--    </select>-->
+
     <select id="findAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
         select b.*, u.nickname as nickname
         from bike_board b join user u on b.user_id = u.user_id
