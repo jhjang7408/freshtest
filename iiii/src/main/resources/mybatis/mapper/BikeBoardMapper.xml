@@ -13,8 +13,14 @@
         values (#{userid}, #{productname}, #{title}, #{image}, #{price}, #{info}, #{status}, CURRENT_TIMESTAMP)
     </insert>
     <!--구매 게시판 목록 조회-->
+<!--    <select id="findAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">-->
+<!--        select * from bike_board order by bike_id desc-->
+<!--    </select>-->
+
     <select id="findAll" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
-        select * from bike_board order by bike_id desc
+        select b.*, u.nickname as nickname
+        from bike_board b join user u on b.user_id = u.user_id
+        order by b.bike_id desc
     </select>
 
     <!--특정 게시물 조회-->
@@ -30,5 +36,6 @@
     <delete id="delete" parameterType="int">
         delete from bike_board where bike_id = #{bikeid}
     </delete>
+
 
 </mapper>

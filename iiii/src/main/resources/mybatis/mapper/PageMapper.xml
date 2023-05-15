@@ -22,9 +22,10 @@
 
     <!-- 자전거 구매 게시판 페이징 처리 후 게시글 조회 -->
     <select id="selectBikeBoard" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
-        SELECT *
-        FROM bike_board
-        ORDER BY bike_id DESC
+        SELECT b.*, u.nickname as nickname
+        FROM bike_board b
+                 JOIN user u ON b.user_id = u.user_id
+        ORDER BY b.bike_id DESC
             LIMIT #{cntPerPage} OFFSET #{start}
     </select>
     <!-- 악세서리 구매 게시판 총 게시글 갯수 출력 -->

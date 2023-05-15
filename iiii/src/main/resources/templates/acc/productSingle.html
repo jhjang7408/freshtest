@@ -380,41 +380,19 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" th:href="@{'../qa/guide'}"
+                  <a class="dropdown-item" th:href="@{'/qa/guide'}"
                   >가이드</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" th:href="@{'../qa/qalist'}"
+                  <a class="dropdown-item" th:href="@{'/qa/qalist'}"
                   >질문/정보 게시판</a
                   >
                 </li>
               </ul>
             </li>
 
-            <li class="nav-item dropdown">
-              <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-              >
-                공지
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="../pages/signin.html"
-                  >공지</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/signup.html"
-                  >이벤트</a
-                  >
-                </li>
-              </ul>
-            </li>
+
 
             <li class="nav-item dropdown">
               <a
@@ -434,7 +412,7 @@
                   <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" th:href="@{'../moon/moonlist'}">자주 묻는 질문</a>
+                  <a class="dropdown-item" th:href="@{'/moon/moonlist'}">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -833,7 +811,7 @@
           <!-- img slide -->
           <div class="product" id="product">
             <div class="zoom" onmousemove="zoom(event)"
-                 style="background-image: url(../assets/images/products/bike/bike-1.jpg)">
+                 th:style="'background-image: url(/uploadImg/' + ${acc.image} + ')'">
               <!-- img -->
               <!-- img --><img th:src="@{'/uploadImg/' + ${acc.image}}" alt="acc Image" width="100" height="300">
 
@@ -879,14 +857,13 @@
 
                             <div class="col-xxl-4 col-lg-4 col-md-5 col-5 d-grid">
                               <!-- button -->
-                              <!-- btn --> <button id="addCartBtn" type="button" class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>Add to
-                              cart</button>
+                              <!-- btn --> <button id="addCartBtn" type="button" class="btn btn-primary"><i class="feather-icon icon-shopping-bag me-2"></i>
+                              장바구니 추가</button>
                               <!-- btn -->
                               <a th:attr="onclick='saveQuantity(' + ${acid} + ')'" class="btn btn-primary mr-2">결제</a>
 <!--                              <a onclick="saveQuantity([[${acid}]])" class="btn btn-primary mr-2">결제</a>-->
 <!--                              <a th:href="@{/acc/payment(acid=${acid})}" class="btn btn-primary mr-2">결제</a>-->
-                              <a th:href="@{'/mypage/shop-cart'}" class="btn btn-primary mr-2">장바구니</a>
-                            </div>
+                               </div>
                             <div class="col-md-4 col-4">
                               <!-- btn -->
                             </div>

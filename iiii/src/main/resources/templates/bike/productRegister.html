@@ -391,41 +391,19 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../qa/guide'}"
+                                    <a class="dropdown-item" th:href="@{'/qa/guide'}"
                                     >가이드</a
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../qa/qalist'}"
+                                    <a class="dropdown-item" th:href="@{'/qa/qalist'}"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                공지
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="../pages/signin.html"
-                                    >공지</a
-                                    >
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="../pages/signup.html"
-                                    >이벤트</a
-                                    >
-                                </li>
-                            </ul>
-                        </li>
+
 
                         <li class="nav-item dropdown">
                             <a
@@ -445,7 +423,7 @@
                                     <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../moon/moonlist'}">자주 묻는 질문</a>
+                                    <a class="dropdown-item" th:href="@{'/moon/moonlist'}">자주 묻는 질문</a>
                                 </li>
                             </ul>
                         </li>

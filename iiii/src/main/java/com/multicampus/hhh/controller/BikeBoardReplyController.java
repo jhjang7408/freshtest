@@ -26,7 +26,7 @@ import java.security.Principal;
 public class BikeBoardReplyController {
     private final BikeBoardService service;
     private final BikeBoardReplyService bikeBoardReplyService;
-    @Secured("ROLE_USER")
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("productSingle/{bikeid}/bikereply")
     public String register(@PathVariable int bikeid, BikeBoardDTO bikeBoardDTO, BikeBoardReplyDTO bikeBoardReplyDTO, Model model, HttpSession session){
         int bikereplyid = bikeBoardReplyDTO.getBikereplyid();
@@ -54,7 +54,7 @@ public class BikeBoardReplyController {
 //
 //        return "redirect:/bike/productSingle/" + bikeid;
 //    }
-
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @PostMapping("productSingle/{bikeid}/{bikereplyid}/delete/")
     public String delete(@PathVariable int bikeid, @PathVariable int bikereplyid, Principal principal, Model model){
 
