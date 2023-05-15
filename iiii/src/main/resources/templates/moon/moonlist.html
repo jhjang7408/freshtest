@@ -149,38 +149,31 @@
           </div>
         </div>
         <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-          <form action="#">
+          <form id="search-form" action="#">
             <div class="input-group">
-              <input
-                      class="form-control rounded"
-                      type="search"
-                      placeholder="Search for products"
-              />
+              <input id="search-input" class="form-control rounded" type="search" placeholder="제품을 검색하세요">
               <span class="input-group-append">
-                    <button
-                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-                            type="button"
-                    >
-                      <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-search"
-                      >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </button>
-                  </span>
+        <button id="search-button" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="16"
+               height="16"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="2"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+               class="feather feather-search"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </span>
             </div>
           </form>
         </div>
+
 
         <!-- Button trigger modal -->
         <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
@@ -252,7 +245,9 @@
     </div>
   </div>
 
-  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
+  <nav
+          class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
+  >
     <div class="container px-0 px-md-3">
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
         <div
@@ -324,18 +319,14 @@
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
               >
-                판매 등록 277줄
+                판매 등록
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/acc/productRegister"
-                  >악세서리 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/bike/productRegister"
-                  >자전거 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                 </li>
               </ul>
             </li>
@@ -393,29 +384,29 @@
               </ul>
             </li>
 
-            <li class="nav-item dropdown">
-              <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-              >
-                공지
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="../pages/signin.html"
-                  >공지</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/signup.html"
-                  >이벤트</a
-                  >
-                </li>
-              </ul>
-            </li>
+            <!--            <li class="nav-item dropdown">-->
+            <!--              <a-->
+            <!--                      class="nav-link dropdown-toggle"-->
+            <!--                      href="#"-->
+            <!--                      role="button"-->
+            <!--                      data-bs-toggle="dropdown"-->
+            <!--                      aria-expanded="false"-->
+            <!--              >-->
+            <!--                공지-->
+            <!--              </a>-->
+            <!--              <ul class="dropdown-menu">-->
+            <!--                <li>-->
+            <!--                  <a class="dropdown-item" href="../pages/signin.html"-->
+            <!--                  >공지</a-->
+            <!--                  >-->
+            <!--                </li>-->
+            <!--                <li>-->
+            <!--                  <a class="dropdown-item" href="../pages/signup.html"-->
+            <!--                  >이벤트</a-->
+            <!--                  >-->
+            <!--                </li>-->
+            <!--              </ul>-->
+            <!--            </li>-->
 
             <li class="nav-item dropdown">
               <a
@@ -512,16 +503,44 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">제목</th>
-                                    <th scope="col">내용</th>
+                                    <th scope="col"></th>
+                                    <!--<th scope="col">내용</th>-->
                                 </tr>
                                 </thead>
         
                                 <tbody>
                                 <tr>
-                                    <td>자주 묻는 질문1</td>
-                                    <td>내용1ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇㄻㄴㅇ리마넝리;ㅏㅁ넝라ㅣ;먼이;ㅏ러미;ㅏㄴ어리;ㅏㅁ언라ㅣ;ㅓ</td>
+                                  <td><strong>상품의 상태는 어떻게 되나요?</strong></br>
+                                      => 구매 전에 상품 설명을 자세히 읽어보고, 추가로 궁금한 점이 있다면 판매자에게 문의해야 합니다.</td>
                                 </tr>
+
+                                <tr>
+                                  <td><strong>배송비는 얼마인가요?</strong></br>
+                                    => 판매자는 배송비를 상세하게 표시해야 합니다. 일부 중고거래사이트에서는 구매자가 직접 배송비를 부담해야 하는 경우도 있으므로, 반드시 확인해야 합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>상품의 교환이나 반품이 가능한가요?</strong></br>
+                                    => 판매자는 상품의 교환 또는 반품 가능 여부를 명시해야 합니다. 일부 판매자들은 교환 또는 반품을 받지 않는 경우도 있으므로, 상세히 확인해야 합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>가격을 깎아 줄 수 있나요?</strong></br>
+                                    => 판매자는 가격을 깎아 줄 수 있는지 여부를 명시해야 합니다. 그러나 일반적으로 중고거래에서는 가격 깎임이 가능한 경우가 많으므로, 깎인 가격에 대해 협상해볼 만합니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>상품의 사진을 더 요청할 수 있나요?</strong></br>
+                                    => 판매자는 상품의 사진을 상세하게 제공해야 합니다. 그러나 사진에 대한 추가 요청은 판매자의 판단에 따라 가능하지 않을 수 있습니다.</td>
+                                </tr>
+
+                                <tr>
+                                  <td><strong>결제 방법은 어떤 것이 있나요?</strong></br>
+                                    => 판매자는 결제 방법을 명시해야 합니다. 중고거래에서는 계좌이체 등, 악세서리 경우 온라인 결제 방법을 제공하고 있습니다.</td>
+                                </tr>
+
+
+
                                 </tbody>
         
         
@@ -533,10 +552,10 @@
 
 
 
-                                  <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId == null}">
+                                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
                                     <a href="/member/signin">1:1문의하기</a>
                                   </button>
-                                  <button type="button" class="btn btn-secondary modBtn" th:if="${session.loginId != null}">
+                                  <button type="button" class="btn btn-secondary modBtn" sec:authorize="isAuthenticated()">
                                     <a href="/moon/qamoonlist">1:1문의하기</a>
                                   </button>
 
