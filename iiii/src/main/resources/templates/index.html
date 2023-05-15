@@ -65,20 +65,28 @@
 </head>
 
 <body>
+
 <div class="border-bottom">
   <div class="py-4 pt-lg-3 pb-lg-0">
     <div class="container">
       <div class="row w-100 align-items-center gx-lg-2 gx-0">
-        <div class="col-xxl-2 col-lg-3">
+
+
+        <div class="col-xxl-2 col-lg-3 text-center">
+
           <a class="navbar-brand d-none d-lg-block" href="/">
             <img th:src="@{/images/수신호멈.jpg}"
-                 alt="eCommerce HTML Template"/>
+                 alt="eCommerce HTML Template"
+                 />
           </a>
-          <div class="d-flex justify-content-between w-100 d-lg-none">
+
+
+          <div class="d-flex justify-content-between w-100 d-lg-none text-center">
             <a class="navbar-brand" href="/">
               <img
-                      th:src="@{/images/logo/freshcart-logo.svg}"
+                      th:src="@{/images/수신호멈.jpg}"
                       alt="eCommerce HTML Template"
+
               />
             </a>
 
@@ -170,10 +178,20 @@
                 </svg>
               </button>
             </div>
+
+
+
           </div>
         </div>
+
+
         <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-          <form id="search-form" action="#">
+          <div class="col-12 text-end">
+            <p class="fst-italic fw-semi-bold h1 px-2 px-lg-14" style="font-size: 60px; color: #003399">
+              오바르다</p>
+            <p class="text-primary fst-italic fw-semi-bold px-2 px-lg-14">오늘도 바람을 가르다. 올바른 제품만 판매한다</p>
+          </div>
+          <!--<form id="search-form" action="#">
             <div class="input-group">
               <input id="search-input" class="form-control rounded" type="search" placeholder="제품을 검색하세요">
               <span class="input-group-append">
@@ -195,7 +213,7 @@
         </button>
       </span>
             </div>
-          </form>
+          </form>-->
         </div>
 
 
@@ -461,6 +479,8 @@
   </nav>
 </div>
 
+
+
 <main>
   <section class="mt-8 full-width-section">
     <div class="container">
@@ -478,9 +498,7 @@
               =========================================
               =========================================
             </p>
-            <a href="#!" class="btn btn-light mt-3"
-            >자전거 구경 하러가기 <i class="feather-icon icon-arrow-right ms-1"></i
-            ></a>
+            <a href="/bike/bikeList" class="btn btn-light mt-3">자전거 구경 하러가기 <i class="feather-icon icon-arrow-right ms-1"></i></a>
           </div>
         </div>
 <!--        <div class=" "-->
@@ -528,7 +546,7 @@
             >
               <div>
                 <h3 class="fw-bold mb-1">구매하기</h3>
-                <a href="#!" class="btn btn-dark">구매하기</a>
+                <a href="/acc/accList" class="btn btn-dark">구매하기</a>
               </div>
             </div>
           </div>
@@ -564,81 +582,12 @@
         </div>
       </div>
       <div class="category-slider">
-        <div class="item">
-          <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+        <div class="item" th:each="list : ${list}">
+          <a th:href="@{/acc/productSingle/{acid}(acid=${list.acid})}"  class="text-decoration-none text-inherit">
             <div class="card card-product mb-lg-4">
               <div class="card-body text-center py-8">
-                <img src="assets/images/category/category-dairy-bread-eggs.jpg" alt="Grocery Ecommerce Template" class="mb-3 img-fluid"/>
-                <div class="text-truncate">Dairy, Bread & Eggs</div>
-              </div>
-            </div>
-          </a>
-        </div>
-
-          <div class="item">
-          <a
-                  href="../pages/shop-grid.html"
-                  class="text-decoration-none text-inherit"
-          >
-            <div class="card card-product mb-lg-4">
-              <div class="card-body text-center py-8">
-                <img
-                        src="assets/images/category/category-baby-care.jpg"
-                        alt="Grocery Ecommerce Template"
-                        class="mb-3"
-                />
-                <div class="text-truncate">Baby Care</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="item">
-          <a
-                  href="../pages/shop-grid.html"
-                  class="text-decoration-none text-inherit"
-          >
-            <div class="card card-product mb-lg-4">
-              <div class="card-body text-center py-8">
-                <img
-                        src="assets/images/category/category-chicken-meat-fish.jpg"
-                        alt="Grocery Ecommerce Template"
-                        class="mb-3"
-                />
-                <div class="text-truncate">Chicken, Meat & Fish</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="item">
-          <a
-                  href="../pages/shop-grid.html"
-                  class="text-decoration-none text-inherit"
-          >
-            <div class="card card-product mb-lg-4">
-              <div class="card-body text-center py-8">
-                <img
-                        src="assets/images/category/category-cleaning-essentials.jpg"
-                        alt="Grocery Ecommerce Template"
-                        class="mb-3"
-                />
-                <div class="text-truncate">Cleaning Essentials</div>
-              </div>
-            </div>
-          </a>
-        </div>
-        <div class="item">
-          <a
-                  href="../pages/shop-grid.html"
-                  class="text-decoration-none text-inherit"
-          >
-            <div class="card card-product mb-lg-4">
-              <div class="card-body text-center py-8">
-                <img
-                        src="assets/images/category/category-pet-care.jpg"
-                        alt="Grocery Ecommerce Template"
-                        class="mb-3"
-                />
-                <div class="text-truncate">Pet Care</div>
+                <img th:src="@{'/uploadImg/' + ${list.image}}" alt="Grocery Ecommerce Template" class="mb-3 img-fluid"/>
+                <div class="text-truncate" th:text="${list.productname}">--</div>
               </div>
             </div>
           </a>
