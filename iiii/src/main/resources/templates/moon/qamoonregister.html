@@ -442,26 +442,26 @@
 
 
 
-  <!-- main wrapper -->
+<!-- main wrapper -->
 
-  <div>
-    <!-- navbar vertical -->
+<div>
+  <!-- navbar vertical -->
 
 
 
-    
 
-    <!-- main -->
-    <main>
-      
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="mt-4">
-            <div class="container">
-              <div class="row ">
-                <div class="col-12">
-                  <!-- breadcrumb -->
+
+  <!-- main -->
+  <main>
+
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="mt-4">
+        <div class="container">
+          <div class="row ">
+            <div class="col-12">
+              <!-- breadcrumb -->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                   <li class="breadcrumb-item"><a href="/">메인</a></li>
@@ -470,91 +470,91 @@
                   <li class="breadcrumb-item active" aria-current="page">쓰기</li>
                 </ol>
               </nav>
-              </div>
-              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <section class="mt-8">
-            <div class="container">
+      <section class="mt-8">
+        <div class="container">
+          <div class="row">
+            <!-- logo -->
+            <div class="col-12">
+              <h1 class="fw-bold">문의글 쓰기</h1>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- row -->
+      <div class="row">
+
+        <div class="col-lg-8 col-12">
+          <!-- card -->
+          <div class="card mb-6 card-lg">
+            <!-- card body -->
+            <div class="card-body p-6 ">
+              <h4 class="mb-4 h5">쓰기</h4>
               <div class="row">
-                <!-- logo -->
-                <div class="col-12">
-                  <h1 class="fw-bold">문의글 쓰기</h1>
-                </div>
+                <!-- input -->
+
+                <form th:action="@{qamoonregister}" method="post">
+
+
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">제목</label>
+                    <input type="text" class="form-control" name="title" placeholder="제목" required>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8">
+                    <label class="form-label">작성자</label>
+                    <input type="text" class="form-control" name="userid"  th:value="${#authentication.principal.memberVO.userid}" readonly>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-8 col-lg-8">
+                    <label class="form-label">내용</label>
+                    <textarea cols="40" rows="20"  class="form-control" name="content"  placeholder="내용" required></textarea>
+                  </div>
+
+
+
+
+                  <div class="row">
+                    <div class="col">
+                      <button type="submit" class="w-100 btn btn-primary btn-lg">게시글 등록</button>
+                    </div>
+                  </div>
+
+
+                </form>
+
+
+                <!-- input -->
+
               </div>
+
+              <!-- input -->
+
+
             </div>
-          </section>
-        <!-- row -->
-        <div class="row">
-
-          <div class="col-lg-8 col-12">
-            <!-- card -->
-            <div class="card mb-6 card-lg">
-              <!-- card body -->
-              <div class="card-body p-6 ">
-                <h4 class="mb-4 h5">쓰기</h4>
-                <div class="row">
-                  <!-- input -->
-
-                  <form th:action="@{qamoonregister}" method="post">
-
-
-                  <!-- input -->
-                    <div class="mb-3 col-lg-8">
-                      <label class="form-label">제목</label>
-                      <input type="text" class="form-control" name="title" placeholder="제목" required>
-                    </div>
-                    <!-- input -->
-                    <div class="mb-3 col-lg-8">
-                      <label class="form-label">작성자</label>
-                      <input type="text" class="form-control" name="userid"  th:value="${#authentication.principal.memberVO.userid}" readonly>
-                    </div>
-                  <!-- input -->
-                    <div class="mb-8 col-lg-8">
-                      <label class="form-label">내용</label>
-                      <textarea cols="40" rows="20"  class="form-control" name="content"  placeholder="내용" required></textarea>
-                    </div>
-
-
-
-
-                    <div class="row">
-                      <div class="col">
-                        <button type="submit" class="w-100 btn btn-primary btn-lg">게시글 등록</button>
-                      </div>
-                    </div>
-
-
-                  </form>
-
-
-                  <!-- input -->
-
-                </div>
-
-                  <!-- input -->
-
-
-                </div>
-              </div>
-            </div>
-
           </div>
-
-
         </div>
 
+      </div>
+
+
+    </div>
 
 
 
-          
 
 
 
-    </main>
 
-  </div>
+
+  </main>
+
+</div>
 
 <!-- Libs JS -->
 <script th:src="@{/libs/jquery/dist/jquery.min.js}"></script>
