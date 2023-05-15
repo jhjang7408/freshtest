@@ -25,7 +25,9 @@
 
     <!--특정 게시물 조회-->
     <select id="selectOne" resultType="com.multicampus.hhh.dto.BikeBoardDTO">
-        select * from bike_board where bike_id = #{bikeid}
+        select b.*, u.nickname as nickname
+        from bike_board b join user u on b.user_id = u.user_id
+        where b.bike_id = ${bikeid}
     </select>
 
     <!--게시글 수정(게시글 작성자 + 관리자만 가능)-->
