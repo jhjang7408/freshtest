@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
     <title>FreshCart - eCommerce HTML Template</title>
@@ -36,24 +37,79 @@
     <!-- Theme CSS -->
     <link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- iamport.payment.js -->
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-    <script>
+    <script th:inline="javascript">
         var IMP = window.IMP;
-        //var productName = [[${productName}]] ;
-        //var productPrice = [[${productPrice}]] ;
+        IMP.init("imp01133206");
+        var productName = [[${productName}]];
+        var productQuantity;
+        var productPrice;
+        var selectedPaymentMethod = null;
+        //form 태그로 넘기기 or javascript코드에서 java코드로 넘긴다음에 다시 받기?
+        // var productQuantity = localStorage.getItem("productQuantity");
+        // var productPrice = [[${productPrice}]] * productQuantity;
+        // console.log(productName);
+        // console.log(productQuantity);
+        //
+        //
+        // //아래 구매목록에서 productQuantity사용하기위해서 추가
+        // document.getElementById("productAmount").innerText = productQuantity;
+
+        //html이 수행된 이후에 javascript가 수행되게 만듦.
+        document.addEventListener("DOMContentLoaded", function() {
+            productQuantity = localStorage.getItem("productQuantity");
+            productPrice = [[${productPrice}]] * productQuantity;
+            console.log(productName);
+            console.log(productQuantity);
+            document.getElementById("productQuantityInput").value = productQuantity;
+            document.getElementById("productNameInput").value = productName;
+            document.getElementById("productPriceInput").value = productPrice;
+            // 아래 구매목록에서 productQuantity 사용하기 위해서 추가
+            document.getElementById("productAmount").innerText = productQuantity;
+            //가격
+            document.getElementById("productPrice").innerText = productPrice;
+            //합계 금액(아직은 단일 상품이라 productPrice 값을 사용)
+            document.getElementById("totalPrice").innerText = productPrice;
+
+            // 라디오 버튼 클릭 이벤트 수정
+            document.getElementById("cardPayment").addEventListener("change", function () {
+                if (this.checked) {
+                    console.log("Card payment selected");
+                    selectedPaymentMethod = "card";
+                }
+            });
+
+            document.getElementById("kakaoPay").addEventListener("change", function () {
+                if (this.checked) {
+                    console.log("KakaoPay selected");
+                    selectedPaymentMethod = "kakao";
+                }
+            });
+
+            // 결제하기 버튼에 이벤트 핸들러 추가
+            document.getElementById("paymentButton").addEventListener("click", function () {
+                if (selectedPaymentMethod === "card") {
+                    requestPay();
+                } else if (selectedPaymentMethod === "kakao") {
+                    requestKakaoPay();
+                } else {
+                    console.error("결제 방식이 선택되지 않았습니다.");
+                }
+            });
+        });
         //카드 결제
         function requestPay() {
-            IMP.init("imp01133206");
+            console.log("Card payment requested");
             IMP.request_pay({
                 pg : "html5_inicis",
                 pay_method : 'card',
                 merchant_uid: `INIpayTest`,
-                //name : productName,
-                //amount : productPrice,
-                name : '당근',
-                amount : 1004,
+                name : productName,
+                amount : productPrice,
+                //name : '당근',
+                //amount : 1004,
                 buyer_email : 'Iamport@chai.finance',
                 buyer_name : '포트원 기술지원팀',
                 buyer_tel : '010-1234-5678',
@@ -64,24 +120,24 @@
             });
         }
 
-        //카카오페이
-        // function requestPay() {
-        //     IMP.init("imp01133206");
-        //     IMP.request_pay({
-        //         pg : "kakaopay.TC0ONETIME",
-        //         pay_method : 'card',
-        //         merchant_uid: `iamporttest`,
-        //         name : '당근 10kg',
-        //         amount : 1004,
-        //         buyer_email : 'Iamport@chai.finance',
-        //         buyer_name : '포트원 기술지원팀',
-        //         buyer_tel : '010-1234-5678',
-        //         buyer_addr : '서울특별시 강남구 삼성동',
-        //         buyer_postcode : '123-456'
-        //     }, function (rsp) { // callback
-        //         //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
-        //     });
-        // }
+        //pg 카카오페이
+        function requestKakaoPay() {
+            console.log("KakaoPay payment requested");
+            IMP.request_pay({
+                pg : "kakaopay.TC0ONETIME",
+                pay_method : 'card',
+                merchant_uid: `iamporttest`,
+                name : productName,
+                amount : productPrice,
+                buyer_email : 'Iamport@chai.finance',
+                buyer_name : '포트원 기술지원팀',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+            });
+        }
 
     </script>
 
@@ -89,91 +145,146 @@
 
 <body>
 
-<div class="border-bottom ">
-
-
+<div class="border-bottom">
     <div class="py-4 pt-lg-3 pb-lg-0">
         <div class="container">
             <div class="row w-100 align-items-center gx-lg-2 gx-0">
                 <div class="col-xxl-2 col-lg-3">
-                    <a class="navbar-brand d-none d-lg-block" href="../dist/index.html">
-                        <img src="../assets/images/수신호멈.jpg" alt="eCommerce HTML Template">
-
+                    <a class="navbar-brand d-none d-lg-block" href="/">
+                        <img th:src="@{/images/수신호멈.jpg}"
+                             alt="eCommerce HTML Template"/>
                     </a>
                     <div class="d-flex justify-content-between w-100 d-lg-none">
-                        <a class="navbar-brand" href="../dist/index.html">
-                            <img src="../assets/images/logo/freshcart-logo.svg" alt="eCommerce HTML Template">
-
+                        <a class="navbar-brand" href="/">
+                            <img
+                                    th:src="@{/images/logo/freshcart-logo.svg}"
+                                    alt="eCommerce HTML Template"
+                            />
                         </a>
 
                         <div class="d-flex align-items-center lh-1">
-
                             <div class="list-inline me-4">
                                 <div class="list-inline-item">
-
-                                    <a href="#!" class="text-muted" data-bs-toggle="modal" data-bs-target="#userModal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                             class="feather feather-user">
-                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <a
+                                            href="#!"
+                                            class="text-muted"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#userModal"
+                                    >
+                                        <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="feather feather-user"
+                                        >
+                                            <path
+                                                    d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"
+                                            ></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
                                     </a>
                                 </div>
                                 <div class="list-inline-item">
-
-                                    <a class="text-muted position-relative " data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                                       href="#offcanvasExample" role="button" aria-controls="offcanvasRight">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                             class="feather feather-shopping-bag">
-                                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                    <a
+                                            class="text-muted position-relative"
+                                            data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvasRight"
+                                            href="#offcanvasExample"
+                                            role="button"
+                                            aria-controls="offcanvasRight"
+                                    >
+                                        <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="20"
+                                                height="20"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="feather feather-shopping-bag"
+                                        >
+                                            <path
+                                                    d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"
+                                            ></path>
                                             <line x1="3" y1="6" x2="21" y2="6"></line>
                                             <path d="M16 10a4 4 0 0 1-8 0"></path>
                                         </svg>
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                        1
-                        <span class="visually-hidden">unread messages</span>
-                      </span>
+                                        <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"
+                                        >
+                          1
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
                                     </a>
                                 </div>
-
                             </div>
                             <!-- Button -->
-                            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="offcanvas"
-                                    data-bs-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false"
-                                    aria-label="Toggle navigation">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                                     class="bi bi-text-indent-left text-primary" viewBox="0 0 16 16">
+                            <button
+                                    class="navbar-toggler collapsed"
+                                    type="button"
+                                    data-bs-toggle="offcanvas"
+                                    data-bs-target="#navbar-default"
+                                    aria-controls="navbar-default"
+                                    aria-expanded="false"
+                                    aria-label="Toggle navigation"
+                            >
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="32"
+                                        height="32"
+                                        fill="currentColor"
+                                        class="bi bi-text-indent-left text-primary"
+                                        viewBox="0 0 16 16"
+                                >
                                     <path
-                                            d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                                            d="M2 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm.646 2.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L4.293 8 2.646 6.354a.5.5 0 0 1 0-.708zM7 6.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                                    />
                                 </svg>
                             </button>
-
                         </div>
                     </div>
-
                 </div>
                 <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-
                     <form action="#">
-                        <div class="input-group ">
-                            <input class="form-control rounded" type="search" placeholder="Search for products">
+                        <div class="input-group">
+                            <input
+                                    class="form-control rounded"
+                                    type="search"
+                                    placeholder="Search for products"
+                            />
                             <span class="input-group-append">
-                  <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-search">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                  </button>
-                </span>
+                    <button
+                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                            type="button"
+                    >
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                      >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </button>
+                  </span>
                         </div>
-
                     </form>
                 </div>
-
 
                 <!-- Button trigger modal -->
                 <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
@@ -183,134 +294,257 @@
                 <!-- </div>  -->
 
                 <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
-
                     <div class="list-inline">
-
-                        <div class="list-inline-item">
-                            <a href="./pages/signin.html">로그인</a>
+                        <div class="list-inline-item" sec:authorize="!isAuthenticated()">
+                            <a href="/member/signin">로그인</a>
                         </div>
-
-                        <div class="list-inline-item">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
+                        <div class="list-inline-item" sec:authorize="isAuthenticated()">
+                            <a href="/member/logout">로그아웃</a>
+                        </div>
+                        <!--            th:if="${session.loginId != null}"-->
+                        <div class="list-inline-item" sec:authorize="isAuthenticated()">
+                            <li class="nav-item dropdown" >
+                                <a
+                                        class="nav-link dropdown-toggle"
+                                        href="#"
+                                        role="button"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                >
                                     마이페이지
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="./pages/signin.html">장바구니</a></li>
-                                    <li><a class="dropdown-item" href="./pages/signup.html">구매 목록</a></li>
-                                    <li><a class="dropdown-item" href="./pages/forgot-password.html">판매 목록</a></li>
-                                    <li><a class="dropdown-item" href="./pages/signup.html">개인정보 수정</a></li>
-                                    <li><a class="dropdown-item" href="./pages/signup.html">주소 추가/수정</a></li>
+                                    <li>
+                                        <a class="dropdown-item" href="/mypage/shop-cart"
+                                        >장바구니</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                                class="dropdown-item"
+                                                href="/mypage/orderlist-bike"
+                                        >자전거 구매내역</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                                class="dropdown-item"
+                                                href="/mypage/orderlist-acc"
+                                        >악세사리 구매내역</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                                class="dropdown-item"
+                                                href="/mypage/listsell"
+                                        >판매 목록</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                                class="dropdown-item"
+                                                href="/mypage/account-modify"
+                                        >개인정보 수정</a
+                                        >
+                                    </li>
                                 </ul>
                             </li>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
+    <nav
+            class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
+    >
         <div class="container px-0 px-md-3">
-
             <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
-                <div class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none">
-                    <a href="../dist/index.html"><img src="../assets/images/logo/freshcart-logo.svg"
-                                                      alt="eCommerce HTML Template"></a>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <div
+                        class="d-flex justify-content-between align-items-center mb-2 d-block d-lg-none"
+                >
+                    <a href="/"
+                    ><img
+                            th:src="@{../images/logo/freshcart-logo.svg}"
+                            alt="eCommerce HTML Template"
+                    /></a>
+                    <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                    ></button>
                 </div>
                 <div class="d-block d-lg-none my-4">
                     <form action="#">
-                        <div class="input-group ">
-                            <input class="form-control rounded" type="search" placeholder="Search for products">
+                        <div class="input-group">
+                            <input
+                                    class="form-control rounded"
+                                    type="search"
+                                    placeholder="Search for products"
+                            />
                             <span class="input-group-append">
-                  <button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                         class="feather feather-search">
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                  </button>
-                </span>
+                    <button
+                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
+                            type="button"
+                    >
+                      <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              class="feather feather-search"
+                      >
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                    </button>
+                  </span>
                         </div>
                     </form>
                     <div class="mt-2">
-                        <button type="button" class="btn  btn-outline-gray-400 text-muted w-100 " data-bs-toggle="modal"
-                                data-bs-target="#locationModal">
+                        <button
+                                type="button"
+                                class="btn btn-outline-gray-400 text-muted w-100"
+                                data-bs-toggle="modal"
+                                data-bs-target="#locationModal"
+                        >
                             <i class="feather-icon icon-map-pin me-2"></i>Pick Location
                         </button>
                     </div>
-
                 </div>
 
                 <div class="d-none d-lg-block">
-                    <ul class="navbar-nav align-items-center ">
-
+                    <ul class="navbar-nav align-items-center">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
                                 판매 등록
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../dashboard/add-product.html">악세서리 판매 등록</a></li>
-                                <li><a class="dropdown-item" href="../dashboard/add-product.html">자전거 판매 등록</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
+                                </li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
                                 구매
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../pages/shop-acc.html">악세서리 구매</a></li>
-                                <li><a class="dropdown-item" href="../pages/shop.html">자전거 구매</a></li>
-                                <li><a class="dropdown-item" href="../pages/shop-cart.html">장바구니</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="/acc/accList"
+                                    >악세서리 구매</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                            class="dropdown-item"
+                                            href="/bike/bikeList"
+                                    >자전거 구매</a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/mypage/shop-cart"
+                                       sec:authorize="isAuthenticated()">장바구니</a>
+                                </li>
                             </ul>
                         </li>
-
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
                                 커뮤니티
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./pages/blog.html">가이드</a></li>
-                                <li><a class="dropdown-item" href="../pages/store-grid.html">질문/정보 게시판</a></li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{'../qa/guide'}"
+                                    >가이드</a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{'../qa/gulist'}"
+                                    >질문/정보 게시판</a
+                                    >
+                                </li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
                                 공지
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../pages/signin.html">공지</a></li>
-                                <li><a class="dropdown-item" href="../pages/signup.html">이벤트</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="../pages/signin.html"
+                                    >공지</a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="../pages/signup.html"
+                                    >이벤트</a
+                                    >
+                                </li>
                             </ul>
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">
+                            <a
+                                    class="nav-link dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                            >
                                 고객센터
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="../pages/signin.html">1:1문의</a></li>
-                                <li><a class="dropdown-item" href="../pages/signup.html">자주 묻는 질문</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" th:href="@{'../mooon/moonlist'}">자주 묻는 질문</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
-
             </div>
         </div>
-
     </nav>
 </div>
 <!-- Modal -->
@@ -704,7 +938,7 @@
                         <div class="mb-8">
                             <!-- text -->
                             <h1 class="fw-bold mb-0">주문</h1>
-                            <p class="mb-0">계정이 있으신가요? <a href="#!">로그인</a>.</p>
+<!--                            <p class="mb-0">계정이 있으신가요? <a href="#!">로그인</a>.</p>-->
                         </div>
                     </div>
                 </div>
@@ -725,8 +959,8 @@
                                         <i class="feather-icon icon-map-pin me-2 text-muted"></i>배송지
                                     </a>
                                     <!-- btn -->
-                                    <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
-                                       data-bs-target="#addAddressModal">새 배송지 입력 </a>
+<!--                                    <a href="#" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"-->
+<!--                                       data-bs-target="#addAddressModal">새 배송지 입력 </a>-->
                                     <!-- collapse -->
                                 </div>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse show"
@@ -743,14 +977,21 @@
                                                         </label>
                                                     </div>
                                                     <!-- address -->
-                                                    <address> <strong>Jitu Chauhan</strong> <br>
 
-                                                        4450 North Avenue Oakland, <br>
+                                                    <address>
+                                                        수령인:<span th:text ="${userid}"></span> <br>
+                                                        주소:<span th:text="${userAddress}"></span> <br>
+                                                        전화번호:<span th:text="${userPhnum}"></span>
 
-                                                        Nebraska, United States,<br>
+                                                    </address>
+<!--                                                    <address> <strong>Jitu Chauhan</strong> <br>-->
 
-                                                        <abbr title="Phone">P: 402-776-1106</abbr></address>
-                                                    <span class="text-danger">Default address </span>
+<!--                                                        4450 North Avenue Oakland, <br>-->
+
+<!--                                                        Nebraska, United States,<br>-->
+
+<!--                                                        <abbr title="Phone">P: 402-776-1106</abbr></address>-->
+<!--                                                    <span class="text-danger">Default address </span>-->
 
                                                 </div>
                                             </div>
@@ -762,36 +1003,92 @@
                             </div>
                             <!-- accordion item -->
 
-                            <!-- accordion item -->
+<!--                            카드 결제만 구현 했을 때-->
+<!--                            <div class="accordion-item py-4">-->
 
-                            <!-- accordion item -->
+<!--                                <a href="#" class="text-inherit h5"  data-bs-toggle="collapse"-->
+<!--                                   data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">-->
+<!--                                    <i class="feather-icon icon-credit-card me-2 text-muted"></i>결제 수단-->
+<!--                                    &lt;!&ndash; collapse &ndash;&gt; </a>-->
+<!--                                <div id="flush-collapseFour" class="accordion-collapse collapse "-->
+<!--                                     data-bs-parent="#accordionFlushExample">-->
+
+<!--                                    <div class="mt-5">-->
+<!--                                        <div>-->
+
+<!--                                            <div class="card card-bordered shadow-none mb-2">-->
+<!--                                                &lt;!&ndash; card body &ndash;&gt;-->
+<!--                                                <div class="card-body p-6">-->
+<!--                                                    <div class="d-flex">-->
+<!--                                                        <div class="form-check">-->
+<!--                                                            &lt;!&ndash; checkbox &ndash;&gt;-->
+<!--                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">-->
+<!--                                                            <label class="form-check-label ms-2" for="paypal">-->
+
+<!--                                                            </label>-->
+<!--                                                        </div>-->
+<!--                                                        <div>-->
+<!--                                                            &lt;!&ndash; title &ndash;&gt;-->
+<!--                                                            <h5 class="mb-1 h6"> 카드결제</h5>-->
+
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; card &ndash;&gt;-->
+
+<!--                                            &lt;!&ndash; card &ndash;&gt;-->
+<!--                                            <div class="card card-bordered shadow-none mb-2">-->
+<!--                                                &lt;!&ndash; card body &ndash;&gt;-->
+<!--                                                <div class="card-body p-6">-->
+<!--                                                    &lt;!&ndash; check input &ndash;&gt;-->
+<!--                                                    <div class="d-flex">-->
+<!--                                                        <div class="form-check">-->
+<!--                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="payoneer">-->
+<!--                                                            <label class="form-check-label ms-2" for="payoneer">-->
+
+<!--                                                            </label>-->
+<!--                                                        </div>-->
+<!--                                                        <div>-->
+<!--                                                            &lt;!&ndash; title &ndash;&gt;-->
+<!--                                                            <h5 class="mb-1 h6">카카오 페이</h5>-->
+
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            &lt;!&ndash; card &ndash;&gt;-->
+
+<!--                                            &lt;!&ndash; Button &ndash;&gt;-->
+<!--                                            <div class="mt-5 d-flex justify-content-end">-->
+<!--                                                <a href="#" class="btn btn-outline-gray-400 text-muted"-->
+<!--                                                   data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"-->
+<!--                                                   aria-controls="flush-collapseThree">취소</a>-->
+<!--                                                &lt;!&ndash;                        <a href="#" class="btn btn-primary ms-2">주문</a>&ndash;&gt;-->
+<!--                                                <button onclick="requestPay()"class="btn btn-primary mb-2">결제하기</button> &lt;!&ndash; 결제하기 버튼 생성 &ndash;&gt;-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                            </div>-->
                             <div class="accordion-item py-4">
-
-                                <a href="#" class="text-inherit h5"  data-bs-toggle="collapse"
-                                   data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                <a href="#" class="text-inherit h5"  data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
                                     <i class="feather-icon icon-credit-card me-2 text-muted"></i>결제 수단
                                     <!-- collapse --> </a>
-                                <div id="flush-collapseFour" class="accordion-collapse collapse "
-                                     data-bs-parent="#accordionFlushExample">
-
+                                <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                     <div class="mt-5">
                                         <div>
-
                                             <div class="card card-bordered shadow-none mb-2">
                                                 <!-- card body -->
                                                 <div class="card-body p-6">
                                                     <div class="d-flex">
                                                         <div class="form-check">
-                                                            <!-- checkbox -->
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="paypal">
-                                                            <label class="form-check-label ms-2" for="paypal">
-
+                                                            <!-- 카드 결제 라디오 버튼 -->
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cardPayment">
+                                                            <label class="form-check-label ms-2" for="cardPayment">
+                                                                카드결제
                                                             </label>
-                                                        </div>
-                                                        <div>
-                                                            <!-- title -->
-                                                            <h5 class="mb-1 h6"> 카드결제</h5>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -802,53 +1099,41 @@
                                             <div class="card card-bordered shadow-none mb-2">
                                                 <!-- card body -->
                                                 <div class="card-body p-6">
-                                                    <!-- check input -->
+                                                    <!-- 카카오페이 라디오 버튼 -->
                                                     <div class="d-flex">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="payoneer">
-                                                            <label class="form-check-label ms-2" for="payoneer">
-
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="kakaoPay">
+                                                            <label class="form-check-label ms-2" for="kakaoPay">
+                                                                카카오 페이
                                                             </label>
-                                                        </div>
-                                                        <div>
-                                                            <!-- title -->
-                                                            <h5 class="mb-1 h6">네이버페이</h5>
-                                                            <p class="mb-0 small">서비스 예정</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- card -->
-                                            <div class="card card-bordered shadow-none">
-                                                <div class="card-body p-6">
-                                                    <!-- check input -->
-                                                    <div class="d-flex">
-                                                        <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="cashonDelivery">
-                                                            <label class="form-check-label ms-2" for="cashonDelivery">
 
-                                                            </label>
-                                                        </div>
-                                                        <div>
-                                                            <!-- title -->
-                                                            <h5 class="mb-1 h6"> 핸드폰결제</h5>
-                                                            <p class="mb-0 small">서비스 예정</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <!-- Button -->
                                             <div class="mt-5 d-flex justify-content-end">
                                                 <a href="#" class="btn btn-outline-gray-400 text-muted"
                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false"
                                                    aria-controls="flush-collapseThree">취소</a>
-                                                <!--                        <a href="#" class="btn btn-primary ms-2">주문</a>-->
-                                                <button onclick="requestPay()"class="btn btn-primary mb-2">결제하기</button> <!-- 결제하기 버튼 생성 -->
+                                                <button id="paymentButton" class="btn btn-primary mb-2">결제하기</button>
                                             </div>
+
+                                            <form action="/orders/register" method="post">
+                                                <!-- 결제 정보 받기 -->
+                                                <input type="hidden" name="acid" th:value="${acid}">
+                                                <input type="hidden" name="userid" th:value="${userid}">
+
+                                                <input type="hidden" name="productname" id="productNameInput">
+                                                <input type="hidden" name="amount" id="productQuantityInput">
+                                                <input type="hidden" name="price" id="productPriceInput">
+                                                <button type="submit" class="btn btn-primary mb-2">결제완료</button>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
 
 
@@ -859,116 +1144,30 @@
                     <div class="col-12 col-md-12 offset-lg-1 col-lg-4">
                         <div class="mt-4 mt-lg-0">
                             <div class="card shadow-sm">
-                                <h5 class="px-6 py-4 bg-transparent mb-0">Order Details</h5>
+                                <h5 class="px-6 py-4 bg-transparent mb-0">구매 상품</h5>
                                 <ul class="list-group list-group-flush">
                                     <!-- list group item -->
                                     <li class="list-group-item px-4 py-3">
                                         <div class="row align-items-center">
                                             <div class="col-2 col-md-2">
-                                                <img src="../assets/images/products/product-img-1.jpg" alt="Ecommerce" class="img-fluid"></div>
+                                                <img th:src="@{'/uploadImg/' + ${productImg}}" alt="acc" class="img-fluid"></div>
                                             <div class="col-5 col-md-5">
-                                                <h6 class="mb-0">Haldiram's Sev Bhujia</h6>
-                                                <span><small class="text-muted">.98 / lb</small></span>
-
+                                                <h6 class="mb-0" th:text ="${productName}"></h6>
                                             </div>
                                             <div class="col-2 col-md-2 text-center text-muted">
-                                                <span>1</span>
+                                                <span id="productAmount"></span>개
 
                                             </div>
                                             <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                <span class="fw-bold">$5.00</span>
+                                                <span class="fw-bold" id="totalPrice"></span>원
 
                                             </div>
                                         </div>
 
                                     </li>
-                                    <!-- list group item -->
-                                    <li class="list-group-item px-4 py-3">
-                                        <div class="row align-items-center">
-                                            <div class="col-2 col-md-2">
-                                                <img src="../assets/images/products/product-img-2.jpg" alt="Ecommerce" class="img-fluid"></div>
-                                            <div class="col-5 col-md-5">
-                                                <h6 class="mb-0">NutriChoice Digestive</h6>
-                                                <span><small class="text-muted">250g</small></span>
 
-                                            </div>
-                                            <div class="col-2 col-md-2 text-center text-muted">
-                                                <span>1</span>
-
-                                            </div>
-                                            <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                <span class="fw-bold">$20.00</span>
-                                                <div class="text-decoration-line-through text-muted small">$26.00</div>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                    <!-- list group item -->
-                                    <li class="list-group-item px-4 py-3">
-                                        <div class="row align-items-center">
-                                            <div class="col-2 col-md-2">
-                                                <img src="../assets/images/products/product-img-3.jpg" alt="Ecommerce" class="img-fluid"></div>
-                                            <div class="col-5 col-md-5">
-                                                <h6 class="mb-0">Cadbury 5 Star Chocolate</h6>
-                                                <span><small class="text-muted">1 kg</small></span>
-
-                                            </div>
-                                            <div class="col-2 col-md-2 text-center text-muted">
-                                                <span>1</span>
-
-                                            </div>
-                                            <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                <span class="fw-bold">$15.00</span>
-                                                <div class="text-decoration-line-through text-muted small">$20.00</div>
-                                            </div>
-                                        </div>
-
-                                    </li>
-                                    <!-- list group item -->
-                                    <li class="list-group-item px-4 py-3">
-                                        <div class="row align-items-center">
-                                            <div class="col-2 col-md-2">
-                                                <img src="../assets/images/products/product-img-4.jpg" alt="Ecommerce" class="img-fluid"></div>
-                                            <div class="col-5 col-md-5">
-                                                <h6 class="mb-0">Onion Flavour Potato</h6>
-                                                <span><small class="text-muted">250g</small></span>
-
-                                            </div>
-                                            <div class="col-2 col-md-2 text-center text-muted">
-                                                <span>1</span>
-
-                                            </div>
-                                            <div class="col-3 text-lg-end text-start text-md-end col-md-3">
-                                                <span class="fw-bold">$15.00</span>
-                                                <div class="text-decoration-line-through text-muted small">$20.00</div>
-                                            </div>
-                                        </div>
-
-                                    </li>
-
-                                    <!-- list group item -->
                                     <li class="list-group-item px-4 py-3">
                                         <div class="d-flex align-items-center justify-content-between   mb-2">
-                                            <div>
-                                                Item Subtotal
-
-                                            </div>
-                                            <div class="fw-bold">
-                                                $70.00
-
-                                            </div>
-
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between  ">
-                                            <div>
-                                                Service Fee <i class="feather-icon icon-info text-muted" data-bs-toggle="tooltip"
-                                                               title="Default tooltip"></i>
-
-                                            </div>
-                                            <div class="fw-bold">
-                                                $3.00
-
-                                            </div>
 
                                         </div>
 
@@ -977,11 +1176,10 @@
                                     <li class="list-group-item px-4 py-3">
                                         <div class="d-flex align-items-center justify-content-between fw-bold">
                                             <div>
-                                                Subtotal
+                                                합계 금액
                                             </div>
                                             <div>
-                                                $73.00
-
+                                                <span class="fw-bold" id="productPrice"></span>원
 
                                             </div>
 
