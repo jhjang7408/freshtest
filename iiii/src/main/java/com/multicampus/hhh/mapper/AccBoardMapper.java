@@ -17,4 +17,6 @@ public interface AccBoardMapper {
     void update(AccBoardDTO accBoardDTO);
     void delete(int acid);
 
+    List<AccBoardDTO> listTen();
+
 }

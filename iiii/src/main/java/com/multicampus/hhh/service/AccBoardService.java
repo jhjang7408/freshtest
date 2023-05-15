@@ -14,4 +14,6 @@ public interface AccBoardService {
     void update(AccBoardDTO accBoardDTO);
     void delete(int acid);
 
+    List<AccBoardDTO> listTen();
+
 }

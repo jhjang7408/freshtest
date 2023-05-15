@@ -203,16 +203,14 @@
 
         <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
           <div class="list-inline">
-            <div class="list-inline-item" th:if="${session.loginId == null}">
+            <div class="list-inline-item" sec:authorize="!isAuthenticated()">
               <a href="/member/signin">로그인</a>
             </div>
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <a href="/member/logout">로그아웃</a>
             </div>
-
-
-
-            <div class="list-inline-item" th:if="${session.loginId != null}">
+            <!--            th:if="${session.loginId != null}"-->
+            <div class="list-inline-item" sec:authorize="isAuthenticated()">
               <li class="nav-item dropdown" >
                 <a
                         class="nav-link dropdown-toggle"
@@ -340,18 +338,14 @@
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
               >
-                판매 등록 277줄
+                판매 등록
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../index"
-                  >악세서리 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/index-2.html"
-                  >자전거 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                 </li>
               </ul>
             </li>
@@ -368,25 +362,23 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../pages/shop-grid.html"
+                  <a class="dropdown-item" href="/acc/accList"
                   >악세서리 구매</a
                   >
                 </li>
                 <li>
                   <a
                           class="dropdown-item"
-                          href="../pages/shop-grid-3-column.html"
+                          href="/bike/bikeList"
                   >자전거 구매</a
                   >
                 </li>
                 <li>
                   <a class="dropdown-item" href="/mypage/shop-cart"
-                  >장바구니</a
-                  >
+                     sec:authorize="isAuthenticated()">장바구니</a>
                 </li>
               </ul>
             </li>
-
             <li class="nav-item dropdown">
               <a
                       class="nav-link dropdown-toggle"
@@ -399,12 +391,12 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="./pages/blog.html"
+                  <a class="dropdown-item" href="/qa/guide"
                   >가이드</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/store-grid.html"
+                  <a class="dropdown-item" href="/qa/qalist"
                   >질문/정보 게시판</a
                   >
                 </li>
@@ -447,14 +439,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="../pages/signin.html"
-                  >1:1문의</a
-                  >
+                  <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="../pages/signup.html"
-                  >자주 묻는 질문</a
-                  >
+                  <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
