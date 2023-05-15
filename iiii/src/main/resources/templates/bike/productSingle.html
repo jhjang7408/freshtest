@@ -216,13 +216,13 @@
                     >장바구니</a
                     >
                   </li>
-                  <li>
-                    <a
-                            class="dropdown-item"
-                            href="/mypage/orderlist-bike"
-                    >자전거 구매내역</a
-                    >
-                  </li>
+                  <!--                    <li>-->
+                  <!--                      <a-->
+                  <!--                              class="dropdown-item"-->
+                  <!--                              href="/mypage/orderlist-bike"-->
+                  <!--                      >자전거 구매내역</a-->
+                  <!--                      >-->
+                  <!--                    </li>-->
                   <li>
                     <a
                             class="dropdown-item"
@@ -380,19 +380,41 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" th:href="@{'/qa/guide'}"
+                  <a class="dropdown-item" href="/qa/guide"
                   >가이드</a
                   >
                 </li>
                 <li>
-                  <a class="dropdown-item" th:href="@{'/qa/qalist'}"
+                  <a class="dropdown-item" href="/qa/qalist"
                   >질문/정보 게시판</a
                   >
                 </li>
               </ul>
             </li>
 
-
+            <li class="nav-item dropdown">
+              <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+              >
+                공지
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="../pages/signin.html"
+                  >공지</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="../pages/signup.html"
+                  >이벤트</a
+                  >
+                </li>
+              </ul>
+            </li>
 
             <li class="nav-item dropdown">
               <a
@@ -406,13 +428,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                  <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                  <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" th:href="@{'/moon/moonlist'}">자주 묻는 질문</a>
+                  <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                 </li>
               </ul>
             </li>
@@ -962,7 +984,7 @@
                         <div class="card mb-3">
                           <div class="card-body">
                             <h6 class="card-subtitle mb-2 text-muted" th:text=" '작성자 :' + ${reply.nickname}">작성자 ID</h6>
-                            <p class="card-text" th:text="'내용' + ${reply.content}">댓글 내용</p>
+                            <p class="card-text" th:text="${reply.content}">댓글 내용</p>
                             <p class="card-text"><small class="text-muted" th:text=" '작성일시:' + ${reply.regdate}">작성일시</small></p>
                           </div>
                           <div class="card-footer bg-transparent border-top-0" th:if="${reply.userid} == ${loginId}">
