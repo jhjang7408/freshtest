@@ -833,7 +833,7 @@
           <!-- img slide -->
           <div class="product" id="product">
             <div class="zoom" onmousemove="zoom(event)"
-                 style="background-image: url(../assets/images/products/bike/bike-1.jpg)">
+                 th:style="'background-image: url(/uploadImg/' + ${acc.image} + ')'">
               <!-- img -->
               <!-- img --><img th:src="@{'/uploadImg/' + ${acc.image}}" alt="acc Image" width="100" height="300">
 

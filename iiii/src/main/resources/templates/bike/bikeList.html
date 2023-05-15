@@ -926,7 +926,7 @@
                                         <div class="card-body">
                                             <div class="text-center position-relative">
                                                 <a th:href="@{/bike/productSingle/{bikeid}(bikeid=${bike.bikeid})}">
-                                                    <img th:src="@{'/uploadImg/' + ${bike.image}}" alt="acc Image" class="img-fluid">
+                                                    <img th:src="@{'/uploadImg/' + ${bike.image}}" alt="bike Image" class="img-fluid">
                                                 </a>
                                             </div>
                                         </div>
@@ -934,12 +934,12 @@
                                             <table>
                                                 <tbody>
                                                 <tr>
-                                                    <th scope="row">작성자명:</th>
-                                                    <td th:text="${bike.userid}"></td>
-                                                </tr>
-                                                <tr>
                                                     <th scope="row">제목:</th>
                                                     <td th:text="${bike.title}"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">작성자명:</th>
+                                                    <td th:text="${bike.userid}"></td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">제품명:</th>

@@ -833,7 +833,7 @@
           <!-- img slide -->
           <div class="product" id="product">
             <div class="zoom" onmousemove="zoom(event)"
-                 style="background-image: url(../assets/images/products/bike/bike-1.jpg)">
+                 th:style="'background-image: url(/uploadImg/' + ${bike.image} + ')'">
               <!-- img -->
               <!-- img --><img th:src="@{'/uploadImg/' + ${bike.image}}" alt="Bike Image" width="100" height="300">
 
@@ -979,19 +979,38 @@
                   <!--                  댓글 목록-->
                   <div id="replies">
                     <h5>댓글 목록</h5>
-                    <ul>
+                    <ul class="list-unstyled">
                       <li th:each="reply : ${replies}">
-                        <p th:text="${reply.userid}">작성자 ID</p>
-                        <p th:text="${reply.content}">댓글 내용</p>
-                        <p th:text="${reply.regdate}">작성일시</p>
-
-                        <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post" th:if="${reply.userid} == ${loginId}">
-                          <button type="submit" class="btn btn-danger">삭제</button>
-                        </form>
-                        <hr>
+                        <div class="card mb-3">
+                          <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted" th:text=" '작성자 :' + ${reply.userid}">작성자 ID</h6>
+                            <p class="card-text" th:text="'내용' + ${reply.content}">댓글 내용</p>
+                            <p class="card-text"><small class="text-muted" th:text=" '작성일시:'${reply.regdate}">작성일시</small></p>
+                          </div>
+                          <div class="card-footer bg-transparent border-top-0" th:if="${reply.userid} == ${loginId}">
+                            <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
+                              <button type="submit" class="btn btn-danger">삭제</button>
+                            </form>
+                          </div>
+                        </div>
                       </li>
                     </ul>
                   </div>
+<!--                  <div id="replies">-->
+<!--                    <h5>댓글 목록</h5>-->
+<!--                    <ul>-->
+<!--                      <li th:each="reply : ${replies}">-->
+<!--                        <p th:text="${reply.userid}">작성자 ID</p>-->
+<!--                        <p th:text="${reply.content}">댓글 내용</p>-->
+<!--                        <p th:text="${reply.regdate}">작성일시</p>-->
+
+<!--                        <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post" th:if="${reply.userid} == ${loginId}">-->
+<!--                          <button type="submit" class="btn btn-danger">삭제</button>-->
+<!--                        </form>-->
+<!--                        <hr>-->
+<!--                      </li>-->
+<!--                    </ul>-->
+<!--                  </div>-->
 
 
 

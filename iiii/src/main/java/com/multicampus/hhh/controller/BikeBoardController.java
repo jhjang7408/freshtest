@@ -186,11 +186,23 @@ public class BikeBoardController {
 
 
             // 이미지 파일 처리
+//            if (imgFile != null && !imgFile.isEmpty()) {
+//                String imageName = imgFile.getOriginalFilename();
+//                String savedName = UUID.randomUUID().toString() + imageName;
+//                File file = new File("C:\\upload", savedName);
+//                imgFile.transferTo(file);
+//                bikeBoardDTO.setImage(savedName);
+//            }
             if (imgFile != null && !imgFile.isEmpty()) {
+                // 업로드 한 이미지 파일명 저장
                 String imageName = imgFile.getOriginalFilename();
                 String savedName = UUID.randomUUID().toString() + imageName;
-                File file = new File("C:\\upload", savedName);
+                //이미지 파일 저장할 저장공간 설정
+                String absolutePath = System.getProperty("user.dir");
+                String path = absolutePath + "/src/main/resources/static/uploadImg";
+                File file = new File(path, savedName);
                 imgFile.transferTo(file);
+                // 이미지 파일명을 DTO에 설정
                 bikeBoardDTO.setImage(savedName);
             }
 
