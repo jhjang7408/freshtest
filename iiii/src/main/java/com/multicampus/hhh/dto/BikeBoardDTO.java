@@ -36,5 +36,5 @@ public class BikeBoardDTO {
 
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime regdate;
-
+    private String nickname;
 }
