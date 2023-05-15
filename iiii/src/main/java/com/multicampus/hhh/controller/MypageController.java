@@ -12,6 +12,7 @@ import com.multicampus.hhh.service.MemberService;
 import com.sun.security.auth.UserPrincipal;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collection;
-import java.util.Enumeration;
 import java.util.List;
 
 @Controller
@@ -41,20 +41,12 @@ public class MypageController {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     @GetMapping("/orderlist-bike")
     public void orderbikelist(HttpSession session, Model model){
 
         log.info("자전거 구매내역");
     }
 
-//    @GetMapping("/orderlist-acc")
-//    public void orderacclist(){
-//        log.info("악세사리 구매내역");
-//    }
-
-
-    //테스트
     @GetMapping("/account-modify")
     public void accountmod(Model model, HttpSession session, @AuthenticationPrincipal UserDetails userDetails, @AuthenticationPrincipal PrincipalDetails principalDetails){
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -92,16 +84,13 @@ public class MypageController {
         return "redirect:/mypage/account-modify";
     }
 
-
     @GetMapping("/listsell")
     public void listsell(Model model,@AuthenticationPrincipal PrincipalDetails principalDetails){
         String userid =        principalDetails.getMemberVO().getUserid();
         List<BikeBoardVO> bikeBoard = memberService.findbike(userid);
         model.addAttribute("bikelist", bikeBoard);
         log.info("판매내역");
-//        return "/mypage/listsell";
     }
-
 
     @GetMapping("/shop-cart")
     public void cartPage(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails){
@@ -129,7 +118,7 @@ public class MypageController {
 
     @Secured("ROLE_USER")
     @PostMapping("/addcart")
-    public String addCart(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("acid") int acid){
+    public ResponseEntity<String> addCart(@AuthenticationPrincipal PrincipalDetails principalDetails, @RequestParam("acid") int acid){
         String userid = principalDetails.getMemberVO().getUserid();
         BasketDTO basketDTO = BasketDTO.builder()
                 .userid(userid)
@@ -137,13 +126,27 @@ public class MypageController {
                 .build();
         log.info("제대로 작동하는지 확인");
         memberService.addCart(basketDTO);
-        return "/acc/accList";
+        return ResponseEntity.ok("good");
     }
 
+//    @PostMapping("/removeCart")
+//    @ResponseBody
+//    public ResponseEntity<String> removeCart(@RequestParam("bagid") int bagid){
+//        memberService.revmoveCart(bagid);
+//        return ResponseEntity.ok("Item removed");
+//    }
+
     @PostMapping("/removeCart")
-    public String removeCart(@RequestParam("bagid") int bagid){
+    @ResponseBody
+    public ResponseEntity<Integer> removeCart(@RequestParam("bagid") int bagid, @AuthenticationPrincipal PrincipalDetails principalDetails){
         memberService.revmoveCart(bagid);
-        return "/mypage/shop-cart";
+        String userid = principalDetails.getMemberVO().getUserid();
+        List<BasketDTO> cart = memberService.shopCart(userid);
+        int totalSum = 0;
+        for (BasketDTO basket : cart) {
+            totalSum += basket.getPrice()*basket.getCount();
+        }
+        return ResponseEntity.ok(totalSum);
     }
 
     @PostMapping("/changepass")     //비밀번호 변경
