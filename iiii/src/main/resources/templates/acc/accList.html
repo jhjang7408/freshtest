@@ -401,7 +401,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../qa/gulist'}"
+                                    <a class="dropdown-item" th:href="@{'../qa/qalist'}"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
@@ -450,7 +450,7 @@
                                     <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../mooon/moonlist'}">자주 묻는 질문</a>
+                                    <a class="dropdown-item" th:href="@{'../moon/moonlist'}">자주 묻는 질문</a>
                                 </li>
                             </ul>
                         </li>
@@ -926,6 +926,7 @@
                             text-overflow: ellipsis;
                             max-width: 100%;
                         }
+
                     </style>
 
                     <!-- row -->
@@ -962,18 +963,18 @@
                     </div>
                     <div style="display: block; text-align: center;">
                             <span th:if="${paging.startPage != 1}">
-                                <a th:href="@{/bike/bikeList(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>
+                                <a th:href="@{/acc/accList(nowPage=${paging.startPage - 1},cntPerPage=${paging.cntPerPage})}">&lt;</a>
                             </span>
                         <span th:each="p : ${#numbers.sequence(paging.startPage, paging.endPage)}">
                                 <span th:if="${p == paging.nowPage}">
                                     <b th:text="${p}"></b>
                                 </span>
                                 <span th:unless="${p == paging.nowPage}">
-                                    <a th:href="@{/bike/bikeList(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>
+                                    <a th:href="@{/acc/accList(nowPage=${p},cntPerPage=${paging.cntPerPage})}" th:text="${p}"></a>
                                 </span>
                             </span>
                         <span th:if="${paging.endPage != paging.lastPage}">
-                                <a th:href="@{/bike/bikeList(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>
+                                <a th:href="@{/acc/accList(nowPage=${paging.endPage + 1},cntPerPage=${paging.cntPerPage})}">&gt;</a>
                             </span>
                     </div>
 
