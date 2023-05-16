@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
   <head>
-    <title>FreshCart - eCommerce HTML Template</title>
+    <title>OBARDA</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta
@@ -50,23 +50,63 @@
 
     <!-- Theme CSS -->
     <link rel="stylesheet" th:href="@{/css/theme.min.css}" />
+
+
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script th:inline="javascript">
+      var IMP = window.IMP;
+      IMP.init("imp01133206");
+      var productPrice = [[${totalSum}]] + 3000;
+      //카드 결제
+      function requestPay() {
+        console.log("Card payment requested");
+        console.log(productPrice);
+        IMP.request_pay({
+          pg : "html5_inicis",
+          pay_method : 'card',
+          merchant_uid: `INIpayTest`,
+          name : '장바구니',
+          amount : productPrice,
+          //name : '당근',
+          //amount : 1004,
+          buyer_email : 'Iamport@chai.finance',
+          buyer_name : '포트원 기술지원팀',
+          buyer_tel : '010-1234-5678',
+          buyer_addr : '서울특별시 강남구 삼성동',
+          buyer_postcode : '123-456'
+        }, function (rsp) { // callback
+          //rsp.imp_uid 값으로 결제 단건조회 API를 호출하여 결제결과를 판단합니다.
+        });
+      }
+
+
+    </script>
+
   </head>
 
   <body>
+
   <div class="border-bottom">
     <div class="py-4 pt-lg-3 pb-lg-0">
       <div class="container">
         <div class="row w-100 align-items-center gx-lg-2 gx-0">
-          <div class="col-xxl-2 col-lg-3">
+
+
+          <div class="col-xxl-2 col-lg-3 text-center">
+
             <a class="navbar-brand d-none d-lg-block" href="/">
               <img th:src="@{/images/수신호멈.jpg}"
-                   alt="eCommerce HTML Template"/>
+                   alt="eCommerce HTML Template"
+              />
             </a>
-            <div class="d-flex justify-content-between w-100 d-lg-none">
+
+
+            <div class="d-flex justify-content-between w-100 d-lg-none text-center">
               <a class="navbar-brand" href="/">
                 <img
-                        th:src="@{/images/logo/freshcart-logo.svg}"
+                        th:src="@{/images/수신호멈.jpg}"
                         alt="eCommerce HTML Template"
+
                 />
               </a>
 
@@ -158,33 +198,51 @@
                   </svg>
                 </button>
               </div>
+
+
+
             </div>
           </div>
+
+
           <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-            <form id="search-form" action="#">
+            <div class="col-12 text-end">
+              <p class="fst-italic fw-semi-bold h1 px-2 px-lg-14" style="font-size: 60px; color: #003399">
+                오바르다</p>
+              <p class="text-primary fst-italic fw-semi-bold px-2 px-lg-14">오늘도 바람을 가르다. 올바른 제품만 판매한다</p>
+            </div>
+            <!--<form id="search-form" action="#">
               <div class="input-group">
                 <input id="search-input" class="form-control rounded" type="search" placeholder="제품을 검색하세요">
                 <span class="input-group-append">
-        <button id="search-button" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="16"
-               height="16"
-               viewBox="0 0 24 24"
-               fill="none"
-               stroke="currentColor"
-               stroke-width="2"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               class="feather feather-search"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-      </span>
+          <button id="search-button" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="16"
+                 height="16"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round"
+                 class="feather feather-search"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </button>
+        </span>
               </div>
-            </form>
+            </form>-->
           </div>
+
+
+          <!-- Button trigger modal -->
+          <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
+          <!-- data-bs-target="#locationModal"> -->
+          <!-- <i class="feather-icon icon-map-pin me-2"></i>Location 옆 로그인210줄 -->
+          <!-- </button> -->
+          <!-- </div>  -->
 
           <div class="col-md-4 col-xxl-4 text-end d-none d-lg-block">
             <div class="list-inline">
@@ -197,24 +255,48 @@
               <!--            th:if="${session.loginId != null}"-->
               <div class="list-inline-item" sec:authorize="isAuthenticated()">
                 <li class="nav-item dropdown" >
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a
+                          class="nav-link dropdown-toggle"
+                          href="#"
+                          role="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                  >
                     마이페이지
                   </a>
                   <ul class="dropdown-menu">
                     <li>
-                      <a class="dropdown-item" href="/mypage/shop-cart">장바구니</a>
+                      <a class="dropdown-item" href="/mypage/shop-cart"
+                      >장바구니</a
+                      >
                     </li>
-<!--                    <li>-->
-<!--                      <a class="dropdown-item" href="/mypage/orderlist-bike">자전거 구매내역</a>-->
-<!--                    </li>-->
+                    <!--                  <li>-->
+                    <!--                    <a-->
+                    <!--                            class="dropdown-item"-->
+                    <!--                            href="/mypage/orderlist-bike"-->
+                    <!--                    >자전거 구매내역</a-->
+                    <!--                    >-->
+                    <!--                  </li>-->
                     <li>
-                      <a class="dropdown-item" href="/mypage/orderlist-acc">악세사리 구매내역</a>
+                      <a
+                              class="dropdown-item"
+                              href="/mypage/orderlist-acc"
+                      >악세사리 구매내역</a
+                      >
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/mypage/listsell">판매 목록</a>
+                      <a
+                              class="dropdown-item"
+                              href="/mypage/listsell"
+                      >판매 목록</a
+                      >
                     </li>
                     <li>
-                      <a class="dropdown-item" href="/mypage/account-modify">개인정보 수정</a>
+                      <a
+                              class="dropdown-item"
+                              href="/mypage/account-modify"
+                      >개인정보 수정</a
+                      >
                     </li>
                   </ul>
                 </li>
@@ -463,13 +545,13 @@
                       </div>
 
                       <!-- 장바구니 수량 + - 버튼 -->
-                      <div class="col-3 col-md-3 col-lg-2">
-                        <div class="input-group input-spinner">
-                          <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"/>
-                          <input type="number" step="1" max="10" name="quantity" class="quantity-field form-control-sm form-input"/>
-                          <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"/>
-                        </div>
-                      </div>
+<!--                      <div class="col-3 col-md-3 col-lg-2">-->
+<!--                        <div class="input-group input-spinner">-->
+<!--                          <input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity"/>-->
+<!--                          <input type="number" step="1" max="10" name="quantity" class="quantity-field form-control-sm form-input"/>-->
+<!--                          <input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity"/>-->
+<!--                        </div>-->
+<!--                      </div>-->
 
                       <div class="col-2 text-lg-end text-start text-md-end col-md-2">
                         <span class="fw-bold text-danger" th:text="'&#8361; ' + ${cart.price}"></span>
@@ -514,9 +596,7 @@
                   </div>
                   <div class="d-grid mb-1 mt-4">
                     <!-- btn -->
-                    <button class="btn btn-primary btn-lg d-flex justify-content-center align-items-center" type="submit">
-                     <span class="fw-bold">결제하기</span>
-                    </button>
+                    <button onclick="requestPay()" class="btn btn-primary mb-2">결제하기</button>
                   </div>
                   <!-- heading -->
                 </div>
@@ -613,6 +693,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   <script>
+    // 장바구니에서 삭제하기
   $('.remove-cart-btn').click(function (e) {
   e.preventDefault();
 
@@ -634,6 +715,29 @@
   },
   });
   });
+
+  // <!-- 결제금액 보내기 -->
+  // $(document).ready(function() {
+  //   $("button[type='submit'").click(function (e) {
+  //     e.preventDefault();
+  //
+  //     const totalSumWithFee = $("span[data-role='total-sum-with-fee']").text();
+  //
+  //     $.ajax({
+  //       url:"/",
+  //       type:'POST',
+  //       data:{
+  //         totalSum: totalSumWithFee
+  //       },
+  //       success: function (response){
+  //
+  //       },
+  //       error: function (xhr, status, error){
+  //
+  //       }
+  //     });
+  //   });
+  // });
   </script>
 
   <!--  <script>-->

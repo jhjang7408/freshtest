@@ -36,7 +36,7 @@
 
   <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet">
 
-  <title>Dashboard</title>
+  <title>OBARDA</title>
 </head>
 
 <body>
@@ -45,16 +45,23 @@
   <div class="py-4 pt-lg-3 pb-lg-0">
     <div class="container">
       <div class="row w-100 align-items-center gx-lg-2 gx-0">
-        <div class="col-xxl-2 col-lg-3">
+
+
+        <div class="col-xxl-2 col-lg-3 text-center">
+
           <a class="navbar-brand d-none d-lg-block" href="/">
             <img th:src="@{/images/수신호멈.jpg}"
-                 alt="eCommerce HTML Template"/>
+                 alt="eCommerce HTML Template"
+            />
           </a>
-          <div class="d-flex justify-content-between w-100 d-lg-none">
+
+
+          <div class="d-flex justify-content-between w-100 d-lg-none text-center">
             <a class="navbar-brand" href="/">
               <img
-                      th:src="@{/images/logo/freshcart-logo.svg}"
+                      th:src="@{/images/수신호멈.jpg}"
                       alt="eCommerce HTML Template"
+
               />
             </a>
 
@@ -146,10 +153,20 @@
                 </svg>
               </button>
             </div>
+
+
+
           </div>
         </div>
+
+
         <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-          <form id="search-form" action="#">
+          <div class="col-12 text-end">
+            <p class="fst-italic fw-semi-bold h1 px-2 px-lg-14" style="font-size: 60px; color: #003399">
+              오바르다</p>
+            <p class="text-primary fst-italic fw-semi-bold px-2 px-lg-14">오늘도 바람을 가르다. 올바른 제품만 판매한다</p>
+          </div>
+          <!--<form id="search-form" action="#">
             <div class="input-group">
               <input id="search-input" class="form-control rounded" type="search" placeholder="제품을 검색하세요">
               <span class="input-group-append">
@@ -171,7 +188,7 @@
         </button>
       </span>
             </div>
-          </form>
+          </form>-->
         </div>
 
 
@@ -208,13 +225,13 @@
                     >장바구니</a
                     >
                   </li>
-                  <li>
-                    <a
-                            class="dropdown-item"
-                            href="/mypage/orderlist-bike"
-                    >자전거 구매내역</a
-                    >
-                  </li>
+                  <!--                  <li>-->
+                  <!--                    <a-->
+                  <!--                            class="dropdown-item"-->
+                  <!--                            href="/mypage/orderlist-bike"-->
+                  <!--                    >자전거 구매내역</a-->
+                  <!--                    >-->
+                  <!--                  </li>-->
                   <li>
                     <a
                             class="dropdown-item"
@@ -475,26 +492,34 @@
         <div class="col-md-8 offset-md-2">
           <!-- text -->
           <div class="mb-5">
-            
-            <h1 class="fw-bold text-center">안전하게 자전거 타는 방법</h1>
-            
+
+            <h1 class="fw-bold text-center">올바른 라이딩을 위한 안전 수칙</h1>
+
           </div>
           <!-- img -->
-          <div class="mb-8"> <img src="/images/blog/blogImage.jpg" alt="" class="img-fluid rounded"></div>
+          <div class="mb-8 text-center"> <img src="/images/자전거안전수칙.jpg" alt="" class="img-fluid rounded"></div>
 
           <div>
             <!-- text -->
             <div class="mb-4">
-              <p>1. 헬멧을 쓰세요</p>
-              <p>2. 안전한 자전거를 선택하세요</p>
-              <p>3. 자전거 크기를 선택하세요</p>
-              <p>4. 트래픽 규칙을 지켜주세요</p>
-              <p>5. 안전한 주행 위치를 선택하세요</p>
-              <p>6. 양옆을 둘러보고 신호를 내세요</p>
-              <p>7. 안전한 차선을 유지하세요</p>
-              <p>8. 언제나 앞을 내다보며 주행하세요</p>
-              <p>9. 반사 장치와 조명기구를 장착하세요</p>
-              <p>10. 자전거를 안전하게 보관하세요</p>
+              <h2>주행원칙</h2>
+              <h5>자전거도로와 일반도로</h5>
+              <p>도로교통법상 자전거는 '차'로 분류되어 있습니다. 보도와 차도가 구분된 도로에서 자전거는 차도로 통행해야 합니다. 자전거 도로가 있으면 자전거 도로로 통행해야 합니다. 어린이, 노인, 신체장애인이 이용하는 자전거나 안전표지로 자전거통행이 허용된 경우, 도로공사나 파손, 장애 등으로 차도 동행을 할 수 없는 경우에는 보도를 이용할 수 있습니다.</p>
+
+              <h5>우측통행</h5>
+              <p>자전거는 우측통행이 원칙이며, 속도가 가장 느린 차로 끝 차도를 이용해야 합니다. 자전거의 왼쪽으로 내릴 경우 차량 쪽으로 몸이 쏠려 위험할 수 있으므로 오른쪽으로 타고 내립니다.</p>
+
+              <h5>도로 횡단</h5>
+              <p>자전거횡단도가 없을 때는 차의 직진 신호에 따라 오른쪽 가장자리로 자전거를 타고 직진합니다. 횡단보도를 이용할 경우에는 자전거에서 내려 끌고 건너야 합니다. 자전거 횡단도가 있으면 이를 이용하여 자전거를 타고 지나갈 수 있습니다.</p>
+
+              <h5>주차,느리게 주행하는 차량 통과</h5>
+              <p>주차된 차나 느리게 주행하는 차량을 통과할 경우, 충분히 속도를 줄이고 공간을 띄워 문이 열리거나 차가 출발할 경우를 대비하여야 합니다. 자전거가 지나감을 경음기와 육성으로 알리고, 맞은편이나 뒤에서 추월하려는 차량에 주의합니다. 좌측으로 추월(통과)하는 것이 원칙이나 느리게 주행하는 차, 정지한 차가 있는 경우 우측으로 통행할 수 있습니다.</p>
+
+              <h5>출발과 정지</h5>
+              <p>자전거가 멈춘 상태에서 출발하고 완전히 정지한 후 내리는 것이 안전합니다. 출발 전 뒤를 돌아보고 안전하게 출바할 수 있는지 확인하고, 멈추기 전 뒤쪽을 확인하고 수신호로 정지할 것을 알린 뒤 서서히 속도를 줄이는 것이 안전합니다.</p>
+
+              <h5>안전거리</h5>
+              <p>자전거 운전자는 앞의 자동차, 자전거와 안전거리를 충분히 두어야 합니다. 자전거와는 평지에서 자전거 1대가 충분히 들어갈 정도(약3m), 내리막에서는 3대 이상의 거리를 두고 주행합니다.</p>
             </div>
             <hr class="mt-lg-10 mb-lg-6 my-md-6">
             <!-- blockquote -->
@@ -524,7 +549,7 @@
             <!-- List unstyled -->
             
             <!-- Img alignment -->
-            
+            <a href="https://www.bike.go.kr/content.do?key=2008148326977">출처: 자전거 행복나눔</a>
           </div>
           
         </div>

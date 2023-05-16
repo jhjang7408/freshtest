@@ -106,6 +106,11 @@ public class BikeBoardController {
 
         log.info("자전거 등록");
 
+//      등록에서 정보 입력란에 개행문자로 구분해도 spacebar로 인식하는것을 해결하기 위해 <br>을 \n로 변환
+        String infoBr = bikeBoardDTO.getInfo().replace("\n", "<br>");
+        bikeBoardDTO.setInfo(infoBr);
+
+
 //        if(bindingResult.hasErrors()) {
 //            log.info("has errors.......");
 //            redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors() );
@@ -235,8 +240,10 @@ public class BikeBoardController {
         String writer = bikeBoardDTO.getUserid();
         model.addAttribute("writer", writer);
 
-        if(userid.getUserid().equals(writer)){
-            //외래키 제약 조건 때문에 replyService.deleteByBikeId로 댓글부터 삭제
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if(userid.getUserid().equals(writer) || isAdmin) {
             replyService.deleteByBikeId(bikeid);
             service.delete(bikeid);
             log.info("삭제진행");
