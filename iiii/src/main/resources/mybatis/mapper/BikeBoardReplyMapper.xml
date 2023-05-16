@@ -23,6 +23,9 @@
     </delete>
 
     <select id="findByBikeId" resultType="com.multicampus.hhh.dto.BikeBoardReplyDTO">
-        SELECT * FROM bike_board_reply WHERE bike_id = #{bikeid} ORDER BY regdate DESC
+        select b.*, u.nickname as nickname
+        from bike_board_reply b join user u on b.user_id = u.user_id
+        where b.bike_id = #{bikeid}
+        order by regdate
     </select>
 </mapper>

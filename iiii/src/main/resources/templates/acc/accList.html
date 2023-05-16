@@ -228,13 +228,13 @@
                                         >장바구니</a
                                         >
                                     </li>
-                                    <li>
-                                        <a
-                                                class="dropdown-item"
-                                                href="/mypage/orderlist-bike"
-                                        >자전거 구매내역</a
-                                        >
-                                    </li>
+                                    <!--                    <li>-->
+                                    <!--                      <a-->
+                                    <!--                              class="dropdown-item"-->
+                                    <!--                              href="/mypage/orderlist-bike"-->
+                                    <!--                      >자전거 구매내역</a-->
+                                    <!--                      >-->
+                                    <!--                    </li>-->
                                     <li>
                                         <a
                                                 class="dropdown-item"
@@ -343,14 +343,10 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/acc/productRegister"
-                                    >악세서리 판매 등록</a
-                                    >
+                                    <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="/bike/productRegister"
-                                    >자전거 판매 등록</a
-                                    >
+                                    <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                                 </li>
                             </ul>
                         </li>
@@ -396,41 +392,19 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../qa/guide'}"
+                                    <a class="dropdown-item" href="/qa/guide"
                                     >가이드</a
                                     >
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../qa/qalist'}"
+                                    <a class="dropdown-item" href="/qa/qalist"
                                     >질문/정보 게시판</a
                                     >
                                 </li>
                             </ul>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                            >
-                                공지
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href="../pages/signin.html"
-                                    >공지</a
-                                    >
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="../pages/signup.html"
-                                    >이벤트</a
-                                    >
-                                </li>
-                            </ul>
-                        </li>
+
 
                         <li class="nav-item dropdown">
                             <a
@@ -444,13 +418,13 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="/member/signin" th:if="${session.loginId == null}">1:1문의</a>
+                                    <a class="dropdown-item" href="/member/signin" sec:authorize="!isAuthenticated()">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="moon/qamoonlist" th:if="${session.loginId != null}">1:1문의</a>
+                                    <a class="dropdown-item" href="/moon/qamoonlist" sec:authorize="isAuthenticated()">1:1문의</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{'../moon/moonlist'}">자주 묻는 질문</a>
+                                    <a class="dropdown-item" href="/moon/moonlist">자주 묻는 질문</a>
                                 </li>
                             </ul>
                         </li>
@@ -916,6 +890,7 @@
                         .card-product img {
                             width: 100%;
                             height: auto;
+                            max-height: 110px;
                             object-fit: cover;
                             border-radius: 10px;
 
@@ -926,7 +901,25 @@
                             text-overflow: ellipsis;
                             max-width: 100%;
                         }
-
+                        .paging-container {
+                            display: block;
+                            text-align: center;
+                        }
+                        table {
+                            width: 100%;
+                        }
+                        th {
+                            width: 30%;
+                            white-space: nowrap;
+                        }
+                        td {
+                            width: 70%;
+                            white-space: nowrap;
+                            /*제목이 너무 길때*/
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            max-width: 70%;
+                        }
                     </style>
 
                     <!-- row -->

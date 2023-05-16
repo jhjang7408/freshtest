@@ -25,7 +25,7 @@ public class MainController {
         List<AccBoardDTO> list = accBoardService.listTen();
         model.addAttribute("list", list);
         log.info("메인페이지");
-        return "index";
+        return "/index";
     }
 
     @GetMapping("/search")

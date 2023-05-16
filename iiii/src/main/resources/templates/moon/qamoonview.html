@@ -149,38 +149,31 @@
           </div>
         </div>
         <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-          <form action="#">
+          <form id="search-form" action="#">
             <div class="input-group">
-              <input
-                      class="form-control rounded"
-                      type="search"
-                      placeholder="Search for products"
-              />
+              <input id="search-input" class="form-control rounded" type="search" placeholder="제품을 검색하세요">
               <span class="input-group-append">
-                    <button
-                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-                            type="button"
-                    >
-                      <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-search"
-                      >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </button>
-                  </span>
+        <button id="search-button" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="16"
+               height="16"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="2"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+               class="feather feather-search"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </span>
             </div>
           </form>
         </div>
+
 
         <!-- Button trigger modal -->
         <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
@@ -215,13 +208,13 @@
                     >장바구니</a
                     >
                   </li>
-                  <li>
-                    <a
-                            class="dropdown-item"
-                            href="/mypage/orderlist-bike"
-                    >자전거 구매내역</a
-                    >
-                  </li>
+                  <!--                  <li>-->
+                  <!--                    <a-->
+                  <!--                            class="dropdown-item"-->
+                  <!--                            href="/mypage/orderlist-bike"-->
+                  <!--                    >자전거 구매내역</a-->
+                  <!--                    >-->
+                  <!--                  </li>-->
                   <li>
                     <a
                             class="dropdown-item"
@@ -252,7 +245,9 @@
     </div>
   </div>
 
-  <nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4">
+  <nav
+          class="navbar navbar-expand-lg navbar-light navbar-default py-0 py-lg-4"
+  >
     <div class="container px-0 px-md-3">
       <div class="offcanvas offcanvas-start p-4 p-lg-0" id="navbar-default">
         <div
@@ -324,18 +319,14 @@
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
               >
-                판매 등록 277줄
+                판매 등록
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="/acc/productRegister"
-                  >악세서리 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/acc/productRegister" sec:authorize="hasRole('ROLE_ADMIN')">악세서리 판매 등록</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/bike/productRegister"
-                  >자전거 판매 등록</a
-                  >
+                  <a class="dropdown-item" href="/bike/productRegister" sec:authorize="!isAuthenticated() or hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')">자전거 판매 등록</a>
                 </li>
               </ul>
             </li>
@@ -393,29 +384,29 @@
               </ul>
             </li>
 
-            <li class="nav-item dropdown">
-              <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-              >
-                공지
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="../pages/signin.html"
-                  >공지</a
-                  >
-                </li>
-                <li>
-                  <a class="dropdown-item" href="../pages/signup.html"
-                  >이벤트</a
-                  >
-                </li>
-              </ul>
-            </li>
+            <!--            <li class="nav-item dropdown">-->
+            <!--              <a-->
+            <!--                      class="nav-link dropdown-toggle"-->
+            <!--                      href="#"-->
+            <!--                      role="button"-->
+            <!--                      data-bs-toggle="dropdown"-->
+            <!--                      aria-expanded="false"-->
+            <!--              >-->
+            <!--                공지-->
+            <!--              </a>-->
+            <!--              <ul class="dropdown-menu">-->
+            <!--                <li>-->
+            <!--                  <a class="dropdown-item" href="../pages/signin.html"-->
+            <!--                  >공지</a-->
+            <!--                  >-->
+            <!--                </li>-->
+            <!--                <li>-->
+            <!--                  <a class="dropdown-item" href="../pages/signup.html"-->
+            <!--                  >이벤트</a-->
+            <!--                  >-->
+            <!--                </li>-->
+            <!--              </ul>-->
+            <!--            </li>-->
 
             <li class="nav-item dropdown">
               <a
@@ -448,26 +439,26 @@
 
 
 
-  <!-- main wrapper -->
+<!-- main wrapper -->
 
-  <div>
-    <!-- navbar vertical -->
+<div>
+  <!-- navbar vertical -->
 
 
 
-    
 
-    <!-- main -->
-    <main>
-      
-      <!-- container -->
-      <div class="container">
-        <!-- row -->
-        <div class="mt-4">
-            <div class="container">
-              <div class="row ">
-                <div class="col-12">
-                  <!-- breadcrumb -->
+
+  <!-- main -->
+  <main>
+
+    <!-- container -->
+    <div class="container">
+      <!-- row -->
+      <div class="mt-4">
+        <div class="container">
+          <div class="row ">
+            <div class="col-12">
+              <!-- breadcrumb -->
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
                   <li class="breadcrumb-item"><a href="/">메인</a></li>
@@ -476,169 +467,164 @@
                   <li class="breadcrumb-item active" aria-current="page">읽기</li>
                 </ol>
               </nav>
-              </div>
-              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          <section class="mt-8">
-            <div class="container">
-              <div class="row">
-                <!-- logo -->
-                <div class="col-12">
-                  <h1 class="fw-bold">문의글 보기</h1>
-                </div>
-              </div>
+      <section class="mt-8">
+        <div class="container">
+          <div class="row">
+            <!-- logo -->
+            <div class="col-12">
+              <h1 class="fw-bold">문의글 보기</h1>
             </div>
-          </section>
-        <!-- row -->
-        <div class="row mt-3">
+          </div>
+        </div>
+      </section>
+      <!-- row -->
+      <div class="row mt-3">
 
-          <div class="col">
-            <!-- card -->
-            <div class="card">
-              <!-- card body -->
-              <div class="card-body">
-                <h4 class="mb-4 h5">보기</h4>
-                <div class="row">
-                  <!-- input -->
-                  <div class="mb-3 col-lg-8">
-                    <label class="form-label">번호</label>
-                    <input type="text" class="form-control" id="moonid" th:value="${qamoonview.moonid}" readonly>
-                  </div>
-                  <!-- input -->
-                  <div class="mb-3 col-lg-8">
-                    <label class="form-label">제목</label>
-                    <input type="text" class="form-control" th:value="${qamoonview.title}" readonly>
-                  </div>
-                  <!-- input -->
+        <div class="col">
+          <!-- card -->
+          <div class="card">
+            <!-- card body -->
+            <div class="card-body">
+              <h4 class="mb-4 h5">보기</h4>
+              <div class="row">
+                <!-- input -->
+                <div class="mb-3 col-lg-8">
+                  <label class="form-label">번호</label>
+                  <input type="text" class="form-control" id="moonid" th:value="${qamoonview.moonid}" readonly>
+                </div>
+                <!-- input -->
+                <div class="mb-3 col-lg-8">
+                  <label class="form-label">제목</label>
+                  <input type="text" class="form-control" th:value="${qamoonview.title}" readonly>
+                </div>
+                <!-- input -->
 
-                  <!-- input -->
-                  <div class="mb-8 col-lg-8">
-                    <label class="form-label">내용</label>
-                    <textarea cols="40" rows="10" type="text" class="form-control" th:text="${qamoonview.content}" readonly></textarea>
-                  </div>
-
-
+                <!-- input -->
+                <div class="mb-8 col-lg-8">
+                  <label class="form-label">내용</label>
+                  <textarea cols="40" rows="10" type="text" class="form-control" th:text="${qamoonview.content}" readonly></textarea>
+                </div>
 
 
 
-                  <table class="table">
 
-                    <thead>
 
-                    <tr>
+                <table class="table">
 
-                      <th scope="col">번호</th>
-                      <th scope="col">내용</th>
-                      <th scope="col">작성자</th>
-                      <th scope="col">시간</th>
-                      <th scope="col">ㅇ</th>
+                  <thead>
 
-                    </tr>
-                    </thead>
+                  <tr>
 
-                    <tbody>
+                    <th scope="col">번호</th>
+                    <th scope="col">내용</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">시간</th>
+                    <th scope="col">ㅇ</th>
 
-                    <tr th:each="board : ${qamoonreply}">
+                  </tr>
+                  </thead>
 
-                      <td th:text="${board.moonreplyid}">번호</td>
-                      <td th:text="${board.content}">내용</td><!--&gt;
+                  <tbody>
+
+                  <tr th:each="board : ${qamoonreply}">
+
+                    <td th:text="${board.moonreplyid}">번호</td>
+                    <td th:text="${board.content}">내용</td><!--&gt;
                         <div class="content" th:text="${board.content}"></div>
                         <button type="button" data-toggle="modal" data-target="#replymodify" th:if="${session.loginId != null && session.loginId.userid == board.userid}">수정</button>
                       </td>-->
-                      <td th:text="${board.userid}">작성자</td>
-                      <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
-                      <td>
-                        <div>
-                          <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${#authentication.principal.memberVO.userid == board.userid}" >x</button>
-                        </div>
-                      </td>
-                      </br>
-
-
-
-                    </tr>
-                    </tbody>
-
-
-                  </table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  <form th:action="@{qamoonreplyregister}" method="post" sec:authorize="isAuthenticated()">
-                    <div class="mb-3 col-lg-8">
-                      <input type="hidden" class="form-control" name="moonid" th:value="${qamoonview.moonid}" readonly>
-                    </div>
-                    <!-- input -->
-                    <div class="mb-3 col-lg-8" sec:authorize="isAuthenticated()">
-
-                     <input type="hidden" class="form-control" name="userid" th:value="${#authentication.principal.memberVO.userid}" readonly>
-                    </div>
-                    <!-- input -->
-                    <div class="mb-8 col-lg-8">
-
-                      <textarea cols="40" rows="3" type="text" class="form-control" name="content"  placeholder="내용" required></textarea>
-
-                    </div>
-
-                    <div class="my-4">
-                      <div class="float-end">
-                        <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
+                    <td th:text="${board.userid}">작성자</td>
+                    <td th:text="${#temporals.format(board.regdate, 'yyyy-MM-dd')}">시간</td>
+                    <td>
+                      <div>
+                        <button type="button" class="btn btn-danger" id="deletereply-btn" th:if="${#authentication.principal.memberVO.userid == board.userid}" >x</button>
                       </div>
-                    </div>
+                    </td>
+                    </br>
 
 
 
-                  </form>
+                  </tr>
+                  </tbody>
 
 
+                </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <form th:action="@{qamoonreplyregister}" method="post" sec:authorize="isAuthenticated()">
+                  <div class="mb-3 col-lg-8">
+                    <input type="hidden" class="form-control" name="moonid" th:value="${qamoonview.moonid}" readonly>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-3 col-lg-8" sec:authorize="isAuthenticated()">
+
+                    <input type="hidden" class="form-control" name="userid" th:value="${#authentication.principal.memberVO.userid}" readonly>
+                  </div>
+                  <!-- input -->
+                  <div class="mb-8 col-lg-8">
+
+                    <textarea cols="40" rows="3" type="text" class="form-control" name="content"  placeholder="내용" required></textarea>
+
+                  </div>
 
                   <div class="my-4">
                     <div class="float-end">
-                      <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
-                        <a href="/member/signin">댓글 쓰기</a>
-                      </button>
+                      <button type="submit" class="w-100 btn btn-primary btn-lg">댓글 등록</button>
                     </div>
                   </div>
 
 
 
-                  <div class="my-4">
-                    <div class="float-end">
-
-                      <a href="/moon/qamoonlist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
-
-
-                      <a th:href="@{/moon/qamoonmodify(moon_id =${qamoonview.moonid})}" th:if="${#authentication.principal.memberVO.userid == qamoonview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
-
-                      <button type="button" class="btn btn-danger" id="delete-btn" th:if="${#authentication.principal.memberVO.userid == qamoonview.userid}">삭제</button>
+                </form>
 
 
 
-                    </div>
+                <div class="my-4">
+                  <div class="float-end">
+                    <button type="button" class="btn btn-secondary modBtn" sec:authorize="!isAuthenticated()">
+                      <a href="/member/signin">댓글 쓰기</a>
+                    </button>
                   </div>
-
-
-
-
-
-
-
                 </div>
+
+
+
+                <div class="my-4">
+                  <div class="float-end">
+
+                    <a href="/moon/qamoonlist"><button type="button" class="btn btn-primary listBtn">게시판으로</button></a>
+
+
+                    <a th:href="@{/moon/qamoonmodify(moon_id =${qamoonview.moonid})}" th:if="${#authentication.principal.memberVO.userid == qamoonview.userid}"><button type="button" class="btn btn-secondary modBtn">수정</button></a>
+
+                    <button type="button" class="btn btn-danger" id="delete-btn" th:if="${#authentication.principal.memberVO.userid == qamoonview.userid}">삭제</button>
+
+
+
+                  </div>
+                </div>
+
+
+
 
 
 
@@ -647,25 +633,30 @@
 
 
 
+
             </div>
 
 
 
-
           </div>
+
+
 
 
         </div>
 
 
-
-
       </div>
 
 
-    </main>
 
-  </div>
+
+    </div>
+
+
+  </main>
+
+</div>
 
 
 
