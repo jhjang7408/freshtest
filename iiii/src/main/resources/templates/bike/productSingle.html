@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 
-  <title>FreshCart - eCommerce HTML Template</title>
+  <title>OBARDA</title>
   <link th:href="@{/libs/dropzone/dist/min/dropzone.min.css}" rel="stylesheet" />
   <link th:href="@{/libs/tiny-slider/dist/tiny-slider.css}" rel="stylesheet">
   <link th:href="@{/libs/slick-carousel/slick/slick.css}" rel="stylesheet" />
@@ -37,7 +37,18 @@
   <!-- Theme CSS -->
   <link rel="stylesheet" th:href="@{/css/theme.min.css}">
 
+<!--  로그인 시에만 댓글 작성 가능-->
+  <script>
+    document.getElementById("replyForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // 기본 동작인 폼 제출을 중단합니다.
 
+      // 이동할 URL을 지정합니다.
+      var url = "/bike/productRegister";
+
+      // 페이지 이동
+      window.location.href = url;
+    });
+  </script>
 </head>
 
 <body>
@@ -46,16 +57,23 @@
   <div class="py-4 pt-lg-3 pb-lg-0">
     <div class="container">
       <div class="row w-100 align-items-center gx-lg-2 gx-0">
-        <div class="col-xxl-2 col-lg-3">
+
+
+        <div class="col-xxl-2 col-lg-3 text-center">
+
           <a class="navbar-brand d-none d-lg-block" href="/">
             <img th:src="@{/images/수신호멈.jpg}"
-                 alt="eCommerce HTML Template"/>
+                 alt="eCommerce HTML Template"
+            />
           </a>
-          <div class="d-flex justify-content-between w-100 d-lg-none">
+
+
+          <div class="d-flex justify-content-between w-100 d-lg-none text-center">
             <a class="navbar-brand" href="/">
               <img
-                      th:src="@{/images/logo/freshcart-logo.svg}"
+                      th:src="@{/images/수신호멈.jpg}"
                       alt="eCommerce HTML Template"
+
               />
             </a>
 
@@ -147,41 +165,44 @@
                 </svg>
               </button>
             </div>
+
+
+
           </div>
         </div>
+
+
         <div class="col-xxl-6 col-lg-5 d-none d-lg-block">
-          <form action="#">
+          <div class="col-12 text-end">
+            <p class="fst-italic fw-semi-bold h1 px-2 px-lg-14" style="font-size: 60px; color: #003399">
+              오바르다</p>
+            <p class="text-primary fst-italic fw-semi-bold px-2 px-lg-14">오늘도 바람을 가르다. 올바른 제품만 판매한다</p>
+          </div>
+          <!--<form id="search-form" action="#">
             <div class="input-group">
-              <input
-                      class="form-control rounded"
-                      type="search"
-                      placeholder="Search for products"
-              />
+              <input id="search-input" class="form-control rounded" type="search" placeholder="제품을 검색하세요">
               <span class="input-group-append">
-                    <button
-                            class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end"
-                            type="button"
-                    >
-                      <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="16"
-                              height="16"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="feather feather-search"
-                      >
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                      </svg>
-                    </button>
-                  </span>
+        <button id="search-button" class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg"
+               width="16"
+               height="16"
+               viewBox="0 0 24 24"
+               fill="none"
+               stroke="currentColor"
+               stroke-width="2"
+               stroke-linecap="round"
+               stroke-linejoin="round"
+               class="feather feather-search"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </span>
             </div>
-          </form>
+          </form>-->
         </div>
+
 
         <!-- Button trigger modal -->
         <!-- <button type="button" class="btn  btn-outline-gray-400 text-muted" data-bs-toggle="modal" -->
@@ -216,13 +237,13 @@
                     >장바구니</a
                     >
                   </li>
-                  <!--                    <li>-->
-                  <!--                      <a-->
-                  <!--                              class="dropdown-item"-->
-                  <!--                              href="/mypage/orderlist-bike"-->
-                  <!--                      >자전거 구매내역</a-->
-                  <!--                      >-->
-                  <!--                    </li>-->
+                  <!--                  <li>-->
+                  <!--                    <a-->
+                  <!--                            class="dropdown-item"-->
+                  <!--                            href="/mypage/orderlist-bike"-->
+                  <!--                    >자전거 구매내역</a-->
+                  <!--                    >-->
+                  <!--                  </li>-->
                   <li>
                     <a
                             class="dropdown-item"
@@ -392,7 +413,29 @@
               </ul>
             </li>
 
-
+            <!--            <li class="nav-item dropdown">-->
+            <!--              <a-->
+            <!--                      class="nav-link dropdown-toggle"-->
+            <!--                      href="#"-->
+            <!--                      role="button"-->
+            <!--                      data-bs-toggle="dropdown"-->
+            <!--                      aria-expanded="false"-->
+            <!--              >-->
+            <!--                공지-->
+            <!--              </a>-->
+            <!--              <ul class="dropdown-menu">-->
+            <!--                <li>-->
+            <!--                  <a class="dropdown-item" href="../pages/signin.html"-->
+            <!--                  >공지</a-->
+            <!--                  >-->
+            <!--                </li>-->
+            <!--                <li>-->
+            <!--                  <a class="dropdown-item" href="../pages/signup.html"-->
+            <!--                  >이벤트</a-->
+            <!--                  >-->
+            <!--                </li>-->
+            <!--              </ul>-->
+            <!--            </li>-->
 
             <li class="nav-item dropdown">
               <a
@@ -909,10 +952,7 @@
 <!--                  <p class="mb-0">내용</p>-->
 <!--                </div>-->
                 <div>
-
-                  <p>제품 설명: <span th:text="${bike.info}"></span></p>
-
-
+                  <p>제품 설명: <span th:utext="${bike.info}"></span></p>
                 </div>
 <!--                <form action="/bike/productRegister" method="post">-->
 
@@ -957,6 +997,9 @@
                   <!--                  댓글 목록-->
                   <div id="replies">
                     <h5>댓글 목록</h5>
+                    <div sec:authorize = "!isAuthenticated()">
+                    <p>댓글 작성은 로그인이 필요합니다.</p>
+                    </div>
                     <ul class="list-unstyled">
                       <li th:each="reply : ${replies}">
                         <div class="card mb-3">
@@ -965,7 +1008,7 @@
                             <p class="card-text" th:text="${reply.content}">댓글 내용</p>
                             <p class="card-text"><small class="text-muted" th:text=" '작성일시:' + ${reply.regdate}">작성일시</small></p>
                           </div>
-                          <div class="card-footer bg-transparent border-top-0" th:if="${reply.userid} == ${loginId}">
+                          <div class="card-footer bg-transparent border-top-0" th:if="${reply.userid} == ${loginId} or ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                             <form th:action="@{/bike/productSingle/{bikeid}/{bikereplyid}/delete/ (bikeid=${bike.bikeid}, bikereplyid=${reply.bikereplyid})}" method="post">
                               <button type="submit" class="btn btn-danger">삭제</button>
                             </form>
@@ -994,13 +1037,14 @@
 
 
                   <!-- 댓글 작성 폼 -->
-                  <form th:action="@{'/bike/productSingle/' + ${bike.bikeid} + '/bikereply'}" method="post">
+                  <dev sec:authorize="isAuthenticated()">
+                  <form th:action="@{'/bike/productSingle/' + ${bike.bikeid} + '/bikereply'}"  method="post">
                     <input type="hidden" name="bikeid" th:value="${bike.bikeid}">
                     <label for="content">댓글</label>
                     <textarea id="content" name="content"class="form-control" rows="3" required></textarea>
                     <button type="submit" class="btn btn-primary">등록</button>
                   </form>
-
+                  </dev>
 
 
 
